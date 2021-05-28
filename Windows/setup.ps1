@@ -1,5 +1,5 @@
-New-Item -Path '~\Documents\PowerShell' -ItemType Directory
-New-Item -Path '~\Documents' -Name 'WindowsPowerShell' -Target 'PowerShell' -ItemType SymbolicLink
+New-Item -ItemType Directory -Path '~\Documents\PowerShell\addon'
+New-Item -ItemType SymbolicLink -Path '~\Documents' -Name 'WindowsPowerShell' -Target 'PowerShell'
 
 Copy-Item $(Join-Path $PSScriptRoot "Microsoft.PowerShell_profile.ps1") '~\Documents\PowerShell'
 
