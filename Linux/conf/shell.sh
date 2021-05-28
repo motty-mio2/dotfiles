@@ -16,3 +16,5 @@ alias python='python3'
 
 eval $(/home/linuxbrew/.linuxbrew/bin/brew shellenv)
 
+source ~/conf/addon/*.sh > /dev/null
+
