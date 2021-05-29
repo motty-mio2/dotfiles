@@ -38,10 +38,10 @@ case $ANS in
     ;;
 esac
 
-echo "Install linuxbrew"
+echo "Install linuxbrew? [Y/n]"
 read ANS
 case $ANS in
   "" | [Yy]* )
-    "./${script_directory}/linuxbrew.sh"
+    ".${script_directory}/linuxbrew.sh"
     ;;
 esac
