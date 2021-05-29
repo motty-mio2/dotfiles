@@ -1,5 +1,5 @@
 SCRIPT_DIR=$(cd $(dirname $0); pwd)
-source ~/conf/shell.sh
+source ${SCRIPT_DIR}/shell.sh
 
 plugins=(git zsh-autosuggestions)
 

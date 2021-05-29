@@ -37,3 +37,11 @@ case $ANS in
     echo "source ${script_directory}/conf/server.sh" >> ~/.bashrc
     ;;
 esac
+
+echo "Install linuxbrew"
+read ANS
+case $ANS in
+  "" | [Yy]* )
+    "./${script_directory}/linuxbrew.sh"
+    ;;
+esac
