@@ -2,9 +2,14 @@ Import-Module posh-git
 Import-Module oh-my-posh
 Import-Module PSReadLine
 function global:prompt {
-    $now = Get-Date -format "MM/dd HH:mm"
+    $user = $env:UserName
+    # $now = Get-Date -format "MM/dd HH:mm:ss"
+    $now = Get-Date -format "HH:mm:ss"
     $loc = Get-Location
-    Write-Host($now + " " + $loc + " ") -nonewline
+
+    Write-Host("[" + $user + "] ") -nonewline -foregroundcolor DarkGreen
+    Write-Host("(" + $now + ")") -nonewline -foregroundcolor DarkYellow
+    Write-Host(" " + $loc + " ") -nonewline -foregroundcolor DarkBlue
     return "> "
 }
 
