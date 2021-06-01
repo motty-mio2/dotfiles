@@ -15,26 +15,29 @@ sh -c "$(wget -O- https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools
 git clone https://github.com/zsh-users/zsh-completions ~/.oh-my-zsh/custom/plugins/zsh-completions
 git clone https://github.com/zsh-users/zsh-autosuggestions ~/.oh-my-zsh/custom/plugins/zsh-autosuggestions
 
-
+# nano setup
 ln -s "${repo_path%/}/.nanorc" ~/.nanorc
 
 echo "source ~/.profile" >> ~/.zshrc
 
-echo "source ${script_directory}/conf/zsh.sh" >> ~/.zshrc
-echo "source ${script_directory}/conf/bash.sh" >> ~/.bashrc
+
+ln -s "$script_directory/conf" ~/conf
+
+echo "source ${HOME}/conf/zsh.sh" >> ~/.zshrc
+echo "source ${HOME}/conf/bash.sh" >> ~/.bashrc
 
 if [ $(uname -r | sed -n 's/.*\( *Microsoft *\).*/\1/ip') ];
 then
-        echo "source ${script_directory}/conf/wsl.sh" >> ~/.zshrc
-        echo "source ${script_directory}/conf/wsl.sh" >> ~/.bashrc
+        echo "source ${HOME}/conf/wsl.sh" >> ~/.zshrc
+        echo "source ${HOME}/conf/wsl.sh" >> ~/.bashrc
 fi
 
 echo "is this Server machine? [Y/n]"
 read ANS
 case $ANS in
   "" | [Yy]* )
-    echo "source ${script_directory}/conf/server.sh" >> ~/.zshrc
-    echo "source ${script_directory}/conf/server.sh" >> ~/.bashrc
+    echo "source ${HOME}/conf/server.sh" >> ~/.zshrc
+    echo "source ${HOME}/conf/server.sh" >> ~/.bashrc
     ;;
 esac
 
