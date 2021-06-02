@@ -14,4 +14,4 @@ setopt histignorealldups
 HISTFILE=~/.zsh_history
 HISTSIZE=10000
 SAVEHIST=10000
-PROMPT="%{${fg[green]}%}[%n@%m]%{${fg[yellow]}%}(%*%) %{${fg[blue]}%}%~ %# %{${reset_color}%}"
+PROMPT="%{${fg[green]}%}[%n@%m]%{${fg[yellow]}%}(%*%) %{${fg[blue]}%}%~ %{${reset_color}%}%# "
