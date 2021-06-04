@@ -8,7 +8,7 @@ sudo sed -i.bak -e "s%http://archive.ubuntu.com/ubuntu/%http://ftp.iij.ad.jp/pub
 # sed -ie '$a set constantshow\nset linenumbers\nset historylog' /etc/nanorc && \
 sudo apt-get update
 sudo apt-get upgrade -y
-sudo apt-get install -y curl nano fonts-noto-cjk wget screen zsh byobu
+sudo apt-get install -y curl nano wget screen zsh byobu
 
 # Zsh setup
 sh -c "$(wget -O- https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
