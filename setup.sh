@@ -9,7 +9,7 @@ git clone https://github.com/zsh-users/zsh-completions ~/.oh-my-zsh/custom/plugi
 git clone https://github.com/zsh-users/zsh-autosuggestions ~/.oh-my-zsh/custom/plugins/zsh-autosuggestions
 
 # nano setup
-ln -s "${repo_path%/}/.nanorc" ~/.nanorc
+ln -s "$script_directory/.nanorc" ~/.nanorc
 
 echo "source ~/.profile" >> ~/.zshrc
 
@@ -34,12 +34,13 @@ case $ANS in
     ;;
 esac
 
-curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh
+echo "Install linuxbrew? [Y/n]"
+read ANS
+case $ANS in
+  "" | [Yy]* )
+    "${script_directory}/linuxbrew.sh"
 
-# echo "Install linuxbrew? [Y/n]"
-# read ANS
-# case $ANS in
-#   "" | [Yy]* )
-#     "${script_directory}/linuxbrew.sh"
-#     ;;
-# esac
+    echo "eval $(/home/linuxbrew/.linuxbrew/bin/brew shellenv)" >> ~/.zshrc
+    echo "eval $(/home/linuxbrew/.linuxbrew/bin/brew shellenv)" >> ~/.bashrc
+    ;;
+esac

@@ -16,8 +16,6 @@ alias bupdate='brew update && brew upgrade'
 alias pip='pip3'
 alias python='python3'
 
-eval $(/home/linuxbrew/.linuxbrew/bin/brew shellenv)
-
 if [ -d $addon_folder ]; then
     for file in $( ls $addon_folder | grep .sh$ ); do
         source "${addon_folder}/${file}"
