@@ -41,10 +41,12 @@ case $ANS in
     ;;
 esac
 
-echo "Install linuxbrew? [Y/n]"
-read ANS
-case $ANS in
-  "" | [Yy]* )
-    "${script_directory}/linuxbrew.sh"
-    ;;
-esac
+curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh
+
+# echo "Install linuxbrew? [Y/n]"
+# read ANS
+# case $ANS in
+#   "" | [Yy]* )
+#     "${script_directory}/linuxbrew.sh"
+#     ;;
+# esac
