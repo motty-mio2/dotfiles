@@ -1,9 +1,15 @@
 # mio2's setup environments for Linux Branch
 
-## Requirements
+## PreRequirements
 - zsh
 - curl
 - wget
+
+## Installaion
+```
+chmod +x setup.sh
+./setup.sh
+```
 
 ## Contains
 - zsh
