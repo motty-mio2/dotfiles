@@ -1,4 +1,4 @@
-#eSCRIPT_DIR=$(cd $(dirname $0); pwd)
+SCRIPT_DIR=$(cd $(dirname $0); pwd)
 #source "${SCRIPT_DIR%/}/shell.sh"
 source "${SCRIPT_DIR}/shell.sh"
 
