@@ -19,11 +19,11 @@ setopt prompt_subst
 zstyle ':vcs_info:git:*' check-for-changes true
 zstyle ':vcs_info:git:*' unstagedstr "%F{red} *" # %u
 zstyle ':vcs_info:git:*' stagedstr "%F{red} +" # %c
-zstyle ':vcs_info:git:*' formats '%F{red}(%b%u%c)'
+zstyle ':vcs_info:git:*' formats '%F{red}(%b%u%c) '
 
 setopt histignorealldups
 HISTFILE=~/.zsh_history
 HISTSIZE=10000
 SAVEHIST=10000
 
-PROMPT="%{${fg[green]}%}[%n@%m] %{${fg[yellow]}%}(%*%) %{${fg[blue]}%}%~ %{${fg[red]}%}\${vcs_info_msg_0_} %{${reset_color}%}%# "
+PROMPT="%{${fg[green]}%}[%n@%m] %{${fg[yellow]}%}(%*%) %{${fg[blue]}%}%~ %{${fg[red]}%}\${vcs_info_msg_0_}%{${reset_color}%}%# "
