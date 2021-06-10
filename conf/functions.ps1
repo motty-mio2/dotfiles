@@ -92,20 +92,24 @@ function codex {
         if (Test-Path (Convert-Path $Args[0]) -PathType Container) {
             # Write-Host "This is folder"
             $Folder = Convert-Path $Args[0]
-            foreach ($item in $Folder) {
-                if ((Get-ChildItem $item).Extension -eq ".code-workspace") {
-                    code $Args[0]
-                    break
+            # Write-Output $Folder
+            # foreach ($item in $Folder) {
+            if (Test-Path $Folder\*.code-workspace) {
+                Get-ChildItem $Folder\*.code-workspace | ForEach-Object -Process {
+                    code $(Convert-Path $_)
+                    # break
                 }
             }
-            code $(Convert-Path .)
+            else {
+                code $(Convert-Path .)
+            }
         }
         elseif ((Get-ChildItem $Args[0]).Extension -eq ".code-workspace") {
-            #Write-Host "This is workspace"
+            # Write-Host "This is workspace"
             code $Args[0]
         }
         else {
-            Write-Host "This is valid file"
+            # Write-Host "This is valid file"
             code (Split-Path (Convert-Path $Args[0]) -parent)
         }
     }
