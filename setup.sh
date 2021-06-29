@@ -3,20 +3,13 @@ repo_path=${script_directory%/*}
 echo $script_directory
 cd ~/
 
-sudo sed -i.bak -e "s%http://archive.ubuntu.com/ubuntu/%http://ftp.iij.ad.jp/pub/linux/ubuntu/archive/%g" /etc/apt/sources.list
-#sed -e "s/# set constantshow/set constantshow/" -e "s/# set linenumbers/set linenumbers/" -e "s/# set matchbrackets/set matchbrackets/" -e "s/# set mouse/set mouse/" -e "s/# set nonewlines/set nonewlines/" -e "s/# set tabsize 8/set tabsize 4/" -e "s/# set tabstospaces/set tabstospaces/" -e "s/# set trimblanks/set trimblanks/" -i ~/.nanorc
-# sed -ie '$a set constantshow\nset linenumbers\nset historylog' /etc/nanorc && \
-sudo apt-get update
-sudo apt-get upgrade -y
-sudo apt-get install -y curl nano fonts-noto-cjk wget screen zsh byobu
-
 # Zsh setup
 sh -c "$(wget -O- https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
 git clone https://github.com/zsh-users/zsh-completions ~/.oh-my-zsh/custom/plugins/zsh-completions
 git clone https://github.com/zsh-users/zsh-autosuggestions ~/.oh-my-zsh/custom/plugins/zsh-autosuggestions
 
 # nano setup
-ln -s "${repo_path%/}/.nanorc" ~/.nanorc
+ln -s "$script_directory/.nanorc" ~/.nanorc
 
 echo "source ~/.profile" >> ~/.zshrc
 
@@ -46,5 +39,9 @@ read ANS
 case $ANS in
   "" | [Yy]* )
     /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+    "${script_directory}/linuxbrew.sh"
+
+    echo "eval $(/home/linuxbrew/.linuxbrew/bin/brew shellenv)" >> ~/.zshrc
+    echo "eval $(/home/linuxbrew/.linuxbrew/bin/brew shellenv)" >> ~/.bashrc
     ;;
 esac

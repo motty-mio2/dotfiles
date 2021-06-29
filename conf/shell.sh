@@ -1,3 +1,5 @@
+addon_folder="${HOME}/conf/addon"
+
 # set PATH so it includes user's private bin if it exists
 if [ -d "$HOME/bin" ] ; then
     PATH="$HOME/bin:$PATH"
@@ -14,7 +16,8 @@ alias bupdate='brew update && brew upgrade'
 alias pip='pip3'
 alias python='python3'
 
-eval $(/home/linuxbrew/.linuxbrew/bin/brew shellenv)
-
-(source ~/conf/addon/*.sh) &> /dev/null
-
+if [ -d $addon_folder ]; then
+    for file in $( ls $addon_folder | grep .sh$ ); do
+        source "${addon_folder}/${file}"
+    done
+fi
