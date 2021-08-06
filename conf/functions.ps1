@@ -68,17 +68,16 @@ function zip {
     Param($Item,
         [string]$Name = [Guid]::NewGuid().ToString().Substring(0, 8))
 
-    if ($Item -is [array]) {
-        $Archive_Path = Convert-Path $Item[0]
-    }
-    else {
-        $Archive_Path = Convert-Path $Item
-    }
-    write-host $Archive_Path
+    $Item_List = Convert-Path $Item
+    # $Item_List = Get-ChildItem -include $Item
+    $Base_Path = Split-Path $Item_List[0] -Parent
+    $Archive_Name = Join-Path $Base_Path "$Name.zip"
 
-    # $output_name = (Get-Item (Convert-Path $args)).BaseName
-    # Write-Host $output_name
-    # 7z a $output_name -tzip >NUL
+    while ((Test-Path $Archive_Name)) {
+        $Archive_Name = Join-Path $Base_Path ($Name + [Guid]::NewGuid().ToString().Substring(0, 4) + ".zip")
+    }
+
+    7z a $Archive_Name $Item_List > $null
 }
 
 function uzip {
@@ -87,9 +86,10 @@ function uzip {
     $Base_Dir = Split-Path $Archive_Path -Parent
     $Output_Dir = Join-Path $Base_Dir $Archive_Name
 
-    if (Test-Path $Output_Dir) {
+    while ((Test-Path $Output_Dir)) {
         $Output_Dir = Join-Path $Base_Dir ($Archive_Name + [Guid]::NewGuid().ToString().Substring(0, 4))
     }
+
 
     # New-Item -ItemType Directory $Output_Dir
     7z e -r "-o$Output_Dir" $Archive_Path > $null
