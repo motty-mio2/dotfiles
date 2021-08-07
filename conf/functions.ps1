@@ -77,7 +77,7 @@ function zip {
         $Archive_Name = Join-Path $Base_Path ($Name + [Guid]::NewGuid().ToString().Substring(0, 4) + ".zip")
     }
 
-    7z a $Archive_Name $Item_List > $null
+    7z a $Archive_Name $Item_List # > $null
 }
 
 function uzip {
@@ -92,7 +92,7 @@ function uzip {
 
 
     # New-Item -ItemType Directory $Output_Dir
-    7z e -r "-o$Output_Dir" $Archive_Path > $null
+    7z x -r "-o$Output_Dir" $Archive_Path # > $null
 }
 
 function update {
