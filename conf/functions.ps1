@@ -96,7 +96,8 @@ function uzip {
 }
 
 function update {
-    scoop update && scoop update *
+    scoop update
+    scoop update *
 }
 
 function iv {
