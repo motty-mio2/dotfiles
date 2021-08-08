@@ -38,7 +38,7 @@ echo "Install linuxbrew? [Y/n]"
 read ANS
 case $ANS in
   "" | [Yy]* )
-    "${script_directory}/linuxbrew.sh"
+    /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
 
     echo "eval $(/home/linuxbrew/.linuxbrew/bin/brew shellenv)" >> ~/.zshrc
     echo "eval $(/home/linuxbrew/.linuxbrew/bin/brew shellenv)" >> ~/.bashrc
