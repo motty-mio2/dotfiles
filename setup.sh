@@ -3,11 +3,6 @@ repo_path=${script_directory%/*}
 echo $script_directory
 cd ~/
 
-# Zsh setup
-sh -c "$(wget -O- https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
-git clone https://github.com/zsh-users/zsh-completions ~/.oh-my-zsh/custom/plugins/zsh-completions
-git clone https://github.com/zsh-users/zsh-autosuggestions ~/.oh-my-zsh/custom/plugins/zsh-autosuggestions
-
 # nano setup
 ln -s "$script_directory/.nanorc" ~/.nanorc
 

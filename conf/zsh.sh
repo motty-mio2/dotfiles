@@ -16,6 +16,8 @@ autoload -Uz colors
 colors
 zstyle ':completion:*' matcher-list 'm:{a-z}={A-Z}'
 
+setopt TRANSIENT_RPROMPT
+
 autoload -Uz vcs_info
 precmd_vcs_info() { vcs_info }
 precmd_functions+=( precmd_vcs_info )
