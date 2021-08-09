@@ -9,7 +9,7 @@ ln -s "$script_directory/.nanorc" ~/.nanorc
 echo "source ~/.profile" >> ~/.zshrc
 
 
-ln -s "$script_directory/conf" ~/conf
+ln -sr ./conf ~/conf
 
 echo "source ${HOME}/conf/zsh.sh" >> ~/.zshrc
 echo "source ${HOME}/conf/bash.sh" >> ~/.bashrc

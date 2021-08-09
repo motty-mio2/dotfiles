@@ -15,4 +15,4 @@ done
 
 echo "zstyle :prezto:module:prompt theme powerlevel10k" >> ~/.zpreztorc
 
-ln -sff ./.p10k.zsh ~/.p10k.zsh
+ln -sfr ./.p10k.zsh ~/.p10k.zsh

@@ -3,9 +3,10 @@ sudo sed -i.bak -e "s%http://archive.ubuntu.com/ubuntu/http://ftp.iij.ad.jp/pub/
 # sed -ie '$a set constantshow\nset linenumbers\nset historylog' /etc/nanorc && \
 sudo apt-get update
 sudo apt-get upgrade -qy
-sudo apt-get install -qy curl nano wget screen zsh byobu git unar
+sudo apt-get install -qy nano wget zsh git unar
 
 touch ~/.zshrc
-./setup.sh
 
 zsh ./zsh.sh
+
+./setup.sh
