@@ -16,3 +16,5 @@ done
 echo "zstyle :prezto:module:prompt theme powerlevel10k" >> ~/.zpreztorc
 
 ln -sfr ./.p10k.zsh ~/.p10k.zsh
+
+echo 'POWERLEVEL9K_DISABLE_CONFIGURATION_WIZARD=true' >>! ~/.zshrc

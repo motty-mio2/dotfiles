@@ -5,11 +5,10 @@ cd ~/
 
 # nano setup
 ln -s "$script_directory/.nanorc" ~/.nanorc
+ln -sr "$script_directory/conf" ~/conf
 
 echo "source ~/.profile" >> ~/.zshrc
 
-
-ln -sr ./conf ~/conf
 
 echo "source ${HOME}/conf/zsh.sh" >> ~/.zshrc
 echo "source ${HOME}/conf/bash.sh" >> ~/.bashrc
