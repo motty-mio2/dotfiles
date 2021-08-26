@@ -18,7 +18,8 @@ scoop alias add backup 'scoop export > ~\scoop.txt'
 git config --global core.autocrlf input
 
 
-#(Get-Content ~\.nanorc) | % { $_ -replace "# set constantshow", "set constantshow" } | Set-Content ~\.nanorc
+# (Get-Content ~\.nanorc) | % { $_ -replace "# set constantshow", "set constantshow" } | Set-Content ~\.nanorc
 
-sudo scoop install Cascadia-Code
+# sudo scoop install Cascadia-Code
 sudo ~\scoop\apps\win32-openssh\current\install-sshd.ps1
+sudo sc config "Audiosrv" start= auto
