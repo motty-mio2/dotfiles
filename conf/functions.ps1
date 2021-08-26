@@ -41,6 +41,8 @@ function rmrf {
     Remove-Item -Recurse -Force $Target
 }
 
+Set-Alias db Directory_Break
+
 function Directory_Break_Single {
     $Child_Path = Convert-Path $args
     $Parent_Path = Split-Path $Child_Path -parent
@@ -144,4 +146,10 @@ function codex {
     }
 }
 
-Set-Alias db Directory_Break
+function mkcd {
+    $Target = $args[0]
+    if (-Not (Test-Path -Type Container $Target) ) {
+        New-Item -ItemType Directory $Target
+    }
+    Set-Location $Target
+}
