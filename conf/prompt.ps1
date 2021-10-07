@@ -29,6 +29,5 @@ function global:prompt {
 }
 
 $env:DISPLAY = "localhost:0.0"
-$env:PATH = $env:USERPROFILE + "\.poetry\bin" + ";" + $env:PATH
 Set-PSReadLineKeyHandler -Key Tab -Function MenuComplete
 Set-PSReadlineKeyHandler -Key ctrl+d -Function DeleteCharOrExit
