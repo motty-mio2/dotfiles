@@ -21,3 +21,9 @@ if [ -d $addon_folder ]; then
         source "${addon_folder}/${file}"
     done
 fi
+
+function mkcd () {
+    mkdir $1 && cd $_
+}
+
+export PIPENV_VENV_IN_PROJECT=1
