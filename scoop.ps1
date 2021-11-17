@@ -16,7 +16,7 @@ scoop alias add upgrade 'scoop update && scoop update *' 'update all'
 scoop alias add backup 'scoop export > ~\scoop.txt'
 
 git config --global core.autocrlf input
-
+git config --global init.defaultBranch main
 
 # (Get-Content ~\.nanorc) | % { $_ -replace "# set constantshow", "set constantshow" } | Set-Content ~\.nanorc
 
