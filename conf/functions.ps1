@@ -5,8 +5,11 @@
 
 
 function test-func {
-    Param($name, $id)
+    Param($id)
     Write-Host "this comes from test"
+    foreach ($item in $args) {
+        Write-Host $item
+    }
     write-host $name
     if ([string]::IsNullorEmpty($id)) {
         $id = [Guid]::NewGuid().ToString().Substring(0, 8)
@@ -67,34 +70,40 @@ function Directory_Break {
 }
 
 function zip {
-    Param($Item,
-        [string]$Name = [Guid]::NewGuid().ToString().Substring(0, 8))
+    Param($Directory,
+        $Name = (Split-Path -Leaf $Directory)
+    )
 
-    $Item_List = Convert-Path $Item
-    # $Item_List = Get-ChildItem -include $Item
-    $Base_Path = Split-Path $Item_List[0] -Parent
-    $Archive_Name = Join-Path $Base_Path "$Name.zip"
+    if ($Directory) {
+        $Base_Path = Split-Path -Parent $Directory
+        $Archive_Name = Join-Path $Base_Path "$Name.zip"
 
-    while ((Test-Path $Archive_Name)) {
-        $Archive_Name = Join-Path $Base_Path ($Name + [Guid]::NewGuid().ToString().Substring(0, 4) + ".zip")
+        while ((Test-Path $Archive_Name)) {
+            $Archive_Name = Join-Path $Base_Path ($Name + [Guid]::NewGuid().ToString().Substring(0, 4) + ".zip")
+        }
+
+        7z a $Archive_Name (Get-ChildItem $Directory) # > $null
     }
-
-    7z a $Archive_Name $Item_List # > $null
+    else {
+        Write-Output ("This is 7zip based archive function.`n`tParam is directory.")
+    }
 }
 
 function uzip {
-    $Archive_Path = Convert-Path $args
-    $Archive_Name = [System.IO.Path]::GetFileNameWithoutExtension($args)
-    $Base_Dir = Split-Path $Archive_Path -Parent
-    $Output_Dir = Join-Path $Base_Dir $Archive_Name
+    Param($Archive
+    )
+    if ($Archive) {
+        $Archive_Path = Convert-Path $Archive
+        $Archive_Name = [System.IO.Path]::GetFileNameWithoutExtension($args)
+        $Base_Dir = Split-Path $Archive_Path -Parent
+        $Output_Dir = Join-Path $Base_Dir $Archive_Name
 
-    while ((Test-Path $Output_Dir)) {
-        $Output_Dir = Join-Path $Base_Dir ($Archive_Name + [Guid]::NewGuid().ToString().Substring(0, 4))
+        while ((Test-Path $Output_Dir)) {
+            $Output_Dir = Join-Path $Base_Dir ($Archive_Name + [Guid]::NewGuid().ToString().Substring(0, 4))
+        }
+
+        7z x -r "-o$Output_Dir" $Archive_Path # > $null
     }
-
-
-    # New-Item -ItemType Directory $Output_Dir
-    7z x -r "-o$Output_Dir" $Archive_Path # > $null
 }
 
 function update {
@@ -147,9 +156,10 @@ function codex {
 }
 
 function mkcd {
-    $Target = $args[0]
-    if (-Not (Test-Path -Type Container $Target) ) {
-        New-Item -ItemType Directory $Target
+    Param ($dir)
+
+    if (-Not (Test-Path -Type Container $dir) ) {
+        New-Item -ItemType Directory $dir
     }
-    Set-Location $Target
+    Set-Location $dir
 }
