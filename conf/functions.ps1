@@ -69,9 +69,29 @@ function Directory_Break {
     }
 }
 
-function zip {
+function zipd {
     Param($Directory,
         $Name = (Split-Path -Leaf $Directory)
+    )
+    $CurrentDir = Convert-Path .
+    if ($Directory) {
+        $Base_Path = Split-Path -Parent $Directory
+        $Archive_Name = Join-Path $Base_Path "$Name.zip"
+
+        while ((Test-Path $Archive_Name)) {
+            $Archive_Name = Join-Path $Base_Path ($Name + [Guid]::NewGuid().ToString().Substring(0, 4) + ".zip")
+        }
+
+        7z a $Archive_Name (Get-ChildItem $Directory) # > $null
+    }
+    else {
+        Write-Output ("This is 7zip based archive function.`n`tParam is directory.")
+    }
+}
+
+function zipf {
+    Param($file,
+        $Name = (Split-Path -Leaf $file)
     )
 
     if ($Directory) {
@@ -88,6 +108,7 @@ function zip {
         Write-Output ("This is 7zip based archive function.`n`tParam is directory.")
     }
 }
+
 
 function uzip {
     Param($Archive
