@@ -8,6 +8,6 @@ New-Item -ItemType SymbolicLink -Path '~\AppData\Roaming\Microsoft\Windows\Start
 
 Install-Module posh-git -Scope CurrentUser -AllowPrerelease -Force
 Install-Module oh-my-posh -Scope CurrentUser -AllowPrerelease -Force
-Install-Module -Name PSReadLine -Scope CurrentUser -Force -SkipPublisherCheck
+Install-Module PSReadLine -Scope CurrentUser -AllowPrerelease -Force
 
 # winget install PowerShell --version 7.0.3
