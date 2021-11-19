@@ -27,3 +27,4 @@ function mkcd () {
 }
 
 export PIPENV_VENV_IN_PROJECT=1
+export CUBLAS_WORKSPACE_CONFIG=:16:8
