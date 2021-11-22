@@ -29,4 +29,8 @@ function mkcd() {
 }
 
 export PIPENV_VENV_IN_PROJECT=1
+<<<<<<< HEAD
 export LIBGL_ALWAYS_INDIRECT=1
+=======
+export CUBLAS_WORKSPACE_CONFIG=:16:8
+>>>>>>> 845697a7c3a80287abc80992dcf2732e6f72a2eb
