@@ -1,3 +1,5 @@
+#!/bin/bash
+
 addon_folder="${HOME}/conf/addon"
 
 # set PATH so it includes user's private bin if it exists
@@ -22,8 +24,9 @@ if [ -d $addon_folder ]; then
     done
 fi
 
-function mkcd () {
+function mkcd() {
     mkdir $1 && cd $_
 }
 
 export PIPENV_VENV_IN_PROJECT=1
+export LIBGL_ALWAYS_INDIRECT=1

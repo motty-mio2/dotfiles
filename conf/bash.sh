@@ -1,5 +1,5 @@
 SCRIPT_DIR=$(cd $(dirname $0); pwd)
-#source "${SCRIPT_DIR%/}/shell.sh"
+# echo ${SCRIPT_DIR}
 source "${SCRIPT_DIR}/shell.sh"
 
 #if [ -n "$BASH_VERSION" ]; then
