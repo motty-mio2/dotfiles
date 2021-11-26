@@ -4,7 +4,7 @@ sudo perl -p -i.bak -e 's%(deb(?:-src|)\s+)https?://(?!archive\.canonical\.com|s
 # sed -ie '$a set constantshow\nset linenumbers\nset historylog' /etc/nanorc && \
 sudo apt-get update
 sudo apt-get upgrade -qy
-sudo apt-get install -qy nano wget zsh git unar byobu
+sudo apt-get install -qy byobu curl git nano screen unar wget zsh
 
 touch ~/.zshrc
 
