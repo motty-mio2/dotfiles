@@ -8,7 +8,8 @@ autoload -Uz compinit
 compinit
 autoload -Uz colors
 colors
-zstyle ':completion:*' matcher-list 'm:{a-z}={A-Z}'
+# zstyle ':completion:*' matcher-list 'm:{a-z}={A-Z}'
+zstyle ':prezto:module:prompt' theme 'powerlevel10k'
 
 setopt TRANSIENT_RPROMPT
 
