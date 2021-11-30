@@ -3,12 +3,25 @@ repo_path=${script_directory%/*}
 echo $script_directory
 cd ~/
 
+# Download Prezto
+git clone --recursive https://github.com/sorin-ionescu/prezto.git "${ZDOTDIR:-$HOME}/.zprezto"
+
+setopt EXTENDED_GLOB
+for rcfile in "${ZDOTDIR:-$HOME}"/.zprezto/runcoms/^README.md(.N); do
+  ln -s "$rcfile" "${ZDOTDIR:-$HOME}/.${rcfile:t}"
+done
+
+zsh
+prompt -s powerlevel10k
+exit
+
+ln -s "$script_directory/.p10k.zsh" ${HOME}/.p10k.zsh
+
 # nano setup
 ln -s "$script_directory/.nanorc" ~/.nanorc
 ln -sr "$script_directory/conf" ~/conf
 
 echo "source ~/.profile" >> ~/.zshrc
-
 
 echo "source ${HOME}/conf/zsh.sh" >> ~/.zshrc
 echo "source ${HOME}/conf/bash.sh" >> ~/.bashrc
@@ -26,6 +39,7 @@ then
     echo "source ${HOME}/conf/wsl.sh" >> ~/.zshrc
     echo "source ${HOME}/conf/wsl.sh" >> ~/.bashrc
 fi
+
 
 echo "is this Server machine? [Y/n]"
 read ANS
