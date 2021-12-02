@@ -9,7 +9,6 @@ compinit
 autoload -Uz colors
 colors
 # zstyle ':completion:*' matcher-list 'm:{a-z}={A-Z}'
-zstyle ':prezto:module:prompt' theme 'powerlevel10k'
 
 setopt TRANSIENT_RPROMPT
 
@@ -17,3 +16,9 @@ setopt histignorealldups
 HISTFILE=~/.zsh_history
 HISTSIZE=10000
 SAVEHIST=10000
+
+zstyle ':prezto:module:prompt' theme 'powerlevel10k'
+
+autoload -Uz promptinit
+promptinit
+prompt powerlevel10k
