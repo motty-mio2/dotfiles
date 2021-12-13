@@ -1,5 +1,8 @@
-New-Item -ItemType Directory -Path '~\Documents\PowerShell'
-New-Item -ItemType SymbolicLink -Path '~\Documents\PowerShell' -Name 'conf' -Target $(Join-Path $PSScriptRoot "conf")
+New-Item -ItemType Directory -Path '~\Documents\PowerShell\conf'
+Get-ChildItem -Path (Join-Path $PSScriptRoot "\conf\") -Name -Recurse -Include *.ps1 | ForEach-Object -Process {
+    New-Item -ItemType SymbolicLink -Path '~\Documents\PowerShell\conf\' -Name $_ -Value $(Join-Path $PSScriptRoot "conf\" $_)
+}
+
 New-Item -ItemType SymbolicLink -Path '~\Documents' -Name 'WindowsPowerShell' -Target (Join-Path $HOME '\Documents\PowerShell')
 
 Copy-Item $(Join-Path $PSScriptRoot "Microsoft.PowerShell_profile.ps1") '~\Documents\PowerShell'
@@ -9,5 +12,3 @@ New-Item -ItemType SymbolicLink -Path '~\AppData\Roaming\Microsoft\Windows\Start
 Install-Module posh-git -Scope CurrentUser -AllowPrerelease -Force
 Install-Module oh-my-posh -Scope CurrentUser -AllowPrerelease -Force
 Install-Module PSReadLine -Scope CurrentUser -AllowPrerelease -Force
-
-# winget install PowerShell --version 7.0.3
