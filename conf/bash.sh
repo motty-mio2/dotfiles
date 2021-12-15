@@ -1,6 +1,9 @@
-SCRIPT_DIR=$(cd $(dirname $0); pwd)
-# echo ${SCRIPT_DIR}
-source "${SCRIPT_DIR}/shell.sh"
+conf_folder="${HOME}/conf"
+if [ -d $conf_folder ]; then
+    for file in $( ls $conf_folder | grep .sh$ ); do
+        source "${conf_folder}/${file}"
+    done
+fi
 
 #if [ -n "$BASH_VERSION" ]; then
 #    # include .bashrc if it exists
