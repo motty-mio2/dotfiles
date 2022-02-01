@@ -6,10 +6,10 @@ echo $script_directory
 cd ~/
 
 # Download Prezto
-git clone --recursive https://github.com/sorin-ionescu/prezto.git "${ZDOTDIR:-$HOME}/.zprezto"
+git clone --recursive https://github.com/sorin-ionescu/prezto.git "${ZDOTDIR:-$HOME}/.zprezto" > /dev/null
 
 mkdir ~/.fonts
-wget -P ~/.fonts https://github.com/ryanoasis/nerd-fonts/releases/download/v2.1.0/CascadiaCode.zip
+wget -P ~/.fonts https://github.com/ryanoasis/nerd-fonts/releases/download/v2.1.0/CascadiaCode.zip > /dev/null
 unar -D ~/.fonts/CascadiaCode.zip -o ~/.fonts
 rm ~/.fonts/CascadiaCode.zip
 
