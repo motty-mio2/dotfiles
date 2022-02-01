@@ -19,13 +19,13 @@ done
 
 echo "zstyle :prezto:module:prompt theme powerlevel10k" >> ~/.zpreztorc
 
+mkdir conf
 ln -s "${script_directory}/.p10k.zsh" "${HOME}/.p10k.zsh"
 ln -s "${script_directory}/.nanorc" "${HOME}/.nanorc"
 ln -s "${script_directory}/conf/shell.sh" "${HOME}/conf/shell.sh"
 echo "source ~/.profile" >> ~/.zshrc
 echo "source ${script_directory}/conf/zsh.sh" >> ~/.zshrc
 echo "source ${script_directory}/conf/bash.sh" >> ~/.bashrc
-mkdir conf
 
 # wsl setup
 if [[ `cat /proc/version | grep 'microsoft'` ]]; then
