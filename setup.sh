@@ -13,6 +13,7 @@ wget -P ~/.fonts https://github.com/ryanoasis/nerd-fonts/releases/download/v2.1.
 unar -D ~/.fonts/CascadiaCode.zip -o ~/.fonts
 rm ~/.fonts/CascadiaCode.zip
 
+setopt EXTENDED_GLOB
 for rcfile in "${ZDOTDIR:-$HOME}"/.zprezto/runcoms/^README.md(.N); do
     ln -s "$rcfile" "${ZDOTDIR:-$HOME}/.${rcfile:t}"
 done
