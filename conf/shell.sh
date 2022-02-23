@@ -20,6 +20,10 @@ function mkcd() {
     mkdir $1 && cd $_
 }
 
+function cats() {
+    cat $1 | \grep -v "^#" | \grep -v "^$"
+}
+
 export PIPENV_VENV_IN_PROJECT=1
 export LIBGL_ALWAYS_INDIRECT=1
 export CUBLAS_WORKSPACE_CONFIG=:16:8
