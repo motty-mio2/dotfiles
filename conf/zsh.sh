@@ -28,5 +28,9 @@ autoload -Uz promptinit
 promptinit
 prompt powerlevel10k
 
+if [[ -s "${ZDOTDIR:-$HOME}/.zprezto/init.zsh" ]]; then
+    source "${ZDOTDIR:-$HOME}/.zprezto/init.zsh"
+fi
+
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
 
