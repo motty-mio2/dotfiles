@@ -1,6 +1,10 @@
 # export DISPLAY=$(cat /etc/resolv.conf | grep nameserver | awk '{print $2}'):0
 whome=$(wslpath $(wslvar USERPROFILE))
 
+if [ -z "${SSH_AGENT_PID}" ]; then
+    eval $(ssh-agent) 1>/dev/null
+fi
+
 export SSH_AUTH_SOCK=$HOME/.ssh/agent.sock
 ss -a | grep -q $SSH_AUTH_SOCK
 if [ $? -ne 0   ]; then
