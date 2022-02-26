@@ -21,7 +21,7 @@ function mkcd() {
 }
 
 function cats() {
-    cat $1 | grep -vE "^#" | grep -vE "^$" | grep -vE "^( )+#"
+    cat $1 | grep -vE "^#" | grep -vE "^( )*#"
 }
 
 export PIPENV_VENV_IN_PROJECT=1
