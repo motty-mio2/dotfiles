@@ -3,6 +3,7 @@
 #   Get-Command $args | Format-List
 #}
 
+Set-Alias ll Get-ChildItem -Force
 
 function test-func {
     Param($id)
@@ -20,6 +21,7 @@ function test-func {
 function touch {
     New-Item -type file $args
 }
+
 function python3 {
     python $args
 }
@@ -44,7 +46,6 @@ function rmrf {
     Remove-Item -Recurse -Force $Target
 }
 
-Set-Alias db Directory_Break
 
 function Directory_Break_Single {
     $Child_Path = Convert-Path $args
@@ -183,4 +184,10 @@ function mkcd {
         New-Item -ItemType Directory $dir
     }
     Set-Location $dir
+    Set-Alias db Directory_Break
+}
+
+function ln {
+    param ($src, $dist)
+    New-Item -ItemType SymbolicLink -Target (Resolve-Path $src) -Path (Resolve-Path $dist)
 }
