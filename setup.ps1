@@ -1,5 +1,5 @@
 New-Item -ItemType Directory -Path '~\Documents\PowerShell\conf'
-Get-ChildItem -Path (Join-Path $PSScriptRoot "\conf\") -Name -Recurse -Include *.ps1 | ForEach-Object -Process {
+Get-ChildItem -Path (Join-Path $PSScriptRoot "\conf\") -Name -Recurse | ForEach-Object -Process {
     New-Item -ItemType SymbolicLink -Path '~\Documents\PowerShell\conf\' -Name $_ -Value $(Join-Path $PSScriptRoot "conf\" $_)
 }
 
