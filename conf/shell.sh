@@ -24,7 +24,7 @@ function mkcd() {
 }
 
 function cats() {
-    cat $1 | \grep -v "^#" | \grep -v "^$"
+    cat $1 | grep -vE "^\s*#" | grep -vE '^\s*$'
 }
 
 export PIPENV_VENV_IN_PROJECT=1

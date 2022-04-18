@@ -11,3 +11,15 @@ if [ $? -ne 0   ]; then
     rm -f $SSH_AUTH_SOCK
     ( setsid socat UNIX-LISTEN:$SSH_AUTH_SOCK,fork EXEC:"$whome/go/bin/npiperelay.exe -ei -s //./pipe/openssh-ssh-agent",nofork & ) >/dev/null 2>&1
 fi
+
+function open() {
+    if [ $# != 1 ]; then
+        explorer.exe .
+    else
+        if [ -e $1 ]; then
+            cmd.exe /c start $(wslpath -w $1) 2> /dev/null
+        else
+            echo "open: $1 : No such file or directory" 
+        fi
+    fi
+}
