@@ -15,6 +15,9 @@ alias bupdate='brew update && brew upgrade'
 alias pip='pip3'
 alias python='python3'
 alias rmrf='rm -rf'
+alias watch="watch "
+alias lsn='ls -U1 $1 | wc -l'
+alias rmemp='find . -type d -empty -delete'
 
 function mkcd() {
     mkdir $1 && cd $_
