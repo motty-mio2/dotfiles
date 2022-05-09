@@ -14,6 +14,7 @@ scoop bucket add nerd-font
 
 scoop alias add upgrade 'scoop update && scoop update *' 'update all'
 scoop alias add backup 'scoop export > ~\scoop.txt'
+scoop alias add reinstall "scoop uninstall $*; scoop install $*"
 
 git config --global credential.helper manager-core
 git config --global core.autocrlf input
