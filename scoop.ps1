@@ -1,6 +1,6 @@
 Set-ExecutionPolicy RemoteSigned -Scope CurrentUser -Force
 
-iwr -useb get.scoop.sh | iex
+Invoke-WebRequest -useb get.scoop.sh | Invoke-Expression
 scoop reset
 
 scoop install git 7zip sudo nano
