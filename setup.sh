@@ -1,4 +1,4 @@
-#!/usr/bin/zsh
+#!/bin/bash
 
 script_directory=$(cd $(dirname $0); pwd)
 repo_path=${script_directory%/*}

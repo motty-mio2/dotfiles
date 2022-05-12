@@ -1,12 +1,11 @@
-#!/bin/zsh
+#!/usr/bin/zsh
+
 conf_folder="${HOME}/conf"
-if [ -d $conf_folder ]; then
-    for file in $( ls $conf_folder | grep .sh$ ); do
-        source "${conf_folder}/${file}"
-    done
+if [ -d "$conf_folder" ]; then
+    source "${conf_folder}"/*.sh
 fi
 
-fpath=(/usr/local/share/zsh-completions/src $fpath)
+fpath=(/usr/local/share/zsh-completions/src "$fpath")
 
 autoload -Uz compinit
 compinit
@@ -20,8 +19,7 @@ setopt EXTENDED_GLOB
 setopt histignorealldups
 HISTFILE=~/.zsh_history
 HISTSIZE=10000
-SAVEHIST=10000
-POWERLEVEL9K_DISABLE_CONFIGURATION_WIZARD=true
+#SAVEHIST=10000
 zstyle ':prezto:module:prompt' theme 'powerlevel10k'
 
 autoload -Uz promptinit
