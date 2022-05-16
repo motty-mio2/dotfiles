@@ -1,8 +1,10 @@
-#!/usr/bin/zsh
+#!/usr/bin/sh
 
 conf_folder="${HOME}/conf"
 if [ -d "$conf_folder" ]; then
-    source "${conf_folder}"/*.sh
+    for file in $( ls "$conf_folder" | grep .sh$ ); do
+        source "${conf_folder}/${file}"
+    done
 fi
 
 fpath=(/usr/local/share/zsh-completions/src $fpath)
