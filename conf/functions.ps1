@@ -18,17 +18,11 @@ function test-func {
     Write-Output "$id"
 }
 
-function touch {
-    New-Item -type file $args
-}
+Set-Alias touch "New-Item -type file"
 
-function python3 {
-    python $args
-}
+Set-Alias python3 python
 
-function pip3 {
-    python -m pip $args
-}
+Set-Alias pip3 "python -m pip"
 
 function rmrf {
     <#
@@ -133,13 +127,9 @@ function update {
     scoop update *
 }
 
-function iv {
-    iverilog $args
-}
+Set-Alias iv "iverilog"
 
-function ivx {
-    iverilog -g2012 $args
-}
+Set-Alias ivx "iverilog -g2012"
 
 function Current_Dir {
     Write-Output $(Convert-Path .)
