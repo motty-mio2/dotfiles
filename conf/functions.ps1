@@ -177,7 +177,11 @@ function mkcd {
     Set-Alias db Directory_Break
 }
 
-function ln {
-    param ($src, $dist)
-    New-Item -ItemType SymbolicLink -Target (Resolve-Path $src) -Path (Resolve-Path $dist)
+function ln([switch] $s, [string] $filePath, [string] $symlink) {
+    if ($s) {
+        New-Item -ItemType SymbolicLink -Value $filePath -Path $symlink | Out-Null
+    }
+    else {
+        New-Item -ItemType HardLink -Value $filePath -Path $symlink | Out-Null
+    }
 }
