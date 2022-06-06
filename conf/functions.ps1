@@ -74,7 +74,6 @@ function zipd {
     Param($Directory,
         $Name = (Split-Path -Leaf $Directory)
     )
-    $CurrentDir = Convert-Path .
     if ($Directory) {
         $Base_Path = Split-Path -Parent $Directory
         $Archive_Name = Join-Path $Base_Path "$Name.zip"
