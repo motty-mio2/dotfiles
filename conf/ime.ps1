@@ -10,7 +10,7 @@ function gime {
         "palette" { $argument = " --mode=character_palette" }
         Default { $argument = $null }
     }
-    cmd /C (start "C:\Program Files (x86)\Google\Google Japanese Input\GoogleIMEJaTool.exe"${argument})
+    cmd /C (Start-Process "C:\Program Files (x86)\Google\Google Japanese Input\GoogleIMEJaTool.exe"${argument})
 }
 
 function msime {
