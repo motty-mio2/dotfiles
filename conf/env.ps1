@@ -6,3 +6,11 @@ $env:PATH = $env:USERPROFILE + "\.pyenv\pyenv-win\shims" + ";" + $env:PATH
 $env:PYENV = $env:USERPROFILE + "\.pyenv\pyenv-win\"
 $env:PYENV_HOME = $env:USERPROFILE + "\.pyenv\pyenv-win\"
 $env:PYENV_ROOT = $env:USERPROFILE + "\.pyenv\pyenv-win\"
+
+
+# try {
+#     $ENV:COMSPEC = (Get-Command pwsh -ErrorAction Stop).Definition
+# }
+# catch {
+#     $ENV:COMSPEC = "C:\Windows\System32\WindowsPowerShell\v1.0\powershell.EXE"
+# }
