@@ -1,6 +1,7 @@
 #!/bin/bash
 
 script_directory=$(cd $(dirname $0); pwd)
+conf_directory="~"
 repo_path=${script_directory%/*}
 echo $script_directory
 cd ~/
