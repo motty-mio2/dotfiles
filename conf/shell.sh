@@ -12,8 +12,6 @@ fi
 alias ll='ls -la'
 alias aupdate='sudo apt update && sudo apt upgrade -y && sudo apt autoremove -y'
 alias bupdate='brew update && brew upgrade'
-alias pip='pip3'
-alias python='python3'
 alias rmrf='rm -rf'
 alias watch="watch "
 alias rmemp='find . -type d -empty -delete'
