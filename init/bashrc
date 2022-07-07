@@ -118,10 +118,8 @@ if ! shopt -oq posix; then
   fi
 fi
 
-conf_directory="${HOME}/.config/shell"
-
-if [ -d "$conf_directory" ]; then
-    for file in $(ls ~/conf/*.sh); do
-        source "${file}"
-    done
-fi
+conf_folder="${HOME}/.config/shell"
+# if [ -d "$conf_folder" ]; then
+for file in $( ls "$conf_folder" | grep .sh$ ); do
+    echo "${conf_folder}/${file}"
+done

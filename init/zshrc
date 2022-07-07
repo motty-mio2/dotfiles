@@ -42,12 +42,8 @@ if [ -d "$HOME/.local/bin" ] ; then
     PATH="$HOME/.local/bin:$PATH"
 fi
 
-source ~/.profile
-
-conf_directory="${HOME}/.config/shell"
-
-if [ -d "$conf_directory" ]; then
-  for file in $(ls ~/conf/*.sh); do
-        source "${file}"
-    done
-fi
+conf_folder="${HOME}/.config/shell"
+# if [ -d "$conf_folder" ]; then
+for file in $( ls "$conf_folder" | grep .sh$ ); do
+    source "${conf_folder}/${file}"
+done
