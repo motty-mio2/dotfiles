@@ -1,9 +1,10 @@
 #!/usr/bin/sh
 
-conf_folder="${HOME}/conf"
-if [ -d "$conf_folder" ]; then
-    for file in $( ls "$conf_folder" | grep .sh$ ); do
-        source "${conf_folder}/${file}"
+conf_directory="${HOME}/.conf/shell"
+
+if [ -d "$conf_directory" ]; then
+    for file in $( ls "$conf_directory" | grep .sh$ ); do
+        source "${conf_directory}/${file}"
     done
 fi
 

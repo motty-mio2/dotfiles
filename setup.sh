@@ -1,7 +1,7 @@
 #!/bin/bash
 
 script_directory=$(cd $(dirname $0); pwd)
-conf_directory="~"
+conf_directory="${HOME}/.conf/shell"
 repo_path=${script_directory%/*}
 echo $script_directory
 cd ~/
@@ -21,7 +21,7 @@ done
 
 echo "zstyle :prezto:module:prompt theme powerlevel10k" >> ~/.zpreztorc
 
-mkdir conf
+mkdir -P $conf_directory
 ln -s "${script_directory}/.p10k.zsh" "${HOME}/.p10k.zsh"
 ln -s "${script_directory}/.nanorc" "${HOME}/.nanorc"
 ln -s "${script_directory}/conf/shell.sh" "${HOME}/conf/shell.sh"
