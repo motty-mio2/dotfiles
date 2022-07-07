@@ -1,14 +1,11 @@
 #!/usr/bin/sh
 
-conf_folder="${HOME}/conf"
-if [ -d "$conf_folder" ]; then
-    for file in $( ls "$conf_folder" | grep .sh$ ); do
-        source "${conf_folder}/${file}"
-    done
+if [[ -s "${ZDOTDIR:-$HOME}/.zprezto/init.zsh" ]]; then
+  source "${ZDOTDIR:-$HOME}/.zprezto/init.zsh"
 fi
 
-fpath=(/usr/local/share/zsh-completions/src $fpath)
 
+fpath=(/usr/local/share/zsh-completions/src $fpath)
 
 autoload -Uz compinit
 compinit
@@ -36,3 +33,21 @@ fi
 
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
 
+
+if [ -d "$HOME/bin" ] ; then
+    PATH="$HOME/bin:$PATH"
+fi
+
+if [ -d "$HOME/.local/bin" ] ; then
+    PATH="$HOME/.local/bin:$PATH"
+fi
+
+source ~/.profile
+
+conf_directory="${HOME}/.config/shell"
+
+if [ -d "$conf_directory" ]; then
+  for file in $(ls ~/conf/*.sh); do
+        source "${file}"
+    done
+fi
