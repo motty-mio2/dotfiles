@@ -1,7 +1,7 @@
 #!/bin/bash
 
 script_directory=$(cd $(dirname $0); pwd)
-conf_directory="~"
+conf_directory="$HOME/.config/shell"
 repo_path=${script_directory%/*}
 echo $script_directory
 cd ~/
@@ -21,10 +21,10 @@ done
 
 echo "zstyle :prezto:module:prompt theme powerlevel10k" >> ~/.zpreztorc
 
-mkdir conf
+mkdir conf_directory
 ln -s "${script_directory}/.p10k.zsh" "${HOME}/.p10k.zsh"
 ln -s "${script_directory}/.nanorc" "${HOME}/.nanorc"
-ln -s "${script_directory}/conf/shell.sh" "${HOME}/conf/shell.sh"
+ln -s "${script_directory}/conf/shell.sh" "${conf_directory}/shell.sh"
 echo "source ~/.profile" >> ~/.zshrc
 echo "source ${script_directory}/conf/zsh.sh" >> ~/.zshrc
 echo "source ${script_directory}/conf/bash.sh" >> ~/.bashrc
@@ -46,7 +46,7 @@ else
     read ANS
     case $ANS in
     "" | [Yy]* )
-        ln -s "${script_directory}/conf/server.sh" "${HOME}/conf/server.sh"
+        ln -s "${script_directory}/conf/server.sh" "${conf_directory}server.sh"
         ;;
     esac
 fi
