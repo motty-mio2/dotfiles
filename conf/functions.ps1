@@ -30,19 +30,31 @@ function pip3 {
     python -m pip $args
 }
 
-function rmrf {
-    <#
-        .DESCRIPTION
-        Deletes the specified file or directory.
-        .PARAMETER target
-        Target file or directory to be deleted.
-        .NOTES
-        This is an equivalent command of "rm -rf" in Unix-like systems.
-    #>
-    Param(
-        [Parameter(Mandatory = $true)]
-        [string]$Target
-    )
+function single2double($Target_Path) {
+    $str = Convert-Path $Target_Path
+    $out = ""
+    for ($i = 0; $i -lt $str.Length - 1; $i++) {
+        $out = $out + $str[$i]
+        if ( $str[$i] -eq "\" -and $str[$i + 1] -ne "\") {
+            $out = $out + "\"
+        }
+    }
+
+    $out = $out + $str[-1]
+    Write-Output $out
+}
+
+function wslp ($Target_Path) {
+    $out = single2double($Target_Path)
+
+    wsl wslpath -u $out
+}
+
+function nvim($File) {
+    $p = wslp $File
+    wsl nvim $p
+}
+function rmrf ($Target) {
     Remove-Item -Recurse -Force $Target
 }
 
@@ -138,10 +150,6 @@ function iv {
 
 function ivx {
     iverilog -g2012 $args
-}
-
-function Current_Dir {
-    Write-Output $(Convert-Path .)
 }
 
 function codex {
