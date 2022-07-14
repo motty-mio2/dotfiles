@@ -1,6 +1,6 @@
 #!/bin/bash
 # export DISPLAY=$(cat /etc/resolv.conf | grep nameserver | awk '{print $2}'):0
-whome=$(wslpath "$(wslvar USERPROFILE)")
+#whome=$(wslpath "$(wslvar USERPROFILE)")
 
 if [ -z "${SSH_AGENT_PID}" ]; then
     eval "$(ssh-agent)" 1>/dev/null
