@@ -1,0 +1,25 @@
+[[plugins]]
+repo = 'neovim/nvim-lspconfig'
+#hook_add ='''exec 'source ' . rc_dir . '/settings/lspconfig.vim' '''
+hook_add = '''
+lua << EOF
+    package.path = rc_dir .. '/settings/?.lua;' .. package.path
+
+    require('nvim-lspconfig')
+EOF
+'''
+
+[[plugins]]
+repo = 'williamboman/nvim-lsp-installer'
+
+[[plugins]]
+repo = 'Shatur/neovim-ayu'
+
+[[plugins]]
+repo = 'lambdalisue/fern.vim'
+
+[[plugins]]
+repo = 'nvim-lua/completion-nvim'
+
+
+
