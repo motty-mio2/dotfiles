@@ -50,14 +50,9 @@ function wslp ($Target_Path) {
     wsl wslpath -u $out
 }
 
-function nvim($File) {
-    $p = wslp $File
-    wsl nvim $p
-}
 function rmrf ($Target) {
     Remove-Item -Recurse -Force $Target
 }
-
 
 function Directory_Break_Single {
     $Child_Path = Convert-Path $args
@@ -121,6 +116,11 @@ function zipf {
     }
 }
 
+function zip {
+    Param($Archive, $Files)
+    Write-Output $Files
+    # 7z.exe a $Archive $Files
+}
 
 function uzip {
     Param($Archive
@@ -202,3 +202,16 @@ function ln([switch] $s, [string] $filePath, [string] $symlink) {
         New-Item -ItemType HardLink -Value $filePath -Path $symlink | Out-Null
     }
 }
+
+Remove-Alias ls
+
+function ls {
+    Get-ChildItem -Exclude .* $Args
+}
+
+Set-Alias ll Get-ChildItem
+
+function lx {
+    Get-ChildItem $Args | Where-Object { $_.Name -match '^[\.]' }
+}
+

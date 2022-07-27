@@ -1,5 +1,13 @@
 {
   "$schema": "https://raw.githubusercontent.com/JanDeDobbeleer/oh-my-posh/main/themes/schema.json",
+  "profiles": {
+    "defaults": {},
+    "list": [
+      {
+        "cursorShape": "bar"
+      }
+    ]
+  },
   "blocks": [
     {
       "alignment": "left",
