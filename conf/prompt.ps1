@@ -1,9 +1,8 @@
-Import-Module posh-git
-Import-Module oh-my-posh
-Import-Module PSReadLine
+oh-my-posh init pwsh --config $PSScriptRoot\theme.omp.json | Invoke-Expression
 
-# Set-PoshPrompt powerlevel10k_classic
-Set-PoshPrompt -Theme $PSScriptRoot\theme.omp.json
+Import-Module C:\Users\kouki\scoop\modules\PSReadLine
+Import-Module C:\Users\kouki\scoop\modules\posh-git
+
 Enable-PoshTransientPrompt
 
 Set-PSReadLineKeyHandler -Key Tab -Function MenuComplete

@@ -17,6 +17,10 @@ scoop alias add upgrade 'scoop update && scoop update *' 'update all'
 scoop alias add backup 'scoop export > ~\scoop.txt'
 scoop alias add reinstall "scoop uninstall {0}; scoop install {0}"
 
+scoop install oh-my-posh
+scoop install posh-git
+scoop install PSReadLine
+
 git config --global credential.helper manager-core
 git config --global core.autocrlf input
 git config --global init.defaultBranch main
