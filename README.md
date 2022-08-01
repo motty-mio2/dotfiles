@@ -13,7 +13,7 @@ chmod +x setup.sh
 
 ## Contains
 - zsh
-    - oh-my-zsh
+    - prezto
     - zsh-completions
     - zsh-autosuggestions
 - byobu
@@ -22,5 +22,5 @@ chmod +x setup.sh
 - wsl2 display support (WSL2 only)
 
 ## addon
-1. mkdir ~/conf/addon
-2. set config fils on ~/conf/addon/(example).sh
+ - ~/.config/shell
+
