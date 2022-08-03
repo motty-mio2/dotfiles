@@ -7,7 +7,7 @@ if [ -z "${SSH_AGENT_PID}" ]; then
 fi
 
 export SSH_AUTH_SOCK=$HOME/.ssh/agent.sock
-if ss -a | grep -q "$SSH_AUTH_SOCK"; then
+if ! ss -a | grep -q "$SSH_AUTH_SOCK" ; then
     rm -f "$SSH_AUTH_SOCK"
     ( setsid socat UNIX-LISTEN:"$SSH_AUTH_SOCK",fork EXEC:"$HOME/whome/go/bin/npiperelay.exe -ei -s //./pipe/openssh-ssh-agent",nofork & ) >/dev/null 2>&1
 fi
