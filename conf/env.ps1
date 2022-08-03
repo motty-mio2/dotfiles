@@ -7,6 +7,8 @@ $env:PYENV = $env:USERPROFILE + "\.pyenv\pyenv-win\"
 $env:PYENV_HOME = $env:USERPROFILE + "\.pyenv\pyenv-win\"
 $env:PYENV_ROOT = $env:USERPROFILE + "\.pyenv\pyenv-win\"
 
+$SVLINT_CONFIG = $env:USERPROFILE + "\.config\svls\.svlint.toml"
+$env:SVLINT_CONFIG = $env:USERPROFILE + "\.config\svls\.svlint.toml"
 
 # try {
 #     $ENV:COMSPEC = (Get-Command pwsh -ErrorAction Stop).Definition
