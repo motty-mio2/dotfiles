@@ -49,5 +49,5 @@ export NVM_DIR="$HOME/.nvm"
 conf_folder="${HOME}/.config/shell"
 # if [ -d "$conf_folder" ]; then
 for file in "$conf_folder"/*.sh ; do
-    source "${conf_folder}/${file}"
+    source ${file}
 done
