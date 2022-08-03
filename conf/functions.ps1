@@ -3,8 +3,6 @@
 #   Get-Command $args | Format-List
 #}
 
-Set-Alias ll Get-ChildItem -Force
-
 function test-func {
     Param($id)
     Write-Host "this comes from test"
