@@ -71,9 +71,10 @@ end
 --     on_attach = on_attach
 -- }
 
--- require'lspconfig'.clangd.setup {}
--- -- require'lspconfig'.marksman.setup{}
--- require'lspconfig'.pyright.setup {}
--- require'lspconfig'.svls.setup {}
--- require'lspconfig'.tailwindcss.setup {}
+require'lspconfig'.clangd.setup {}
+require'lspconfig'.marksman.setup{}
+require'lspconfig'.zk.setup{}
+require'lspconfig'.pyright.setup {}
+require'lspconfig'.svls.setup {}
+require'lspconfig'.tailwindcss.setup {}
 
