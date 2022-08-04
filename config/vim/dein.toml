@@ -1,16 +1,23 @@
 [[plugins]]
 repo = 'neovim/nvim-lspconfig'
-#hook_add ='''exec 'source ' . rc_dir . '/settings/lspconfig.vim' '''
+
 hook_add = '''
 lua << EOF
-    package.path = rc_dir .. '/settings/?.lua;' .. package.path
-
     require('nvim-lspconfig')
 EOF
 '''
 
 [[plugins]]
-repo = 'williamboman/nvim-lsp-installer'
+repo = 'williamboman/mason.nvim'
+
+hook_add = '''
+lua << EOF
+    require('mason-lsp')
+EOF
+'''
+
+[[plugins]]
+repo = 'williamboman/mason-lspconfig.nvim'
 
 [[plugins]]
 repo = 'Shatur/neovim-ayu'
@@ -21,5 +28,6 @@ repo = 'lambdalisue/fern.vim'
 [[plugins]]
 repo = 'nvim-lua/completion-nvim'
 
-
+[[plugins]]
+repo = 'cohama/lexima.vim'
 
