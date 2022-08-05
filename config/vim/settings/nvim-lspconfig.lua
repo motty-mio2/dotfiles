@@ -66,14 +66,13 @@ local on_attach = function(client, bufnr)
 ]]
     end
 end
-
--- nvim_lsp["gopls"].setup {
---     on_attach = on_attach
--- }
+nvim_lsp["gopls"].setup {
+    on_attach = on_attach
+}
 
 require'lspconfig'.clangd.setup {}
-require'lspconfig'.marksman.setup{}
-require'lspconfig'.zk.setup{}
+require'lspconfig'.marksman.setup {}
+require'lspconfig'.zk.setup {}
 require'lspconfig'.pyright.setup {}
 require'lspconfig'.svls.setup {}
 require'lspconfig'.tailwindcss.setup {}
