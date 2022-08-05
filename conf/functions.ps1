@@ -204,12 +204,12 @@ function ln([switch] $s, [string] $filePath, [string] $symlink) {
 Remove-Alias ls
 
 function ls {
-    Get-ChildItem -Exclude .* $Args
+    Get-ChildItem $Args | Where-Object { $_.Name -notmatch '^\.' }
 }
 
 Set-Alias ll Get-ChildItem
 
 function lx {
-    Get-ChildItem $Args | Where-Object { $_.Name -match '^[\.]' }
+    Get-ChildItem $Args | Where-Object { $_.Name -match '^\.' }
 }
 
