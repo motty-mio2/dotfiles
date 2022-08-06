@@ -4,3 +4,5 @@ New-Item -ItemType SymbolicLink -Path '~\AppData\Local\nvim' -Name 'init.lua' -V
 
 New-Item -ItemType SymbolicLink -Path $HOME -Name ".vim" -Value $(Join-Path $PSScriptRoot "\config\vim")
 
+scoop install svls llvm
+nvm install --location=global pyright # Python
