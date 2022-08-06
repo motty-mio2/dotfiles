@@ -213,3 +213,6 @@ function lx {
     Get-ChildItem $Args | Where-Object { $_.Name -match '^\.' }
 }
 
+function doc {
+    docker compose $Args
+}
