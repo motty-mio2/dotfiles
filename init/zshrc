@@ -47,3 +47,17 @@ conf_folder="${HOME}/.config/shell"
 for file in "$conf_folder"/*.sh ; do
     source ${file}
 done
+
+if [ -f ~/.fzf.zsh ] ; then
+    if [[ ! "$PATH" == */home/linuxbrew/.linuxbrew/opt/fzf/bin* ]]; then
+    PATH="${PATH:+${PATH}:}/home/linuxbrew/.linuxbrew/opt/fzf/bin"
+    fi
+
+    # Auto-completion
+    # ---------------
+    [[ $- == *i* ]] && source "/home/linuxbrew/.linuxbrew/opt/fzf/shell/completion.zsh" 2> /dev/null
+
+    # Key bindings
+    # ------------
+    source "/home/linuxbrew/.linuxbrew/opt/fzf/shell/key-bindings.zsh"
+fi

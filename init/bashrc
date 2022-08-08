@@ -123,3 +123,19 @@ conf_folder="${HOME}/.config/shell"
 for file in "$conf_folder"/*.sh ; do
     echo "${conf_folder}/${file}"
 done
+
+if [ -f ~/.fzf.bash ] then
+    # Setup fzf
+    # ---------
+    if [[ ! "$PATH" == */home/linuxbrew/.linuxbrew/opt/fzf/bin* ]]; then
+    PATH="${PATH:+${PATH}:}/home/linuxbrew/.linuxbrew/opt/fzf/bin"
+    fi
+
+    # Auto-completion
+    # ---------------
+    [[ $- == *i* ]] && source "/home/linuxbrew/.linuxbrew/opt/fzf/shell/completion.bash" 2> /dev/null
+
+    # Key bindings
+    # ------------
+    source "/home/linuxbrew/.linuxbrew/opt/fzf/shell/key-bindings.bash"
+fi
