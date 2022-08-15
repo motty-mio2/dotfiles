@@ -15,6 +15,5 @@ curl https://raw.githubusercontent.com/Shougo/dein.vim/master/bin/installer.sh >
 sh ./installer.sh ~/.cache/dein
 
 brew install zk # markdown
-brew install llvm # C/C++
-nvm install --location=global pyright # Python
+node install --location=global pyright # Python
 cargo install svls # SystemVerilog
