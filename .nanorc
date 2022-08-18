@@ -1,0 +1,9 @@
+set constantshow
+set linenumbers
+set matchbrackets "(<[{)>]}"
+set mouse
+set nonewlines
+set tabsize 4
+set tabstospaces
+set trimblanks
+# include "@PKGDATADIR@/*.nanorc
