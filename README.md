@@ -1,7 +1,26 @@
-# mio2's ターミナルセットアップ
-## Windows
-1. Download Windows Branch
-2. run `setup.ps1`
-## Linux (Ubuntu)
-1. Download Linux Branch
-2. run `ubuntu.sh`
+# mio2's setup environments for Linux Branch
+
+## PreRequirements
+- zsh
+- curl
+- wget
+
+## Installaion
+```
+chmod +x setup.sh
+./setup.sh
+```
+
+## Contains
+- zsh
+    - prezto
+    - zsh-completions
+    - zsh-autosuggestions
+- byobu
+- linuxbrew
+
+- wsl2 display support (WSL2 only)
+
+## addon
+ - ~/.config/shell
+
