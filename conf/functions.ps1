@@ -207,6 +207,10 @@ function ls {
     Get-ChildItem $Args | Where-Object { $_.Name -notmatch '^\.' }
 }
 
+function lh {
+    Get-ChildItem $Args | Where-Object { $_.Name -match '^\.' }
+}
+
 Set-Alias ll Get-ChildItem
 
 function lx {
