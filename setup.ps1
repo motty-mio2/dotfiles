@@ -9,3 +9,4 @@ Copy-Item $(Join-Path $PSScriptRoot "Microsoft.PowerShell_profile.ps1") '~\Docum
 
 New-Item -ItemType SymbolicLink -Path '~\AppData\Roaming\Microsoft\Windows\Start Menu\Programs\Startup' -Name config.xlaunch -Value $(Join-Path $PSScriptRoot "config.xlaunch")
 
+Install-Module PSReadLine -Force

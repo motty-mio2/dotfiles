@@ -1,6 +1,7 @@
 oh-my-posh init pwsh --config $PSScriptRoot\theme.omp.json | Invoke-Expression
 
-Import-Module (Join-Path -Path $HOME -ChildPath \scoop\modules\posh-git)
+Import-Module PSReadLine
+Import-Module (Join-Path $HOME "\scoop\modules\posh-git")
 
 Enable-PoshTransientPrompt
 
