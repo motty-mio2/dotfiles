@@ -140,6 +140,7 @@ function uzip {
 function update {
     scoop update
     scoop update *
+    scoop cleanup *
 }
 
 function iv {
