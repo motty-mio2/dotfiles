@@ -1,10 +1,11 @@
 #!/bin/bash
 
-
-alias ll='ls -la'
 alias aupdate='sudo apt update && sudo apt upgrade -y && sudo apt autoremove -y'
 alias bupdate='brew update && brew upgrade'
 alias zupdate='sudo zypper ref && sudo zypper update -y'
+
+alias ll='ls -la'
+alias lh='ls -ld .*'
 
 alias rmrf='rm -rf'
 alias watch="watch "
