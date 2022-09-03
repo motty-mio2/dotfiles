@@ -29,8 +29,8 @@ ln -s "${script_directory}/conf/shell.sh" "${conf_directory}/shell.sh"
 
 rm ~/.zshrc
 rm ~/.bashrc
-ln -s "${script_directory}/init/zsh.sh" >> ~/.zshrc
-ln -s "${script_directory}/init/bash.sh" >> ~/.bashrc
+ln -s "${script_directory}/init/zshrc" ~/.zshrc
+ln -s "${script_directory}/init/bashrc" ~/.bashrc
 
 # wsl setup
 if [[ `cat /proc/version | grep 'microsoft'` ]]; then
