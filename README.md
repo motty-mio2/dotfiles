@@ -13,8 +13,7 @@
  - common : `npm install --location=global pyright`
 
 ### SystemVerilog : svls
-- windows : `scoop install svls && scoop install svlint`
-- common : `cargo install svls`
+- common : `cargo install svlint svls`
 
 ## Reference
 - https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.txt
