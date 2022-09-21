@@ -5,7 +5,19 @@ if [[ -s "${ZDOTDIR:-$HOME}/.zprezto/init.zsh" ]]; then
 fi
 
 
-fpath=(/usr/local/share/zsh-completions/src $fpath)
+zstyle ':prezto:load' pmodule \
+  'environment' \
+  'terminal' \
+  'editor' \
+  'history' \
+  'directory' \
+  'spectrum' \
+  'utility' \
+  'completion' \
+  'prompt' \
+  'autosuggestions'
+
+# fpath=(/usr/local/share/zsh-completions/src $fpath)
 
 autoload -Uz compinit
 compinit
