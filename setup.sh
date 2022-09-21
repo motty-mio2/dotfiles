@@ -2,7 +2,7 @@
 
 script_directory=$(cd $(dirname $0); pwd)
 conf_directory="$HOME/.config/shell"
-mkdir -P $conf_directory
+mkdir -p $conf_directory
 
 echo $script_directory
 cd ~/
