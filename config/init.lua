@@ -13,5 +13,9 @@ vim.wo.listchars = 'tab:¦ ,trail:･'
 vim.o.number = true
 
 -- packerの読み込み
+vim.cmd [[packadd packer.nvim]]
+
 require 'plugins'
 vim.cmd [[autocmd BufWritePost plugins.lua PackerCompile]]
+
+require 'lsp'
