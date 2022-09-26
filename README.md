@@ -13,7 +13,6 @@
  - common : `npm install --location=global pyright`
 
 ### SystemVerilog : svls
-- windows : `scoop install svls && scoop install svlint`
 - common : `cargo install svls`
 
 ## Reference

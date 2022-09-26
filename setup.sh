@@ -14,6 +14,3 @@ cd ~/.cache/dein || exit
 curl https://raw.githubusercontent.com/Shougo/dein.vim/master/bin/installer.sh > installer.sh
 sh ./installer.sh ~/.cache/dein
 
-brew install zk # markdown
-node install --location=global pyright # Python
-cargo install svls # SystemVerilog
