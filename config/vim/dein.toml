@@ -23,11 +23,20 @@ repo = 'williamboman/mason-lspconfig.nvim'
 repo = 'Shatur/neovim-ayu'
 
 [[plugins]]
-repo = 'lambdalisue/fern.vim'
+repo = 'vim-denops/denops.vim'
 
 [[plugins]]
-repo = 'nvim-lua/completion-nvim'
+repo ='Shougo/ddu.vim'
+hook_add='''
+source
+'''
 
 [[plugins]]
-repo = 'cohama/lexima.vim'
+repo ='Shougo/ddu-source-file'
+
+[[plugins]]
+repo ='Shougo/ddu-kind-file'
+
+[[plugins]]
+repo ='Shougo/ddu-column-filename'
 
