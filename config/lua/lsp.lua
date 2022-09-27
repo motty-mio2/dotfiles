@@ -1,5 +1,12 @@
 -- 1. LSP Sever management
 require('mason').setup()
+require('mason-lspconfig').setup({
+    automatic_installation = true,
+    ensure_installed = {"clangd", "pyright", "svls", -- LSP
+    "flake8", "mypy", "shellcheck", -- Linter
+    "black", "isort", "yamlfmt" -- Formatter
+    }
+})
 require('mason-lspconfig').setup_handlers({function(server)
     local opt = {
         -- -- Function executed when the LSP server startup
