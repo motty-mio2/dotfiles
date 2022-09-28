@@ -4,6 +4,7 @@ require('packer').startup(function()
     use 'williamboman/mason.nvim'
     use 'williamboman/mason-lspconfig.nvim'
     use 'neovim/nvim-lspconfig'
+    use 'WhoIsSethDaniel/mason-tool-installer.nvim'
 
     use "nvim-treesitter/nvim-treesitter"
 
@@ -11,7 +12,14 @@ require('packer').startup(function()
     use "hrsh7th/cmp-nvim-lsp"
     use "hrsh7th/vim-vsnip"
 
-    use 'nvim-lua/plenary.nvim'
-    use 'nvim-telescope/telescope.nvim'
-end)
+    use {
+        'nvim-telescope/telescope.nvim',
+        requires = {"nvim-lua/plenary.nvim"}
+    }
 
+    use {
+        "nvim-neo-tree/neo-tree.nvim",
+        requires = {"nvim-lua/plenary.nvim", "kyazdani42/nvim-web-devicons", "MunifTanjim/nui.nvim"}
+    }
+
+end)
