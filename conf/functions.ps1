@@ -202,7 +202,11 @@ function ln([switch] $s, [string] $filePath, [string] $symlink) {
     }
 }
 
-Remove-Alias ls
+try {
+    Remove-Alias ls -ErrorAction Stop
+}
+catch {
+}
 
 function ls {
     Get-ChildItem $Args | Where-Object { $_.Name -notmatch '^\.' }
