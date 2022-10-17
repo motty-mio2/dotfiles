@@ -1,6 +1,11 @@
 #!/usr/bin/sh
 
-source "$HOME/.config/shell/common.sh"
+conf_folder="${HOME}/.config/shell/"
+# if [ -d "$conf_folder" ]; then
+for file in "$conf_folder"/*.sh ; do
+    source ${file}
+done
+
 eval "$(sheldon source)"
 
 # fpath=(/usr/local/share/zsh-completions/src $fpath)
@@ -62,12 +67,6 @@ fi
 if [ -d "$HOME/.local/bin" ] ; then
     PATH="$HOME/.local/bin:$PATH"
 fi
-
-conf_folder="${HOME}/.config/shell/conf"
-# if [ -d "$conf_folder" ]; then
-for file in "$conf_folder"/*.sh ; do
-    source ${file}
-done
 
 if [ -f ~/.fzf.zsh ] ; then
     if [[ ! "$PATH" == */home/linuxbrew/.linuxbrew/opt/fzf/bin* ]]; then
