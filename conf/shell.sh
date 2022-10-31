@@ -35,6 +35,18 @@ cats() {
     < "$1" grep -vE "^\s*#" | grep -vE '^\s*$'
 }
 
+envup () {
+    dirs=("$HOME/Projects/dotfiles" "$HOME/Projects/dotprivate" "$HOME/Projects/poshconfig" "$HOME/Projects/nvimcfg")
+
+    for target in "${dirs[@]}"
+    do
+        if [ -d "$target" ] ; then
+        echo "$target"
+            git -C "$target" pull
+        fi
+    done
+}
+
 export PIPENV_VENV_IN_PROJECT=1
 export LIBGL_ALWAYS_INDIRECT=1
 export CUBLAS_WORKSPACE_CONFIG=:16:8
