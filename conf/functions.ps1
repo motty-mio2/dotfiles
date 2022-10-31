@@ -137,7 +137,7 @@ function uzip {
     }
 }
 
-function update {
+function supdate {
     scoop update
     scoop update *
     scoop cleanup *
@@ -224,4 +224,19 @@ function lx {
 
 function doc {
     docker compose $Args
+}
+
+function envup {
+    $dirs = @("$HOME/Projects/dotfiles",
+    "$HOME/Projects/dotprivate",
+    "$HOME/Projects/poshconfig",
+    "$HOME/Projects/nvimcfg"
+    )
+
+    foreach ($target in $dirs){
+        if (Test-Path $target ) {
+	    Write-Host $target
+            git -C $target pull
+        }
+    }
 }
