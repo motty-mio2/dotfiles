@@ -18,6 +18,11 @@ vim.opt.cursorline = true -- highlight the current line
 vim.opt.number = true -- set numbered lines
 vim.opt.mouse = "a" -- allow the mouse to be used in neovim
 vim.opt.ignorecase = true -- ignore case in search patterns
+vim.opt.shiftwidth = 4
+vim.opt.tabstop = 4
+vim.opt.expandtab = true
+vim.opt.autoindent = true
+vim.opt.smartindent = true
 
 -- packerの読み込み
 vim.cmd [[packadd packer.nvim]]
