@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/usr/bin/env bash
 
 sudo pacman -S --noconfirm nano wget zsh git unarchiver
 
