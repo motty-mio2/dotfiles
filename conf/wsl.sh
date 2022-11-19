@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 # export DISPLAY=$(cat /etc/resolv.conf | grep nameserver | awk '{print $2}'):0
 #whome=$(wslpath "$(wslvar USERPROFILE)")
 
@@ -12,7 +12,7 @@ if ! ss -a | grep -q "$SSH_AUTH_SOCK" ; then
     ( setsid socat UNIX-LISTEN:"$SSH_AUTH_SOCK",fork EXEC:"$HOME/whome/go/bin/npiperelay.exe -ei -s //./pipe/openssh-ssh-agent",nofork & ) >/dev/null 2>&1
 fi
 
-function open() {
+open() {
     if [ $# != 1 ]; then
         explorer.exe .
     else

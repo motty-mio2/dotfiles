@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
 script_directory=$(cd "$(dirname "$0")" || exit; pwd)
 

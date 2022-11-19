@@ -1,4 +1,4 @@
-#!/usr/bin/sh
+#!/usr/bin/env bash
 
 export XDG_CONFIG_HOME="$HOME/.config"
 
@@ -37,14 +37,25 @@ cats() {
 
 envup () {
     dirs=("$HOME/Projects/dotfiles" "$HOME/Projects/dotprivate" "$HOME/Projects/poshconfig" "$HOME/Projects/nvimcfg")
-
+    
     for target in "${dirs[@]}"
     do
         if [ -d "$target" ] ; then
-        echo "$target"
+            echo "$target"
             git -C "$target" pull
         fi
     done
+}
+
+webp2png (){
+    while [[ "${1:-}" = -* ]]; do shift; done
+    
+    if [ $# -gt 0 ]; then
+        for file in "$1"/*.webp ; do
+            output_name="${file%webp}png"
+            dwebp "${file}" -o  -mt "$output_name"
+        done
+    fi
 }
 
 export PIPENV_VENV_IN_PROJECT=1

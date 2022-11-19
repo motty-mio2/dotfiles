@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
 script_directory=$(cd "$(dirname "$0")" || exit; pwd)
 conf_directory="$HOME/.config/shell"
@@ -41,8 +41,8 @@ else
     echo "is this Server machine? [Y/n]"
     read -r ANS
     case $ANS in
-    "" | [Yy]* )
-        ln -s "${script_directory}/conf/server.sh" "${conf_directory}/server.sh"
+        "" | [Yy]* )
+            ln -s "${script_directory}/conf/server.sh" "${conf_directory}/server.sh"
         ;;
     esac
 fi
