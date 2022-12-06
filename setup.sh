@@ -8,5 +8,5 @@ git clone --depth 1 https://github.com/wbthomason/packer.nvim ~/.local/share/nvi
 # nvim config directory
 conf_directory="$HOME/.config/nvim"
 
-ln -s "${script_directory}/config/vim" "${HOME}/.vim"
-ln -s "${script_directory}/config/nvim" "${conf_directory}"
+ln -s "${script_directory}/config" "${conf_directory}"
+
