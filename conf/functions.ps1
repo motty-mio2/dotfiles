@@ -143,6 +143,10 @@ function supdate {
     scoop cleanup *
 }
 
+function wupdate {
+    winget upgrade $args
+}
+
 function iv {
     iverilog $args
 }
