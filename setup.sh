@@ -29,8 +29,8 @@ mkdir ~/.fonts
 
 setopt EXTENDED_GLOB
 
-ln -s "${script_directory}/.p10k.zsh" "${HOME}/.p10k.zsh"
-ln -s "${script_directory}/.nanorc" "${HOME}/.nanorc"
+ln -s "${script_directory}/conf/p10k.zsh" "${HOME}/.p10k.zsh"
+ln -s "${script_directory}/conf/nanorc" "${HOME}/.nanorc"
 ln -s "${script_directory}/conf/shell.sh" "${conf_directory}/shell.sh"
 
 
