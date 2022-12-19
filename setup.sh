@@ -1,5 +1,20 @@
 #!/usr/bin/env bash
 
+if type "apt" > /dev/null 2>&1; then
+    echo "Ubuntu Mode"
+    sudo sed -i.org -e 's|archive.ubuntu.com|ftp.jaist.ac.jp/pub/Linux|g' /etc/apt/sources.list
+    sudo apt-get update
+    sudo apt-get upgrade -qy
+    sudo apt-get install -qy byobu curl git nano screen unar wget zsh libssl-dev build-essential
+
+elif [ -e /etc/fedora-release ]; then
+    # Fedra
+    echo "Fedora Mode"
+else then
+    echo "None"
+fi
+
+
 script_directory=$(cd "$(dirname "$0")" || exit; pwd)
 conf_directory="$HOME/.config/shell"
 mkdir -p "$conf_directory"
@@ -47,6 +62,8 @@ else
     esac
 fi
 
-cargo install sheldon
+curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
+
+~/.cargo/bin/cargo install sheldon
 mkdir -p "$HOME/.config/sheldon"
 ln -s "$script_directory/conf/plugins.toml" "$HOME/.config/sheldon"
