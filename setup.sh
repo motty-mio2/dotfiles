@@ -3,10 +3,12 @@
 if type "apt" > /dev/null 2>&1; then
     echo "Ubuntu Mode"
     sudo sed -i.org -e 's|archive.ubuntu.com|ftp.jaist.ac.jp/pub/Linux|g' /etc/apt/sources.list
+    sudo add-apt-repository ppa:longsleep/golang-backports
     sudo apt-get update
     sudo apt-get upgrade -qy
-    sudo apt-get install -qy byobu curl git nano screen unar wget zsh libssl-dev build-essential
-
+    sudo apt-get install -qy byobu curl git nano screen unar wget zsh libssl-dev build-essential golang
+elif type "pacman" > /dev/null 2>&1; then
+    sudo pacman -S --noconfirm nano wget zsh git unarchiver
 elif [ -e /etc/fedora-release ]; then
     # Fedra
     echo "Fedora Mode"
