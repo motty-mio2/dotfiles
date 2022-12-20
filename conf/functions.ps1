@@ -232,14 +232,14 @@ function doc {
 
 function envup {
     $dirs = @("$HOME/Projects/dotfiles",
-    "$HOME/Projects/dotprivate",
-    "$HOME/Projects/poshconfig",
-    "$HOME/Projects/nvimcfg"
+        "$HOME/Projects/dotprivate",
+        "$HOME/Projects/poshconfig",
+        "$HOME/Projects/nvimcfg"
     )
 
-    foreach ($target in $dirs){
+    foreach ($target in $dirs) {
         if (Test-Path $target ) {
-	    Write-Host $target
+            Write-Host $target
             git -C $target pull
         }
     }
