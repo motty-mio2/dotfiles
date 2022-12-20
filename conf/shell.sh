@@ -5,10 +5,6 @@ export XDG_CONFIG_HOME="$HOME/.config"
 # Rust
 if [ -d "$HOME/.cargo/bin" ] ; then
     export PATH="$HOME/.cargo/bin:$PATH"
-    if [ -f "$HOME/.cargo/bin/sccache" ] ; then
-        RUSTC_WRAPPER="$HOME/.cargo/bin/sccache"
-        export RUSTC_WRAPPER
-    fi
 fi
 alias aupdate='sudo apt update && sudo apt upgrade -y && sudo apt autoremove -y'
 alias bupdate='brew update && brew upgrade'
