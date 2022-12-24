@@ -69,3 +69,5 @@ curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
 ~/.cargo/bin/cargo install sheldon
 mkdir -p "$HOME/.config/sheldon"
 ln -s "$script_directory/conf/plugins.toml" "$HOME/.config/sheldon"
+
+ssh-keygen -t ed25519
