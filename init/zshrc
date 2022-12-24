@@ -1,9 +1,9 @@
-#!/usr/bin/sh
+#!/usr/bin/bash
 
 conf_folder="${HOME}/.config/shell/"
 # if [ -d "$conf_folder" ]; then
 for file in "$conf_folder"/*.sh ; do
-    source ${file}
+    source "${file}"
 done
 
 eval "$(sheldon source)"
@@ -13,10 +13,10 @@ fpath=(/home/linuxbrew/.linuxbrew/share/zsh/site-functions $fpath)
 
 autoload -Uz compinit
 
-if [[ -n ${ZDOTDIR}/.zcompdump(#qN.mh+24) ]]; then
-	compinit;
+if [[ -n ${ZDOTDIR}/.zcompdump ]]; then
+    compinit;
 else
-	compinit -C;
+    compinit -C;
 fi;
 
 # compinit -u
@@ -70,13 +70,13 @@ fi
 
 if [ -f ~/.fzf.zsh ] ; then
     if [[ ! "$PATH" == */home/linuxbrew/.linuxbrew/opt/fzf/bin* ]]; then
-    PATH="${PATH:+${PATH}:}/home/linuxbrew/.linuxbrew/opt/fzf/bin"
+        PATH="${PATH:+${PATH}:}/home/linuxbrew/.linuxbrew/opt/fzf/bin"
     fi
-
+    
     # Auto-completion
     # ---------------
     [[ $- == *i* ]] && source "/home/linuxbrew/.linuxbrew/opt/fzf/shell/completion.zsh" 2> /dev/null
-
+    
     # Key bindings
     # ------------
     source "/home/linuxbrew/.linuxbrew/opt/fzf/shell/key-bindings.zsh"
