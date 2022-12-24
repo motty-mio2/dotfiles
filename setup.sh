@@ -8,7 +8,7 @@ if type "apt" > /dev/null 2>&1; then
     sudo apt-get upgrade -qy
     sudo apt-get install -qy byobu curl git nano screen unar wget zsh libssl-dev build-essential golang
     elif type "pacman" > /dev/null 2>&1; then
-    sudo pacman -Sy --noconfirm nano wget zsh git unarchiver byobu curl screen
+    sudo pacman -Sy --noconfirm nano wget zsh git unarchiver byobu curl screen pkg-config
     elif [ -e /etc/fedora-release ]; then
     # Fedra
     echo "Fedora Mode"
