@@ -45,11 +45,24 @@ envup () {
 
 webp2png (){
     while [[ "${1:-}" = -* ]]; do shift; done
-    
+
     if [ $# -gt 0 ]; then
         for file in "$1"/*.webp ; do
+            echo "$file"
             output_name="${file%webp}png"
-            dwebp "${file}" -o  -mt "$output_name"
+            dwebp -mt "${file}" -o "$output_name"
+        done
+    fi
+}
+
+png2webp (){
+    while [[ "${1:-}" = -* ]]; do shift; done
+
+    if [ $# -gt 0 ]; then
+        for file in "$1"/*.png ; do
+            echo "$file"
+            output_name="${file%png}webp"
+            cwebp  -lossless -mt -quiet "${file}" -o "$output_name"
         done
     fi
 }
