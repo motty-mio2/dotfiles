@@ -23,9 +23,6 @@ github = 'zsh-users/zsh-completions'
 [plugins.zsh-autosuggestions]
 github = 'zsh-users/zsh-autosuggestions'
 
-[plugins."gitignore.plugin.zsh"]
-github = 'voronkovich/gitignore.plugin.zsh'
-
 [plugins.zsh-syntax-highlighting]
 github = 'zsh-users/zsh-syntax-highlighting'
 
