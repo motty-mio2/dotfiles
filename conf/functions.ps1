@@ -243,4 +243,6 @@ function envup {
             git -C $target pull
         }
     }
+
+    git -C "$HOME/.pyenv" pull
 }
