@@ -41,11 +41,14 @@ envup () {
             git -C "$target" pull
         fi
     done
+    
+    # update pyenv
+    git -C "$HOME/.pyenv" pull
 }
 
 webp2png (){
     while [[ "${1:-}" = -* ]]; do shift; done
-
+    
     if [ $# -gt 0 ]; then
         for file in "$1"/*.webp ; do
             echo "$file"
@@ -57,7 +60,7 @@ webp2png (){
 
 png2webp (){
     while [[ "${1:-}" = -* ]]; do shift; done
-
+    
     if [ $# -gt 0 ]; then
         for file in "$1"/*.png ; do
             echo "$file"
