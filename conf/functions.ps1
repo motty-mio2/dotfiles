@@ -234,7 +234,8 @@ function envup {
     $dirs = @("$HOME/Projects/dotfiles",
         "$HOME/Projects/dotprivate",
         "$HOME/Projects/poshconfig",
-        "$HOME/Projects/nvimcfg"
+        "$HOME/Projects/nvimcfg",
+        "$HOME/.pyenv"
     )
 
     foreach ($target in $dirs) {
@@ -243,6 +244,4 @@ function envup {
             git -C $target pull
         }
     }
-
-    git -C "$HOME/.pyenv" pull
 }
