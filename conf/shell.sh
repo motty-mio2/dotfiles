@@ -32,7 +32,7 @@ cats() {
 }
 
 envup () {
-    dirs=("$HOME/Projects/dotfiles" "$HOME/Projects/dotprivate" "$HOME/Projects/poshconfig" "$HOME/Projects/nvimcfg")
+    dirs=("$HOME/Projects/dotfiles" "$HOME/Projects/dotprivate" "$HOME/Projects/poshconfig" "$HOME/Projects/nvimcfg" "$HOME/.pyenv")
     
     for target in "${dirs[@]}"
     do
@@ -41,9 +41,6 @@ envup () {
             git -C "$target" pull
         fi
     done
-    
-    # update pyenv
-    git -C "$HOME/.pyenv" pull
 }
 
 webp2png (){
