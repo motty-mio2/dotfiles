@@ -72,12 +72,19 @@ if [ -f ~/.fzf.zsh ] ; then
     if [[ ! "$PATH" == */home/linuxbrew/.linuxbrew/opt/fzf/bin* ]]; then
         PATH="${PATH:+${PATH}:}/home/linuxbrew/.linuxbrew/opt/fzf/bin"
     fi
-    
+
     # Auto-completion
     # ---------------
     [[ $- == *i* ]] && source "/home/linuxbrew/.linuxbrew/opt/fzf/shell/completion.zsh" 2> /dev/null
-    
+
     # Key bindings
     # ------------
     source "/home/linuxbrew/.linuxbrew/opt/fzf/shell/key-bindings.zsh"
 fi
+
+function select-history() {
+  BUFFER=$(history -n -r 1 | fzf --no-sort +m --query "$LBUFFER" --prompt="History > ")
+  CURSOR=$#BUFFER
+}
+zle -N select-history
+bindkey '^r' select-history
