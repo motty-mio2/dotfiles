@@ -20,6 +20,7 @@ scoop alias add reinstall "scoop uninstall {0}; scoop install {0}"
 scoop install oh-my-posh
 scoop install posh-git
 scoop install PSReadLine
+scoop install psfzf
 
 git config --global credential.helper manager-core
 git config --global core.autocrlf input
