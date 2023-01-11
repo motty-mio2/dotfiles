@@ -3,6 +3,10 @@
 #   Get-Command $args | Format-List
 #}
 
+function e {
+    explorer .
+}
+
 function test-func {
     Param($id)
     Write-Host "this comes from test"
