@@ -66,7 +66,7 @@ fi
 
 curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
 
-~/.cargo/bin/cargo install sheldon
+~/.cargo/bin/cargo install cargo-update sccache sheldon
 mkdir -p "$HOME/.config/sheldon"
 ln -s "$script_directory/conf/plugins.toml" "$HOME/.config/sheldon"
 
