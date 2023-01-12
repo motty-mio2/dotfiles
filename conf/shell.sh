@@ -41,6 +41,9 @@ envup () {
             git -C "$target" pull
         fi
     done
+    
+    cargo install-update --all
+    sheldon lock --update
 }
 
 webp2png (){
