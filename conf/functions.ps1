@@ -238,6 +238,7 @@ function envup {
     $dirs = @("$HOME/Projects/dotfiles",
         "$HOME/Projects/dotprivate",
         "$HOME/Projects/poshconfig",
+        "$HOME/Projects/poshfiles",
         "$HOME/Projects/nvimcfg",
         "$HOME/.pyenv"
     )
@@ -248,4 +249,6 @@ function envup {
             git -C $target pull
         }
     }
+
+  cargo install-update --all
 }
