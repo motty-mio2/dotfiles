@@ -24,3 +24,5 @@ chmod +x setup.sh
 ## addon
  - ~/.config/shell
 
+## WSL
+- setup ssh agent on [wsl2-ssh-agent](https://github.com/mame/wsl2-ssh-agent)

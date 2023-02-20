@@ -45,12 +45,10 @@ ln -s "${script_directory}/conf/brew.sh" "${conf_directory}/brew.sh"
 # wsl setup
 if grep -q microsoft /proc/version ; then
     whome=$(wslpath "$(wslvar USERPROFILE)")
-    sudo apt-get install -y golang socat
-    go get -d github.com/jstarks/npiperelay
-    GOOS=windows go build -o "${whome}/go/bin/npiperelay.exe" github.com/jstarks/npiperelay
-    sudo apt-get purge -y golang
-    sudo apt-get autoremove -y
-    rm -rf ~/go
+    
+    curl -L -o "$HOME"/.local/bin/wsl2-ssh-agent https://github.com/mame/wsl2-ssh-agent/releases/latest/download/wsl2-ssh-agent
+    chmod 755 "$HOME"/.local/bin/wsl2-ssh-agent
+    
     ln -s "$whome" ~/whome
     ln -s "${script_directory}/conf/wsl.sh" "${conf_directory}/wsl.sh"
     ln -s "${script_directory}/conf/server.sh" "${conf_directory}/server.sh"
