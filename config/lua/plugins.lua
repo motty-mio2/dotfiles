@@ -1,5 +1,4 @@
 return {
-	{ "wbthomason/packer.nvim" },
 	{
 		"motty-mio2/mason.nvim",
 		branch = "hotfix/npm_exe",
