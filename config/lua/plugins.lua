@@ -1,29 +1,28 @@
-require('packer').startup(function()
-    use 'wbthomason/packer.nvim'
+require("packer").startup(function()
+	use("wbthomason/packer.nvim")
 
-    use {
-        'motty-mio2/mason.nvim', 
-        branch = "hotfix/npm_exe"
-    }
-   
-    use 'williamboman/mason-lspconfig.nvim'
-    use 'neovim/nvim-lspconfig'
-    use 'WhoIsSethDaniel/mason-tool-installer.nvim'
+	use({
+		"motty-mio2/mason.nvim",
+		branch = "hotfix/npm_exe",
+	})
 
-    use "nvim-treesitter/nvim-treesitter"
+	use("williamboman/mason-lspconfig.nvim")
+	use("neovim/nvim-lspconfig")
+	use("WhoIsSethDaniel/mason-tool-installer.nvim")
 
-    use "hrsh7th/nvim-cmp"
-    use "hrsh7th/cmp-nvim-lsp"
-    use "hrsh7th/vim-vsnip"
+	use("nvim-treesitter/nvim-treesitter")
 
-    use {
-        'nvim-telescope/telescope.nvim',
-        requires = {"nvim-lua/plenary.nvim"}
-    }
+	use("hrsh7th/nvim-cmp")
+	use("hrsh7th/cmp-nvim-lsp")
+	use("hrsh7th/vim-vsnip")
 
-    use {
-        "nvim-neo-tree/neo-tree.nvim",
-        requires = {"nvim-lua/plenary.nvim", "kyazdani42/nvim-web-devicons", "MunifTanjim/nui.nvim"}
-    }
+	use({
+		"nvim-telescope/telescope.nvim",
+		requires = { "nvim-lua/plenary.nvim" },
+	})
 
+	use({
+		"nvim-neo-tree/neo-tree.nvim",
+		requires = { "nvim-lua/plenary.nvim", "kyazdani42/nvim-web-devicons", "MunifTanjim/nui.nvim" },
+	})
 end)
