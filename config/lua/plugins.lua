@@ -1,7 +1,11 @@
 require('packer').startup(function()
     use 'wbthomason/packer.nvim'
 
-    use {'motty-mio2/mason.nvim', "hotfix/npm_exe"}
+    use {
+        'motty-mio2/mason.nvim', 
+        branch = "hotfix/npm_exe"
+    }
+   
     use 'williamboman/mason-lspconfig.nvim'
     use 'neovim/nvim-lspconfig'
     use 'WhoIsSethDaniel/mason-tool-installer.nvim'
