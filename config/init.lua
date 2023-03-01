@@ -1,5 +1,5 @@
 -- 2バイト文字を描画する
-vim.o.ambiwidth = 'double'
+vim.o.ambiwidth = "double"
 -- メッセージ表示欄を1行確保
 vim.o.cmdheight = 1
 -- emoji
@@ -7,7 +7,7 @@ vim.o.emoji = true
 
 -- 不可視文字を表示
 vim.wo.list = true
-vim.wo.listchars = 'tab:¦ ,trail:･'
+vim.wo.listchars = "tab:¦ ,trail:･"
 
 -- 行番号を表示する
 vim.o.number = true
@@ -41,6 +41,5 @@ plugins = require("plugins")
 
 require("lazy").setup(plugins)
 
-
-require 'lsp'
-require 'treesitter'
+require("lsp")
+require("treesitter")
