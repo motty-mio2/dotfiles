@@ -10,6 +10,7 @@ return {
 	{ "hrsh7th/nvim-cmp" },
 	{ "hrsh7th/cmp-nvim-lsp" },
 	{ "hrsh7th/vim-vsnip" },
+	{ "sainnhe/everforest" },
 	{
 		"nvim-telescope/telescope.nvim",
 		dependencies = { "nvim-lua/plenary.nvim" },
@@ -17,5 +18,11 @@ return {
 	{
 		"nvim-neo-tree/neo-tree.nvim",
 		dependencies = { "nvim-lua/plenary.nvim", "kyazdani42/nvim-web-devicons", "MunifTanjim/nui.nvim" },
+	},
+	{
+		"LazyVim/LazyVim",
+		opts = {
+			colorscheme = "everforest",
+		},
 	},
 }
