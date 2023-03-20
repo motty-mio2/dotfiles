@@ -10,6 +10,7 @@ require("mason-tool-installer").setup({
 		"clangd",
         "json-lsp",
         "marksman",
+        "powershell-editor-services",
 		"pyright",
 		"svls",
         "yaml-language-server",
