@@ -8,8 +8,11 @@ require("mason-tool-installer").setup({
 	ensure_installed = {
 		"bash-language-server",
 		"clangd",
+        "json-lsp",
+        "marksman",
 		"pyright",
 		"svls",
+        "yaml-language-server",
 		"flake8",
 		"mypy",
 		"shellcheck",
