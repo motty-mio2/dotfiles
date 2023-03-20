@@ -11,8 +11,8 @@ alias bupdate='brew update && brew upgrade'
 alias zupdate='sudo zypper ref && sudo zypper update -y'
 
 alias ls="ls --color=auto"
-alias ll='ls -lahGF'
-alias lh='ls -ldGF .*'
+alias ll='ls -lahF'
+alias lh='ls -ldF .*'
 
 alias rmrf='rm -rf'
 alias watch="watch "
