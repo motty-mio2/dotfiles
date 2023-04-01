@@ -8,6 +8,7 @@ if [ -d "$HOME/.cargo/bin" ] ; then
 fi
 alias aupdate='sudo apt update && sudo apt upgrade -y && sudo apt autoremove -y'
 alias bupdate='brew update && brew upgrade'
+alias dupdate='sudo dnf update -y'
 alias zupdate='sudo zypper ref && sudo zypper update -y'
 
 alias ls="ls --color=auto"
