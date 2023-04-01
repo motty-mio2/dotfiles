@@ -3,8 +3,8 @@
 #   Get-Command $args | Format-List
 #}
 
-function e {
-    explorer .
+function open ($target = (Get-Location).Path) {
+    Start-Process $target
 }
 
 function test-func {
@@ -250,5 +250,5 @@ function envup {
         }
     }
 
-  cargo install-update --all
+    cargo install-update --all
 }
