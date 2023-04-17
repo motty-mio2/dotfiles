@@ -1,4 +1,4 @@
-#!/usr/bin/bash
+#!/usr/bin/zsh
 
 conf_folder="${HOME}/.config/shell/"
 # if [ -d "$conf_folder" ]; then
@@ -43,7 +43,7 @@ colors
 setopt globdots
 setopt TRANSIENT_RPROMPT
 setopt EXTENDED_GLOB
-setopt histignorealldups
+setopt hist_ignore_all_dups
 setopt auto_param_slash
 setopt mark_dirs
 setopt auto_menu
