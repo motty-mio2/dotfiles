@@ -24,6 +24,9 @@ vim.opt.expandtab = true
 vim.opt.autoindent = true
 vim.opt.smartindent = true
 
+vim.opt.list = true
+vim.opt.listchars = { tab = '>>', trail = '-', nbsp = '+' }
+
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
 if not vim.loop.fs_stat(lazypath) then
 	vim.fn.system({
