@@ -249,6 +249,6 @@ function envup {
             git -C $target pull
         }
     }
-
+    rustup update
     cargo install-update --all
 }
