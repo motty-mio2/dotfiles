@@ -1,6 +1,6 @@
 #!/usr/bin/zsh
 
-conf_folder="${HOME}/.local/share/chezmoi/tools/conf"
+conf_folder="${HOME}/.local/share/chezmoi/tools/posix/conf"
 # if [ -d "$conf_folder" ]; then
 for file in "$conf_folder"/*.sh ; do
     source "${file}"
