@@ -6,6 +6,12 @@ for file in "$conf_folder"/*.sh ; do
     source "${file}"
 done
 
+completions="${HOME}/.local/share/chezmoi/tools/completions/conf"
+# if [ -d "$conf_folder" ]; then
+for file in "$completions"/*.sh ; do
+    source "${file}"
+done
+
 eval "$(sheldon source)"
 
 # fpath=(/usr/local/share/zsh-completions/src $fpath)
