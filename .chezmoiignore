@@ -1,8 +1,9 @@
+.gitignore
+doc
+LICENSE
+
 README.md
 tools
-
-.gitignore
-LICENSE
 
 {{ if eq .chezmoi.os "windows" }}
     .bashrc
