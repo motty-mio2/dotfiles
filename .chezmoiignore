@@ -3,3 +3,12 @@ tools
 
 .gitignore
 LICENSE
+
+{{ if eq .chezmoi.os "windows" -}}
+    dot_bashrc
+    dot_zshrc
+    dot_p10k.zsh
+{{ else -}}
+    config.xlaunch
+    Documents
+{{ end -}}
