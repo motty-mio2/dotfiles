@@ -9,7 +9,8 @@ tools
     .bashrc
     .zshrc
     .p10k.zsh
-    .config
+    .config/nvim
+    .config/sheldon
 {{ end }}
 
 {{ if ne .chezmoi.os "windows" }}
