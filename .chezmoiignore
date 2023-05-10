@@ -4,11 +4,13 @@ tools
 .gitignore
 LICENSE
 
-{{ if eq .chezmoi.os "windows" -}}
-    dot_bashrc
-    dot_zshrc
-    dot_p10k.zsh
-{{ else -}}
+{{ if eq .chezmoi.os "windows" }}
+    .bashrc
+    .zshrc
+    .p10k.zsh
+{{ end }}
+
+{{ if ne .chezmoi.os "windows" }}
     config.xlaunch
     Documents
-{{ end -}}
+{{ end }}
