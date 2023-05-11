@@ -12,6 +12,8 @@ Set-Alias pip3 pip
 # gh
 (& gh completion -s powershell) | Out-String | Invoke-Expression
 
+(& chezmoi completion powershell) | Out-String | Invoke-Expression
+
 function ghf {
     gh repo clone $(gh repo list -L 10000 | fzf).Split("`t")[0]
 }
