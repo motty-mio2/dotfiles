@@ -7,8 +7,8 @@ format = """
 [ ](fg:separater bg:base_background)\
 $directory\
 [](fg:separater bg:base_background)\
-$git_branch\
-[](fg:separater bg:base_background)\
+$git_branch($git_status)\
+[ ](fg:separater bg:base_background)\
 $python\
 [](fg:separater bg:base_background)\
 $cmd_duration\
@@ -60,7 +60,17 @@ use_os_path_sep = false
 [git_branch]
 style = "bg:base_background"
 symbol = ''
-format = '[ $symbol$branch(:$remote_branch) ]($style)'
+format = '[ $symbol$branch(:$remote_branch)]($style)'
+
+[git_status]
+style = "bg:base_background"
+untracked = "?($count)"
+staged = "+($count)"
+ahead = '⇡${count}'
+diverged = '⇕⇡${ahead_count}⇣${behind_count}'
+behind = '⇣${count}'
+
+format = '([ $untracked$staged$diverged]($style))'
 
 [hostname]
 ssh_only = false
