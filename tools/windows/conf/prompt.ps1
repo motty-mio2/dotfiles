@@ -1,9 +1,9 @@
-oh-my-posh init pwsh --config $PSScriptRoot\theme.omp.json | Invoke-Expression
+# oh-my-posh init pwsh --config $PSScriptRoot\theme.omp.json | Invoke-Expression
+# Enable-PoshTransientPrompt
 
 Import-Module PSReadLine
 Import-Module (Join-Path $HOME "\scoop\modules\posh-git")
 
-Enable-PoshTransientPrompt
 
 Set-PSReadLineKeyHandler -Key Tab -Function MenuComplete
 Set-PSReadlineKeyHandler -Key ctrl+d -Function DeleteCharOrExit

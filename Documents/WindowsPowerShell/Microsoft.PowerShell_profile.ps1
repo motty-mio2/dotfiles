@@ -1,3 +1,15 @@
+function Invoke-Starship-TransientFunction {
+    &starship module character
+}
+
+function Invoke-Starship-PreCommand {
+    $host.ui.RawUI.WindowTitle = "$env:USERNAME@$env:COMPUTERNAME"
+}
+
+Invoke-Expression (&starship init powershell)
+
+Enable-TransientPrompt
+
 $configure_folder = $HOME + "\.local\share\chezmoi\tools\windows\conf"
 
 Get-ChildItem -Path ($configure_folder) -Recurse -Include *.ps1 | ForEach-Object -Process {
@@ -6,12 +18,12 @@ Get-ChildItem -Path ($configure_folder) -Recurse -Include *.ps1 | ForEach-Object
 
 Register-ArgumentCompleter -Native -CommandName winget -ScriptBlock {
     param($wordToComplete, $commandAst, $cursorPosition)
-        [Console]::InputEncoding = [Console]::OutputEncoding = $OutputEncoding = [System.Text.Utf8Encoding]::new()
-        $Local:word = $wordToComplete.Replace('"', '""')
-        $Local:ast = $commandAst.ToString().Replace('"', '""')
-        winget complete --word="$Local:word" --commandline "$Local:ast" --position $cursorPosition | ForEach-Object {
-            [System.Management.Automation.CompletionResult]::new($_, $_, 'ParameterValue', $_)
-        }
+    [Console]::InputEncoding = [Console]::OutputEncoding = $OutputEncoding = [System.Text.Utf8Encoding]::new()
+    $Local:word = $wordToComplete.Replace('"', '""')
+    $Local:ast = $commandAst.ToString().Replace('"', '""')
+    winget complete --word="$Local:word" --commandline "$Local:ast" --position $cursorPosition | ForEach-Object {
+        [System.Management.Automation.CompletionResult]::new($_, $_, 'ParameterValue', $_)
+    }
 }
 
 #Set-PsFzfOption -PSReadlineChordProvider 'Ctrl+t'

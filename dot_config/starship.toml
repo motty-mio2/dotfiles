@@ -5,7 +5,7 @@ format = """
 $directory\
 [](fg:separater bg:base_background)\
 $git_branch($git_status)\
-[ ](fg:separater bg:base_background)\
+[](fg:separater bg:base_background)\
 $python\
 [](fg:separater bg:base_background)\
 $cmd_duration\
@@ -53,7 +53,7 @@ use_os_path_sep = false
 [git_branch]
 style = "bg:base_background"
 symbol = ''
-format = '[ $symbol$branch(:$remote_branch)]($style)'
+format = '([ $symbol$branch(:$remote_branch) ]($style))'
 
 [git_status]
 style = "bg:base_background"
@@ -63,7 +63,7 @@ ahead = '⇡${count}'
 diverged = '⇕⇡${ahead_count}⇣${behind_count}'
 behind = '⇣${count}'
 
-format = '([ $untracked$staged$diverged]($style))'
+format = '([$untracked$staged$diverged ]($style))'
 
 [hostname]
 ssh_only = false
@@ -91,9 +91,8 @@ python_binary = ['python', 'python3', 'python3.exe', 'python3.bat']
 format = '[ ${symbol}${version}(\($virtualenv\)) ]($style)'
 
 [username]
-show_always = true
-style = "bg:base_background"
 style_user = "bg:base_background"
 style_root = "bg:base_background"
 format = '[$user]($style)'
-disabled = false
+show_always = true
+
