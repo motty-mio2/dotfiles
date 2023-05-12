@@ -37,7 +37,7 @@ function Set-Pyenv-Path {
     foreach ($target in @( "PYENV", "PYENV_HOME", "PYENV_ROOT")) {
         $tmp_path = [System.Environment]::GetEnvironmentVariable("$target", "User")
 
-        if ( $null -eq $tmp_path || $tmp_path -ne $PYENV_DIR ) {
+        if ( ($null -eq $tmp_path) -Or ($tmp_path -ne $PYENV_DIR )) {
             [System.Environment]::SetEnvironmentVariable('PYENV', $PYENV_DIR, "User")
         }
     }
