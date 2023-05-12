@@ -4,9 +4,8 @@
 Import-Module PSReadLine
 Import-Module (Join-Path $HOME "\scoop\modules\posh-git")
 
-
 Set-PSReadLineKeyHandler -Key Tab -Function MenuComplete
 Set-PSReadlineKeyHandler -Key ctrl+d -Function DeleteCharOrExit
 
 Set-PSReadLineOption -PredictionSource History
-Set-PSReadLineOption -PredictionViewStyle ListView
+Set-PSReadLineOption -PredictionViewStyle InlineView
