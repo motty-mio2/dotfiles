@@ -1,0 +1,96 @@
+# Get editor completions based on the config schema
+"$schema" = 'https://starship.rs/config-schema.json'
+
+# [](#444444)\
+# [](fg:separater bg:base_background)\
+format = """
+[ ](fg:separater bg:base_background)\
+$directory\
+[](fg:separater bg:base_background)\
+$git_branch\
+[](fg:separater bg:base_background)\
+$python\
+[](fg:separater bg:base_background)\
+$cmd_duration\
+
+[](fg:base_background)
+[ $os $username@$hostname](bg:base_background)\
+[](fg:base_background)\
+$character\
+"""
+
+# right_format = '''$os'''
+# right_format = """$os"""
+
+
+# Inserts a blank line between shell prompts
+add_newline = false
+command_timeout = 1000
+palette = 'mypower'
+
+[palettes.mypower]
+text = 'white'
+base_background = '#444444'
+separater = '#868686'
+
+# Replace the '❯' symbol in the prompt with '➜'
+#[character] # The name of the module we are configuring is 'character'
+#success_symbol = '[➜](bold green)' # The 'success_symbol' segment is being set to '➜' with the color 'bold green'
+
+# Disable the package module, hiding it from the prompt completely
+[package]
+disabled = true
+
+
+[cmd_duration]
+min_time = 0
+format = '[ $duration]($style)'
+style = 'bg:base_background'
+
+[directory]
+truncate_to_repo = false
+truncation_length = 8
+before_repo_root_style = 'fg:cyan bg:base_background'
+style = 'bg:base_background'
+repo_root_style = 'fg:green bg:base_background'
+format = '[$path ]($style)'
+repo_root_format = '[$before_root_path]($before_repo_root_style)[$repo_root]($repo_root_style)[$path]($repo_root_style)[$read_only]($read_only_style)[ ]($style)'
+use_os_path_sep = false
+
+[git_branch]
+style = "bg:base_background"
+symbol = ''
+format = '[ $symbol$branch(:$remote_branch) ]($style)'
+
+[hostname]
+ssh_only = false
+style = "bg:base_background"
+format = '[$hostname]($style)'
+trim_at = '.'
+
+[os]
+format = "[$symbol]($style)"
+style = "fg:bold blue bg:base_background"
+disabled = false
+
+[os.symbols]
+Windows = " "
+Debian = " "
+Ubuntu = " "
+Arch = "󰣇"
+Fedora = " "
+
+[python]
+symbol = '🐍'
+pyenv_version_name = true
+style = "bg:base_background"
+python_binary = ['python', 'python3', 'python3.exe', 'python3.bat']
+format = '[ ${symbol}${version}(\($virtualenv\)) ]($style)'
+
+[username]
+show_always = true
+style = "bg:base_background"
+style_user = "bg:base_background"
+style_root = "bg:base_background"
+format = '[$user]($style)'
+disabled = false
