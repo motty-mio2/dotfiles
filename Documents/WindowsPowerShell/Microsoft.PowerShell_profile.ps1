@@ -14,7 +14,7 @@ Register-ArgumentCompleter -Native -CommandName winget -ScriptBlock {
         }
 }
 
-Set-PsFzfOption -PSReadlineChordProvider 'Ctrl+t'
-Set-PsFzfOption -PSReadlineChordReverseHistory 'Ctrl+r'
-Set-PSReadLineKeyHandler -Key Tab -ScriptBlock { Invoke-FzfTabCompletion }
+#Set-PsFzfOption -PSReadlineChordProvider 'Ctrl+t'
+#Set-PsFzfOption -PSReadlineChordReverseHistory 'Ctrl+r'
+#Set-PSReadLineKeyHandler -Key Tab -ScriptBlock { Invoke-FzfTabCompletion }
 
