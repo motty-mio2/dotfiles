@@ -4,12 +4,17 @@ Get-ChildItem -Path ($configure_folder) -Recurse -Include *.ps1 | ForEach-Object
     Invoke-Expression (". " + $_)
 }
 
+
 {{ if (eq .powershell "starship") }}
 function Invoke-Starship-TransientFunction {
     &starship module character
 }
 
+#function Invoke-Starship-PreCommand {
+#}
+
 Invoke-Expression (&starship init powershell)
+
 Enable-TransientPrompt
 {{ else }}
 # oh-my-posh
