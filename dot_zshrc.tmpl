@@ -58,13 +58,6 @@ setopt list_types
 HISTFILE=~/.zsh_history
 HISTSIZE=10000
 SAVEHIST=10000
-POWERLEVEL9K_DISABLE_CONFIGURATION_WIZARD=true
-
-autoload -Uz promptinit
-promptinit
-
-[[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
-
 
 if [ -d "$HOME/bin" ] ; then
     PATH="$HOME/bin:$PATH"
@@ -78,11 +71,11 @@ if [ -f ~/.fzf.zsh ] ; then
     if [[ ! "$PATH" == */home/linuxbrew/.linuxbrew/opt/fzf/bin* ]]; then
         PATH="${PATH:+${PATH}:}/home/linuxbrew/.linuxbrew/opt/fzf/bin"
     fi
-    
+
     # Auto-completion
     # ---------------
     [[ $- == *i* ]] && source "/home/linuxbrew/.linuxbrew/opt/fzf/shell/completion.zsh" 2> /dev/null
-    
+
     # Key bindings
     # ------------
     source "/home/linuxbrew/.linuxbrew/opt/fzf/shell/key-bindings.zsh"
@@ -94,3 +87,13 @@ function select-history() {
 }
 zle -N select-history
 bindkey '^r' select-history
+
+{{ if (eq .zsh "starship") }}
+eval "$(starship init zsh)"
+{{ else }}
+# POWERLEVEL
+POWERLEVEL9K_DISABLE_CONFIGURATION_WIZARD=true
+[[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
+autoload -Uz promptinit
+promptinit
+{{end}}
