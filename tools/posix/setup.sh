@@ -56,7 +56,7 @@ curl https://get.volta.sh | bash
 # Use Rust
 curl https://sh.rustup.rs -sSf | sh -s -- -y
 
-~/.cargo/bin/cargo install cargo-update sccache sheldonbat fd-find git-ignore-generator
+~/.cargo/bin/cargo install cargo-update sccache sheldon bat fd-find git-ignore-generator
 
 # Use chezmoi
 /home/linuxbrew/.linuxbrew/bin/chezmoi init motty-mio2
