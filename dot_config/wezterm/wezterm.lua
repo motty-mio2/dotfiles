@@ -1,9 +1,13 @@
-local wezterm = require 'wezterm';
+local wezterm = require 'wezterm'
 
-if wezterm.target.target_triple == 'x86_64-pc-windows-msvc' then
-    local default_prog = {"pwsh.exe", "-NoLogo", "-NoExit"}
+clm = require("launcher").launch_menu
+
+local default_prog = {}
+
+if wezterm.target_triple == 'x86_64-pc-windows-msvc' then
+    default_prog = {"pwsh.exe", "-NoLogo", "-NoExit"}
 else
-    local default_prog = {"/usr/bin/zsh"}
+    default_prog = {"/usr/bin/zsh"}
 end
 
 return {
@@ -13,7 +17,8 @@ return {
     color_scheme = "OneHalfDark",
     hide_tab_bar_if_only_one_tab = true,
     adjust_window_size_when_changing_font_size = false,
-    default_prog = default_prog,
     keys = require("keybinds").keys,
-    disable_default_key_bindings = true
+    disable_default_key_bindings = true,
+    default_prog = default_prog,
+    launch_menu = clm
 }
