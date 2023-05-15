@@ -84,7 +84,7 @@ Arch = "󰣇"
 Fedora = " "
 
 [python]
-symbol = '🐍'
+symbol = '🐍 '
 pyenv_version_name = true
 style = "bg:base_background"
 python_binary = ['python', 'python3', 'python3.exe', 'python3.bat']
