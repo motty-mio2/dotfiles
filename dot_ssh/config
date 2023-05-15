@@ -1,0 +1,7 @@
+Include ~/.ssh/match
+Include ~/.ssh/host
+
+Host *
+    IdentityFile ~/.ssh/id_rsa
+    IdentityFile ~/.ssh/id_ed25519
+    IdentitiesOnly yes

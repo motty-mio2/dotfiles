@@ -1,0 +1,15 @@
+{{ if eq .chezmoi.os "windows" }}
+# マッチしない：外部
+Match Host baz !Exec "ping -4 -n 1 tippy.mio2.info > nul"
+    ProxyJump cloudflare
+
+Match Host tippy !Exec "ping -4 -n 1 tippy.mio2.info > nul"
+    ProxyJump cloudflare
+{{else}}
+# マッチしない：外部
+Match Host baz !Exec "ping -4 -c 1 tippy.mio2.info > /dev/null 2>&1"
+    ProxyJump cloudflare
+
+Match Host tippy !Exec "ping -4 -c 1 tippy.mio2.info > /dev/null 2>&1"
+    ProxyJump cloudflare
+{{end}}
