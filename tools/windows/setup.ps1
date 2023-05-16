@@ -9,7 +9,7 @@ Invoke-WebRequest -useb get.scoop.sh | Invoke-Expression
 
 scoop reset
 
-scoop install git 7zip sudo nano
+scoop install git 7zip gsudo nano
 scoop bucket add extras
 scoop bucket add github-gh
 scoop bucket add java
