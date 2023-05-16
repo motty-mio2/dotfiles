@@ -13,12 +13,12 @@ if type "apt" > /dev/null 2>&1; then
     libbz2-dev libffi-dev liblzma-dev libncursesw5-dev libreadline-dev \
     libsqlite3-dev libssl-dev libxml2-dev libxmlsec1-dev zlib1g-dev \
     python3-dev python3-venv python-is-python3
-    
+
     elif type "pacman" > /dev/null 2>&1; then
     sudo pacman -Sy --noconfirm nano wget zsh git unarchiver byobu curl screen pkg-config
     # Pyenv Dependency
     sudo pacman -S --needed base-devel openssl zlib xz tk
-    
+
     elif type "dnf" > /dev/null 2>&1; then
     echo "RHEL Mode"
     sudo dnf -q -y groupinstall "Development Tools"
@@ -28,7 +28,7 @@ if type "apt" > /dev/null 2>&1; then
     else
         sudo yum -q -y install gcc make patch zlib-devel bzip2 bzip2-devel readline-devel sqlite sqlite-devel openssl-devel tk-devel libffi-devel xz-devel python39
     fi
-    
+
     elif type "zypper" > /dev/null 2>&1; then
     zypper install gcc automake bzip2 libbz2-devel xz xz-devel openssl-devel ncurses-devel \
     readline-devel zlib-devel tk-devel libffi-devel sqlite3-devel libgdbm-devel make findutils
@@ -51,12 +51,15 @@ curl https://get.volta.sh | bash
 
 # Use Homebrew
 /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
-/home/linuxbrew/.linuxbrew/bin/brew install chezmoi fzf gh neovim
+/home/linuxbrew/.linuxbrew/bin/brew install bat chezmoi fd fzf gh neovim sheldon svls svlint tree
+/home/linuxbrew/.linuxbrew/bin/brew tap sondr3/homebrew-taps
+/home/linuxbrew/.linuxbrew/bin/brew tap wez/wezterm-linuxbrew
+/home/linuxbrew/.linuxbrew/bin/brew install wezterm git-ignore
 
 # Use Rust
 curl https://sh.rustup.rs -sSf | sh -s -- -y
 
-~/.cargo/bin/cargo install cargo-update sccache sheldon bat fd-find git-ignore-generator
+~/.cargo/bin/cargo install cargo-update sccache git-ignore-generator
 
 # Use chezmoi
 /home/linuxbrew/.linuxbrew/bin/chezmoi init motty-mio2
