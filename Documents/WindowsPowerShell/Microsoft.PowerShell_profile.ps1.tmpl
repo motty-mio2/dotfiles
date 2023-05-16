@@ -4,6 +4,11 @@ Get-ChildItem -Path ($configure_folder) -Recurse -Include *.ps1 | ForEach-Object
     Invoke-Expression (". " + $_)
 }
 
+$private_folder = $HOME + "\.config\shell\dotprivate\addon"
+Get-ChildItem -Path ($private_folder) -Recurse -Include *.ps1 | ForEach-Object -Process {
+    Invoke-Expression (". " + $_)
+}
+
 
 {{ if (eq .powershell "starship") }}
 function Invoke-Starship-TransientFunction {

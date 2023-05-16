@@ -124,6 +124,12 @@ for file in "$conf_folder"/*.sh ; do
     source "${file}"
 done
 
+private_folder="${HOME}/.config/shell/dotprivate/addon"
+for file in "$private_folder"/*.sh ; do
+    source "${file}"
+done
+
+
 if [ -f ~/.fzf.bash ]; then
     # Setup fzf
     # ---------
