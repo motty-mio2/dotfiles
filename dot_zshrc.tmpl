@@ -1,5 +1,7 @@
 #!/usr/bin/zsh
 
+source "${HOME}/.local/share/zsh/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh"
+
 conf_folder="${HOME}/.local/share/chezmoi/tools/posix/conf"
 # if [ -d "$conf_folder" ]; then
 for file in "$conf_folder"/*.sh ; do
@@ -7,6 +9,7 @@ for file in "$conf_folder"/*.sh ; do
 done
 
 fpath=("$HOME/.local/share/chezmoi/tools/posix/completions" $fpath)
+fpath=("$HOME/.local/share/zsh/zsh-completions/src" $fpath)
 fpath=(/home/linuxbrew/.linuxbrew/share/zsh/site-functions $fpath)
 
 autoload -Uz compinit
@@ -86,6 +89,5 @@ eval "$(starship init zsh)"
 # POWERLEVEL
 POWERLEVEL9K_DISABLE_CONFIGURATION_WIZARD=true
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
-autoload -Uz promptinit
-promptinit
+source "${HOME}/.local/share/zsh/powerlevel10k/powerlevel10k.zsh-theme"
 {{end}}

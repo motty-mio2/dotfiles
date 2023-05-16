@@ -11,6 +11,7 @@ tools
     .p10k.zsh
     .config/nvim
     .config/sheldon
+    .local
 {{ end }}
 
 {{ if ne .chezmoi.os "windows" }}
