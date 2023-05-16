@@ -51,7 +51,7 @@ curl https://get.volta.sh | bash
 
 # Use Homebrew
 /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
-/home/linuxbrew/.linuxbrew/bin/brew install bat chezmoi fd fzf gh neovim sheldon svls svlint tree
+/home/linuxbrew/.linuxbrew/bin/brew install bat bitwarden-cli chezmoi fd fzf gh neovim sheldon svls svlint tree
 /home/linuxbrew/.linuxbrew/bin/brew tap sondr3/homebrew-taps
 /home/linuxbrew/.linuxbrew/bin/brew tap wez/wezterm-linuxbrew
 /home/linuxbrew/.linuxbrew/bin/brew install wezterm git-ignore
