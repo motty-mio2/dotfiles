@@ -25,7 +25,7 @@ function Set-Poetry-Path {
     $user_path = [System.Environment]::GetEnvironmentVariable('PATH', "User")
 
     if (-Not $user_path.Contains( $POETRY_DIR )) {
-        [System.Environment]::SetEnvironmentVariable("PATH", $user_path + ";" + $POETRY_DIR, "User")
+        [System.Environment]::SetEnvironmentVariable("PATH", "$POETRY_DIR" + ";" + "$user_path", "User")
     }
 }
 
