@@ -6,6 +6,8 @@ for file in "$conf_folder"/*.sh ; do
     source "${file}"
 done
 
+eval "$(sheldon source)"
+
 fpath=("$HOME/.local/share/chezmoi/tools/posix/completions" $fpath)
 fpath=(/home/linuxbrew/.linuxbrew/share/zsh/site-functions $fpath)
 
