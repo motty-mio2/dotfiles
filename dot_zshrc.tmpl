@@ -6,14 +6,13 @@ for file in "$conf_folder"/*.sh ; do
     source "${file}"
 done
 
-<<<<<<< HEAD
 eval "$(sheldon source)"
-=======
+
 private_folder="${HOME}/.config/shell/dotprivate/addon"
 for file in "$private_folder"/*.sh ; do
     source "${file}"
 done
->>>>>>> 5c91add (use dotprivate addon)
+
 
 fpath=("$HOME/.local/share/chezmoi/tools/posix/completions" $fpath)
 fpath=(/home/linuxbrew/.linuxbrew/share/zsh/site-functions $fpath)
