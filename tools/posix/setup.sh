@@ -2,7 +2,7 @@
 
 if type "apt" > /dev/null 2>&1; then
     echo "Ubuntu Mode"
-    sudo sed -i.org -e 's|archive.ubuntu.com|ftp.jaist.ac.jp/pub/Linux|g' /etc/apt/sources.list
+#     sudo sed -i.org -e 's|archive.ubuntu.com|ftp.jaist.ac.jp/pub/Linux|g' /etc/apt/sources.list
     sudo add-apt-repository ppa:longsleep/golang-backports
     sudo apt-get update
     sudo apt-get upgrade -qy
