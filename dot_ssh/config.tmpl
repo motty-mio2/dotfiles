@@ -1,0 +1,17 @@
+Include ~/.ssh/match
+Include ~/.ssh/host
+
+{{ $client := 1 }}
+{{ range $host := .servers }}
+{{ if (eq $host $.chezmoi.hostname) }}
+{{ $client = 0 }}
+{{ break }}
+{{ end }}
+{{ end }}
+
+{{ if $client }}
+Host *
+    IdentityFile ~/.ssh/id_rsa
+    IdentityFile ~/.ssh/id_ed25519
+    IdentitiesOnly yes
+{{ end }}
