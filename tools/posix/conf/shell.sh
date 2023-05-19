@@ -2,6 +2,11 @@
 
 export XDG_CONFIG_HOME="$HOME/.config"
 
+function set_win_title(){
+    local title=${1:~$USER@$HOST};
+    echo -ne "\033]0; $title \007"
+}
+
 # Rust
 if [ -d "$HOME/.cargo/bin" ] ; then
     export PATH="$HOME/.cargo/bin:$PATH"
