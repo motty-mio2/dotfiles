@@ -147,3 +147,8 @@ if [ -f ~/.fzf.bash ]; then
     source "/home/linuxbrew/.linuxbrew/opt/fzf/shell/key-bindings.bash"
 fi
 source "$HOME/.cargo/env"
+
+{{ if (eq .bash "starship") }}
+eval "$(starship init bash)"
+{{ end }}
+
