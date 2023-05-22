@@ -27,7 +27,7 @@ return {
     { key = '8', mods = 'CTRL', action = act.ActivateTab(7) },
     { key = '9', mods = 'CTRL', action = act.ActivateTab(-1) },
     { key = '=', mods = 'CTRL', action = act.IncreaseFontSize },
-    -- { key = 'c', mods = 'CTRL', action = act.CopyTo 'Clipboard' },
+    { key = 'c', mods = 'CTRL', action = act.SendKey{ key='c', mods='CTRL' } },
     { key = 'c', mods = 'SHIFT|CTRL', action = act.CopyTo 'Clipboard' },
     { key = 'c', mods = 'SUPER', action = act.CopyTo 'Clipboard' },
     -- { key = 'f', mods = 'CTRL', action = act.Search 'CurrentSelectionOrEmptyString' },
