@@ -90,6 +90,8 @@ bindkey '^r' select-history
 
 {{ if (eq .zsh "starship") }}
 eval "$(starship init zsh)"
+{{ else if (eq .zsh "oh-my-posh") }}
+eval "$(oh-my-posh init zsh --config ~/.config/theme.omp.json)"
 {{ else }}
 # POWERLEVEL
 POWERLEVEL9K_DISABLE_CONFIGURATION_WIZARD=true

@@ -150,5 +150,7 @@ source "$HOME/.cargo/env"
 
 {{ if (eq .bash "starship") }}
 eval "$(starship init bash)"
+{{ else if (eq .bash "oh-my-posh") }}
+eval "$(oh-my-posh init bash --config ~/.config/theme.omp.json)"
 {{ end }}
 
