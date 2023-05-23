@@ -90,6 +90,7 @@ bindkey '^r' select-history
 
 {{ if (eq .zsh "starship") }}
 eval "$(starship init zsh)"
+precmd_functions+=(set_win_title)
 {{ else if (eq .zsh "oh-my-posh") }}
 eval "$(oh-my-posh init zsh --config ~/.config/theme.omp.json)"
 {{ else }}
