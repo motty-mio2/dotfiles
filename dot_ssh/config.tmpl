@@ -8,6 +8,12 @@ Include ~/.ssh/host
 {{ break }}
 {{ end }}
 {{ end }}
+{{ if eq .chezmoi.os "linux" }}
+{{   if (.chezmoi.kernel.osrelease | lower | contains "microsoft") }}
+{{ $client = 0 }}
+{{   end }}
+{{ end }}
+
 
 {{ if $client }}
 Host *
