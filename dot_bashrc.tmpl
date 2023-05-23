@@ -80,7 +80,7 @@ if [ -x /usr/bin/dircolors ]; then
     alias ls='ls --color=auto'
     #alias dir='dir --color=auto'
     #alias vdir='vdir --color=auto'
-    
+
     alias grep='grep --color=auto'
     alias fgrep='fgrep --color=auto'
     alias egrep='egrep --color=auto'
@@ -136,12 +136,12 @@ if [ -f ~/.fzf.bash ]; then
     if [[ ! "$PATH" == */home/linuxbrew/.linuxbrew/opt/fzf/bin* ]]; then
         PATH="${PATH:+${PATH}:}/home/linuxbrew/.linuxbrew/opt/fzf/bin"
     fi
-    
+
     # Auto-completion
     # ---------------
     # shellcheck source=/home/linuxbrew/.linuxbrew/opt/fzf/shell/completion.bash
     [[ $- == *i* ]] && source "/home/linuxbrew/.linuxbrew/opt/fzf/shell/completion.bash" 2> /dev/null
-    
+
     # Key bindings
     # ------------
     source "/home/linuxbrew/.linuxbrew/opt/fzf/shell/key-bindings.bash"
@@ -150,6 +150,7 @@ source "$HOME/.cargo/env"
 
 {{ if (eq .bash "starship") }}
 eval "$(starship init bash)"
+starship_precmd_user_func="set_win_title"
 {{ else if (eq .bash "oh-my-posh") }}
 eval "$(oh-my-posh init bash --config ~/.config/theme.omp.json)"
 {{ end }}
