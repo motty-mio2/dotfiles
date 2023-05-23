@@ -235,11 +235,7 @@ function doc {
 }
 
 function envup {
-    $dirs = @("$HOME/Projects/dotfiles",
-        "$HOME/Projects/dotprivate",
-        "$HOME/Projects/poshconfig",
-        "$HOME/Projects/poshfiles",
-        "$HOME/Projects/nvimcfg",
+    $dirs = @(
         "$HOME/.pyenv"
     )
 

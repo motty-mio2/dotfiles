@@ -38,7 +38,7 @@ cats() {
 }
 
 envup () {
-    dirs=("$HOME/Projects/dotfiles" "$HOME/Projects/dotprivate" "$HOME/Projects/poshconfig" "$HOME/Projects/nvimcfg" "$HOME/.pyenv")
+    dirs=("$HOME/.pyenv")
     
     for target in "${dirs[@]}"
     do
