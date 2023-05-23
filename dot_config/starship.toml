@@ -61,10 +61,10 @@ untracked = "?($count)"
 modified = "!($count)"
 staged = "+($count)"
 ahead = '⇡${count}'
-diverged = '⇕⇡${ahead_count}⇣${behind_count}'
 behind = '⇣${count}'
+diverged = '⇡${ahead_count}⇣${behind_count}'
 
-format = '([$untracked$modified$staged$diverged ]($style))'
+format = '([$untracked$modified$staged$ahead_behind ]($style))'
 
 [hostname]
 ssh_only = false
