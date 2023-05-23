@@ -96,7 +96,5 @@ eval "$(oh-my-posh init zsh --config ~/.config/theme.omp.json)"
 {{ else }}
 # POWERLEVEL
 POWERLEVEL9K_DISABLE_CONFIGURATION_WIZARD=true
-[[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
-autoload -Uz promptinit
-promptinit
-{{end}}
+source ~/.p10k.zsh
+{{ end }}
