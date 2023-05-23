@@ -52,18 +52,19 @@ use_os_path_sep = false
 
 [git_branch]
 style = "bg:base_background"
-symbol = ''
+symbol = ' '
 format = '([ $symbol$branch(:$remote_branch) ]($style))'
 
 [git_status]
 style = "bg:base_background"
 untracked = "?($count)"
+modified = "!($count)"
 staged = "+($count)"
 ahead = '⇡${count}'
 diverged = '⇕⇡${ahead_count}⇣${behind_count}'
 behind = '⇣${count}'
 
-format = '([$untracked$staged$diverged ]($style))'
+format = '([$untracked$modified$staged$diverged ]($style))'
 
 [hostname]
 ssh_only = false
