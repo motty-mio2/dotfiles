@@ -6,6 +6,9 @@ Set-PSReadlineKeyHandler -Key ctrl+d -Function DeleteCharOrExit
 
 Set-PSReadLineOption -PredictionViewStyle InlineView
 
+Set-PSReadLineOption -Colors @{
+    "Parameter" = [ConsoleColor]::Cyan
+}
 
 #Set-PsFzfOption -PSReadlineChordProvider 'Ctrl+t'
 #Set-PsFzfOption -PSReadlineChordReverseHistory 'Ctrl+r'
