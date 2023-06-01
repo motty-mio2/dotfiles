@@ -66,11 +66,10 @@ return {
     { key = 'Insert', mods = 'CTRL', action = act.CopyTo 'PrimarySelection' },
     { key = 'Copy', mods = 'NONE', action = act.CopyTo 'Clipboard' },
     { key = 'Paste', mods = 'NONE', action = act.PasteFrom 'Clipboard' },
-    { key = "F2", mods = "NONE", action = act.SpawnTab "CurrentPaneDomain"},
-    { key = "F2", mods = "SHIFT", action =act.SplitVertical{ domain =  'CurrentPaneDomain' }},
-    { key = "F2", mods = "CTRL", action =act.SplitHorizontal{ domain =  'CurrentPaneDomain' }},
-    { key = 'F3', mods = 'NONE', action = act.ActivateTabRelative(-1) },
-    { key = 'F4', mods = 'NONE', action = act.ActivateTabRelative(1) },
+    { key = "=", mods = "ALT",   action = act.SplitVertical{ domain = 'CurrentPaneDomain' }},
+    { key = "=", mods = "ALT|SHIFT",   action = act.SplitVertical{ domain = 'CurrentPaneDomain' }},
+    { key = "+", mods = "ALT",    action = act.SplitHorizontal{ domain = 'CurrentPaneDomain' }},
+    { key = "+", mods = "ALT|SHIFT",    action = act.SplitHorizontal{ domain = 'CurrentPaneDomain' }},
   },
   key_tables = {
     copy_mode = {
