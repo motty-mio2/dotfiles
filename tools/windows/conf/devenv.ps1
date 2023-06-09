@@ -18,6 +18,19 @@ function ghf {
     gh repo clone $(gh repo list -L 10000 | fzf).Split("`t")[0]
 }
 
+function Set-Environemt-Path {
+    param (
+        $ENV_NAME,
+        $ENV_VALUE
+    )
+
+    $current_setting = [System.Environment]::GetEnvironmentVariable($ENV_NAME, "User")
+
+    if (($null -eq $current_setting) -Or (-Not $current_setting.Contains( $ENV_VALUE ))) {
+        [System.Environment]::SetEnvironmentVariable("$ENV_NAME", "$ENV_VALUE" + "; " + "$current_setting", "User")
+    }
+}
+
 function Set-Poetry-Path {
     param (
         $POETRY_DIR = $env:USERPROFILE + "\AppData\Roaming\Python\Scripts"
