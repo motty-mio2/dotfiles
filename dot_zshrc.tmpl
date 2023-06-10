@@ -8,12 +8,6 @@ done
 
 eval "$(sheldon source)"
 
-private_folder="${HOME}/.config/shell/dotprivate/addon"
-for file in "$private_folder"/*.sh ; do
-    source "${file}"
-done
-
-
 fpath=("$HOME/.local/share/chezmoi/tools/posix/completions" $fpath)
 fpath=(/home/linuxbrew/.linuxbrew/share/zsh/site-functions $fpath)
 
