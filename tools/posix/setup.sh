@@ -62,4 +62,6 @@ curl https://sh.rustup.rs -sSf | sh -s -- -y
 ~/.cargo/bin/cargo install cargo-update sccache git-ignore-generator
 
 # Use chezmoi
-/home/linuxbrew/.linuxbrew/bin/chezmoi init motty-mio2
+/home/linuxbrew/.linuxbrew/bin/chezmoi init motty-mio2 --ssh
+/home/linuxbrew/.linuxbrew/bin/chezmoi apply -k
+/home/linuxbrew/.linuxbrew/bin/chezmoi apply -k
