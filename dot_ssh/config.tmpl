@@ -3,17 +3,16 @@ Include ~/.ssh/host
 
 {{ $client := 1 }}
 {{ range $host := .servers }}
-{{ if (eq $host $.chezmoi.hostname) }}
-{{ $client = 0 }}
-{{ break }}
-{{ end }}
+{{   if (eq $host $.chezmoi.hostname) }}
+{{     $client = 0 }}
+{{     break }}
+{{   end }}
 {{ end }}
 {{ if eq .chezmoi.os "linux" }}
 {{   if (.chezmoi.kernel.osrelease | lower | contains "microsoft") }}
-{{ $client = 0 }}
+{{     $client = 0 }}
 {{   end }}
 {{ end }}
-
 
 {{ if $client }}
 Host *
