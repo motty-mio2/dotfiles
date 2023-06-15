@@ -10,6 +10,10 @@ else
     default_prog = {"/usr/bin/zsh"}
 end
 
+wezterm.on('window-config-reloaded', function(window, pane)
+    window:toast_notification('wezterm', 'configuration reloaded!', nil, 4000)
+end)
+
 return {
     font = wezterm.font("HackGen Console"), -- 自分の好きなフォントいれる
     use_ime = true,
