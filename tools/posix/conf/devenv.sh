@@ -9,8 +9,8 @@ eval "$(pyenv init -)"
 export PATH="$HOME/.poetry/bin:$PATH" # old
 export PATH="$HOME/.local/share/pypoetry:$PATH" # new
 
-# Python
-alias pytest="pytest -s"
+# rye
+source "$HOME/.rye/env"
 
 # svlint
 export SVLINT_CONFIG="$HOME/.config/svls/.svlint.toml"

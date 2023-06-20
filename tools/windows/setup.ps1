@@ -17,7 +17,7 @@ scoop bucket add versions
 scoop bucket add nerd-font
 scoop bucket add hdl https://github.com/motty-mio2/mio2_bucket.git
 
-scoop install 7zip bat bitwarden-cli chezmoi fd fzf gh git gsudonano less make neovim oh-my-posh posh-git psfzf python svlint svls volta wezterm wget which
+scoop install 7zip bat bitwarden-cli chezmoi fd fzf gh git gsudonano less make neovim oh-my-posh posh-git psfzf rye svlint svls volta wezterm wget which
 
 scoop alias add upgrade 'scoop update && scoop update *' 'update all'
 scoop alias add backup 'scoop export > ~\scoop.txt'
@@ -25,9 +25,11 @@ scoop alias add reinstall "scoop uninstall {0}; scoop install {0}"
 
 # Pyenv Install
 Invoke-WebRequest -UseBasicParsing -Uri "https://raw.githubusercontent.com/pyenv-win/pyenv-win/master/pyenv-win/install-pyenv-win.ps1" -OutFile "./install-pyenv-win.ps1"; &"./install-pyenv-win.ps1"
+~/.pyenv/pyenv-win/bin/pyenv-win install 3.10.9
+~/.pyenv/pyenv-win/bin/pyenv-win global 3.10.9
 
 # Poetry Install
-(Invoke-WebRequest -Uri https://install.python-poetry.org -UseBasicParsing).Content | python -
+(Invoke-WebRequest -Uri https://install.python-poetry.org -UseBasicParsing).Content | ~/.pyenv/pyenv-win/shims/python -
 ~/AppData/Roaming/Python/Scripts/poetry.exe config virtualenvs.in-project true
 
 # Volta Install

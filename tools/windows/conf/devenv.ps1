@@ -36,6 +36,14 @@ function Set-Poetry-Path {
 
 }
 
+function Set-Rye-Path {
+    param (
+        $RYE_DIR = $env:USERPROFILE + "\.rye\shims"
+    )
+
+    Set-Environemt-Path -ENV_NAME "PATH" -ENV_VALUE $RYE_DIR
+}
+
 function Set-SVLINT-PATH {
     param (
         $SVLINT_CONFIG = $env:USERPROFILE + "\.config\svlint\svlint.toml"
