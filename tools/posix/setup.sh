@@ -45,6 +45,9 @@ git clone https://github.com/pyenv/pyenv.git ~/.pyenv
 curl -sSL https://install.python-poetry.org | /usr/bin/python3 -
 ~/.local/bin/poetry config virtualenvs.in-project true
 
+# rye Install
+curl -sSf https://rye-up.com/get | bash
+
 # Volta Install
 curl https://get.volta.sh | bash
 ~/.volta/bin/volta install node@lts
