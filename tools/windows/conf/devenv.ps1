@@ -3,12 +3,30 @@ Set-Alias python3 python
 Set-Alias pip3 pip
 
 # Volta
-(& volta completions powershell) | Out-String | Invoke-Expression
+try {
+    (& volta completions powershell) | Out-String | Invoke-Expression
+}
+catch {
+}
 
 # gh
-(& gh completion -s powershell) | Out-String | Invoke-Expression
+try {
+    (& gh completion -s powershell) | Out-String | Invoke-Expression
+}
+catch {
+}
 
-(& chezmoi completion powershell) | Out-String | Invoke-Expression
+try {
+    (& chezmoi completion powershell) | Out-String | Invoke-Expression
+}
+catch {
+}
+
+try {
+    (& kubectl completion powershell) | Out-String | Invoke-Expression -ErrorAction SilentlyContinue
+}
+catch {
+}
 
 function ghf {
     gh repo clone $(gh repo list -L 10000 | fzf).Split("`t")[0]
