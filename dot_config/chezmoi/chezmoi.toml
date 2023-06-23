@@ -6,4 +6,4 @@
     # starship oh-my-posh powerlevel10k
     zsh = "powerlevel10k"
 
-    servers = ["anko", "baz", "dn", "tippy", "share"]
+    servers = ["anko", "baz", "dn", "dockernode", "tippy", "share"]
