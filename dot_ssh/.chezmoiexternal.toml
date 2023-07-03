@@ -1,4 +1,0 @@
-["authorized_keys"]
-    type = "file"
-    url = "https://github.com/motty-mio2.keys"
-    refreshPeriod = "168h"
