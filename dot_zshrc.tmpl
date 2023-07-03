@@ -8,9 +8,6 @@ done
 
 eval "$(sheldon source)"
 
-source <(kubectl completion zsh)
-source <(sheldon completions --shell zsh)
-
 fpath=("$HOME/.local/share/chezmoi/tools/posix/completions" $fpath)
 fpath=(/home/linuxbrew/.linuxbrew/share/zsh/site-functions $fpath)
 

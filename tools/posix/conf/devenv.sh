@@ -10,8 +10,11 @@ export PATH="$HOME/.poetry/bin:$PATH" # old
 export PATH="$HOME/.local/share/pypoetry:$PATH" # new
 
 # rye
-source "$HOME/.rye/env"
-
+rye_folder="$HOME/.rye/env"
+if [ -d "$rye_folder" ]
+then
+    source "${rye_folder}"
+fi
 # svlint
 export SVLINT_CONFIG="$HOME/.config/svls/.svlint.toml"
 
