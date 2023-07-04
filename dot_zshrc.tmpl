@@ -94,3 +94,7 @@ eval "$(oh-my-posh init zsh --config ~/.config/theme.omp.json)"
 POWERLEVEL9K_DISABLE_CONFIGURATION_WIZARD=true
 source ~/.p10k.zsh
 {{ end }}
+
+agent="$(ssh-agent)"
+#echo $agent
+eval $agent
