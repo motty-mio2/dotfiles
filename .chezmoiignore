@@ -8,6 +8,7 @@ tools
 {{ if eq .chezmoi.os "windows" }}
     .bashrc
     .zshrc
+    .zlogout
     .p10k.zsh
     .config/nvim
     .config/sheldon
