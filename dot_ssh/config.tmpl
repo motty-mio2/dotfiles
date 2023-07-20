@@ -1,5 +1,4 @@
-Include ~/.ssh/host
-Include ~/.ssh/match
+Include ~/.ssh/config.d/*.conf
 
 {{ if glob ( joinPath .chezmoi.homeDir "/.ssh/id_25519" ) }}
 Host *
