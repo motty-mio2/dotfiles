@@ -54,12 +54,31 @@ function Set-Poetry-Path {
 
 }
 
-function Set-Rye-Path {
+function Install-Rye {
     param (
-        $RYE_DIR = $env:USERPROFILE + "\.rye\shims"
+        # $RYE_DIR = $env:USERPROFILE + "\.rye\shims"
+        $url = "https://github.com/mitsuhiko/rye/releases/latest/download/rye-x86_64-windows.exe",
+        $installDir = "$env:USERPROFILE\.local\bin",
+        $RYE_HOME = "$env:USERPROFILE\.local\share\rye",
+        $executableName = "rye.exe"
     )
 
-    Set-Environemt-Path -ENV_NAME "PATH" -ENV_VALUE $RYE_DIR
+    # Set Rye HOME
+    if (-not (Test-Path -Path $RYE_HOME)) {
+        New-Item -Path $RYE_HOME -ItemType Directory
+    }
+
+    [System.Environment]::SetEnvironmentVariable("RYE_HOME", "$RYE_HOME", "User")
+    $env:RYE_HOME = "$RYE_HOME"
+
+    # Install Rye
+    if (-not (Test-Path -Path $installDir)) {
+        New-Item -Path $installDir -ItemType Directory
+    }
+
+    Invoke-WebRequest -Uri $url -OutFile (Join-Path -Path $installDir -ChildPath $executableName)
+
+    Set-Environemt-Path -ENV_NAME "PATH" -ENV_VALUE "$RYE_HOME\\shims"
 }
 
 function Set-SVLINT-PATH {
