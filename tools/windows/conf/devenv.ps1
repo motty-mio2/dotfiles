@@ -85,7 +85,15 @@ function Install-Rye {
 }
 
 
-    Set-Environemt-Path -ENV_NAME "PATH" -ENV_VALUE "$RYE_HOME\\shims"
+function Install-Rye-Tools {
+    param (
+        $RYE_ENV = "$env:USERPROFILE\.local\share\rye\shims",
+        $executableName = "rye.exe"
+    )
+
+    foreach ($tool in @("poetry", "black", "isort" , "mypy", "flake8", "ruff")) {
+        & "$RYE_ENV\$executableName" install $tool
+    }
 }
 
 function Set-SVLINT-PATH {
