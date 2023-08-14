@@ -23,14 +23,28 @@ scoop alias add upgrade 'scoop update && scoop update *' 'update all'
 scoop alias add backup 'scoop export > ~\scoop.txt'
 scoop alias add reinstall "scoop uninstall {0}; scoop install {0}"
 
-# Pyenv Install
-Invoke-WebRequest -UseBasicParsing -Uri "https://raw.githubusercontent.com/pyenv-win/pyenv-win/master/pyenv-win/install-pyenv-win.ps1" -OutFile "./install-pyenv-win.ps1"; &"./install-pyenv-win.ps1"
-~/.pyenv/pyenv-win/bin/pyenv-win install 3.10.9
-~/.pyenv/pyenv-win/bin/pyenv-win global 3.10.9
+# Rye Install
+$url = "https://github.com/mitsuhiko/rye/releases/latest/download/rye-x86_64-windows.exe"
+$RYE_HOME = "$env:USERPROFILE\.local\share\rye"
+$executableName = "rye.exe"
 
-# Poetry Install
-(Invoke-WebRequest -Uri https://install.python-poetry.org -UseBasicParsing).Content | ~/.pyenv/pyenv-win/shims/python -
-~/AppData/Roaming/Python/Scripts/poetry.exe config virtualenvs.in-project true
+if (-not (Test-Path -Path $RYE_HOME)) {
+    New-Item -Path $RYE_HOME -ItemType Directory
+}
+
+$env:RYE_HOME = "$RYE_HOME"
+
+## Get Installer
+Invoke-WebRequest -Uri $url -OutFile (Join-Path -Path $env:HOME -ChildPath $executableName)
+& "$env:HOME\$executableName"
+
+Remove-Item "$env:HOME\$executableName"
+
+$env:PATH = "$RYE_HOME\shims;" + $env:PATH
+## Install Rye Tools
+foreach ($tool in @("poetry", "black", "flake8", "isort" , "mypy", "ruff")) {
+    & "$RYE_HOME\shimis\$executableName" install $tool
+}
 
 # Volta Install
 volta install node@lts
