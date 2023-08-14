@@ -56,7 +56,6 @@ function Set-Poetry-Path {
 
 function Install-Rye {
     param (
-        # $RYE_DIR = $env:USERPROFILE + "\.rye\shims"
         $url = "https://github.com/mitsuhiko/rye/releases/latest/download/rye-x86_64-windows.exe",
         $installDir = "$env:USERPROFILE\.local\bin",
         $RYE_HOME = "$env:USERPROFILE\.local\share\rye",
@@ -77,6 +76,14 @@ function Install-Rye {
     }
 
     Invoke-WebRequest -Uri $url -OutFile (Join-Path -Path $installDir -ChildPath $executableName)
+    & "$installDir\$executableName"
+
+    Set-Environemt-Path -ENV_NAME "PATH" -ENV_VALUE "$RYE_HOME\shims"
+    $env:PATH = "$RYE_HOME\shims;" + $env:PATH
+
+    Remove-Item "$installDir\$executableName"
+}
+
 
     Set-Environemt-Path -ENV_NAME "PATH" -ENV_VALUE "$RYE_HOME\\shims"
 }
