@@ -46,7 +46,14 @@ curl -sSL https://install.python-poetry.org | /usr/bin/python3 -
 ~/.local/bin/poetry config virtualenvs.in-project true
 
 # rye Install
+export RYE_HOME="$HOME/.local/share/rye"
 curl -sSf https://rye-up.com/get | bash
+
+tools=("poetry" "black" "flake8" "isort" "mypy" "ruff")
+
+for tool in "${tools[@]}"; do
+    "$RYE_HOME/shims/rye" install "$tool"
+done
 
 # Volta Install
 curl https://get.volta.sh | bash
