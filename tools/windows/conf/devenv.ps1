@@ -78,10 +78,10 @@ function Install-Rye {
     Invoke-WebRequest -Uri $url -OutFile (Join-Path -Path $installDir -ChildPath $executableName)
     & "$installDir\$executableName"
 
+    Remove-Item "$installDir\$executableName"
+
     Set-Environemt-Path -ENV_NAME "PATH" -ENV_VALUE "$RYE_HOME\shims"
     $env:PATH = "$RYE_HOME\shims;" + $env:PATH
-
-    Remove-Item "$installDir\$executableName"
 }
 
 
