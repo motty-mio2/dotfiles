@@ -36,17 +36,15 @@ else
     echo "None"
 fi
 
-# Pyenv Install
-git clone https://github.com/pyenv/pyenv.git ~/.pyenv
-~/.pyenv/bin/pyenv install 3.10.11
-~/.pyenv/bin/pyenv global 3.10.11
-
-# Poetry Install
-curl -sSL https://install.python-poetry.org | /usr/bin/python3 -
-~/.local/bin/poetry config virtualenvs.in-project true
-
 # rye Install
+export RYE_HOME="$HOME/.local/share/rye"
 curl -sSf https://rye-up.com/get | bash
+
+tools=("poetry" "black" "flake8" "isort" "mypy" "ruff")
+
+for tool in "${tools[@]}"; do
+    "$RYE_HOME/shims/rye" install "$tool"
+done
 
 # Volta Install
 curl https://get.volta.sh | bash

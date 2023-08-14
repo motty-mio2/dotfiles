@@ -46,20 +46,49 @@ function Set-Environemt-Path {
 }
 
 
-function Set-Poetry-Path {
+function Install-Rye {
     param (
-        $POETRY_DIR = $env:USERPROFILE + "\AppData\Roaming\Python\Scripts"
+        $url = "https://github.com/mitsuhiko/rye/releases/latest/download/rye-x86_64-windows.exe",
+        $RYE_HOME = "$env:USERPROFILE\.local\share\rye",
+        $executableName = "rye.exe"
     )
-    Set-Environemt-Path -ENV_NAME "PATH" -ENV_VALUE $POETRY_DIR
 
+    # Set Rye HOME
+    if (-not (Test-Path -Path $RYE_HOME)) {
+        New-Item -Path $RYE_HOME -ItemType Directory
+    }
+
+    $env:RYE_HOME = "$RYE_HOME"
+
+    # Install Rye
+    Invoke-WebRequest -Uri $url -OutFile (Join-Path -Path $env:HOME -ChildPath $executableName)
+    & "$env:HOME\$executableName"
+
+    Remove-Item "$env:HOME\$executableName"
+
+    $env:PATH = "$RYE_HOME\shims;" + $env:PATH
+
+    Set-Environemt-Path -ENV_NAME "PATH" -ENV_VALUE "$RYE_HOME\shims"
+    [System.Environment]::SetEnvironmentVariable("RYE_HOME", "$RYE_HOME", "User")
 }
 
 function Set-Rye-Path {
     param (
-        $RYE_DIR = $env:USERPROFILE + "\.rye\shims"
+        $RYE_HOME = "$env:USERPROFILE\.local\share\rye"
+    )
+    Set-Environemt-Path -ENV_NAME "PATH" -ENV_VALUE "$RYE_HOME\shims"
+    [System.Environment]::SetEnvironmentVariable("RYE_HOME", "$RYE_HOME", "User")
+
+}
+function Install-Rye-Tools {
+    param (
+        $RYE_ENV = "$env:USERPROFILE\.local\share\rye\shims",
+        $executableName = "rye.exe"
     )
 
-    Set-Environemt-Path -ENV_NAME "PATH" -ENV_VALUE $RYE_DIR
+    foreach ($tool in @("poetry", "black", "flake8", "isort" , "mypy", "ruff")) {
+        & "$RYE_ENV\$executableName" install $tool
+    }
 }
 
 function Set-SVLINT-PATH {
@@ -68,16 +97,4 @@ function Set-SVLINT-PATH {
     )
 
     Set-Environemt-Path -ENV_NAME "SVLINT_CONFIG" -ENV_VALUE $SVLINT_CONFIG
-}
-function Set-Pyenv-Path {
-    param (
-        $PYENV_DIR = $env:USERPROFILE + "\.pyenv\pyenv-win"
-    )
-
-    Set-Environemt-Path -ENV_NAME "PYENV" -ENV_VALUE $PYENV_DIR
-    Set-Environemt-Path -ENV_NAME "PYENV_HOME" -ENV_VALUE $PYENV_DIR
-    Set-Environemt-Path -ENV_NAME "PYENV_ROOT" -ENV_VALUE $PYENV_DIR
-
-    Set-Environemt-Path -ENV_NAME "PATH" -ENV_VALUE $PYENV_DIR + "\bin"
-    Set-Environemt-Path -ENV_NAME "PATH" -ENV_VALUE $PYENV_DIR + "\shims"
 }

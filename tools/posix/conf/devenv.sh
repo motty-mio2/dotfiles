@@ -1,20 +1,9 @@
-#!/bin/sh
+#!/bin/bash
 
-# Pyenv
-export PYENV_ROOT="$HOME/.pyenv"
-export PATH="$PYENV_ROOT/bin:$PATH"
-eval "$(pyenv init -)"
+# Rye
+export RYE_HOME="$HOME/.local/share/rye"
+source "$HOME/.local/share/rye/env"
 
-# Poetry
-export PATH="$HOME/.poetry/bin:$PATH" # old
-export PATH="$HOME/.local/share/pypoetry:$PATH" # new
-
-# rye
-rye_folder="$HOME/.rye/env"
-if [ -d "$rye_folder" ]
-then
-    source "${rye_folder}"
-fi
 # svlint
 export SVLINT_CONFIG="$HOME/.config/svls/.svlint.toml"
 
