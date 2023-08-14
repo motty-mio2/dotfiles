@@ -91,7 +91,7 @@ function Install-Rye-Tools {
         $executableName = "rye.exe"
     )
 
-    foreach ($tool in @("poetry", "black", "isort" , "mypy", "flake8", "ruff")) {
+    foreach ($tool in @("poetry", "black", "flake8", "isort" , "mypy", "ruff")) {
         & "$RYE_ENV\$executableName" install $tool
     }
 }
