@@ -2,7 +2,7 @@
 
 # Rye
 export RYE_HOME="$HOME/.local/share/rye"
-source "$HOME/.local/share/rye/env"
+source "$RYE_HOME/env"
 
 # svlint
 export SVLINT_CONFIG="$HOME/.config/svls/.svlint.toml"
