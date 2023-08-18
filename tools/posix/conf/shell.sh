@@ -24,6 +24,8 @@ alias rmrf='rm -rf'
 alias watch="watch "
 alias rmemp='find . -type d -empty -delete'
 
+export EDITOR=nvim
+
 lsn(){
     find . -maxdepth 1 | wc -l
 }
