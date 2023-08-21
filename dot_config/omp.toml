@@ -1,39 +1,126 @@
+#:schema https://raw.githubusercontent.com/JanDeDobbeleer/oh-my-posh/main/themes/schema.json
+
 "$schema" = "https://raw.githubusercontent.com/JanDeDobbeleer/oh-my-posh/main/themes/schema.json"
-final_space = true
-version = 2
+version = 2.0
 
 [[blocks]]
-type = "prompt"
-alignment = "left"
+  alignment = "left"
+  type = "prompt"
 
-[properties]
-fetch_status = true
-fetch_stash_count = true
-fetch_upstream_icon = true
+  [[blocks.segments]]
+    background = "#546E7A"
+    foreground = "#26C6DA"
+    style = "plain"
+    template = " {{ if .WSL }}WSL at {{ end }}{{.Icon}} \ue0b1"
+    type = "os"
 
-  [properties.untracked_modes]
-  "/Users/user/Projects/oh-my-posh/" = "no"
+  [[blocks.segments]]
+    background = "#546E7A"
+    foreground = "#26C6DA"
+    style = "plain"
+    template = " \uf0e7 "
+    type = "root"
 
-[[blocks.segments]]
-type = "path"
-style = "powerline"
-powerline_symbol = ""
-foreground = "#ffffff"
-background = "#61AFEF"
+  [[blocks.segments]]
+    background = "#546E7A"
+    foreground = "#26C6DA"
+    style = "plain"
+    template = " {{ .Path }} "
+    type = "path"
+    [blocks.segments.properties]
+      style = "full"
 
-[blocks.segments.properties]
-style = "folder"
+  [[blocks.segments]]
+    background = "#546E7A"
+    foreground = "#64e638"
+    style = "powerline"
+    template = "<#26C6DA>\ue0b1 </>{{ .UpstreamIcon }}{{ .HEAD }}{{ if .Staging.Changed }} \uf046 {{ .Staging.String }}{{ end }}{{ if and (.Working.Changed) (.Staging.Changed) }} |{{ end }}{{ if .Working.Changed }} \uf044 {{ .Working.String }}{{ end }} "
+    type = "git"
+    [blocks.segments.properties]
+      fetch_status = true
+      fetch_upstream_icon = true
 
-[[blocks.segments]]
-type = "git"
-style = "powerline"
-powerline_symbol = ""
-foreground = "#193549"
-background = "#ffeb3b"
-background_templates = [
-  "{{ if or (.Working.Changed) (.Staging.Changed) }}#FFEB3B{{ end }}",
-  "{{ if and (gt .Ahead 0) (gt .Behind 0) }}#FFCC80{{ end }}",
-  "{{ if gt .Ahead 0 }}#B388FF{{ end }}",
-  "{{ if gt .Behind 0 }}#B388FB{{ end }}"
-]
-template = "{{ .UpstreamIcon }}{{ .HEAD }}{{if .BranchStatus }} {{ .BranchStatus }}{{ end }}{{ if .Working.Changed }}  {{ .Working.String }}{{ end }}{{ if and (.Working.Changed) (.Staging.Changed) }} |{{ end }}{{ if .Staging.Changed }}  {{ .Staging.String }}{{ end }}{{ if gt .StashCount 0 }}  {{ .StashCount }}{{ end }}"
+  [[blocks.segments]]
+    type = "python"
+    style = "powerline"
+    powerline_symbol = ""
+    foreground = "#100e23"
+    background = "#906cff"
+    template = "  {{ .Full }} "
+    display_mode = "context"
+
+  [[blocks.segments]]
+    background = "#8800dd"
+    foreground = "#ffffff"
+    style = "powerline"
+    template = " <#fefefe>\ueba2 </> {{ .FormattedMs }} "
+    type = "executiontime"
+    [blocks.segments.properties]
+      always_enabled = true
+      style = "austin"
+      threshold = 500.0
+
+  [[blocks.segments]]
+    background = "transparent"
+    foreground = "#546E7A"
+    style = "plain"
+    template = "\ue0b0"
+    type = "text"
+
+[[blocks]]
+  alignment = "right"
+  type = "prompt"
+
+  [[blocks.segments]]
+    type = "kubectl"
+    style = "powerline"
+    powerline_symbol = ""
+    foreground = "#000000"
+    background = "#ebcc34"
+    template = " ﴱ {{.Context}}{{if .Namespace}} :: {{.Namespace}}{{end}} "
+
+    [properties.context_aliases]
+    "arn:aws:eks:eu-west-1:1234567890:cluster/posh" = "posh"
+
+  [[blocks.segments]]
+    background = "#546E7A"
+    foreground = "#D4E157"
+    leading_diamond = "\ue0b2"
+    style = "diamond"
+    template = " {{ .UserName }}@{{ .HostName }} <#26C6DA>\ue0b3</> "
+    type = "session"
+
+  [[blocks.segments]]
+    background = "#546E7A"
+    foreground = "#D4E157"
+    style = "plain"
+    template = " {{ .CurrentDate | date .Format }} \uf017 "
+    type = "time"
+    [blocks.segments.properties]
+      time_format = "15:04:05"
+
+[[blocks]]
+  alignment = "left"
+  newline = true
+  type = "prompt"
+
+  [[blocks.segments]]
+    foreground = "#D4E157"
+    foreground_templates = ["{{ if gt .Code 0 }}#FF5252{{ end }}"]
+    style = "plain"
+    template = "❯ "
+    type = "exit"
+    [blocks.segments.properties]
+      always_enabled = true
+
+[profiles]
+  [profiles.defaults]
+
+  [[profiles.list]]
+    cursorShape = "bar"
+
+[transient_prompt]
+  background = "transparent"
+  foreground = "#D4E157"
+  template = "❯ "
+
