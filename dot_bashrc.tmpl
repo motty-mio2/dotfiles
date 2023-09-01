@@ -146,6 +146,6 @@ source "$HOME/.cargo/env"
 eval "$(starship init bash)"
 starship_precmd_user_func="set_win_title"
 {{ else if (eq .bash "oh-my-posh") }}
-eval "$(oh-my-posh init bash --config ~/.config/theme.omp.json)"
+eval "$(oh-my-posh init bash --config ~/.config/omp.toml)"
 {{ end }}
 

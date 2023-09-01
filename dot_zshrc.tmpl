@@ -88,7 +88,7 @@ bindkey '^r' select-history
 eval "$(starship init zsh)"
 precmd_functions+=(set_win_title)
 {{ else if (eq .zsh "oh-my-posh") }}
-eval "$(oh-my-posh init zsh --config ~/.config/theme.omp.json)"
+eval "$(oh-my-posh init zsh --config ~/.config/omp.toml)"
 {{ else }}
 # POWERLEVEL
 POWERLEVEL9K_DISABLE_CONFIGURATION_WIZARD=true
