@@ -1,13 +1,13 @@
 "$schema" = 'https://starship.rs/config-schema.json'
 
 format = """
-[ ](fg:separater bg:base_background)\
+[ ](fg:separator bg:base_background)\
 $directory\
-[](fg:separater bg:base_background)\
+[](fg:separator bg:base_background)\
 $git_branch($git_status)\
-[](fg:separater bg:base_background)\
+[](fg:separator bg:base_background)\
 $python\
-[](fg:separater bg:base_background)\
+[](fg:separator bg:base_background)\
 $cmd_duration\
 
 [](fg:base_background)
@@ -24,7 +24,7 @@ palette = 'mypower'
 [palettes.mypower]
 text = 'white'
 base_background = '#444444'
-separater = '#868686'
+separator = '#868686'
 
 # Replace the '❯' symbol in the prompt with '➜'
 #[character] # The name of the module we are configuring is 'character'
