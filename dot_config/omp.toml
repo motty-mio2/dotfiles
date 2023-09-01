@@ -3,66 +3,98 @@
 "$schema" = "https://raw.githubusercontent.com/JanDeDobbeleer/oh-my-posh/main/themes/schema.json"
 version = 2.0
 
+
+[palette]
+  powerline = "#444444"
+  # separator = "#00ff00"
+  separator = "#868686"
+  text = "#ffffff"
+  accent = "#98c379"
+
+
 [[blocks]]
   alignment = "left"
   type = "prompt"
 
   [[blocks.segments]]
-    background = "#546E7A"
-    foreground = "#26C6DA"
+    background = "p:powerline"
+    foreground = "p:text"
     style = "plain"
-    template = " {{ if .WSL }}WSL at {{ end }}{{.Icon}} \ue0b1"
     type = "os"
+    template = """ \
+    {{ .Icon }}  \
+    <p:separator>\ue0b1</>\
+    """
 
-  [[blocks.segments]]
-    background = "#546E7A"
-    foreground = "#26C6DA"
-    style = "plain"
-    template = " \uf0e7 "
-    type = "root"
-
-  [[blocks.segments]]
-    background = "#546E7A"
-    foreground = "#26C6DA"
-    style = "plain"
-    template = " {{ .Path }} "
-    type = "path"
     [blocks.segments.properties]
-      style = "full"
+    windows = "<cyan>\uE62A</>"
 
   [[blocks.segments]]
-    background = "#546E7A"
-    foreground = "#64e638"
-    style = "powerline"
-    template = "<#26C6DA>\ue0b1 </>{{ .UpstreamIcon }}{{ .HEAD }}{{ if .Staging.Changed }} \uf046 {{ .Staging.String }}{{ end }}{{ if and (.Working.Changed) (.Staging.Changed) }} |{{ end }}{{ if .Working.Changed }} \uf044 {{ .Working.String }}{{ end }} "
+    type = "path"
+    background = "p:powerline"
+    foreground = "p:text"
+    style = "plain"
+    powerline_symbol = "<p:separator>\ue0b1</>"
+    # template = " {{ .Path }} "
+    template = """ \
+    <#009CD1>{{ .Parent }}</><green>{{ .Path }}</> \
+    <p:separator>\ue0b1</>\
+    """
+
+    [blocks.segments.properties]
+      folder_separator_icon = "/"
+      # style = "full"
+      style = "folder"
+
+  [[blocks.segments]]
     type = "git"
+    style= "plain"
+    # style = "powerline"
+    powerline_symbol = "<p:separator>\ue0b1</>"
+    background = "p:powerline"
+    foreground = "p:text"
+    template = """ \
+    {{ .UpstreamIcon }}{{ .HEAD }}{{ if .Staging.Changed }} \uf046 {{ .Staging.String }}{{ end }}\
+    {{ if and (.Working.Changed) (.Staging.Changed) }} |{{ end }}\
+    {{ if .Working.Changed }} \uf044 {{ .Working.String }}{{ end }} \
+    <p:separator>\ue0b1</>\
+    """
     [blocks.segments.properties]
       fetch_status = true
       fetch_upstream_icon = true
 
   [[blocks.segments]]
     type = "python"
-    style = "powerline"
-    powerline_symbol = ""
-    foreground = "#100e23"
-    background = "#906cff"
-    template = "  {{ .Full }} "
-    display_mode = "context"
+    style = "plain"
+    powerline_symbol = "<p:separator>\ue0b1</>"
+    background = "p:powerline"
+    foreground = "p:text"
+    display_mode = "files"
+    template = """ \
+    \ue73c {{ if .Error }}{{ .Error }}{{ else }}{{ .Full }}{{ end }}\
+    <p:separator>\ue0b1</>
+    """
 
   [[blocks.segments]]
-    background = "#8800dd"
-    foreground = "#ffffff"
-    style = "powerline"
-    template = " <#fefefe>\ueba2 </> {{ .FormattedMs }} "
     type = "executiontime"
+    background = "p:powerline"
+    foreground = "p:text"
+    style = "plain"
+    # powerline_symbol = "<p:separator>\ue0b1</>"
+
+    template = """ \
+    {{ .FormattedMs }} \
+    <p:separator>\ue0b1</>
+    """
+
     [blocks.segments.properties]
-      always_enabled = true
+      always_enabled = false
       style = "austin"
-      threshold = 500.0
+      threshold = 10.0
 
   [[blocks.segments]]
     background = "transparent"
-    foreground = "#546E7A"
+    foreground = "p:powerline"
     style = "plain"
     template = "\ue0b0"
     type = "text"
@@ -72,30 +104,42 @@ version = 2.0
   type = "prompt"
 
   [[blocks.segments]]
+    background = "transparent"
+    foreground = "p:powerline"
+    style = "plain"
+    template = "\ue0b2"
+    type = "text"
+
+  [[blocks.segments]]
     type = "kubectl"
-    style = "powerline"
-    powerline_symbol = ""
-    foreground = "#000000"
-    background = "#ebcc34"
+    style = "plain"
+    background = "p:powerline"
+    foreground = "p:text"
     template = " ﴱ {{.Context}}{{if .Namespace}} :: {{.Namespace}}{{end}} "
 
     [properties.context_aliases]
     "arn:aws:eks:eu-west-1:1234567890:cluster/posh" = "posh"
 
   [[blocks.segments]]
-    background = "#546E7A"
-    foreground = "#D4E157"
+    background = "p:powerline"
+    foreground = "p:text"
     leading_diamond = "\ue0b2"
-    style = "diamond"
-    template = " {{ .UserName }}@{{ .HostName }} <#26C6DA>\ue0b3</> "
+    style = "plain"
     type = "session"
+    template = """ \
+    {{ .UserName }}@{{ .HostName }} \
+    <p:separator>\ue0b3</>\
+    """
 
   [[blocks.segments]]
-    background = "#546E7A"
-    foreground = "#D4E157"
+    background = "p:powerline"
+    foreground = "p:text"
     style = "plain"
-    template = " {{ .CurrentDate | date .Format }} \uf017 "
     type = "time"
+    template = """ \
+    {{ .CurrentDate | date .Format }} \uf017 \
+    """
+
     [blocks.segments.properties]
       time_format = "15:04:05"
 
@@ -105,11 +149,12 @@ version = 2.0
   type = "prompt"
 
   [[blocks.segments]]
-    foreground = "#D4E157"
+    background = "transparent"
+    foreground = "p:accent"
     foreground_templates = ["{{ if gt .Code 0 }}#FF5252{{ end }}"]
     style = "plain"
     template = "❯ "
-    type = "exit"
+    type = "text"
     [blocks.segments.properties]
       always_enabled = true
 
@@ -120,7 +165,6 @@ version = 2.0
     cursorShape = "bar"
 
 [transient_prompt]
-  background = "transparent"
-  foreground = "#D4E157"
+  # background = "transparent"
+  # foreground = "#D4E157"
   template = "❯ "
-
