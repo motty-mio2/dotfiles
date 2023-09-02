@@ -1,5 +1,8 @@
 #!/bin/bash
 
+# Cargo
+source "$HOME/.cargo/env"
+
 # Rye
 export RYE_HOME="$HOME/.local/share/rye"
 source "$RYE_HOME/env"
