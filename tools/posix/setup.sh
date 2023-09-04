@@ -3,10 +3,10 @@
 if type "pacman" > /dev/null 2>&1; then
     sudo pacman -Sy --noconfirm yay rustup
     rustup install stable 
-    yay -S  bat byobu chezmoi code curl fcitx-im fcitx-configtool fcitx-mozc fd fzf git github-cli go \
+    yay -S  bat byobu chezmoi curl fcitx-im fcitx-configtool fcitx-mozc fd fzf git github-cli go \
     nano neovim \
     oh-my-posh pkg-config rye screen sheldon starship tree ttf-hackgen unarchiver unzip \
-    volta-bin wezterm wget yay zsh 
+    visual-studio-code-bin volta-bin wezterm wget yay zsh 
 
    cargo install cargo-update sccache git-ignore-generator
 
