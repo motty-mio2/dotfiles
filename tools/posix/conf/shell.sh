@@ -19,9 +19,19 @@ alias lh='ls -ldF .*'
 
 alias rmrf='rm -rf'
 alias watch="watch "
-alias rmemp='find . -type d -empty -delete'
 
 export EDITOR=nvim
+
+
+rmemp() {
+    local target_directory="$1"
+
+    if [ -z "$target_directory" ]; then
+        target_directory="."
+    fi
+
+    find "$target_directory" -type d -empty -delete
+}
 
 lsn(){
     find . -maxdepth 1 | wc -l
