@@ -82,6 +82,11 @@ function select-history() {
     CURSOR=$#BUFFER
 }
 zle -N select-history
+
+bindkey -e
+bindkey "^[[3~" delete-char
+bindkey "^[[H" beginning-of-line
+bindkey "^[[F" end-of-line
 bindkey '^r' select-history
 
 {{ if (eq .zsh "starship") }}
