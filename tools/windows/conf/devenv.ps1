@@ -46,6 +46,45 @@ function Set-Environemt-Path {
 }
 
 
+function Set-Poetry-Path {
+    param (
+        $POETRY_DIR = $env:USERPROFILE + "\AppData\Roaming\Python\Scripts"
+    )
+    $user_path = [System.Environment]::GetEnvironmentVariable('PATH', "User")
+
+    if (-Not $user_path.Contains( $POETRY_DIR )) {
+        [System.Environment]::SetEnvironmentVariable("PATH", $user_path + ";" + $POETRY_DIR, "User")
+    }
+}
+
+function Set-Pyenv-Path {
+    param (
+        $PYENV_DIR = $env:USERPROFILE + "\.pyenv\pyenv-win"
+    )
+
+    foreach ($target in @( "PYENV", "PYENV_HOME", "PYENV_ROOT")) {
+        $tmp_path = [System.Environment]::GetEnvironmentVariable("$target", "User")
+
+        if (( $null -eq $tmp_path ) -or ($tmp_path -ne $PYENV_DIR )) {
+            [System.Environment]::SetEnvironmentVariable('PYENV', $PYENV_DIR, "User")
+        }
+    }
+
+    $user_path = [System.Environment]::GetEnvironmentVariable('PATH', "User")
+    $pyenv_bin = $PYENV_DIR + "\bin"
+
+    if (-Not $user_path.Contains( $pyenv_bin )) {
+        [System.Environment]::SetEnvironmentVariable("PATH", $pyenv_bin + ";" + $user_path, "User")
+    }
+
+    $user_path = [System.Environment]::GetEnvironmentVariable('PATH', "User")
+    $pyenv_shims = $PYENV_DIR + "\shims"
+
+    if (-Not $user_path.Contains( $pyenv_shims )) {
+        [System.Environment]::SetEnvironmentVariable("PATH", $pyenv_shims + ";" + $user_path, "User")
+    }
+}
+
 function Install-Rye {
     param (
         $url = "https://github.com/mitsuhiko/rye/releases/latest/download/rye-x86_64-windows.exe",
@@ -80,6 +119,7 @@ function Set-Rye-Path {
     [System.Environment]::SetEnvironmentVariable("RYE_HOME", "$RYE_HOME", "User")
 
 }
+
 function Install-Rye-Tools {
     param (
         $RYE_ENV = "$env:USERPROFILE\.local\share\rye\shims",
