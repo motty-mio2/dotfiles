@@ -10,7 +10,7 @@ then
 fi
 
 private_folder="${HOME}/.config/shell/private"
-if [ -d "$private_folder" ]
+if [ -d "$private_folder/*.sh" ]
 then
     for file in "$private_folder"/*.sh ; do
         # shellcheck source=/dev/null
