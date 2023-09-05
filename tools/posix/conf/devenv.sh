@@ -1,11 +1,26 @@
 #!/bin/bash
 
-# Cargo
-source "$HOME/.cargo/env"
+# Brew
+if [ -d "/home/linuxbrew/" ] ; then
+    eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
+fi
+
+# Go
+if [ -d "$HOME/go/bin" ] ; then
+    export PATH="$HOME/go/bin:$PATH"
+fi
+
+# Rust
+if [ -d "$HOME/.cargo/bin" ] ; then
+    export PATH="$HOME/.cargo/bin:$PATH"
+fi
 
 # Rye
 export RYE_HOME="$HOME/.local/share/rye"
-source "$RYE_HOME/env"
+if [ -d "$RYE_HOME" ] ; then
+    source "$RYE_HOME/env"
+fi
+
 
 # svlint
 export SVLINT_CONFIG="$HOME/.config/svls/.svlint.toml"

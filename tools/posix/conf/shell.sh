@@ -7,10 +7,7 @@ function set_win_title(){
     echo -ne "\033]0; $title \007"
 }
 
-# Rust
-if [ -d "$HOME/.cargo/bin" ] ; then
-    export PATH="$HOME/.cargo/bin:$PATH"
-fi
+
 alias aupdate='sudo apt update && sudo apt upgrade -y && sudo apt autoremove -y'
 alias bupdate='brew update && brew upgrade'
 alias dupdate='sudo dnf update -y'
@@ -41,7 +38,7 @@ cats() {
 
 envup () {
     dirs=("$HOME/.pyenv")
-    
+
     for target in "${dirs[@]}"
     do
         if [ -d "$target" ] ; then
@@ -49,7 +46,7 @@ envup () {
             git -C "$target" pull
         fi
     done
-    
+
     rustup update
     cargo install-update --all
     sheldon lock --update
@@ -57,7 +54,7 @@ envup () {
 
 webp2png (){
     while [[ "${1:-}" = -* ]]; do shift; done
-    
+
     if [ $# -gt 0 ]; then
         for file in "$1"/*.webp ; do
             echo "$file"
@@ -69,7 +66,7 @@ webp2png (){
 
 png2webp (){
     while [[ "${1:-}" = -* ]]; do shift; done
-    
+
     if [ $# -gt 0 ]; then
         for file in "$1"/*.png ; do
             echo "$file"
