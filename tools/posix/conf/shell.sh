@@ -2,12 +2,6 @@
 
 export XDG_CONFIG_HOME="$HOME/.config"
 
-function set_win_title(){
-    local title=${1:~$USER@$HOST};
-    echo -ne "\033]0; $title \007"
-}
-
-
 alias aupdate='sudo apt update && sudo apt upgrade -y && sudo apt autoremove -y'
 alias bupdate='brew update && brew upgrade'
 alias dupdate='sudo dnf update -y'
@@ -86,6 +80,13 @@ png2webp (){
     fi
 }
 
-export PIPENV_VENV_IN_PROJECT=1
-export LIBGL_ALWAYS_INDIRECT=1
-export CUBLAS_WORKSPACE_CONFIG=:16:8
+set-window-title() {
+	local title="$1"
+
+	if [ -z "$title" ]; then
+		title=${USER}@${HOST}
+	fi
+	echo -ne "\033]0; $title \007"
+}
+
+set-window-title
