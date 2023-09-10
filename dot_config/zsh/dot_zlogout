@@ -1,6 +1,6 @@
 #!/usr/bin/env zsh
 
-if [[ ! -z  $SSH_AGENT_PID ]]; then
-  agent="$(ssh-agent -k)"
-  eval $agent
+if [[ ! -z $SSH_AGENT_PID ]]; then
+	agent="$(ssh-agent -k)"
+	eval $agent
 fi
