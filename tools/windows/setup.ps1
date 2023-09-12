@@ -35,15 +35,15 @@ if (-not (Test-Path -Path $RYE_HOME)) {
 $env:RYE_HOME = "$RYE_HOME"
 
 ## Get Installer
-Invoke-WebRequest -Uri $url -OutFile (Join-Path -Path $env:HOME -ChildPath $executableName)
-& "$env:HOME\$executableName"
+Invoke-WebRequest -Uri $url -OutFile (Join-Path -Path $env:RYE_HOME -ChildPath $executableName)
+& "$env:RYE_HOME\$executableName"
 
-Remove-Item "$env:HOME\$executableName"
+Remove-Item "$env:RYE_HOME\$executableName"
 
 $env:PATH = "$RYE_HOME\shims;" + $env:PATH
 ## Install Rye Tools
 foreach ($tool in @("poetry", "black", "flake8", "isort" , "mypy", "ruff")) {
-    & "$RYE_HOME\shimis\$executableName" install $tool
+    & "$RYE_HOME\shims\$executableName" install $tool
 }
 
 # Volta Install

@@ -100,10 +100,10 @@ function Install-Rye {
     $env:RYE_HOME = "$RYE_HOME"
 
     # Install Rye
-    Invoke-WebRequest -Uri $url -OutFile (Join-Path -Path $env:HOME -ChildPath $executableName)
-    & "$env:HOME\$executableName"
+    Invoke-WebRequest -Uri $url -OutFile (Join-Path -Path $env:RYE_HOME -ChildPath $executableName)
+    & "$env:RYE_HOME\$executableName"
 
-    Remove-Item "$env:HOME\$executableName"
+    Remove-Item "$env:RYE_HOME\$executableName"
 
     $env:PATH = "$RYE_HOME\shims;" + $env:PATH
 
