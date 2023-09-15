@@ -7,7 +7,7 @@ tools
 
 {{ if eq .chezmoi.os "windows" }}
     .bashrc
-    .zshrc
+    .zshenv
     .zlogout
     .p10k.zsh
     .config/sheldon
