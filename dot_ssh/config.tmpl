@@ -1,6 +1,6 @@
 Include ~/.ssh/config.d/*.conf
 
-{{ if glob ( joinPath .chezmoi.homeDir "/.ssh/id_25519" ) }}
+{{ if glob ( joinPath .chezmoi.homeDir "/.ssh/id_ed25519" ) }}
 Host *
     IdentitiesOnly yes
     IdentityFile ~/.ssh/id_ed25519
