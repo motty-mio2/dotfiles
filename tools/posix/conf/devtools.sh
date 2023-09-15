@@ -2,38 +2,46 @@
 
 install-rye() {
 	export RYE_HOME="$HOME/.local/share/rye"
-	curl -sSf https://rye-up.com/get | bash
 
-	tools=("poetry" "black" "flake8" "isort" "mypy" "ruff" "pip" "hdl-checker")
+	if [ ! -d "$RYE_HOME" ]; then
+		curl -sSf https://rye-up.com/get | bash
 
-	for tool in "${tools[@]}"; do
-		"$RYE_HOME/shims/rye" install "$tool"
-	done
+		tools=("poetry" "black" "flake8" "isort" "mypy" "ruff" "pip" "hdl-checker")
+
+		for tool in "${tools[@]}"; do
+			"$RYE_HOME/shims/rye" install "$tool"
+		done
+	fi
 }
 
 install-volta() {
 	export VOLTA_HOME="$HOME/.local/share/volta"
 
-	curl https://get.volta.sh | bash
+	if [ ! -d "$VOLTA_HOME" ]; then
+		curl https://get.volta.sh | bash
 
-	"$VOLTA_HOME/bin/volta" install node@lts
+		"$VOLTA_HOME/bin/volta" install node@lts
 
-	tools=("poetry" "black" "flake8" "isort" "mypy" "ruff")
+		tools=("poetry" "black" "flake8" "isort" "mypy" "ruff")
 
-	for tool in "${tools[@]}"; do
-		"$VOLTA_HOME/bin/npm" install -g "@bitwarden/cli"
-	done
+		for tool in "${tools[@]}"; do
+			"$VOLTA_HOME/bin/npm" install -g "@bitwarden/cli"
+		done
+	fi
 }
 
 install-homebrew() {
-	/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
-	/home/linuxbrew/.linuxbrew/bin/brew install bat chezmoi fd fzf gh neovim sheldon starship svls svlint tree
-	/home/linuxbrew/.linuxbrew/bin/brew tap wez/wezterm-linuxbrew
-	/home/linuxbrew/.linuxbrew/bin/brew install wezterm
+	if [ ! -d "/home/linuxbrew/" ]; then
+		/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+		/home/linuxbrew/.linuxbrew/bin/brew tap wez/wezterm-linuxbrew
+		/home/linuxbrew/.linuxbrew/bin/brew install bat chezmoi fd fzf gh neovim sheldon starship svls svlint tree wezterm
+	fi
 }
 
 install-rust(){
-	curl https://sh.rustup.rs -sSf | sh -s -- -y
+	if [ ! -d "$HOME/.cargo/bin" ]; then
+		curl https://sh.rustup.rs -sSf | sh -s -- -y
 
-	~/.cargo/bin/cargo install cargo-update sccache git-ignore-generator
+		"$HOME/.cargo/bin/cargo" install cargo-update sccache git-ignore-generator
+	fi
 }
