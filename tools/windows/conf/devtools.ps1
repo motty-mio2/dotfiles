@@ -44,14 +44,6 @@ function Set-XDG-Directory {
     Set-Environemt-Value -ENV_NAME "HOME"               -ENV_VALUE "$env:USERPROFILE\.config"
 }
 
-function Set-Poetry-Path {
-    param (
-        $POETRY_DIR = $env:USERPROFILE + "\AppData\Roaming\Python\Scripts"
-    )
-
-    Set-Environemt-Path -ENV_NAME "PATH" -ENV_VALUE "$POETRY_DIR"
-}
-
 function Set-Pyenv-Path {
     param (
         $PYENV_DIR = $env:USERPROFILE + "\.pyenv\pyenv-win"
@@ -76,17 +68,13 @@ function Install-Rye {
     # Set Rye HOME
     if (-not (Test-Path -Path $RYE_HOME)) {
         New-Item -Path $RYE_HOME -ItemType Directory
+
+        # Install Rye
+        Invoke-WebRequest -Uri $url -OutFile (Join-Path -Path $RYE_HOME -ChildPath $executableName)
+        & "$RYE_HOME\$executableName"
+
+        Remove-Item "$RYE_HOME\$executableName"
     }
-
-    $env:RYE_HOME = "$RYE_HOME"
-
-    # Install Rye
-    Invoke-WebRequest -Uri $url -OutFile (Join-Path -Path $env:RYE_HOME -ChildPath $executableName)
-    & "$env:RYE_HOME\$executableName"
-
-    Remove-Item "$env:RYE_HOME\$executableName"
-
-    $env:PATH = "$RYE_HOME\shims;" + $env:PATH
 
     Set-Rye-Path -RYE_HOME $RYE_HOME
 }
