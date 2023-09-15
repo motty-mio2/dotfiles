@@ -32,6 +32,28 @@ function ghf {
     gh repo clone $(gh repo list -L 10000 | fzf).Split("`t")[0]
 }
 
+function Set-Environemt-Value {
+    param (
+        $ENV_NAME,
+        $ENV_VALUE
+    )
+
+    $current_setting = [System.Environment]::GetEnvironmentVariable($ENV_NAME, "User")
+
+    # current_setting が設定されていないならば
+    if ($current_setting -eq $null) {
+        [System.Environment]::SetEnvironmentVariable("$ENV_NAME", "$ENV_VALUE", "User")
+    } elseif ($current_setting -ne $ENV_VALUE) {
+        # current_setting が設定されている，かつ，設定されている値が $ENV_VALUE でないならば
+        # print して，ユーザにどちらを利用するか確認する
+        Write-Host "1) Current Setting: $current_setting"
+        Write-Host "2) New Setting:     $ENV_VALUE"
+        $answer = Read-Host "Which do you want to use? (1/2)"
+        if ($answer -eq "2") {
+            [System.Environment]::SetEnvironmentVariable("$ENV_NAME", "$ENV_VALUE", "User")
+        }
+    }
+}
 function Set-Environemt-Path {
     param (
         $ENV_NAME,
