@@ -18,10 +18,6 @@ if which "pyenv" >/dev/null 2>&1; then
 	eval "$(pyenv init -)"
 fi
 
-# Poetry
-export PATH="$HOME/.poetry/bin:$PATH"           # old
-export PATH="$HOME/.local/share/pypoetry:$PATH" # new
-
 # Rust
 if [ -d "$HOME/.cargo/bin" ]; then
 	export PATH="$HOME/.cargo/bin:$PATH"
