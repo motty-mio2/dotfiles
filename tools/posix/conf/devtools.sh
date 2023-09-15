@@ -28,7 +28,7 @@ install-volta() {
 }
 
 install-volta-tools() {
-	tools=("@bitwarden/cli")
+	tools=("@bitwarden/cli" "neovim")
 
 	for tool in "${tools[@]}"; do
 		"$VOLTA_HOME/bin/npm" install -g "$tool"
