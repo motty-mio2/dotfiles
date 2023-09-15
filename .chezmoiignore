@@ -10,7 +10,6 @@ tools
     .zshrc
     .zlogout
     .p10k.zsh
-    .config/nvim
     .config/sheldon
 {{ end }}
 
