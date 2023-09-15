@@ -36,15 +36,20 @@ function Set-Environemt-Path {
     }
 }
 
+function Set-XDG-Directory {
+    Set-Environemt-Value -ENV_NAME "XDG_CONFIG_HOME"    -ENV_VALUE "$env:USERPROFILE\.config"
+    Set-Environemt-Value -ENV_NAME "XDG_DATA_HOME"      -ENV_VALUE "$env:USERPROFILE\.local\share"
+    Set-Environemt-Value -ENV_NAME "XDG_CACHE_HOME"     -ENV_VALUE "$env:USERPROFILE\.local\cache"
+    Set-Environemt-Value -ENV_NAME "XDG_STATE_HOME"     -ENV_VALUE "$env:USERPROFILE\.local\state"
+    Set-Environemt-Value -ENV_NAME "HOME"               -ENV_VALUE "$env:USERPROFILE\.config"
+}
+
 function Set-Poetry-Path {
     param (
         $POETRY_DIR = $env:USERPROFILE + "\AppData\Roaming\Python\Scripts"
     )
-    $user_path = [System.Environment]::GetEnvironmentVariable('PATH', "User")
 
-    if (-Not $user_path.Contains( $POETRY_DIR )) {
-        [System.Environment]::SetEnvironmentVariable("PATH", $user_path + ";" + $POETRY_DIR, "User")
-    }
+    Set-Environemt-Path -ENV_NAME "PATH" -ENV_VALUE "$POETRY_DIR"
 }
 
 function Set-Pyenv-Path {
@@ -53,25 +58,11 @@ function Set-Pyenv-Path {
     )
 
     foreach ($target in @( "PYENV", "PYENV_HOME", "PYENV_ROOT")) {
-        $tmp_path = [System.Environment]::GetEnvironmentVariable("$target", "User")
-
-        if (( $null -eq $tmp_path ) -or ($tmp_path -ne $PYENV_DIR )) {
-            [System.Environment]::SetEnvironmentVariable('PYENV', $PYENV_DIR, "User")
-        }
+        Set-Environemt-Value -ENV_NAME $target -ENV_VALUE $PYENV_DIR
     }
 
-    $user_path = [System.Environment]::GetEnvironmentVariable('PATH', "User")
-    $pyenv_bin = $PYENV_DIR + "\bin"
-
-    if (-Not $user_path.Contains( $pyenv_bin )) {
-        [System.Environment]::SetEnvironmentVariable("PATH", $pyenv_bin + ";" + $user_path, "User")
-    }
-
-    $user_path = [System.Environment]::GetEnvironmentVariable('PATH', "User")
-    $pyenv_shims = $PYENV_DIR + "\shims"
-
-    if (-Not $user_path.Contains( $pyenv_shims )) {
-        [System.Environment]::SetEnvironmentVariable("PATH", $pyenv_shims + ";" + $user_path, "User")
+    foreach ($target in @( "\bin", "\shims")) {
+        Set-Environemt-Value -ENV_NAME $PYENV_DIR + $target -ENV_VALUE $PYENV_DIR
     }
 }
 
@@ -97,8 +88,7 @@ function Install-Rye {
 
     $env:PATH = "$RYE_HOME\shims;" + $env:PATH
 
-    Set-Environemt-Path -ENV_NAME "PATH" -ENV_VALUE "$RYE_HOME\shims"
-    [System.Environment]::SetEnvironmentVariable("RYE_HOME", "$RYE_HOME", "User")
+    Set-Rye-Path -RYE_HOME $RYE_HOME
 }
 
 function Set-Rye-Path {
@@ -106,8 +96,7 @@ function Set-Rye-Path {
         $RYE_HOME = "$env:USERPROFILE\.local\share\rye"
     )
     Set-Environemt-Path -ENV_NAME "PATH" -ENV_VALUE "$RYE_HOME\shims"
-    [System.Environment]::SetEnvironmentVariable("RYE_HOME", "$RYE_HOME", "User")
-
+    Set-Environemt-Value -ENV_NAME "RYE_HOME" -ENV_VALUE "$RYE_HOME"
 }
 
 function Install-Rye-Tools {
@@ -116,8 +105,19 @@ function Install-Rye-Tools {
         $executableName = "rye.exe"
     )
 
-    foreach ($tool in @("poetry", "black", "flake8", "isort" , "mypy", "ruff", "hdl-checker")) {
+    foreach ($tool in @("poetry", "black", "flake8", "isort" , "mypy", "ruff", "pip", "hdl-checker")) {
         & "$RYE_ENV\$executableName" install $tool
+    }
+}
+
+function Install-Volta-Tools {
+    param (
+        $volta = "volta"
+    )
+
+    & "$volta" install node@lts
+    foreach ($tool in @("@bitwarden/cli")) {
+        & npm install -g $tool
     }
 }
 
