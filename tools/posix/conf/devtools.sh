@@ -1,17 +1,20 @@
 #!/usr/bin/env bash
 
 install-rye() {
+	RYE_HOME="$HOME/.local/share/rye"
 	export RYE_HOME="$HOME/.local/share/rye"
 
 	if [ ! -d "$RYE_HOME" ]; then
 		curl -sSf https://rye-up.com/get | bash
-
-		tools=("poetry" "black" "flake8" "isort" "mypy" "ruff" "pip" "hdl-checker")
-
-		for tool in "${tools[@]}"; do
-			"$RYE_HOME/shims/rye" install "$tool"
-		done
 	fi
+}
+
+install-rye-tools() {
+	tools=("poetry" "black" "flake8" "isort" "mypy" "ruff" "pip" "hdl-checker")
+
+	for tool in "${tools[@]}"; do
+		"$RYE_HOME/shims/rye" install "$tool"
+	done
 }
 
 install-volta() {
@@ -21,21 +24,26 @@ install-volta() {
 		curl https://get.volta.sh | bash
 
 		"$VOLTA_HOME/bin/volta" install node@lts
-
-		tools=("poetry" "black" "flake8" "isort" "mypy" "ruff")
-
-		for tool in "${tools[@]}"; do
-			"$VOLTA_HOME/bin/npm" install -g "@bitwarden/cli"
-		done
 	fi
+}
+
+install-volta-tools() {
+	tools=("@bitwarden/cli")
+
+	for tool in "${tools[@]}"; do
+		"$VOLTA_HOME/bin/npm" install -g "$tool"
+	done
 }
 
 install-homebrew() {
 	if [ ! -d "/home/linuxbrew/" ]; then
 		/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+	fi
+}
+
+install-homebrew-tools(){
 		/home/linuxbrew/.linuxbrew/bin/brew tap wez/wezterm-linuxbrew
 		/home/linuxbrew/.linuxbrew/bin/brew install bat chezmoi fd fzf gh neovim sheldon starship svls svlint tree wezterm
-	fi
 }
 
 install-rust(){
