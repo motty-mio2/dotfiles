@@ -6,6 +6,7 @@ require("mason-lspconfig").setup({
 
 require("mason-tool-installer").setup({
 	ensure_installed = {
+		-- lsp
 		"bash-language-server",
 		"clangd",
 		"json-lsp",
@@ -14,12 +15,17 @@ require("mason-tool-installer").setup({
 		"pyright",
 		"svls",
 		"yaml-language-server",
+		-- linter
 		"flake8",
 		"mypy",
 		"shellcheck",
+		-- formatter
 		"black",
+		"clang-format",
 		"isort",
 		"shfmt",
+		"stylua",
+		"verible",
 		"yamlfmt",
 	},
 })
