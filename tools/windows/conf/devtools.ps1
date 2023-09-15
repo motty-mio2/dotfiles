@@ -116,3 +116,17 @@ function Set-SVLINT-PATH {
 
     Set-Environemt-Path -ENV_NAME "SVLINT_CONFIG" -ENV_VALUE $SVLINT_CONFIG
 }
+
+function Install-Scoop-Apps {
+    scoop bucket add extras
+    scoop bucket add java
+    scoop bucket add versions
+    scoop bucket add nerd-font
+    scoop bucket add hdl https://github.com/motty-mio2/mio2_bucket.git
+
+    scoop install `
+        7zip bat chezmoi cloudflared fd fzf geekuninstaller gh git gsudonano `
+        less llvm make nano neovim `
+        oh-my-posh posh-git psfzf ripgrep shellcheck shfmt starship svlint svls sysinternals `
+        volta wezterm wget which
+}
