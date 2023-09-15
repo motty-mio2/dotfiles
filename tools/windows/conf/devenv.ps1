@@ -16,12 +16,14 @@ try {
 catch {
 }
 
+# chezmoi
 try {
     (& chezmoi completion powershell) | Out-String | Invoke-Expression
 }
 catch {
 }
 
+# kubectl
 try {
     (& kubectl completion powershell) | Out-String | Invoke-Expression -ErrorAction SilentlyContinue
 }
