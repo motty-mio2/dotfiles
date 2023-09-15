@@ -41,12 +41,12 @@ install-homebrew() {
 	fi
 }
 
-install-homebrew-tools(){
-		/home/linuxbrew/.linuxbrew/bin/brew tap wez/wezterm-linuxbrew
-		/home/linuxbrew/.linuxbrew/bin/brew install bat chezmoi fd fzf gh neovim sheldon starship svls svlint tree wezterm
+install-homebrew-tools() {
+	/home/linuxbrew/.linuxbrew/bin/brew tap wez/wezterm-linuxbrew
+	/home/linuxbrew/.linuxbrew/bin/brew install bat chezmoi fd fzf gh neovim sheldon starship svls svlint tree wezterm
 }
 
-install-rust(){
+install-rust() {
 	if [ ! -d "$HOME/.cargo/bin" ]; then
 		curl https://sh.rustup.rs -sSf | sh -s -- -y
 
