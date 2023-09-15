@@ -1,7 +1,8 @@
 #!/usr/bin/bash
 
 if type "pacman" >/dev/null 2>&1; then
-	sudo pacman -Sy --noconfirm yay rustup
+	sudo pacman -Sy --noconfirm yay
+	sudo pacman -S --needed base-devel openssl zlib xz tk
 	rustup install stable
 	yay -S bat byobu chezmoi curl fcitx-im fcitx-configtool fcitx-mozc fd fzf git github-cli go \
 		nano neovim \
@@ -46,32 +47,6 @@ else
 	else
 		echo "None"
 	fi
-
-	# rye Install
-	export RYE_HOME="$HOME/.local/share/rye"
-	curl -sSf https://rye-up.com/get | bash
-
-	tools=("poetry" "black" "flake8" "isort" "mypy" "ruff")
-
-	for tool in "${tools[@]}"; do
-		"$RYE_HOME/shims/rye" install "$tool"
-	done
-
-	# Volta Install
-	curl https://get.volta.sh | bash
-	~/.volta/bin/volta install node@lts
-	~/.volta/bin/npm install -g @bitwarden/cli
-
-	# Use Homebrew
-	/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
-	/home/linuxbrew/.linuxbrew/bin/brew install bat chezmoi fd fzf gh neovim sheldon starship svls svlint tree
-	/home/linuxbrew/.linuxbrew/bin/brew tap wez/wezterm-linuxbrew
-	/home/linuxbrew/.linuxbrew/bin/brew install wezterm
-
-	# Use Rust
-	curl https://sh.rustup.rs -sSf | sh -s -- -y
-
-	~/.cargo/bin/cargo install cargo-update sccache git-ignore-generator
 
 	# Use chezmoi
 	/home/linuxbrew/.linuxbrew/bin/chezmoi init motty-mio2
