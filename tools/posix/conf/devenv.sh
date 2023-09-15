@@ -46,7 +46,7 @@ alias iv="iverilog"
 alias ivx="iverilog -g2012"
 
 # Volta
-export VOLTA_HOME="$HOME/.volta"
+export VOLTA_HOME="$HOME/.local/share/volta"
 export PATH="$VOLTA_HOME/bin:$PATH"
 
 # Others
