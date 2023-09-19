@@ -16,12 +16,6 @@ if wezterm.target_triple == 'x86_64-pc-windows-msvc' then
         label = 'Command Prompt',
         args = {'cmd.exe'}
     })
-
-    table.insert(launch_menu, {
-        label = "ubuntu",
-        args = {"wsl.exe", "--distribution", "Ubuntu", "--exec", "/usr/bin/zsh", "-l"}
-    })
-
 end
 
 return {
