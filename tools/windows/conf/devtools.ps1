@@ -104,9 +104,19 @@ function Install-Volta-Tools {
         $volta = "volta"
     )
 
-    & "$volta" install node@lts
-    foreach ($tool in @("@bitwarden/cli", "neovim")) {
-        & npm install -g $tool
+    $volta_tools = (& volta list)
+
+    if ( -Not ($volta_tools -like ("*node*") )) {
+        & "$volta" install node@lts
+    }
+
+    foreach ($tool in @(("bw", "@bitwarden/cli"), ("neovim-node-host", "neovim"))) {
+        $toolName = $tool[0]
+        $package = $tool[1]
+
+        if ( -Not ($volta_tools -like ("*$toolName*") )) {
+            & npm install -g $package
+        }
     }
 }
 
