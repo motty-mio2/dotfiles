@@ -28,7 +28,7 @@ install-volta() {
 
 install-volta-tools() {
 	export VOLTA_HOME="$HOME/.local/share/volta"
-	
+
 	"$VOLTA_HOME/bin/volta" install node@lts
 
 	tools=("@bitwarden/cli" "neovim")
@@ -51,10 +51,13 @@ install-homebrew-tools() {
 install-rust() {
 	if [ ! -d "$HOME/.cargo/bin" ]; then
 		curl https://sh.rustup.rs -sSf | sh -s -- -y
-
 	fi
 }
 
 install-cargo-tools(){
 	"$HOME/.cargo/bin/cargo" install cargo-update sccache git-ignore-generator
+}
+
+install-arch-desktop-dependency(){
+	yay -Sy fcitx5-im fcitx5-configtool fcitx5-mozc visual-studio-code-bin
 }

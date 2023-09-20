@@ -2,12 +2,12 @@
 
 if type "pacman" >/dev/null 2>&1; then
 	sudo pacman -Sy --noconfirm yay
-	sudo pacman -S --needed base-devel openssl zlib xz tk
+	sudo pacman -Sy --needed base-devel openssl rustup tk xz zlib
 	rustup install stable
-	yay -S bat byobu chezmoi curl fcitx-im fcitx-configtool fcitx-mozc fd fzf git github-cli go \
-		nano neovim \
+	yay -Sy bat byobu chezmoi curl fd fzf git github-cli go \
+		htop jq nano neovim \
 		oh-my-posh pkg-config rye screen sheldon starship tree ttf-hackgen unarchiver unzip \
-		visual-studio-code-bin volta-bin wezterm wget yay zsh
+		volta-bin wezterm wget yay zsh
 
 	# Use chezmoi
 	chezmoi init motty-mio2
