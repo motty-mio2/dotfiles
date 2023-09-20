@@ -64,18 +64,20 @@ function Install-Rye {
         $executableName = "rye.exe"
     )
 
-    # Set Rye HOME
-    if (-not (Test-Path -Path $RYE_HOME)) {
-        New-Item -Path $RYE_HOME -ItemType Directory
+    if (-Not(Get-Command rye -ea SilentlyContinue) ) {
+        # Set Rye HOME
+        if (-not (Test-Path -Path $RYE_HOME)) {
+            New-Item -Path $RYE_HOME -ItemType Directory
 
-        # Install Rye
-        Invoke-WebRequest -Uri $url -OutFile (Join-Path -Path $RYE_HOME -ChildPath $executableName)
-        & "$RYE_HOME\$executableName"
+            # Install Rye
+            Invoke-WebRequest -Uri $url -OutFile (Join-Path -Path $RYE_HOME -ChildPath $executableName)
+            & "$RYE_HOME\$executableName"
 
-        Remove-Item "$RYE_HOME\$executableName"
+            Remove-Item "$RYE_HOME\$executableName"
+        }
+
+        Set-Rye-Path -RYE_HOME $RYE_HOME
     }
-
-    Set-Rye-Path -RYE_HOME $RYE_HOME
 }
 
 function Set-Rye-Path {
