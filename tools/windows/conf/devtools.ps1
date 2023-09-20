@@ -1,4 +1,3 @@
-
 function Set-Environemt-Value {
     param (
         $ENV_NAME,
@@ -140,4 +139,10 @@ function Install-Scoop-Apps {
         less llvm make nano neovim `
         oh-my-posh posh-git psfzf ripgrep shellcheck shfmt starship svlint svls sysinternals `
         volta wezterm wget which
+}
+
+function Install-Cargo-Tools() {
+    foreach ($tool in @("cargo-update" , "sccache" , "git-ignore-generator")) {
+        & cargo install $tool
+    }
 }

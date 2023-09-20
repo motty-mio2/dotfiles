@@ -9,8 +9,6 @@ if type "pacman" >/dev/null 2>&1; then
 		oh-my-posh pkg-config rye screen sheldon starship tree ttf-hackgen unarchiver unzip \
 		visual-studio-code-bin volta-bin wezterm wget yay zsh
 
-	cargo install cargo-update sccache git-ignore-generator
-
 	# Use chezmoi
 	chezmoi init motty-mio2
 	chezmoi apply -k

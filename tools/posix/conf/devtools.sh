@@ -23,13 +23,15 @@ install-volta() {
 	if [ ! -d "$VOLTA_HOME" ]; then
 		curl https://get.volta.sh | bash
 
-		"$VOLTA_HOME/bin/volta" install node@lts
 	fi
 }
 
 install-volta-tools() {
-	tools=("@bitwarden/cli" "neovim")
+	export VOLTA_HOME="$HOME/.local/share/volta"
+	
+	"$VOLTA_HOME/bin/volta" install node@lts
 
+	tools=("@bitwarden/cli" "neovim")
 	for tool in "${tools[@]}"; do
 		"$VOLTA_HOME/bin/npm" install -g "$tool"
 	done
@@ -50,6 +52,9 @@ install-rust() {
 	if [ ! -d "$HOME/.cargo/bin" ]; then
 		curl https://sh.rustup.rs -sSf | sh -s -- -y
 
-		"$HOME/.cargo/bin/cargo" install cargo-update sccache git-ignore-generator
 	fi
+}
+
+install-cargo-tools(){
+	"$HOME/.cargo/bin/cargo" install cargo-update sccache git-ignore-generator
 }
