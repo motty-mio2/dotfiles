@@ -17,13 +17,12 @@ version = 2.0
   type = "prompt"
 
   [[blocks.segments]]
+    type = "os"
+    style = "plain"
     background = "p:powerline"
     foreground = "p:text"
-    style = "plain"
-    type = "os"
     template = """ \
     {{ .Icon }}  \
-    <p:separator>\ue0b1</>\
     """
 
     [blocks.segments.properties]
@@ -31,14 +30,14 @@ version = 2.0
 
   [[blocks.segments]]
     type = "path"
+    style = "plain"
     background = "p:powerline"
     foreground = "p:text"
-    style = "plain"
-    powerline_symbol = "<p:separator>\ue0b1</>"
+    # powerline_symbol = "<p:separator>\ue0b1</>"
     # template = " {{ .Path }} "
-    template = """ \
+    template = """\
+    <p:separator>\ue0b1</> \
     <#009CD1>{{ .Parent }}</><green>{{ .Path }}</> \
-    <p:separator>\ue0b1</>\
     """
 
     [blocks.segments.properties]
@@ -49,16 +48,14 @@ version = 2.0
   [[blocks.segments]]
     type = "git"
     style= "plain"
-    # style = "powerline"
-    powerline_symbol = "<p:separator>\ue0b1</>"
+    # powerline_symbol = "<p:separator>\ue0b1</>"
     background = "p:powerline"
     foreground = "p:text"
-    template = """ \
+    template = """\
+    <p:separator>\ue0b1</> \
     {{ .UpstreamIcon }}{{ .HEAD }}{{ if .Staging.Changed }} \uf046 {{ .Staging.String }}{{ end }}\
     {{ if and (.Working.Changed) (.Staging.Changed) }} |{{ end }}\
-    {{ if .Working.Changed }} \uf044 {{ .Working.String }}{{ end }} \
-    <p:separator>\ue0b1</>\
-    """
+    {{ if .Working.Changed }} \uf044 {{ .Working.String }}{{ end }} """
     [blocks.segments.properties]
       fetch_status = true
       fetch_upstream_icon = true
@@ -66,25 +63,24 @@ version = 2.0
   [[blocks.segments]]
     type = "python"
     style = "plain"
-    powerline_symbol = "<p:separator>\ue0b1</>"
     background = "p:powerline"
     foreground = "p:text"
+    # powerline_symbol = "<p:separator>\ue0b1</>"
     display_mode = "files"
-    template = """ \
-    \ue73c {{ if .Error }}{{ .Error }}{{ else }}{{ .Full }}{{ end }}\
-    <p:separator>\ue0b1</>
+    template = """\
+    <p:separator>\ue0b1</> \
+    \ue73c {{ if .Error }}{{ .Error }}{{ else }}{{ .Full }}{{ end }} \
     """
 
   [[blocks.segments]]
     type = "executiontime"
+    style = "plain"
     background = "p:powerline"
     foreground = "p:text"
-    style = "plain"
-    # powerline_symbol = "<p:separator>\ue0b1</>"
 
-    template = """ \
+    template = """\
+    <p:separator>\ue0b1</> \
     {{ .FormattedMs }} \
-    <p:separator>\ue0b1</>
     """
 
     [blocks.segments.properties]
@@ -107,7 +103,7 @@ version = 2.0
     background = "transparent"
     foreground = "p:powerline"
     style = "plain"
-    template = "\ue0b2"
+    template = """ \ue0b2"""
     type = "text"
 
   [[blocks.segments]]
