@@ -1,13 +1,14 @@
 #!/usr/bin/bash
 
 if type "pacman" >/dev/null 2>&1; then
-	sudo pacman -Sy --noconfirm yay
-	sudo pacman -Sy --needed base-devel openssl rustup tk xz zlib
-	rustup install stable
+	sudo pacman -Sy --needed base-devel git go openssl tk xz zlib
+	git clone https://aur.archlinux.org/yay.git
+	cd yay || exit
+	makepkg -si
 	yay -Sy bat byobu chezmoi curl fd fzf git github-cli go \
 		htop jq nano neovim \
 		oh-my-posh pkg-config rye screen sheldon starship tree ttf-hackgen unarchiver unzip \
-		volta-bin wezterm wget yay zsh
+		volta-bin wezterm wget zsh
 
 	# Use chezmoi
 	chezmoi init motty-mio2
