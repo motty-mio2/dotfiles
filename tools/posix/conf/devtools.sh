@@ -54,10 +54,10 @@ install-rust() {
 	fi
 }
 
-install-cargo-tools(){
+install-cargo-tools() {
 	"$HOME/.cargo/bin/cargo" install cargo-update sccache git-ignore-generator
 }
 
-install-arch-desktop-dependency(){
+install-arch-desktop-dependency() {
 	yay -Sy fcitx5-im fcitx5-configtool fcitx5-mozc visual-studio-code-bin
 }
