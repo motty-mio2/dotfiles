@@ -17,17 +17,14 @@ version = 2.0
   type = "prompt"
 
   [[blocks.segments]]
-    type = "os"
+    type = "session"
     style = "plain"
     background = "p:powerline"
     foreground = "p:text"
     template = """ \
-    {{ .Icon }}  \
+    {{ .HostName }} \
     """
-
-    [blocks.segments.properties]
-    windows = "<cyan>\uE62A</>"
-
+  
   [[blocks.segments]]
     type = "path"
     style = "plain"
@@ -37,7 +34,7 @@ version = 2.0
     # template = " {{ .Path }} "
     template = """\
     <p:separator>\ue0b1</> \
-    <#009CD1>{{ .Parent }}</><green>{{ .Path }}</> \
+    <cyan>{{ .Parent }}</><green>{{ .Path }}</> \
     """
 
     [blocks.segments.properties]
@@ -119,17 +116,6 @@ version = 2.0
   [[blocks.segments]]
     background = "p:powerline"
     foreground = "p:text"
-    leading_diamond = "\ue0b2"
-    style = "plain"
-    type = "session"
-    template = """ \
-    {{ .UserName }}@{{ .HostName }} \
-    <p:separator>\ue0b3</>\
-    """
-
-  [[blocks.segments]]
-    background = "p:powerline"
-    foreground = "p:text"
     style = "plain"
     type = "time"
     template = """ \
@@ -143,6 +129,19 @@ version = 2.0
   alignment = "left"
   newline = true
   type = "prompt"
+
+  [[blocks.segments]]
+    type = "os"
+    style = "plain"
+    background = "transparent"
+    foreground = "p:text"
+    template = """ \
+    {{ .Icon }}  \
+    """
+
+    [blocks.segments.properties]
+    windows = "<cyan>\uE62A</>"
+
 
   [[blocks.segments]]
     background = "transparent"
