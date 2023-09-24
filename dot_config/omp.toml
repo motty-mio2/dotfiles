@@ -50,7 +50,7 @@ version = 2.0
     foreground = "p:text"
     template = """\
     <p:separator>\ue0b1</> \
-    {{ .UpstreamIcon }}{{ .HEAD }}{{ if .Staging.Changed }} \uf046 {{ .Staging.String }}{{ end }}\
+    {{ .HEAD }}{{ if .Staging.Changed }} \uf046 {{ .Staging.String }}{{ end }}\
     {{ if and (.Working.Changed) (.Staging.Changed) }} |{{ end }}\
     {{ if .Working.Changed }} \uf044 {{ .Working.String }}{{ end }} """
     [blocks.segments.properties]
