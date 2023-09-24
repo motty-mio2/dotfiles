@@ -1,5 +1,7 @@
 #!/usr/bin/zsh
 
+setopt nonomatch
+
 conf_folder="${HOME}/.local/share/chezmoi/tools/posix/conf"
 # if [ -d "$conf_folder" ]; then
 for file in "$conf_folder"/*.sh ; do
@@ -49,7 +51,6 @@ setopt hist_ignore_dups
 setopt incappendhistory
 setopt list_types
 setopt mark_dirs
-setopt nonomatch
 setopt TRANSIENT_RPROMPT
 
 HISTFILE=$ZDOTDIR/.zsh_history
