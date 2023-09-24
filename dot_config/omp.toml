@@ -50,9 +50,10 @@ version = 2.0
     foreground = "p:text"
     template = """\
     <p:separator>\ue0b1</> \
-    {{ .HEAD }}{{ if .Staging.Changed }} \uf046 {{ .Staging.String }}{{ end }}\
-    {{ if and (.Working.Changed) (.Staging.Changed) }} |{{ end }}\
-    {{ if .Working.Changed }} \uf044 {{ .Working.String }}{{ end }} """
+    {{ .HEAD }}{{if .BranchStatus }} {{ .BranchStatus }}{{ end }}\
+    {{ if .Working.Changed }} \uF044 {{ .Working.String }}{{ end }}\
+    {{ if and (.Staging.Changed) (.Working.Changed) }} |{{ end }}\
+    {{ if .Staging.Changed }} \uF046 {{ .Staging.String }}{{ end }} """
     [blocks.segments.properties]
       fetch_status = true
       fetch_upstream_icon = true
