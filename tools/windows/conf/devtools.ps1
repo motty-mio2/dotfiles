@@ -42,6 +42,10 @@ function Set-XDG-Directory {
     Set-Environemt-Value -ENV_NAME "XDG_STATE_HOME"     -ENV_VALUE "$env:USERPROFILE\.local\state"
 }
 
+function Disable-Vispaly-Venv {
+    Set-Environemt-Value -ENV_NAME "VIRTUAL_ENV_DISABLE_PROMPT" -ENV_VALUE "1"
+}
+
 function Set-Pyenv-Path {
     param (
         $PYENV_DIR = $env:USERPROFILE + "\.pyenv\pyenv-win"
