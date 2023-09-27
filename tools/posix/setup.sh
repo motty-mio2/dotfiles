@@ -7,8 +7,8 @@ if type "pacman" >/dev/null 2>&1; then
 	makepkg -si
 	yay -Sy bat byobu chezmoi curl fd fzf git github-cli go \
 		htop jq nano neovim \
-		oh-my-posh pkg-config rye screen sheldon starship tree ttf-hackgen unarchiver unzip \
-		volta-bin wezterm wget zsh
+		oh-my-posh pkg-config screen sheldon starship tree ttf-hackgen unarchiver unzip \
+		wget zsh
 
 	# Use chezmoi
 	chezmoi init motty-mio2
