@@ -9,7 +9,7 @@ if [ -d "$dot_private" ]; then
 fi
 
 private_folder="${HOME}/.config/shell/private"
-if [ -d "$private_folder/*.sh" ]; then
+if [ -d "$private_folder" ]; then
 	for file in "$private_folder"/*.sh; do
 		# shellcheck source=/dev/null
 		source "${file}"
