@@ -109,7 +109,7 @@ version = 2.0
     style = "plain"
     background = "p:powerline"
     foreground = "p:text"
-    template = " ﴱ {{.Context}}{{if .Namespace}} :: {{.Namespace}}{{end}} "
+    template = "{{if .Namespace}} {{.Namespace}}{{end}} "
 
     [properties.context_aliases]
     "arn:aws:eks:eu-west-1:1234567890:cluster/posh" = "posh"
@@ -120,7 +120,7 @@ version = 2.0
     style = "plain"
     type = "time"
     template = """ \
-    {{ .CurrentDate | date .Format }} \uf017 \
+    {{ .CurrentDate | date .Format }} \
     """
 
     [blocks.segments.properties]
