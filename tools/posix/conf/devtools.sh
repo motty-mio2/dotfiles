@@ -4,11 +4,7 @@ install-rye() {
 	RYE_HOME="$HOME/.local/share/rye"
 	export RYE_HOME="$HOME/.local/share/rye"
 
-	if type "pacman" >/dev/null 2>&1; then
-		yay -Sy rye
-	elif [ ! -d "$RYE_HOME" ]; then
-		curl -sSf https://rye-up.com/get | bash
-	fi
+    curl -sSf https://rye-up.com/get | bash
 }
 
 install-rye-tools() {
