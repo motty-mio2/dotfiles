@@ -53,12 +53,7 @@ install-homebrew-tools() {
 }
 
 install-rust() {
-	if type "pacman" >/dev/null 2>&1; then
-		yay -Sy rustup
-		rustup install stable
-	elif [ ! -d "$HOME/.cargo/bin" ]; then
-		curl https://sh.rustup.rs -sSf | sh -s -- -y
-	fi
+    curl https://sh.rustup.rs -sSf | sh -s -- -y
 }
 
 install-cargo-tools() {
