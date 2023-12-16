@@ -3,6 +3,7 @@
 	email = motty.mio2@gmail.com
 [core]
     autocrlf = input
+	filemode = false
 [fetch]
     prune = true
 [init]
@@ -16,6 +17,3 @@
 	smudge = git-lfs smudge -- %f
 	process = git-lfs filter-process
 	required = true
-
-[credential]
-	helper = wincred
