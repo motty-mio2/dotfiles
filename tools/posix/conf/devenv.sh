@@ -33,6 +33,9 @@ fi
 # svlint
 export SVLINT_CONFIG="$HOME/.config/svls/.svlint.toml"
 
+# task
+alias task=go-task
+
 # Verilog
 alias iv="iverilog"
 alias ivx="iverilog -g2012"
