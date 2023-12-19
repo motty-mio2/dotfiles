@@ -9,8 +9,7 @@ function Set-Environemt-Value {
     # current_setting が設定されていないならば
     if ($current_setting -eq $null) {
         [System.Environment]::SetEnvironmentVariable("$ENV_NAME", "$ENV_VALUE", "User")
-    }
-    elseif ($current_setting -ne $ENV_VALUE) {
+    } elseif ($current_setting -ne $ENV_VALUE) {
         # current_setting が設定されている，かつ，設定されている値が $ENV_VALUE でないならば
         # print して，ユーザにどちらを利用するか確認する
         Write-Host "1) Current Setting: $current_setting"
@@ -69,8 +68,8 @@ function Install-Rye {
 
     if (-Not(Get-Command rye -ea SilentlyContinue) ) {
         # Set Rye HOME
-        if (-not (Test-Path -Path $RYE_HOME)) {
-            New-Item -Path $RYE_HOME -ItemType Directory
+        if (-not (Test-Path "$RYE_HOME\$executableName")) {
+            New-Item -Path $RYE_HOME -ItemType Directory -Force
 
             # Install Rye
             Invoke-WebRequest -Uri $url -OutFile (Join-Path -Path $RYE_HOME -ChildPath $executableName)
@@ -97,7 +96,7 @@ function Install-Rye-Tools {
         $executableName = "rye.exe"
     )
 
-    foreach ($tool in @("poetry", "black", "flake8", "isort" , "mypy", "ruff", "pip", "hdl-checker")) {
+    foreach ($tool in @("poetry", "black", "flake8", "isort" , "mypy", "ruff")) {
         & "$RYE_ENV\$executableName" install $tool
     }
 }
@@ -139,7 +138,7 @@ function Install-Scoop-Apps {
     scoop bucket add hdl https://github.com/motty-mio2/mio2_bucket.git
 
     scoop install `
-        7zip bat chezmoi cloudflared fd fzf geekuninstaller gh git gsudonano `
+        7zip bat chezmoi cloudflared fd fzf geekuninstaller gh git gsudo nano `
         less llvm make nano neovim `
         oh-my-posh posh-git psfzf ripgrep shellcheck shfmt starship svlint svls sysinternals `
         volta wezterm wget which
