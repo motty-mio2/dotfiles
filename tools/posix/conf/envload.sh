@@ -1,17 +1,8 @@
 #!/usr/bin/env bash
 
-dot_private="${HOME}/.config/shell/dotprivate/addon"
-if [ -d "$dot_private" ]; then
-	for file in "$dot_private"/*.sh; do
+if [ -d "${HOME}/.config/shell/" ]; then
+	while read -r f; do
 		# shellcheck source=/dev/null
-		source "${file}"
-	done
-fi
-
-private_folder="${HOME}/.config/shell/private"
-if [ -d "$private_folder" ]; then
-	for file in "$private_folder"/*.sh; do
-		# shellcheck source=/dev/null
-		source "${file}"
-	done
+		source "$f"
+	done < <(find "${HOME}/.config/shell/" -type f -name "*.sh")
 fi
