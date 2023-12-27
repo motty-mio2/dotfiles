@@ -2,6 +2,10 @@
 # export DISPLAY=$(cat /etc/resolv.conf | grep nameserver | awk '{print $2}'):0
 
 if grep -q microsoft /proc/version; then
+	# WSL NVIDIA
+	export LD_LIBRARY_PATH=/usr/lib/wsl/lib:$LD_LIBRARY_PATH
+
+	# Enable SSH Agent
 	agent_binary="$HOME/.local/bin/wsl2-ssh-agent"
 	if [ ! -f "$agent_binary" ]; then
 		curl -L https://github.com/mame/wsl2-ssh-agent/releases/latest/download/wsl2-ssh-agent --output "$agent_binary"
@@ -10,6 +14,7 @@ if grep -q microsoft /proc/version; then
 
 	eval "$("$agent_binary")"
 
+	# Add open command
 	open() {
 		if [ $# != 1 ]; then
 			explorer.exe .
@@ -25,5 +30,10 @@ if grep -q microsoft /proc/version; then
 				fi
 			fi
 		fi
+	}
+
+	# Add pbcopy and pbpaste
+	pbcopy() {
+		clip.exe <"$1"
 	}
 fi
