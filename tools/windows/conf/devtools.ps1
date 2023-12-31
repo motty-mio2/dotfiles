@@ -34,6 +34,15 @@ function Set-Environemt-Path {
     }
 }
 
+function Set-ESP-IDF-Path {
+    param (
+        $ESP_IDF_PATH = $env:USERPROFILE + "\.espressif"
+    )
+
+    Set-Environemt-Value -ENV_NAME "IDF_PATH" -ENV_VALUE "$env:USERPROFILE\esp\esp-idf"
+    Set-Environemt-Value -ENV_NAME "IDF_TOOLS_PATH" -ENV_VALUE "$ESP_IDF_PATH"
+}
+
 function Set-XDG-Directory {
     Set-Environemt-Value -ENV_NAME "XDG_CONFIG_HOME"    -ENV_VALUE "$env:USERPROFILE\.config"
     Set-Environemt-Value -ENV_NAME "XDG_DATA_HOME"      -ENV_VALUE "$env:USERPROFILE\.local\share"
