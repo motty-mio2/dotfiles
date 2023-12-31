@@ -1,5 +1,13 @@
 #!/usr/bin/zsh
 
+if [ -d "$HOME/bin" ] ; then
+    PATH="$HOME/bin:$PATH"
+fi
+
+if [ -d "$HOME/.local/bin" ] ; then
+    PATH="$HOME/.local/bin:$PATH"
+fi
+
 setopt nonomatch
 
 conf_folder="${HOME}/.local/share/chezmoi/tools/posix/conf"
@@ -56,14 +64,6 @@ setopt TRANSIENT_RPROMPT
 HISTFILE=$ZDOTDIR/.zsh_history
 HISTSIZE=10000
 SAVEHIST=10000
-
-if [ -d "$HOME/bin" ] ; then
-    PATH="$HOME/bin:$PATH"
-fi
-
-if [ -d "$HOME/.local/bin" ] ; then
-    PATH="$HOME/.local/bin:$PATH"
-fi
 
 if [ -f ~/.fzf.zsh ] ; then
     if [[ ! "$PATH" == */home/linuxbrew/.linuxbrew/opt/fzf/bin* ]]; then
