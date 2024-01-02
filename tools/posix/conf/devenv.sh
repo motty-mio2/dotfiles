@@ -34,7 +34,9 @@ fi
 export SVLINT_CONFIG="$HOME/.config/svls/.svlint.toml"
 
 # task
-alias task=go-task
+if !hash task &> /dev/null && hash go-task > /dev/null; then
+	alias task=go-task
+fi
 
 # Verilog
 alias iv="iverilog"
