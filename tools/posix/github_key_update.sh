@@ -2,7 +2,6 @@
 
 add_github_ssh_keys() {
     github_username="$1"
-
     github_keys_response=$(curl -s "https://github.com/$github_username.keys")
     authorized_keys_path=~/.ssh/authorized_keys
 
