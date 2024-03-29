@@ -2,15 +2,15 @@ Set-ExecutionPolicy -ExecutionPolicy RemoteSigned -Scope CurrentUser
 Set-ExecutionPolicy RemoteSigned -Scope CurrentUser -Force
 
 powershell -NoProfile Install-Module -Name PSReadLine -Scope CurrentUser -Force
-pwsh -NoProfile Install-Module -Name PSReadLine -Scope CurrentUser -Force
+# pwsh -NoProfile Install-Module -Name PSReadLine -Scope CurrentUser -Force
 
 # Install Scoop
 Invoke-WebRequest -useb get.scoop.sh | Invoke-Expression
-scoop reset
+scoop reset *
 
-scoop alias add upgrade 'scoop update && scoop update *' 'update all'
-scoop alias add backup 'scoop export > ~\scoop.txt'
-scoop alias add reinstall "scoop uninstall {0}; scoop install {0}"
+# scoop alias add upgrade 'scoop update && scoop update *' 'update all'
+# scoop alias add backup 'scoop export > ~\scoop.txt'
+# scoop alias add reinstall "scoop uninstall {0}; scoop install {0}"
 
 sudo sc config "Audiosrv" start= auto
 
