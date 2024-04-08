@@ -5,9 +5,17 @@ clm = require("launcher").launch_menu
 local default_prog = {}
 
 if wezterm.target_triple == 'x86_64-pc-windows-msvc' then
-    default_prog = {"pwsh.exe", "-NoLogo", "-NoExit"}
+    if require("func").is_program_in_path("pwsh.exe") then
+        default_prog = {"pwsh.exe", "-NoLogo", "-NoExit"}
+    else
+        default_prog = {"powershell.exe", "-NoLogo", "-NoExit"}
+    end
 else
-    default_prog = {"/usr/bin/zsh"}
+    if require("func").is_program_in_path("zsh") then
+        default_prog = {"zsh"}
+    else
+        default_prog = {"bash"}
+    end
 end
 
 wezterm.on('window-config-reloaded', function(window, pane)
