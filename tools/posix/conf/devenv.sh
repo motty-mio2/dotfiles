@@ -57,3 +57,8 @@ alias rsmv='\rsync -avhPR --remove-source-files'
 ghf() {
 	gh repo clone "$(gh repo list -L 10000 | fzf | awk '{print $1}')"
 }
+
+mygitconfig() {
+	git config --local user.name "motty"
+	git config --local user.email "motty.mio2@gmail.com"
+}
