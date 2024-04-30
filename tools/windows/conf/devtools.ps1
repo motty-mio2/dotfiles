@@ -144,7 +144,7 @@ function Install-Scoop-Apps {
     scoop bucket add java
     scoop bucket add versions
     scoop bucket add nerd-font
-    scoop bucket add hdl https://github.com/motty-mio2/mio2_bucket.git
+    scoop bucket add motty https://github.com/motty-mio2/scoop_bucket.git
 
     scoop install `
         7zip bat chezmoi cloudflared fd fzf geekuninstaller gh git gsudo nano `
