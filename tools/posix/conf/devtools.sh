@@ -4,11 +4,11 @@ install-rye() {
 	RYE_HOME="$HOME/.local/share/rye"
 	export RYE_HOME="$HOME/.local/share/rye"
 
-    curl -sSf https://rye-up.com/get | bash
+	curl -sSf https://rye-up.com/get | bash
 }
 
 install-rye-tools() {
-	tools=("poetry" "black" "flake8" "isort" "mypy" "ruff" "pip")
+	tools=("poetry" "black" "flake8" "isort" "mypy" "ruff" "pip" "--url git+https://github.com/motty-mio2/dixp dixp")
 
 	for tool in "${tools[@]}"; do
 		"$RYE_HOME/shims/rye" install "$tool"
@@ -53,7 +53,7 @@ install-homebrew-tools() {
 }
 
 install-rust() {
-    curl https://sh.rustup.rs -sSf | sh -s -- -y
+	curl https://sh.rustup.rs -sSf | sh -s -- -y
 }
 
 install-cargo-tools() {
