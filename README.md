@@ -1,28 +1,39 @@
 # mio2's setup environments for Linux Branch
 
-## PreRequirements
-- zsh
-- curl
-- wget
-
 ## Installaion
+
+### Linux
+
+```bash
+curl https://raw.githubusercontent.com/motty-mio2/dotfiles/main/tools/posix/setup.sh | bash
 ```
-chmod +x setup.sh
-./setup.sh
+
+### Windows
+
+```powershell
+iwr https://raw.githubusercontent.com/motty-mio2/dotfiles/main/tools/windows/setup.ps1 | iex
 ```
 
-## Contains
-- zsh
-    - prezto
-    - zsh-completions
-    - zsh-autosuggestions
-- byobu
-- linuxbrew
+## Included Tools
 
-- wsl2 display support (WSL2 only)
+### Common
 
-## addon
- - ~/.config/shell
+- chezmoi
+- neovim
+- git
+- volta
+- rye
+- golang
+- cargo/rust
 
-## WSL
-- setup ssh agent on [wsl2-ssh-agent](https://github.com/mame/wsl2-ssh-agent)
+### Linux
+
+#### Package Manager
+
+- AUR (Arch Destribution)
+- brew / nixos (Other Destribution)
+
+### Windows
+
+- scoop
+- winget
