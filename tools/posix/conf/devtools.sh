@@ -8,7 +8,7 @@ install-rye() {
 }
 
 install-rye-tools() {
-	tools=("poetry" "black" "flake8" "isort" "mypy" "ruff" "pip" "hdl-checker")
+	tools=("poetry" "black" "flake8" "isort" "mypy" "ruff" "pip")
 
 	for tool in "${tools[@]}"; do
 		"$RYE_HOME/shims/rye" install "$tool"
