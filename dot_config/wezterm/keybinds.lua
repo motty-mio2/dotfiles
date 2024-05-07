@@ -1,5 +1,5 @@
 -- https://coralpink.github.io/commentary/wezterm/leader.html
-local wezterm = require 'wezterm'
+local wezterm = require("wezterm")
 local act = wezterm.action
 -- stylua: ignore start
 -- LuaFormatter off
