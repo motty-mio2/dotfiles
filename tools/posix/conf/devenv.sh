@@ -34,7 +34,7 @@ fi
 export SVLINT_CONFIG="$HOME/.config/svls/.svlint.toml"
 
 # task
-if ! hash task &>/dev/null && hash go-task >/dev/null; then
+if ! hash task &>/dev/null && hash go-task &>/dev/null; then
 	alias task=go-task
 fi
 
