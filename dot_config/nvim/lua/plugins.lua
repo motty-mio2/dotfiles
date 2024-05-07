@@ -1,11 +1,6 @@
 return {
-	{
-		"motty-mio2/mason.nvim",
-		branch = "hotfix/npm_exe",
-	},
-	{ "williamboman/mason-lspconfig.nvim" },
+	{ "nvimtools/none-ls.nvim" },
 	{ "neovim/nvim-lspconfig" },
-	{ "WhoIsSethDaniel/mason-tool-installer.nvim" },
 	{ "nvim-treesitter/nvim-treesitter" },
 	{
 		"hrsh7th/nvim-cmp",
