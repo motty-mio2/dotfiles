@@ -42,14 +42,18 @@ install-volta-tools() {
 }
 
 install-homebrew() {
-	if [ ! -d "/home/linuxbrew/" ]; then
-		/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
-	fi
+	BREW_PREFIX="$HOME/.local/share/brew"
+	export BREW_PREFIX="$HOME/.local/share/brew"
+
+	mkdir -p "$BREW_PREFIX"
+	curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh | bash -s -- --prefix="$BREW_PREFIX"
+
+	eval "$("$BREW_PREFIX/bin/brew" shellenv)"
 }
 
 install-homebrew-tools() {
-	/home/linuxbrew/.linuxbrew/bin/brew tap wez/wezterm-linuxbrew
-	/home/linuxbrew/.linuxbrew/bin/brew install bat chezmoi fd fzf gh neovim sheldon starship svls svlint tree wezterm
+	brew tap wez/wezterm-linuxbrew
+	brew install bat chezmoi fd fzf gh neovim sheldon starship svls svlint tree wezterm
 }
 
 install-rust() {

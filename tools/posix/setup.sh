@@ -47,8 +47,31 @@ else
 		echo "None"
 	fi
 
+	#!/bin/bash
+
+	echo -n "Use nix or brew [N/b]: "
+	read -r ANS
+
+	case $ANS in
+	"" | [Nn]*)
+		# Use nix pm
+		sh <(curl -L https://nixos.org/nix/install) --no-daemon
+		;;
+
+	*)
+		# Use Linux Brew
+		BREW_PREFIX="$HOME/.local/share/brew"
+		mkdir "$BREW_PREFIX"
+		curl -L https://github.com/Homebrew/brew/tarball/master | tar xz --strip-components 1 -C "$BREW_PREFIX"
+
+		eval "$("$BREW_PREFIX"/bin/brew shellenv)"
+		brew install chezmoi
+		chezmoi init motty-mio2
+		chezmoi apply -k
+		chemzoi apply -k
+
+		;;
+	esac
+
 	# Use chezmoi
-	/home/linuxbrew/.linuxbrew/bin/chezmoi init motty-mio2
-	/home/linuxbrew/.linuxbrew/bin/chezmoi apply -k
-	/home/linuxbrew/.linuxbrew/bin/chezmoi apply -k
 fi

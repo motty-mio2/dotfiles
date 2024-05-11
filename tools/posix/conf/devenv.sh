@@ -1,8 +1,8 @@
 #!/bin/bash
 
 # Brew
-if [ -d "/home/linuxbrew/" ]; then
-	eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
+if [ -d "$HOME/.local/share/brew" ]; then
+	eval "$("$HOME/.local/share/brew/bin/brew" shellenv)"
 fi
 
 # Go

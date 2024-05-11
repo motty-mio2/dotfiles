@@ -19,7 +19,6 @@ done
 eval "$(sheldon source)"
 
 fpath=("$HOME/.local/share/chezmoi/tools/posix/completions" $fpath)
-fpath=(/home/linuxbrew/.linuxbrew/share/zsh/site-functions $fpath)
 
 autoload -Uz compinit
 
@@ -64,20 +63,6 @@ setopt TRANSIENT_RPROMPT
 HISTFILE=$ZDOTDIR/.zsh_history
 HISTSIZE=10000
 SAVEHIST=10000
-
-if [ -f ~/.fzf.zsh ] ; then
-    if [[ ! "$PATH" == */home/linuxbrew/.linuxbrew/opt/fzf/bin* ]]; then
-        PATH="${PATH:+${PATH}:}/home/linuxbrew/.linuxbrew/opt/fzf/bin"
-    fi
-
-    # Auto-completion
-    # ---------------
-    [[ $- == *i* ]] && source "/home/linuxbrew/.linuxbrew/opt/fzf/shell/completion.zsh" 2> /dev/null
-
-    # Key bindings
-    # ------------
-    source "/home/linuxbrew/.linuxbrew/opt/fzf/shell/key-bindings.zsh"
-fi
 
 function select-history() {
     BUFFER=$(history -n -r 1 | fzf --no-sort +m --query "$LBUFFER" --prompt="History > ")
