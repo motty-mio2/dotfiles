@@ -4,7 +4,9 @@ array=()
 WORKDIR="$HOME/tmp"
 mapfile -t array < <(curl -s https://api.github.com/repos/yuru7/HackGen/releases/latest | grep browser_download_url | cut -d : -f 2,3 | tr -d \")
 
-mkdir "$WORKDIR"
+mkdir -p "$HOME/.fonts"
+
+mkdir -p "$WORKDIR"
 cd "$WORKDIR" || exit
 
 for i in "${array[@]}"; do
