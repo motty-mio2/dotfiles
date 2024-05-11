@@ -5,17 +5,24 @@ if [ -d "$HOME/.local/share/brew" ]; then
 	eval "$("$HOME/.local/share/brew/bin/brew" shellenv)"
 fi
 
+# nix
+if [ -d "$HOME/.nix-profile" ]; then
+	source "$HOME/.nix-profile/etc/profile.d/nix.sh"
+fi
+
 # Go
 if [ -d "$HOME/go/bin" ]; then
 	export PATH="$HOME/go/bin:$PATH"
 fi
 
 # Pyenv
-export PYENV_ROOT="$HOME/.pyenv"
-export PATH="$PYENV_ROOT/bin:$PATH"
-if which "pyenv" >/dev/null 2>&1; then
-	eval "$(pyenv init --path)"
-	eval "$(pyenv init -)"
+if [ -d "$HOME/.pyenv" ]; then
+    export PYENV_ROOT="$HOME/.pyenv"
+    export PATH="$PYENV_ROOT/bin:$PATH"
+    if which "pyenv" >/dev/null 2>&1; then
+        eval "$(pyenv init --path)"
+        eval "$(pyenv init -)"
+    fi
 fi
 
 # Rust
@@ -47,8 +54,10 @@ alias iv="iverilog"
 alias ivx="iverilog -g2012"
 
 # Volta
-export VOLTA_HOME="$HOME/.local/share/volta"
-export PATH="$VOLTA_HOME/bin:$PATH"
+if [ -d "$HOME/.local/share/volta" ]; then
+    export VOLTA_HOME="$HOME/.local/share/volta"
+    export PATH="$VOLTA_HOME/bin:$PATH"
+fi
 
 # Others
 alias doc='docker compose'
