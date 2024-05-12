@@ -26,7 +26,7 @@
             }
         ],
         "target_uinput": "keyboard",
-        "output_symbol": "KEY_DOWN",
+        "output_symbol": "KEY_LEFT",
         "mapping_type": "key_macro"
     },
     {
