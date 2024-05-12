@@ -78,6 +78,7 @@ bindkey '^r' select-history
 bindkey "^[[1~" beginning-of-line
 bindkey "^[[4~" end-of-line
 
+eval `ssh-agent -s`
 
 {{ if (eq .zsh "starship") }}
 eval "$(starship init zsh)"
