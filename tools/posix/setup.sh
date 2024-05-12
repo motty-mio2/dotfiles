@@ -1,11 +1,11 @@
 #!/usr/bin/bash
 
 if type "pacman" >/dev/null 2>&1; then
-	sudo pacman -Sy --needed base-devel git go openssl tk xz zlib
+	sudo pacman -Sy --noconfirm --needed base-devel git go openssl tk xz zlib
 	git clone https://aur.archlinux.org/yay.git
 	cd yay || exit
 	makepkg -si
-	yay -Sy bat byobu chezmoi curl fd fzf git github-cli go \
+	yay -Sy --noconfirm bat byobu chezmoi curl fd fzf git github-cli go \
 		htop jq nano neovim \
 		oh-my-posh pkg-config screen sheldon starship tree ttf-hackgen unarchiver unzip \
 		wget zsh
