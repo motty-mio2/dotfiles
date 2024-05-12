@@ -8,9 +8,9 @@ tools
 {{ if eq .chezmoi.os "windows" }}
     .bashrc
     .zshenv
-    .zlogout
-    .p10k.zsh
+    .config/input-remapper-2
     .config/sheldon
+    .config/zsh
 {{ end }}
 
 {{ if ne .chezmoi.os "windows" }}
