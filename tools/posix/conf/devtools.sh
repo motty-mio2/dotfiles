@@ -1,7 +1,6 @@
 #!/usr/bin/env bash
 
 install-rye() {
-	RYE_HOME="$HOME/.local/share/rye"
 	export RYE_HOME="$HOME/.local/share/rye"
 
 	curl -sSf https://rye-up.com/get | bash
@@ -18,22 +17,13 @@ install-rye-tools() {
 install-volta() {
 	export VOLTA_HOME="$HOME/.local/share/volta"
 
-	if type "pacman" >/dev/null 2>&1; then
-		yay -Sy volta-bin
-	elif [ ! -d "$VOLTA_HOME" ]; then
-		curl https://get.volta.sh | bash
-
-	fi
+    curl https://get.volta.sh | bash
 }
 
 install-volta-tools() {
 	export VOLTA_HOME="$HOME/.local/share/volta"
 
-	if type "pacman" >/dev/null 2>&1; then
-		/usr/sbin/volta install node@lts
-	else
-		"$VOLTA_HOME/bin/volta" install node@lts
-	fi
+	"$VOLTA_HOME/bin/volta" install node@lts
 
 	tools=("@bitwarden/cli" "neovim")
 	for tool in "${tools[@]}"; do
