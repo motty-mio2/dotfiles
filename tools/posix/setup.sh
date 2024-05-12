@@ -4,7 +4,7 @@ if type "pacman" >/dev/null 2>&1; then
 	sudo pacman -Sy --noconfirm --needed base-devel git go openssl tk xz zlib
 	git clone https://aur.archlinux.org/yay.git
 	cd yay || exit
-	makepkg -si
+	makepkg --noconfirm -si
 	yay -Sy --noconfirm bat byobu chezmoi curl fd fzf git github-cli go \
 		htop jq nano neovim \
 		oh-my-posh pkg-config screen sheldon starship tree ttf-hackgen unarchiver unzip \
