@@ -12,7 +12,13 @@ return {
 			"hrsh7th/cmp-nvim-lua",
 		},
 	},
-	{ "sainnhe/everforest" },
+	{
+		"neanias/everforest-nvim",
+		priority = 1000,
+		config = function()
+			require("everforest").setup()
+		end,
+	},
 	{
 		"nvim-telescope/telescope.nvim",
 		dependencies = { "nvim-lua/plenary.nvim" },
@@ -20,11 +26,5 @@ return {
 	{
 		"nvim-neo-tree/neo-tree.nvim",
 		dependencies = { "nvim-lua/plenary.nvim", "kyazdani42/nvim-web-devicons", "MunifTanjim/nui.nvim" },
-	},
-	{
-		"LazyVim/LazyVim",
-		opts = {
-			colorscheme = "everforest",
-		},
 	},
 }
