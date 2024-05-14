@@ -105,9 +105,13 @@ function Install-Rye-Tools {
         $executableName = "rye.exe"
     )
 
-    foreach ($tool in @("poetry", "black", "flake8", "isort" , "mypy", "ruff", "--url git+https://github.com/motty-mio2/dixp dixp")) {
+    foreach ($tool in @("poetry", "black", "flake8", "isort" , "mypy", "ruff")) {
+        & "$RYE_ENV\$executableName" uninstall $tool
         & "$RYE_ENV\$executableName" install $tool
     }
+
+    "$RYE_ENV\$executableName" uninstall dixp
+    "$RYE_ENV\$executableName" install --url git+https://github.com/motty-mio2/dixp dixp
 }
 
 function Install-Volta-Tools {
