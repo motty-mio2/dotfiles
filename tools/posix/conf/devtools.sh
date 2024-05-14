@@ -7,11 +7,15 @@ install-rye() {
 }
 
 install-rye-tools() {
-	tools=("poetry" "black" "flake8" "isort" "mypy" "ruff" "pip" "--url git+https://github.com/motty-mio2/dixp dixp")
+	tools=("poetry" "black" "flake8" "isort" "mypy" "ruff")
 
 	for tool in "${tools[@]}"; do
+        "$RYE_HOME/shims/rye" uninstall "$tool"
 		"$RYE_HOME/shims/rye" install "$tool"
 	done
+
+    "$RYE_HOME/shims/rye" uninstall "dixp"
+    "$RYE_HOME/shims/rye" install --url git+https://github.com/motty-mio2/dixp.git dixp
 }
 
 install-volta() {
