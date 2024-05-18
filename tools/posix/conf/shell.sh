@@ -90,4 +90,9 @@ set-window-title() {
 	echo -ne "\033]0; $title \007"
 }
 
+set-dialout() {
+    sudo usermod -aG dialout $USER
+}
+
 set-window-title
+
