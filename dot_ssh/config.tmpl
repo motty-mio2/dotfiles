@@ -1,5 +1,14 @@
 Include ~/.ssh/config.d/*.conf
 
+Match User *,!git
+    ForwardAgent yes
+    ForwardX11 yes
+    ForwardX11Trusted yes
+    TCPKeepAlive yes
+
+Match User git
+    RequestTTY no
+
 {{ if glob ( joinPath .chezmoi.homeDir "/.ssh/id_ed25519" ) }}
 Host *
     IdentitiesOnly yes
