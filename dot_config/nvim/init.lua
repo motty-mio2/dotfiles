@@ -13,9 +13,15 @@ vim.opt.rtp:prepend(lazypath)
 
 plugins = require("plugins")
 
-require("lazy").setup(plugins)
+require("lazy").setup({
+	spec = {
+		{ import = "plugins" },
+	},
+})
 
-require("option")
+require("completion")
+require("keymap")
 require("lsp")
-require("treesitter")
 require("neotree")
+require("option")
+require("treesitter")
