@@ -17,12 +17,12 @@ fi
 
 # Pyenv
 if [ -d "$HOME/.pyenv" ]; then
-    export PYENV_ROOT="$HOME/.pyenv"
-    export PATH="$PYENV_ROOT/bin:$PATH"
-    if which "pyenv" >/dev/null 2>&1; then
-        eval "$(pyenv init --path)"
-        eval "$(pyenv init -)"
-    fi
+	export PYENV_ROOT="$HOME/.pyenv"
+	export PATH="$PYENV_ROOT/bin:$PATH"
+	if which "pyenv" >/dev/null 2>&1; then
+		eval "$(pyenv init --path)"
+		eval "$(pyenv init -)"
+	fi
 fi
 
 # Rust
@@ -32,7 +32,7 @@ fi
 
 # Rye
 export RYE_HOME="$HOME/.local/share/rye"
-if [ -d "$RYE_HOME" ]; then
+if [ -e "$RYE_HOME/env" ]; then
 	# shellcheck source=/dev/null
 	source "$RYE_HOME/env"
 fi
@@ -55,8 +55,8 @@ alias ivx="iverilog -g2012"
 
 # Volta
 if [ -d "$HOME/.local/share/volta" ]; then
-    export VOLTA_HOME="$HOME/.local/share/volta"
-    export PATH="$VOLTA_HOME/bin:$PATH"
+	export VOLTA_HOME="$HOME/.local/share/volta"
+	export PATH="$VOLTA_HOME/bin:$PATH"
 fi
 
 # Others
