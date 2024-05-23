@@ -1,4 +1,5 @@
 return {
+	{ "nvimtools/none-ls-extras.nvim",dependencies = { "nvimtools/none-ls.nvim" }},
 	{ "nvimtools/none-ls.nvim", dependencies = { "nvim-lua/plenary.nvim" }, config = true },
 	{ "neovim/nvim-lspconfig" },
 	{ "nvim-treesitter/nvim-treesitter" },
@@ -36,7 +37,17 @@ return {
 		"folke/lazy.nvim",
 	},
 	{
-		"j-hui/fidget.nvim",
+		"folke/noice.nvim",
+		dependencies = {
+			"rcarriga/nvim-notify",
+			"MunifTanjim/nui.nvim",
+			"nvim-treesitter/nvim-treesitter",
+		},
+		event = "VeryLazy",
+		opts = {},
+		config = function()
+			require("noice").setup({})
+		end,
 	},
 	{
 		"numToStr/Comment.nvim",

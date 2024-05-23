@@ -24,5 +24,13 @@ null_ls.setup({
 		null_ls.builtins.formatting.verible_verilog_format,
 		null_ls.builtins.formatting.yapf,
 		null_ls.builtins.hover.dictionary,
+
+		-- nonels-extras
+		null_ls.builtins.diagnostics.flake8,
+		null_ls.builtins.diagnostics.ruff,
+		null_ls.builtins.diagnostics.yamllint,
+		null_ls.builtins.formatting.jq,
+		null_ls.builtins.formatting.ruff,
+		null_ls.builtins.formatting.ruff_format,
 	},
 })
