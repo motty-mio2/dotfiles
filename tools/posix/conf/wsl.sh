@@ -32,8 +32,8 @@ if grep -q microsoft /proc/version; then
 		fi
 	}
 
-	# Add pbcopy and pbpaste
-	pbcopy() {
-		clip.exe <"$1"
-	}
+    paste() {
+        powershell.exe -command "[Console]::OutputEncoding = [System.Text.Encoding]::GetEncoding('utf-8');Get-Clipboard"
+    }
+
 fi
