@@ -248,3 +248,8 @@ function envup {
     rustup update
     cargo install-update --all
 }
+
+function paste {
+    powershell.exe -command "[Console]::OutputEncoding = [System.Text.Encoding]::GetEncoding('utf-8');Get-Clipboard"
+}
+
