@@ -28,7 +28,6 @@ try {
 } finally {
     Set-PSFzfOption -PSReadlineChordProvider 'Ctrl+t'
     Set-PSFzfOption -PSReadlineChordReverseHistory 'Ctrl+r'
-    Set-PSReadLineKeyHandler -Key Tab -ScriptBlock { Invoke-FzfTabCompletion }
 }
 
 
