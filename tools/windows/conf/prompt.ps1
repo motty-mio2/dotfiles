@@ -1,18 +1,35 @@
-Import-Module PSReadLine
-Import-Module (Join-Path $HOME "\scoop\modules\posh-git")
+try {
+    Import-Module PSReadLine
+} catch {
+    scoop install PSReadLine
+    Import-Module PSReadLine
+} finally {
+    Set-PSReadLineKeyHandler -Key Tab -Function MenuComplete
+    Set-PSReadlineKeyHandler -Key ctrl+d -Function DeleteCharOrExit
+    Set-PSReadLineOption -PredictionViewStyle InlineView
 
-Set-PSReadLineKeyHandler -Key Tab -Function MenuComplete
-Set-PSReadlineKeyHandler -Key ctrl+d -Function DeleteCharOrExit
-
-Set-PSReadLineOption -PredictionViewStyle InlineView
-
-Set-PSReadLineOption -Colors @{
-    "Parameter" = [ConsoleColor]::Cyan
+    Set-PSReadLineOption -Colors @{
+        "Parameter" = [ConsoleColor]::Cyan
+    }
 }
 
-#Set-PsFzfOption -PSReadlineChordProvider 'Ctrl+t'
-#Set-PsFzfOption -PSReadlineChordReverseHistory 'Ctrl+r'
-#Set-PSReadLineKeyHandler -Key Tab -ScriptBlock { Invoke-FzfTabCompletion }
+try {
+    Import-Module posh-git
+} catch {
+    scoop install posh-git
+    Import-Module posh-git
+}
+
+try {
+    Import-Module PSFzf
+} catch {
+    scoop install PSFzf
+    Import-Module PSFzf
+} finally {
+    Set-PSFzfOption -PSReadlineChordProvider 'Ctrl+t'
+    Set-PSFzfOption -PSReadlineChordReverseHistory 'Ctrl+r'
+    Set-PSReadLineKeyHandler -Key Tab -ScriptBlock { Invoke-FzfTabCompletion }
+}
 
 
 Register-ArgumentCompleter -Native -CommandName winget -ScriptBlock {

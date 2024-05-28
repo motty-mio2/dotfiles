@@ -1,9 +1,6 @@
 Set-ExecutionPolicy -ExecutionPolicy RemoteSigned -Scope CurrentUser
 Set-ExecutionPolicy RemoteSigned -Scope CurrentUser -Force
 
-powershell -NoProfile Install-Module -Name PSReadLine -Scope CurrentUser -Force
-# pwsh -NoProfile Install-Module -Name PSReadLine -Scope CurrentUser -Force
-
 # Install Scoop
 Invoke-WebRequest -useb get.scoop.sh | Invoke-Expression
 scoop reset *
