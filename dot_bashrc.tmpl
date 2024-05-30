@@ -118,6 +118,8 @@ if ! shopt -oq posix; then
     fi
 fi
 
+source "${HOME}/.config/completions/bash/*"
+
 conf_folder="${HOME}/.local/share/chezmoi/tools/posix/conf"
 # if [ -d "$conf_folder" ]; then
 for file in "$conf_folder"/*.sh ; do
