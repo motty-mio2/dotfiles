@@ -15,8 +15,6 @@ alias rmrf='rm -rf'
 alias watch="watch "
 
 export PIPENV_VENV_IN_PROJECT=1
-export LIBGL_ALWAYS_INDIRECT=1
-export CUBLAS_WORKSPACE_CONFIG=:16:8
 
 export EDITOR=nvim
 
