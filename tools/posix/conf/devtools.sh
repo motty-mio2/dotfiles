@@ -29,7 +29,7 @@ install-volta-tools() {
 
 	"$VOLTA_HOME/bin/volta" install node@lts
 
-	tools=("@bitwarden/cli" "neovim")
+	tools=("@bitwarden/cli" "neovim" "pyright" "bash-language-server")
 	for tool in "${tools[@]}"; do
 		"$VOLTA_HOME/bin/npm" install -g "$tool"
 	done
@@ -61,3 +61,4 @@ install-cargo-tools() {
 install-arch-desktop-dependency() {
 	yay -Sy fcitx5-im fcitx5-configtool fcitx5-mozc visual-studio-code-bin
 }
+
