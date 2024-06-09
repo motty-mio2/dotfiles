@@ -70,7 +70,7 @@ function Set-Pyenv-Path {
 
 function Install-Rye {
     param (
-        $url = "https://github.com/mitsuhiko/rye/releases/latest/download/rye-x86_64-windows.exe",
+        $url = "https://github.com/astral-sh/rye/releases/latest/download/rye-x86_64-windows.exe",
         $RYE_HOME = "$env:USERPROFILE\.local\share\rye",
         $executableName = "rye.exe"
     )
