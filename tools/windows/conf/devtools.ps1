@@ -121,7 +121,7 @@ function Install-Volta-Tools {
 
     & "$VOLTA_HOME\bin\volta" install node@lts
 
-    foreach ($tool in @( "@bitwarden/cli", "neovim")) {
+    foreach ($tool in @( "@bitwarden/cli", "neovim", "pyright", "bash-language-server", "tree-sitter-cli")) {
         & "$VOLTA_HOME\bin\volta" install $tool
     }
 }
