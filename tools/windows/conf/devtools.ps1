@@ -116,22 +116,13 @@ function Install-Rye-Tools {
 
 function Install-Volta-Tools {
     param (
-        $volta = "volta"
+        $VOLTA_HOME = "$env:USERPROFILE\.local\share\volta"
     )
 
-    $volta_tools = (& volta list)
+    & "$VOLTA_HOME\bin\volta" install node@lts
 
-    if ( -Not ($volta_tools -like ("*node*") )) {
-        & "$volta" install node@lts
-    }
-
-    foreach ($tool in @(("bw", "@bitwarden/cli"), ("neovim-node-host", "neovim"))) {
-        $toolName = $tool[0]
-        $package = $tool[1]
-
-        if ( -Not ($volta_tools -like ("*$toolName*") )) {
-            & npm install -g $package
-        }
+    foreach ($tool in @( "@bitwarden/cli", "neovim")) {
+        & "$VOLTA_HOME\bin\volta" install $tool
     }
 }
 
