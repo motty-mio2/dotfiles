@@ -6,8 +6,10 @@ if [ -d "$HOME/.local/share/brew" ]; then
 fi
 
 # nix
-if [ -d "$HOME/.nix-profile" ]; then
+if [ -d "$HOME/.nix-profile/etc" ]; then
 	source "$HOME/.nix-profile/etc/profile.d/nix.sh"
+elif [ -d "/nix/var/nix/profiles/default/etc" ]; then
+	source "/nix/var/nix/profiles/default/etc/profile.d/nix.sh"
 fi
 
 # Go
