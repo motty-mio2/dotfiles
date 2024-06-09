@@ -17,6 +17,17 @@ if wezterm.target_triple == "x86_64-pc-windows-msvc" then
 		label = "Command Prompt",
 		args = { "cmd.exe" },
 	})
+else
+	if os.execute("zsh --version") then
+		table.insert(launch_menu, {
+			label = "Zsh",
+			args = { "zsh" },
+		})
+	end
+	table.insert(launch_menu, {
+		label = "Bash",
+		args = { "bash" },
+	})
 end
 
 return {
