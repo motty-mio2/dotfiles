@@ -31,7 +31,7 @@ install-volta-tools() {
 
 	tools=("@bitwarden/cli" "neovim" "pyright" "bash-language-server")
 	for tool in "${tools[@]}"; do
-		"$VOLTA_HOME/bin/npm" install -g "$tool"
+		"$VOLTA_HOME/bin/volta" install "$tool"
 	done
 }
 
