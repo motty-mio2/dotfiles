@@ -145,7 +145,7 @@ function Install-Scoop-Apps {
         7zip bat chezmoi cloudflared fd fzf geekuninstaller gh git gsudo nano `
         less llvm make nano neovim `
         oh-my-posh posh-git psfzf ripgrep shellcheck shfmt starship svlint svls sysinternals `
-        volta wezterm wget which
+        verible wezterm wget which
 }
 
 function Install-Cargo-Tools() {
