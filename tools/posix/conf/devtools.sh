@@ -3,7 +3,7 @@
 install-rye() {
 	export RYE_HOME="$HOME/.local/share/rye"
 
-	curl -sSf https://rye-up.com/get | bash
+	curl -sSf https://rye.astral.sh/get | bash
 }
 
 install-rye-tools() {
