@@ -89,8 +89,7 @@ set-window-title() {
 }
 
 set-dialout() {
-    sudo usermod -aG dialout $USER
+	sudo usermod -aG dialout $USER
 }
 
 set-window-title
-

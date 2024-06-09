@@ -10,18 +10,18 @@ install-rye-tools() {
 	tools=("poetry" "black" "flake8" "isort" "mypy" "ruff")
 
 	for tool in "${tools[@]}"; do
-        "$RYE_HOME/shims/rye" uninstall "$tool"
+		"$RYE_HOME/shims/rye" uninstall "$tool"
 		"$RYE_HOME/shims/rye" install "$tool"
 	done
 
-    "$RYE_HOME/shims/rye" uninstall "dixp"
-    "$RYE_HOME/shims/rye" install --url git+https://github.com/motty-mio2/dixp.git dixp
+	"$RYE_HOME/shims/rye" uninstall "dixp"
+	"$RYE_HOME/shims/rye" install --url git+https://github.com/motty-mio2/dixp.git dixp
 }
 
 install-volta() {
 	export VOLTA_HOME="$HOME/.local/share/volta"
 
-    curl https://get.volta.sh | bash
+	curl https://get.volta.sh | bash
 }
 
 install-volta-tools() {
@@ -61,4 +61,3 @@ install-cargo-tools() {
 install-arch-desktop-dependency() {
 	yay -Sy fcitx5-im fcitx5-configtool fcitx5-mozc visual-studio-code-bin
 }
-
