@@ -29,9 +29,9 @@ install-volta-tools() {
 
 	"$VOLTA_HOME/bin/volta" install node@lts
 
-	tools=("@bitwarden/cli" "neovim" "pyright" "bash-language-server")
+	tools=("@bitwarden/cli" "neovim" "pyright" "bash-language-server" "tree-sitter-cli")
 	for tool in "${tools[@]}"; do
-		"$VOLTA_HOME/bin/npm" install -g "$tool"
+		"$VOLTA_HOME/bin/volta" install "$tool"
 	done
 }
 
@@ -60,4 +60,12 @@ install-cargo-tools() {
 
 install-arch-desktop-dependency() {
 	yay -Sy fcitx5-im fcitx5-configtool fcitx5-mozc visual-studio-code-bin
+}
+
+install-nix-tools() {
+	nix-env -i \
+		arduino-language-server bat chezmoi fd \
+		neovim \
+		oh-my-posh ripgrep sheldon shellcheck shfmt stylua starship svls svlint \
+		verible
 }
