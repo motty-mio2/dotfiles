@@ -116,22 +116,13 @@ function Install-Rye-Tools {
 
 function Install-Volta-Tools {
     param (
-        $volta = "volta"
+        $VOLTA_HOME = "$env:USERPROFILE\.local\share\volta"
     )
 
-    $volta_tools = (& volta list)
+    & "$VOLTA_HOME\bin\volta" install node@lts
 
-    if ( -Not ($volta_tools -like ("*node*") )) {
-        & "$volta" install node@lts
-    }
-
-    foreach ($tool in @(("bw", "@bitwarden/cli"), ("neovim-node-host", "neovim"))) {
-        $toolName = $tool[0]
-        $package = $tool[1]
-
-        if ( -Not ($volta_tools -like ("*$toolName*") )) {
-            & npm install -g $package
-        }
+    foreach ($tool in @( "@bitwarden/cli", "neovim", "pyright", "bash-language-server", "tree-sitter-cli")) {
+        & "$VOLTA_HOME\bin\volta" install $tool
     }
 }
 
@@ -154,7 +145,7 @@ function Install-Scoop-Apps {
         7zip bat chezmoi cloudflared fd fzf geekuninstaller gh git gsudo nano `
         less llvm make nano neovim `
         oh-my-posh posh-git psfzf ripgrep shellcheck shfmt starship svlint svls sysinternals `
-        volta wezterm wget which
+        verible wezterm wget which
 }
 
 function Install-Cargo-Tools() {
