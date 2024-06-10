@@ -65,7 +65,7 @@ install-arch-desktop-dependency() {
 install-nix-tools() {
 	nix-env -i \
 		arduino-language-server bat chezmoi fd \
-		neovim \
+		lazygit neovim \
 		oh-my-posh ripgrep sheldon shellcheck shfmt stylua starship svls svlint \
 		verible
 }
