@@ -24,6 +24,7 @@ array=(
     "$PYENV_ROOT/bin"
     "$HOME/.cargo/bin"
     "$VOLTA_HOME/bin"
+    "$RYE_HOME/shims"
 )
 
 for item in "${array[@]}"; do
@@ -33,7 +34,6 @@ for item in "${array[@]}"; do
 done
 
 array=(
-    "$RYE_HOME/env"
     "$HOME/.nix-profile/etc/profile.d/nix.sh"
     "/nix/var/nix/profiles/default/etc/profile.d/nix.sh"
 )
