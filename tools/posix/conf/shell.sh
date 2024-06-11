@@ -8,6 +8,12 @@ alias zupdate='sudo zypper ref && sudo zypper update -y'
 alias ls="ls --color=auto"
 alias ll='ls -lahF'
 alias lh='ls -ldF .*'
+alias la='ls -A'
+alias l='ls -CF'
+
+alias grep='grep --color=auto'
+alias fgrep='fgrep --color=auto'
+alias egrep='egrep --color=auto'
 
 alias rmrf='rm -rf'
 alias watch="watch "
