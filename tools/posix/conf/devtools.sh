@@ -1,8 +1,6 @@
 #!/usr/bin/env bash
 
 install-rye() {
-	export RYE_HOME="$HOME/.local/share/rye"
-
 	curl -sSf https://rye.astral.sh/get | bash
 }
 
@@ -19,14 +17,10 @@ install-rye-tools() {
 }
 
 install-volta() {
-	export VOLTA_HOME="$HOME/.local/share/volta"
-
 	curl https://get.volta.sh | bash
 }
 
 install-volta-tools() {
-	export VOLTA_HOME="$HOME/.local/share/volta"
-
 	"$VOLTA_HOME/bin/volta" install node@lts
 
 	tools=("@bitwarden/cli" "neovim" "pyright" "bash-language-server" "tree-sitter-cli")
@@ -36,9 +30,6 @@ install-volta-tools() {
 }
 
 install-homebrew() {
-	BREW_PREFIX="$HOME/.local/share/brew"
-	export BREW_PREFIX="$HOME/.local/share/brew"
-
 	mkdir -p "$BREW_PREFIX"
 	curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh | bash -s -- --prefix="$BREW_PREFIX"
 
