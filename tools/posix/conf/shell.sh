@@ -1,7 +1,5 @@
 #!/usr/bin/env bash
 
-export XDG_CONFIG_HOME="$HOME/.config"
-
 alias aupdate='sudo apt update && sudo apt upgrade -y && sudo apt autoremove -y'
 alias bupdate='brew update && brew upgrade'
 alias dupdate='sudo dnf update -y'
@@ -13,10 +11,6 @@ alias lh='ls -ldF .*'
 
 alias rmrf='rm -rf'
 alias watch="watch "
-
-export PIPENV_VENV_IN_PROJECT=1
-
-export EDITOR=nvim
 
 rmemp() {
 	local target_directory="$1"
@@ -86,10 +80,6 @@ set-window-title() {
 		title=${USER}@${HOST}
 	fi
 	echo -ne "\033]0; $title \007"
-}
-
-set-dialout() {
-	sudo usermod -aG dialout $USER
 }
 
 set-window-title

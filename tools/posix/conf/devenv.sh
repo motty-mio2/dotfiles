@@ -5,36 +5,12 @@ if [ -d "$BREW_PREFIX" ]; then
 	eval "$("$BREW_PREFIX/bin/brew" shellenv)"
 fi
 
-# nix
-if [ -d "$HOME/.nix-profile/etc" ]; then
-	source "$HOME/.nix-profile/etc/profile.d/nix.sh"
-elif [ -d "/nix/var/nix/profiles/default/etc" ]; then
-	source "/nix/var/nix/profiles/default/etc/profile.d/nix.sh"
-fi
-
-# Go
-if [ -d "$HOME/go/bin" ]; then
-	export PATH="$HOME/go/bin:$PATH"
-fi
-
 # Pyenv
 if [ -d "$PYENV_ROOT" ]; then
-	export PATH="$PYENV_ROOT/bin:$PATH"
 	if which "pyenv" >/dev/null 2>&1; then
 		eval "$(pyenv init --path)"
 		eval "$(pyenv init -)"
 	fi
-fi
-
-# Rust
-if [ -d "$HOME/.cargo/bin" ]; then
-	export PATH="$HOME/.cargo/bin:$PATH"
-fi
-
-# Rye
-if [ -e "$RYE_HOME/env" ]; then
-	# shellcheck source=/dev/null
-	source "$RYE_HOME/env"
 fi
 
 # task
@@ -49,11 +25,6 @@ alias ivx="iverilog -g2012"
 # Verilog
 alias iv="iverilog"
 alias ivx="iverilog -g2012"
-
-# Volta
-if [ -d "$VOLTA_HOME" ]; then
-	export PATH="$VOLTA_HOME/bin:$PATH"
-fi
 
 # Others
 alias doc='docker compose'

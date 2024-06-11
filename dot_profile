@@ -1,14 +1,46 @@
-#!/usr/bin/sh
+#!/usr/bin/bash
 
-# devenv
-
+# Environment Variables
+## devenv
 export PIPENV_VENV_IN_PROJECT=1
 export PYENV_ROOT="$HOME/.pyenv"
 export RYE_HOME="$HOME/.local/share/rye"
 export SVLINT_CONFIG="$HOME/.config/svls/.svlint.toml"
 export VOLTA_HOME="$HOME/.local/share/volta"
 
-# shell env
+## shell env
 export BREW_PREFIX="$HOME/.local/share/brew"
 export EDITOR=nvim
 export XDG_CONFIG_HOME="$HOME/.config"
+
+#PATH
+
+## Devtools
+
+array=(
+    "$HOME/bin"
+    "$HOME/.local/bin"
+    "$HOME/go/bin"
+    "$PYENV_ROOT/bin"
+    "$HOME/.cargo/bin"
+    "$VOLTA_HOME/bin"
+)
+
+for item in "${array[@]}"; do
+    if [ -d "$item" ] && [[ ":$PATH:" != *":$item:"* ]]; then
+        export PATH="$PATH:$item"
+    fi
+done
+
+array=(
+    "$RYE_HOME/env"
+    "$HOME/.nix-profile/etc/profile.d/nix.sh"
+    "/nix/var/nix/profiles/default/etc/profile.d/nix.sh"
+)
+
+for item in "${array[@]}"; do
+    if [ -d "$item" ]; then
+        #shellcheck source=/dev/null
+        source "$item"
+    fi
+done
