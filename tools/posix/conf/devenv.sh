@@ -1,8 +1,8 @@
 #!/bin/bash
 
 # Brew
-if [ -d "$HOME/.local/share/brew" ]; then
-	eval "$("$HOME/.local/share/brew/bin/brew" shellenv)"
+if [ -d "$BREW_PREFIX" ]; then
+	eval "$("$BREW_PREFIX/bin/brew" shellenv)"
 fi
 
 # nix
@@ -18,8 +18,7 @@ if [ -d "$HOME/go/bin" ]; then
 fi
 
 # Pyenv
-if [ -d "$HOME/.pyenv" ]; then
-	export PYENV_ROOT="$HOME/.pyenv"
+if [ -d "$PYENV_ROOT" ]; then
 	export PATH="$PYENV_ROOT/bin:$PATH"
 	if which "pyenv" >/dev/null 2>&1; then
 		eval "$(pyenv init --path)"
@@ -33,14 +32,10 @@ if [ -d "$HOME/.cargo/bin" ]; then
 fi
 
 # Rye
-export RYE_HOME="$HOME/.local/share/rye"
 if [ -e "$RYE_HOME/env" ]; then
 	# shellcheck source=/dev/null
 	source "$RYE_HOME/env"
 fi
-
-# svlint
-export SVLINT_CONFIG="$HOME/.config/svls/.svlint.toml"
 
 # task
 if ! hash task &>/dev/null && hash go-task &>/dev/null; then
@@ -56,8 +51,7 @@ alias iv="iverilog"
 alias ivx="iverilog -g2012"
 
 # Volta
-if [ -d "$HOME/.local/share/volta" ]; then
-	export VOLTA_HOME="$HOME/.local/share/volta"
+if [ -d "$VOLTA_HOME" ]; then
 	export PATH="$VOLTA_HOME/bin:$PATH"
 fi
 
