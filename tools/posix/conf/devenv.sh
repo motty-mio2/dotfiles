@@ -7,8 +7,10 @@ fi
 
 # nix
 if [ -d "$HOME/.nix-profile/etc" ]; then
+	# shellcheck source=/dev/null
 	source "$HOME/.nix-profile/etc/profile.d/nix.sh"
 elif [ -d "/nix/var/nix/profiles/default/etc" ]; then
+	# shellcheck source=/dev/null
 	source "/nix/var/nix/profiles/default/etc/profile.d/nix.sh"
 fi
 
