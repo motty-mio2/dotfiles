@@ -6,7 +6,7 @@ local default_prog = {}
 
 if wezterm.target_triple == "x86_64-pc-windows-msvc" then
 	if os.execute("pwsh.exe -Version") then
-		default_prog = { "pwsh.exe", "-NoLogo", "-NoExit" }
+		default_prog = { "pwsh.exe", "-NoLogo", "-NoExit" , "-WorkingDirectory" , "~" }
 	else
 		default_prog = { "powershell.exe", "-NoLogo", "-NoExit" }
 	end
