@@ -3,6 +3,9 @@
 alias aupdate='sudo apt update && sudo apt upgrade -y && sudo apt autoremove -y'
 alias bupdate='brew update && brew upgrade'
 alias dupdate='sudo dnf update -y'
+alias nupdate='nix-env --upgrade'
+alias pupdate='sudo pacman -Syu'
+alias yupdate='sudo yay -Syu'
 alias zupdate='sudo zypper ref && sudo zypper update -y'
 
 alias ls="ls --color=auto"
