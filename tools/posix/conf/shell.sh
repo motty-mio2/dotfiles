@@ -82,6 +82,19 @@ png2webp() {
 	fi
 }
 
+bwx() {
+	output=$(bw unlock)
+
+	echo "$output" | while IFS= read -r line; do
+		case "$line" in
+		\$\ *)
+			eval "${line#\$ }"
+			break
+			;;
+		esac
+	done
+}
+
 set-window-title() {
 	local title="$1"
 
