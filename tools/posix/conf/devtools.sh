@@ -1,8 +1,44 @@
 #!/usr/bin/env bash
 
-install-rye() {
-	export RYE_HOME="$HOME/.local/share/rye"
+ghf() {
+	gh repo clone "$(gh repo list -L 10000 | fzf | awk '{print $1}')"
+}
 
+mygitconfig() {
+	git config --local user.name "motty"
+	git config --local user.email "motty.mio2@gmail.com"
+}
+
+# fonts
+install-hackgen() {
+	array=()
+	WORKDIR="$HOME/tmp/hackgen"
+	mapfile -t array < <(curl -s https://api.github.com/repos/yuru7/HackGen/releases/latest | grep browser_download_url | cut -d : -f 2,3 | tr -d \")
+
+	mkdir -p "$HOME/.fonts"
+
+	mkdir -p "$WORKDIR"
+	cd "$WORKDIR" || exit
+
+	for i in "${array[@]}"; do
+		url=$(echo "$i" | tr -d ' ')
+		echo "$url"
+		curl -sL -o ./tmp.zip "$url"
+
+		unzip -oq ./tmp.zip
+		rm ./tmp.zip
+	done
+
+	for a in ./*; do
+		di=$(echo "$a" | cut -d / -f 2)
+		echo "$di"
+		cp -r "$WORKDIR/$di/"* "$HOME/.fonts/"
+	done
+
+	rm -rf "$WORKDIR"
+}
+
+install-rye() {
 	curl -sSf https://rye.astral.sh/get | bash
 }
 
@@ -19,14 +55,10 @@ install-rye-tools() {
 }
 
 install-volta() {
-	export VOLTA_HOME="$HOME/.local/share/volta"
-
 	curl https://get.volta.sh | bash
 }
 
 install-volta-tools() {
-	export VOLTA_HOME="$HOME/.local/share/volta"
-
 	"$VOLTA_HOME/bin/volta" install node@lts
 
 	tools=("@bitwarden/cli" "neovim" "pyright" "bash-language-server" "tree-sitter-cli")
@@ -36,9 +68,6 @@ install-volta-tools() {
 }
 
 install-homebrew() {
-	BREW_PREFIX="$HOME/.local/share/brew"
-	export BREW_PREFIX="$HOME/.local/share/brew"
-
 	mkdir -p "$BREW_PREFIX"
 	curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh | bash -s -- --prefix="$BREW_PREFIX"
 

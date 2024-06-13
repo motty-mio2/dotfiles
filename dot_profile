@@ -1,0 +1,58 @@
+#!/usr/bin/bash
+
+# Environment Variables
+## devenv
+export PIPENV_VENV_IN_PROJECT=1
+export PYENV_ROOT="$HOME/.pyenv"
+export RYE_HOME="$HOME/.local/share/rye"
+export SVLINT_CONFIG="$HOME/.config/svls/.svlint.toml"
+export VOLTA_HOME="$HOME/.local/share/volta"
+
+## shell env
+export BREW_PREFIX="$HOME/.local/share/brew"
+export EDITOR=nvim
+export XDG_CONFIG_HOME="$HOME/.config"
+
+array=(
+    "/usr/bin/lesspipe"
+    "/usr/bin/lesspipe.sh"
+)
+
+for item in "${array[@]}"; do
+    if [ -e "$item" ]; then
+        export LESSOPEN="|$item %s"
+        export LESSCLOSE="$item %s %s"
+    fi
+done
+
+#PATH
+
+## Devtools
+
+array=(
+    "$HOME/bin"
+    "$HOME/.local/bin"
+    "$HOME/go/bin"
+    "$PYENV_ROOT/bin"
+    "$HOME/.cargo/bin"
+    "$VOLTA_HOME/bin"
+    "$RYE_HOME/shims"
+)
+
+for item in "${array[@]}"; do
+    if [ -d "$item" ] && [[ ":$PATH:" != *":$item:"* ]]; then
+        export PATH="$PATH:$item"
+    fi
+done
+
+array=(
+    "$HOME/.nix-profile/etc/profile.d/nix.sh"
+    "/nix/var/nix/profiles/default/etc/profile.d/nix.sh"
+)
+
+for item in "${array[@]}"; do
+    if [ -d "$item" ]; then
+        #shellcheck source=/dev/null
+        source "$item"
+    fi
+done

@@ -1,22 +1,25 @@
 #!/usr/bin/env bash
 
-export XDG_CONFIG_HOME="$HOME/.config"
-
 alias aupdate='sudo apt update && sudo apt upgrade -y && sudo apt autoremove -y'
 alias bupdate='brew update && brew upgrade'
 alias dupdate='sudo dnf update -y'
+alias nupdate='nix-env --upgrade'
+alias pupdate='sudo pacman -Syu'
+alias yupdate='sudo yay -Syu'
 alias zupdate='sudo zypper ref && sudo zypper update -y'
 
 alias ls="ls --color=auto"
 alias ll='ls -lahF'
 alias lh='ls -ldF .*'
+alias la='ls -A'
+alias l='ls -CF'
+
+alias grep='grep --color=auto'
+alias fgrep='fgrep --color=auto'
+alias egrep='egrep --color=auto'
 
 alias rmrf='rm -rf'
 alias watch="watch "
-
-export PIPENV_VENV_IN_PROJECT=1
-
-export EDITOR=nvim
 
 rmemp() {
 	local target_directory="$1"
@@ -79,6 +82,19 @@ png2webp() {
 	fi
 }
 
+bwx() {
+	output=$(bw unlock)
+
+	echo "$output" | while IFS= read -r line; do
+		case "$line" in
+		\$\ *)
+			eval "${line#\$ }"
+			break
+			;;
+		esac
+	done
+}
+
 set-window-title() {
 	local title="$1"
 
@@ -86,10 +102,6 @@ set-window-title() {
 		title=${USER}@${HOST}
 	fi
 	echo -ne "\033]0; $title \007"
-}
-
-set-dialout() {
-	sudo usermod -aG dialout $USER
 }
 
 set-window-title

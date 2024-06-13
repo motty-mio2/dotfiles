@@ -7,10 +7,15 @@ tools
 
 {{ if eq .chezmoi.os "windows" }}
     .bashrc
+    .profile
+    .zprofile
     .zshenv
+    .config/bash-completion.d
+    .conifg/fcitx5
     .config/input-remapper-2
     .config/sheldon
     .config/zsh
+
 {{ end }}
 
 {{ if ne .chezmoi.os "windows" }}
