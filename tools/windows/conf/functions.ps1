@@ -253,3 +253,16 @@ function paste {
     powershell.exe -command "[Console]::OutputEncoding = [System.Text.Encoding]::GetEncoding('utf-8');Get-Clipboard"
 }
 
+function bwx {
+    try {
+        $output = $(bw unlock)
+        foreach ($item in $output) {
+            if ($item -match "> (?<exec>.*)" ) {
+                Invoke-Expression $Matches.exec
+            }
+        }
+    } catch {
+        #
+    }
+}
+
