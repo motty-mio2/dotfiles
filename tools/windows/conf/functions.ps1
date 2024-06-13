@@ -71,8 +71,7 @@ function Directory_Break {
 
     if ($Child_Path.GetType().FullName -eq "System.String") {
         Directory_Break_Single $Child_Path
-    }
-    else {
+    } else {
         foreach ($item in $Child_Path) {
             Directory_Break_Single $item
         }
@@ -92,8 +91,7 @@ function zipd {
         }
 
         7z a $Archive_Name (Get-ChildItem $Directory) # > $null
-    }
-    else {
+    } else {
         Write-Output ("This is 7zip based archive function.`n`tParam is directory.")
     }
 }
@@ -112,8 +110,7 @@ function zipf {
         }
 
         7z a $Archive_Name (Get-ChildItem $Directory) # > $null
-    }
-    else {
+    } else {
         Write-Output ("This is 7zip based archive function.`n`tParam is directory.")
     }
 }
@@ -163,8 +160,7 @@ function codex {
     if ([string]::IsNullorEmpty($Args[0])) {
         # Write-Host "This is empty args"
         code $(Convert-Path .)
-    }
-    else {
+    } else {
         if (Test-Path (Convert-Path $Args[0]) -PathType Container) {
             # Write-Host "This is folder"
             $Folder = Convert-Path $Args[0]
@@ -175,16 +171,13 @@ function codex {
                     code $(Convert-Path $_)
                     # break
                 }
-            }
-            else {
+            } else {
                 code $(Convert-Path .)
             }
-        }
-        elseif ((Get-ChildItem $Args[0]).Extension -eq ".code-workspace") {
+        } elseif ((Get-ChildItem $Args[0]).Extension -eq ".code-workspace") {
             # Write-Host "This is workspace"
             code $Args[0]
-        }
-        else {
+        } else {
             # Write-Host "This is valid file"
             code (Split-Path (Convert-Path $Args[0]) -parent)
         }
@@ -204,16 +197,14 @@ function mkcd {
 function ln([switch] $s, [string] $filePath, [string] $symlink) {
     if ($s) {
         New-Item -ItemType SymbolicLink -Value $filePath -Path $symlink | Out-Null
-    }
-    else {
+    } else {
         New-Item -ItemType HardLink -Value $filePath -Path $symlink | Out-Null
     }
 }
 
 try {
     Remove-Alias ls -ErrorAction Stop
-}
-catch {
+} catch {
 }
 
 function ls {
@@ -251,5 +242,18 @@ function envup {
 
 function paste {
     powershell.exe -command "[Console]::OutputEncoding = [System.Text.Encoding]::GetEncoding('utf-8');Get-Clipboard"
+}
+
+function bwx {
+    try {
+        $output = $(bw unlock)
+        foreach ($item in $output) {
+            if ($item -match "> (?<exec>.*)" ) {
+                Invoke-Expression $Matches.exec
+            }
+        }
+    } catch {
+        #
+    }
 }
 
