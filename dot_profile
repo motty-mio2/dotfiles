@@ -51,7 +51,7 @@ array=(
 )
 
 for item in "${array[@]}"; do
-    if [ -d "$item" ]; then
+    if [ -e "$item" ]; then
         #shellcheck source=/dev/null
         source "$item"
     fi
