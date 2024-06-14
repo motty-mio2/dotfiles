@@ -80,11 +80,13 @@ alias alert='notify-send --urgency=low -i "$([ $? = 0 ] && echo terminal || echo
 # sources /etc/bash.bashrc).
 if ! shopt -oq posix; then
     if [ -f /usr/share/bash-completion/bash_completion ]; then
+        #shellcheck source=/dev/null
         source /usr/share/bash-completion/bash_completion
-
+    fi
 
     if [ -d "$HOME/.config/bash_completion.d" ]; then
         for file in "$HOME/.config/bash_completion.d"/* ; do
+            #shellcheck source=/dev/null
             source "${file}"
         done
     fi
@@ -93,6 +95,7 @@ fi
 conf_folder="${HOME}/.local/share/chezmoi/tools/posix/conf"
 # if [ -d "$conf_folder" ]; then
 for file in "$conf_folder"/*.sh ; do
+    #shellcheck source=/dev/null
     source "${file}"
 done
 
