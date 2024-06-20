@@ -1,9 +1,10 @@
 #!/usr/bin/env bash
 #export $SSH_AUTH_SOCK=""
 
-id_files=$(find "$HOME"/.ssh/id* 2>/dev/null | wc -l)
+count=$(find "$HOME"/.ssh/id* 2>/dev/null | wc -l)
 
-if [ "$id_files" ]; then
+if [ "$count" -ne "0" ]; then
+	echo "key exist"
 	eval "$(ssh-agent -s)" >/dev/null 2>&1
 	ssh-add "$HOME"/.ssh/id* 2>/dev/null
 else
