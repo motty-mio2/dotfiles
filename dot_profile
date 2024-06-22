@@ -40,9 +40,7 @@ array=(
 )
 
 for item in "${array[@]}"; do
-    if [ -d "$item" ] && [[ ":$PATH:" != *":$item:"* ]]; then
-        export PATH="$PATH:$item"
-    fi
+    export PATH="$item:$PATH"
 done
 
 array=(
