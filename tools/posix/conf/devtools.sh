@@ -87,6 +87,18 @@ install-cargo-tools() {
 	"$HOME/.cargo/bin/cargo" install cargo-update sccache git-ignore-generator
 }
 
+install-arch-tools() {
+	sudo pacman -Sy --noconfirm --needed base-devel git go openssl tk xz zlib
+	git clone https://aur.archlinux.org/yay.git
+	cd yay || exit
+	makepkg --noconfirm -si
+	yay -Sy --noconfirm \
+		bat byobu chezmoi curl fd fzf git github-cli go \
+		htop jq nano neovim \
+		oh-my-posh pkg-config screen sheldon starship tree ttf-hackgen unarchiver unzip \
+		wget zsh
+}
+
 install-arch-desktop-dependency() {
 	yay -Sy fcitx5-im fcitx5-configtool fcitx5-mozc visual-studio-code-bin
 }
