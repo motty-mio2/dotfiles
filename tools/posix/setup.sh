@@ -4,14 +4,7 @@ eval "$(curl -s https://raw.githubusercontent.com/motty-mio2/dotfiles/main/tools
 eval "$(curl -s https://raw.githubusercontent.com/motty-mio2/dotfiles/main/dot_profile)"
 
 if type "pacman" >/dev/null 2>&1; then
-	sudo pacman -Sy --noconfirm --needed base-devel git go openssl tk xz zlib
-	git clone https://aur.archlinux.org/yay.git
-	cd yay || exit
-	makepkg --noconfirm -si
-	yay -Sy --noconfirm bat byobu chezmoi curl fd fzf git github-cli go \
-		htop jq nano neovim \
-		oh-my-posh pkg-config screen sheldon starship tree ttf-hackgen unarchiver unzip \
-		wget zsh
+	install-arch-tools
 
 	# Use chezmoi
 	chezmoi init motty-mio2
