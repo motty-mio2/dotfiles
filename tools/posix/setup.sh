@@ -23,26 +23,13 @@ else
 		sudo apt-get update
 		sudo apt-get upgrade -qy
 		sudo apt-get install -qy byobu curl git nano screen unar wget zsh libssl-dev build-essential golang
-		# Pyenv Dependency
-		sudo apt-get install -y \
-			build-essential curl llvm make tk-dev xz-utils wget \
-			libbz2-dev libffi-dev liblzma-dev libncursesw5-dev libreadline-dev \
-			libsqlite3-dev libssl-dev libxml2-dev libxmlsec1-dev zlib1g-dev \
-			python3-dev python3-venv python-is-python3
 
 	elif type "dnf" >/dev/null 2>&1; then
 		echo "RHEL Mode"
 		sudo dnf -q -y groupinstall "Development Tools"
-		# Pyenv dependency
-		if [ -f "/etc/fedora-release" ]; then
-			sudo dnf -q -y install make gcc patch zlib-devel bzip2 bzip2-devel readline-devel sqlite sqlite-devel openssl-devel tk-devel libffi-devel xz-devel libuuid-devel gdbm-devel libnsl2-devel
-		else
-			sudo yum -q -y install gcc make patch zlib-devel bzip2 bzip2-devel readline-devel sqlite sqlite-devel openssl-devel tk-devel libffi-devel xz-devel python39
-		fi
 
 	elif type "zypper" >/dev/null 2>&1; then
-		zypper install gcc automake bzip2 libbz2-devel xz xz-devel openssl-devel ncurses-devel \
-			readline-devel zlib-devel tk-devel libffi-devel sqlite3-devel libgdbm-devel make findutils
+		zypper install -t pattern devel_basis
 	else
 		echo "None"
 	fi
