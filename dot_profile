@@ -25,7 +25,6 @@ export RYE_HOME="$XDG_DATA_HOME/rye"
 export SVLINT_CONFIG="$HOME/.config/svls/.svlint.toml"
 export VOLTA_HOME="$XDG_DATA_HOME/volta"
 export WGETRC="$XDG_CONFIG_HOME/wgetrc"
-export XAUTHORITY="$XDG_RUNTIME_DIR"/Xauthority
 
 # devenv
 export EDITOR=nvim
