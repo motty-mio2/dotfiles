@@ -1,7 +1,7 @@
 #!/usr/bin/bash
 
-eval "$(curl -s https://raw.githubusercontent.com/motty-mio2/dotfiles/main/tools/posix/conf/devtools.sh)"
 eval "$(curl -s https://raw.githubusercontent.com/motty-mio2/dotfiles/main/dot_profile)"
+eval "$(curl -s https://raw.githubusercontent.com/motty-mio2/dotfiles/main/tools/posix/conf/devtools.sh)"
 
 if type "pacman" >/dev/null 2>&1; then
 	install-arch-tools
