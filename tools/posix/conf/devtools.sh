@@ -1,43 +1,5 @@
 #!/usr/bin/env bash
 
-ghf() {
-	gh repo clone "$(gh repo list -L 10000 | fzf | awk '{print $1}')"
-}
-
-mygitconfig() {
-	git config --local user.name "motty"
-	git config --local user.email "motty.mio2@gmail.com"
-}
-
-# fonts
-install-hackgen() {
-	array=()
-	WORKDIR="$HOME/tmp/hackgen"
-	mapfile -t array < <(curl -s https://api.github.com/repos/yuru7/HackGen/releases/latest | grep browser_download_url | cut -d : -f 2,3 | tr -d \")
-
-	mkdir -p "$HOME/.fonts"
-
-	mkdir -p "$WORKDIR"
-	cd "$WORKDIR" || exit
-
-	for i in "${array[@]}"; do
-		url=$(echo "$i" | tr -d ' ')
-		echo "$url"
-		curl -sL -o ./tmp.zip "$url"
-
-		unzip -oq ./tmp.zip
-		rm ./tmp.zip
-	done
-
-	for a in ./*; do
-		di=$(echo "$a" | cut -d / -f 2)
-		echo "$di"
-		cp -r "$WORKDIR/$di/"* "$HOME/.fonts/"
-	done
-
-	rm -rf "$WORKDIR"
-}
-
 install-rye() {
 	curl -sSf https://rye.astral.sh/get | bash
 }
