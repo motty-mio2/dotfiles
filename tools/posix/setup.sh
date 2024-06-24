@@ -6,11 +6,6 @@ eval "$(curl -s https://raw.githubusercontent.com/motty-mio2/dotfiles/main/dot_p
 if type "pacman" >/dev/null 2>&1; then
 	install-arch-tools
 
-	# Use chezmoi
-	chezmoi init motty-mio2
-	chezmoi apply -k
-	chezmoi apply -k
-
 else
 	if type "apt" >/dev/null 2>&1; then
 		echo "Ubuntu Mode"
@@ -51,6 +46,9 @@ else
 		install-homebrew-tools
 		;;
 	esac
-
-	# Use chezmoi
 fi
+
+# Use chezmoi
+chezmoi init motty-mio2
+chezmoi apply -k
+chezmoi apply -k
