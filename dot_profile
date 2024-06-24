@@ -1,6 +1,12 @@
 #!/usr/bin/bash
 
 # Environment Variables
+
+## XDG
+export XDG_CACHE_HOME="$HOME/.cache"
+export XDG_CONFIG_HOME="$HOME/.config"
+export XDG_DATA_HOME="$HOME/.local/share"
+
 ## devenv
 export PIPENV_VENV_IN_PROJECT=1
 export PYENV_ROOT="$HOME/.pyenv"
