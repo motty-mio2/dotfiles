@@ -46,16 +46,9 @@ else
 
 	*)
 		# Use Linux Brew
-		BREW_PREFIX="$HOME/.local/share/brew"
-		mkdir "$BREW_PREFIX"
-		curl -L https://github.com/Homebrew/brew/tarball/master | tar xz --strip-components 1 -C "$BREW_PREFIX"
+		install-homebrew
 
-		eval "$("$BREW_PREFIX"/bin/brew shellenv)"
-		brew install chezmoi
-		chezmoi init motty-mio2
-		chezmoi apply -k
-		chemzoi apply -k
-
+		install-homebrew-tools
 		;;
 	esac
 

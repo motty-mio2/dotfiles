@@ -76,7 +76,11 @@ install-homebrew() {
 
 install-homebrew-tools() {
 	brew tap wez/wezterm-linuxbrew
-	brew install bat chezmoi fd fzf gh neovim sheldon starship svls svlint tree wezterm
+	brew install \
+		bat chezmoi fd fzf gh \
+		neovim \
+		sheldon starship svls svlint tree \
+		wezterm
 }
 
 install-rust() {
