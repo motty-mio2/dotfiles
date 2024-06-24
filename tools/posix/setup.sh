@@ -1,5 +1,8 @@
 #!/usr/bin/bash
 
+eval "$(curl -s https://raw.githubusercontent.com/motty-mio2/dotfiles/main/tools/posix/conf/devtools.sh)"
+eval "$(curl -s https://raw.githubusercontent.com/motty-mio2/dotfiles/main/dot_profile)"
+
 if type "pacman" >/dev/null 2>&1; then
 	sudo pacman -Sy --noconfirm --needed base-devel git go openssl tk xz zlib
 	git clone https://aur.archlinux.org/yay.git
