@@ -41,7 +41,7 @@ else
 	case $ANS in
 	"" | [Nn]*)
 		# Use nix pm
-		sh <(curl -L https://nixos.org/nix/install) --no-daemon
+		install-nix
 		;;
 
 	*)
