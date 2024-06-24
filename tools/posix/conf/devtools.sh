@@ -99,3 +99,13 @@ install-nix-tools() {
 		verible
 }
 
+install-debian-tools() {
+	sudo add-apt-repository ppa:longsleep/golang-backports
+	sudo apt-get update
+	sudo apt-get upgrade -qy
+	sudo apt-get install -qy \
+		bat build-essential byobu curl fd-find fzf git gh \
+		htop jq libssl-dev nano \
+		ripgrep tree unzip \
+		wget zsh
+}
