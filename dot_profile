@@ -8,16 +8,13 @@ export XDG_CONFIG_HOME="$HOME/.config"
 export XDG_DATA_HOME="$HOME/.local/share"
 
 ## devenv
+export BREW_PREFIX="$XDG_DATA_HOME/brew"
+export EDITOR=nvim
 export PIPENV_VENV_IN_PROJECT=1
 export PYENV_ROOT="$HOME/.pyenv"
-export RYE_HOME="$HOME/.local/share/rye"
+export RYE_HOME="$XDG_DATA_HOME/rye"
 export SVLINT_CONFIG="$HOME/.config/svls/.svlint.toml"
-export VOLTA_HOME="$HOME/.local/share/volta"
-
-## shell env
-export BREW_PREFIX="$HOME/.local/share/brew"
-export EDITOR=nvim
-export XDG_CONFIG_HOME="$HOME/.config"
+export VOLTA_HOME="$XDG_DATA_HOME/volta"
 
 export HISTFILE="$HOME/.local/share/shell/history"
 export HISTSIZE=10000
