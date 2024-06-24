@@ -1,45 +1,41 @@
 #!/usr/bin/env bash
 
-ghf() {
-	gh repo clone "$(gh repo list -L 10000 | fzf | awk '{print $1}')"
-}
+# Install Package Manager
 
-mygitconfig() {
-	git config --local user.name "motty"
-	git config --local user.email "motty.mio2@gmail.com"
-}
-
-# fonts
-install-hackgen() {
-	array=()
-	WORKDIR="$HOME/tmp/hackgen"
-	mapfile -t array < <(curl -s https://api.github.com/repos/yuru7/HackGen/releases/latest | grep browser_download_url | cut -d : -f 2,3 | tr -d \")
-
-	mkdir -p "$HOME/.fonts"
-
-	mkdir -p "$WORKDIR"
-	cd "$WORKDIR" || exit
-
-	for i in "${array[@]}"; do
-		url=$(echo "$i" | tr -d ' ')
-		echo "$url"
-		curl -sL -o ./tmp.zip "$url"
-
-		unzip -oq ./tmp.zip
-		rm ./tmp.zip
-	done
-
-	for a in ./*; do
-		di=$(echo "$a" | cut -d / -f 2)
-		echo "$di"
-		cp -r "$WORKDIR/$di/"* "$HOME/.fonts/"
-	done
-
-	rm -rf "$WORKDIR"
+install-rust() {
+	curl https://sh.rustup.rs -sSf | sh -s -- -y
 }
 
 install-rye() {
 	curl -sSf https://rye.astral.sh/get | bash
+}
+
+install-volta() {
+	curl https://get.volta.sh | bash
+}
+
+install-homebrew() {
+	mkdir -p "$BREW_PREFIX"
+	curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh | bash -s -- --prefix="$BREW_PREFIX"
+
+	eval "$("$BREW_PREFIX/bin/brew" shellenv)"
+}
+
+install-nix() {
+	if grep -q microsoft /proc/version; then
+		sh <(curl -L https://nixos.org/nix/install) --no-daemon
+	else
+		sh <(curl -L https://nixos.org/nix/install) --daemon
+	fi
+
+	# shellcheck source=/dev/null
+	source "$HOME/.nix-profile/etc/profile.d/nix.sh"
+}
+
+# Install Tools
+
+install-cargo-tools() {
+	"$HOME/.cargo/bin/cargo" install cargo-update sccache git-ignore-generator
 }
 
 install-rye-tools() {
@@ -54,10 +50,6 @@ install-rye-tools() {
 	"$RYE_HOME/shims/rye" install --url git+https://github.com/motty-mio2/dixp.git dixp
 }
 
-install-volta() {
-	curl https://get.volta.sh | bash
-}
-
 install-volta-tools() {
 	"$VOLTA_HOME/bin/volta" install node@lts
 
@@ -67,28 +59,36 @@ install-volta-tools() {
 	done
 }
 
-install-homebrew() {
-	mkdir -p "$BREW_PREFIX"
-	curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh | bash -s -- --prefix="$BREW_PREFIX"
+install-arch-tools() {
+	sudo pacman -Sy --noconfirm --needed base-devel git go openssl tk xz zlib
+	git clone https://aur.archlinux.org/yay.git
+	cd yay || exit
+	makepkg --noconfirm -si
+	yay -Sy --noconfirm \
+		bat byobu chezmoi curl fd fzf git github-cli go \
+		htop jq nano neovim \
+		oh-my-posh pkg-config screen sheldon starship tree ttf-hackgen unarchiver unzip \
+		wget zsh
+}
 
-	eval "$("$BREW_PREFIX/bin/brew" shellenv)"
+install-debian-tools() {
+	sudo add-apt-repository ppa:longsleep/golang-backports
+	sudo apt-get update
+	sudo apt-get upgrade -qy
+	sudo apt-get install -qy \
+		bat build-essential byobu curl fd-find fzf git gh \
+		htop jq libssl-dev nano \
+		ripgrep tree unzip \
+		wget zsh
 }
 
 install-homebrew-tools() {
 	brew tap wez/wezterm-linuxbrew
-	brew install bat chezmoi fd fzf gh neovim sheldon starship svls svlint tree wezterm
-}
-
-install-rust() {
-	curl https://sh.rustup.rs -sSf | sh -s -- -y
-}
-
-install-cargo-tools() {
-	"$HOME/.cargo/bin/cargo" install cargo-update sccache git-ignore-generator
-}
-
-install-arch-desktop-dependency() {
-	yay -Sy fcitx5-im fcitx5-configtool fcitx5-mozc visual-studio-code-bin
+	brew install \
+		bat chezmoi fd fzf gh \
+		neovim \
+		sheldon starship svls svlint tree \
+		wezterm
 }
 
 install-nix-tools() {
@@ -99,3 +99,6 @@ install-nix-tools() {
 		verible
 }
 
+install-arch-desktop-dependency() {
+	yay -Sy fcitx5-im fcitx5-configtool fcitx5-mozc visual-studio-code-bin
+}
