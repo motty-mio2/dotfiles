@@ -8,17 +8,28 @@ export XDG_CACHE_HOME="$HOME/.local/cache"
 export XDG_DATA_HOME="$HOME/.local/share"
 export XDG_STATE_HOME="$HOME/.local/state"
 
-## devenv
+## Use XDG
+export AWS_SHARED_CREDENTIALS_FILE="$XDG_CONFIG_HOME"/aws/credentials
+export AWS_CONFIG_FILE="$XDG_CONFIG_HOME"/aws/config
 export BREW_PREFIX="$XDG_DATA_HOME/brew"
 export CARGO_HOME="$XDG_DATA_HOME/cargo"
 export RUSTUP_HOME="$XDG_DATA_HOME/rustup"
+export CONDARC="$XDG_CONFIG_HOME/conda/condarc"
+export CUDA_CACHE_PATH="$XDG_CACHE_HOME"/nv
+export DOCKER_CONFIG="$XDG_CONFIG_HOME"/docker
+export GTK_RC_FILES="$XDG_CONFIG_HOME"/gtk-1.0/gtkrc
+export GTK2_RC_FILES="$XDG_CONFIG_HOME"/gtk-2.0/gtkrc
 export GOPATH="$XDG_DATA_HOME/go"
-export EDITOR=nvim
-export PIPENV_VENV_IN_PROJECT=1
-export PYENV_ROOT="$HOME/.pyenv"
+export LIMA_HOME="$XDG_DATA_HOME/lima"
 export RYE_HOME="$XDG_DATA_HOME/rye"
 export SVLINT_CONFIG="$HOME/.config/svls/.svlint.toml"
 export VOLTA_HOME="$XDG_DATA_HOME/volta"
+export WGETRC="$XDG_CONFIG_HOME/wgetrc"
+export XAUTHORITY="$XDG_RUNTIME_DIR"/Xauthority
+
+# devenv
+export EDITOR=nvim
+export PIPENV_VENV_IN_PROJECT=1
 
 export HISTFILE="$HOME/.local/share/shell/history"
 export HISTSIZE=10000

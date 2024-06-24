@@ -21,6 +21,7 @@ alias ivx="iverilog -g2012"
 # Others
 alias doc='docker compose'
 alias rsmv='\rsync -avhPR --remove-source-files'
+alias wget='wget --hsts-file="$XDG_CACHE_HOME/wget-hsts"'
 
 ghf() {
 	gh repo clone "$(gh repo list -L 10000 | fzf | awk '{print $1}')"
