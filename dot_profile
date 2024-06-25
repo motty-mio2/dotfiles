@@ -22,11 +22,11 @@ export GTK2_RC_FILES="$XDG_CONFIG_HOME/gtk-2.0/gtkrc"
 export GOPATH="$XDG_DATA_HOME/go"
 export LIMA_HOME="$XDG_DATA_HOME/lima"
 export RYE_HOME="$XDG_DATA_HOME/rye"
-export SVLINT_CONFIG="$HOME/.config/svls/.svlint.toml"
 export VOLTA_HOME="$XDG_DATA_HOME/volta"
 export WGETRC="$XDG_CONFIG_HOME/wgetrc"
 
 # devenv
+export SVLINT_CONFIG="$HOME/.config/svls/.svlint.toml"
 export EDITOR=nvim
 export PIPENV_VENV_IN_PROJECT=1
 
