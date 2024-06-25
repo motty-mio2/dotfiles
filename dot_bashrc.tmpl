@@ -90,6 +90,13 @@ if ! shopt -oq posix; then
             source "${file}"
         done
     fi
+
+    if [ -d "$HOME/.nix-profile/share/bash-completion/completions" ]; then
+        for file in "$HOME/.nix-profile/share/bash-completion/completions/* ; do
+            #shellcheck source=/dev/null
+            source "${file}"
+        done
+    fi
 fi
 
 conf_folder="${HOME}/.local/share/chezmoi/tools/posix/conf"
