@@ -9,10 +9,14 @@ function Invoke-Starship-TransientFunction {
     &starship module character
 }
 
+#function Invoke-Starship-PreCommand {
+#}
+
 Invoke-Expression (&starship init powershell)
+
 Enable-TransientPrompt
 {{ else }}
 # oh-my-posh
-oh-my-posh init pwsh --config $HOME/.config/omp.toml | Invoke-Expression
+oh-my-posh init pwsh --config ~/.config/omp.toml | Invoke-Expression
 Enable-PoshTransientPrompt
 {{ end }}
