@@ -1,0 +1,26 @@
+# XDG
+$Env:XDG_CONFIG_HOME = "$Env:USERPROFILE\.config"
+$Env:XDG_DATA_HOME = "$Env:USERPROFILE\.local\share"
+$Env:XDG_CACHE_HOME = "$Env:USERPROFILE\.local\cache"
+$Env:XDG_STATE_HOME = "$Env:USERPROFILE\.local\state"
+
+# Use XDG
+$Env:AWS_CONFIG_FILE = "$Env:XDG_CONFIG_HOME/aws/config"
+$Env:BREW_PREFIX = "$Env:XDG_DATA_HOME/brew"
+$Env:CARGO_HOME = "$Env:XDG_DATA_HOME/cargo"
+$Env:RUSTUP_HOME = "$Env:XDG_DATA_HOME/rustup"
+$Env:CONDARC = "$Env:XDG_CONFIG_HOME/conda/condarc"
+$Env:CUDA_CACHE_PATH = "$Env:XDG_CACHE_HOME/nv"
+$Env:DOCKER_CONFIG = "$Env:XDG_CONFIG_HOME/docker"
+$Env:GTK_RC_FILES = "$Env:XDG_CONFIG_HOME/gtk-1.0/gtkrc"
+$Env:GTK2_RC_FILES = "$Env:XDG_CONFIG_HOME/gtk-2.0/gtkrc"
+$Env:GOPATH = "$Env:XDG_DATA_HOME/go"
+$Env:LIMA_HOME = "$Env:XDG_DATA_HOME/lima"
+$Env:RYE_HOME = "$Env:XDG_DATA_HOME/rye"
+$Env:VOLTA_HOME = "$Env:XDG_DATA_HOME/volta"
+$Env:WGETRC = "$Env:XDG_CONFIG_HOME/wgetrc"
+
+# devenv
+$Env:SVLINT_CONFIG = "$Env:HOME/.config/svls/.svlint.toml"
+$Env:EDITOR = "nvim"
+$Env:PIPENV_VENV_IN_PROJECT = "1"
