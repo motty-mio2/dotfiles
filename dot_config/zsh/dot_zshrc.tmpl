@@ -11,6 +11,7 @@ done
 eval "$(sheldon source)"
 
 fpath=("$HOME/.config/zsh/completion" $fpath)
+fpath=("$HOME/.nix-profile/share/zsh/site-functions" $fpath)
 
 autoload -Uz compinit
 
