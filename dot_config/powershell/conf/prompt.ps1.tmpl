@@ -48,11 +48,11 @@ function Invoke-Starship-TransientFunction {
     &starship module character
 }
 
-Invoke-Expression (&starship init powershell)
+{{ output "starship" "init" "powershell" }}
 Enable-TransientPrompt
 {{ else }}
 # oh-my-posh
-oh-my-posh init pwsh --config $HOME/.config/omp.toml | Invoke-Expression
+{{ output "oh-my-posh" "init" "pwsh" "--config" "~/.config/omp.toml" }}
 Enable-PoshTransientPrompt
 {{ end }}
 
