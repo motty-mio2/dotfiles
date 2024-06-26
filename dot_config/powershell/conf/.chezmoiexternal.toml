@@ -1,0 +1,4 @@
+["dotprivate"]
+type = "git-repo"
+url = "git@github.com:motty-mio2/dotprivate.git"
+refreshPeriod = "168h"
