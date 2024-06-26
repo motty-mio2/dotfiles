@@ -42,3 +42,17 @@ Register-ArgumentCompleter -Native -CommandName winget -ScriptBlock {
 }
 
 $host.ui.RawUI.WindowTitle = "$env:USERNAME@$env:COMPUTERNAME"
+
+{{ if (eq .powershell "starship") }}
+function Invoke-Starship-TransientFunction {
+    &starship module character
+}
+
+Invoke-Expression (&starship init powershell)
+Enable-TransientPrompt
+{{ else }}
+# oh-my-posh
+oh-my-posh init pwsh --config $HOME/.config/omp.toml | Invoke-Expression
+Enable-PoshTransientPrompt
+{{ end }}
+
