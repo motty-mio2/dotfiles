@@ -1,1 +1,22 @@
-{{- include "Documents/PowerShell/Microsoft.PowerShell_profile.ps1.tmpl" -}}
+$configure_folder = $HOME + "\.local\share\chezmoi\tools\windows\conf"
+
+Get-ChildItem -Path ($configure_folder) -Recurse -Include *.ps1 | ForEach-Object -Process {
+    Invoke-Expression (". " + $_)
+}
+
+{{ if (eq .powershell "starship") }}
+function Invoke-Starship-TransientFunction {
+    &starship module character
+}
+
+#function Invoke-Starship-PreCommand {
+#}
+
+Invoke-Expression (&starship init powershell)
+
+Enable-TransientPrompt
+{{ else }}
+# oh-my-posh
+oh-my-posh init pwsh --config ~/.config/omp.toml | Invoke-Expression
+Enable-PoshTransientPrompt
+{{ end }}
