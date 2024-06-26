@@ -95,8 +95,7 @@ if ! shopt -oq posix; then
     fi
 fi
 
-conf_folder="${HOME}/.local/share/chezmoi/tools/posix/conf"
-# if [ -d "$conf_folder" ]; then
+conf_folder="${HOME}/.config/shell"
 for file in "$conf_folder"/*.sh ; do
     #shellcheck source=/dev/null
     source "${file}"
