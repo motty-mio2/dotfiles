@@ -55,7 +55,6 @@ envup() {
 
 	rustup update
 	cargo install-update --all
-	sheldon lock --update
 }
 
 webp2png() {

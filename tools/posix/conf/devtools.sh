@@ -67,7 +67,7 @@ install-arch-tools() {
 	yay -Sy --noconfirm \
 		bat byobu chezmoi curl fd fzf git github-cli go \
 		htop jq nano neovim \
-		oh-my-posh pkg-config screen sheldon starship tree ttf-hackgen unarchiver unzip \
+		oh-my-posh pkg-config screen starship tree ttf-hackgen unarchiver unzip \
 		wget zsh
 }
 
@@ -87,7 +87,7 @@ install-homebrew-tools() {
 	brew install \
 		bat chezmoi fd fzf gh \
 		neovim \
-		sheldon starship svls svlint tree \
+		starship svls svlint tree \
 		wezterm
 }
 
@@ -95,7 +95,7 @@ install-nix-tools() {
 	nix-env -i \
 		arduino-language-server bat chezmoi fd go-task \
 		lazygit neovim \
-		oh-my-posh ripgrep sheldon shellcheck shfmt stylua starship svls svlint \
+		oh-my-posh ripgrep shellcheck shfmt stylua starship svls svlint \
 		verible
 }
 
