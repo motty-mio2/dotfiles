@@ -11,6 +11,7 @@ tools
     .zprofile
     .zshenv
     .config/bash-completion.d
+    .config/chezmoi/setup/run_once_01_setup.sh
     .conifg/fcitx5
     .config/input-remapper-2
     .config/sheldon
@@ -19,6 +20,7 @@ tools
 {{ end }}
 
 {{ if ne .chezmoi.os "windows" }}
+    .config/chezmoi/setup/run_once_01_setup.ps1
     Appdata
     Documents
 {{ end }}
