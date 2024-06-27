@@ -1,0 +1,20 @@
+{{- $bash_prompt_list := list "oh-my-posh" "starship" -}}
+{{- $bash_prompt := promptChoiceOnce . "bash_prompt" "Choice Prompt Handler for Bash" $bash_prompt_list "oh-my-posh" -}}
+
+{{- $zsh_prompt_list := list "oh-my-posh" "starship" "powerlevel10k" -}}
+{{- $zsh_prompt := promptChoiceOnce . "zsh_prompt" "Choice Prompt Handler for Zsh" $zsh_prompt_list "oh-my-posh" -}}
+
+{{- $powershell_prompt_list := list "oh-my-posh" "starship" -}}
+{{- $powershell_prompt := promptChoiceOnce . "powershell_prompt" "Choice Prompt Handler for PowerShell" $powershell_prompt_list "oh-my-posh" -}}
+
+
+[data]
+powershell = {{ $powershell_prompt | quote }}
+bash =  {{ $bash_prompt | quote }}
+zsh = {{ $zsh_prompt | quote }}
+
+{{ if ne .chezmoi.os "windows" }}
+{{- $unix_app_manager_list := list "nix" "brew" -}}
+{{- $unix_app_manager := promptChoiceOnce . "unix_app_manager" "Which Manager do you want for" $unix_app_manager_list "nix" -}}
+unix_pm = {{ $unix_app_manager | quote }}
+{{ end }}
