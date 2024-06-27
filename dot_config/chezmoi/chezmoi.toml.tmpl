@@ -1,0 +1,16 @@
+{{- $bash_prompt_list := list "oh-my-posh" "starship" -}}
+{{- $bash_prompt := promptChoiceOnce . "bash_prompt" "What type of host are you on" $bash_prompt_list "oh-my-posh" -}}
+
+{{- $zsh_prompt_list := list "oh-my-posh" "starship" "powerlevel10k" -}}
+{{- $zsh_prompt := promptChoiceOnce . "bash_prompt" "What type of host are you on" $zsh_prompt_list "oh-my-posh" -}}
+
+{{- $powershell_prompt_list := list "oh-my-posh" "starship" -}}
+{{- $powershell_prompt := promptChoiceOnce . "bash_prompt" "What type of host are you on" $powershell_prompt_list "oh-my-posh" -}}
+
+
+[data]
+# starship oh-my-posh"
+powershell = {{- $powershell_prompt | quote -}}
+# starship oh-my-posh
+bash =  {{- $bash_prompt | quote -}}
+zsh = {{- $zsh_prompt | quote -}}
