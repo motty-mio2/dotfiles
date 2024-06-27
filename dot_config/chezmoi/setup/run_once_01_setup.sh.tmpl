@@ -1,38 +1,38 @@
 #!/usr/bin/bash
 {{- if ne .chezmoi.os "windows" -}}
-	eval "$(curl -s https://raw.githubusercontent.com/motty-mio2/dotfiles/main/dot_profile)"
-	eval "$(curl -s https://raw.githubusercontent.com/motty-mio2/dotfiles/main/tools/posix/conf/devtools.sh)"
+eval "$(curl -s https://raw.githubusercontent.com/motty-mio2/dotfiles/main/dot_profile)"
+eval "$(curl -s https://raw.githubusercontent.com/motty-mio2/dotfiles/main/tools/posix/conf/devtools.sh)"
 
-	if type "pacman" >/dev/null 2>&1; then
-		install-arch-tools
+if type "pacman" >/dev/null 2>&1; then
+	install-arch-tools
 
+else
+	if type "apt" >/dev/null 2>&1; then
+		echo "Ubuntu Mode"
+		#     sudo sed -i.org -e 's|archive.ubuntu.com|ftp.jaist.ac.jp/pub/Linux|g' /etc/apt/sources.list
+		install-debian-tools
+	elif type "dnf" >/dev/null 2>&1; then
+		echo "RHEL Mode"
+		sudo dnf -q -y groupinstall "Development Tools"
+
+	elif type "zypper" >/dev/null 2>&1; then
+		zypper install -t pattern devel_basis
 	else
-		if type "apt" >/dev/null 2>&1; then
-			echo "Ubuntu Mode"
-			#     sudo sed -i.org -e 's|archive.ubuntu.com|ftp.jaist.ac.jp/pub/Linux|g' /etc/apt/sources.list
-			install-debian-tools
-		elif type "dnf" >/dev/null 2>&1; then
-			echo "RHEL Mode"
-			sudo dnf -q -y groupinstall "Development Tools"
-
-		elif type "zypper" >/dev/null 2>&1; then
-			zypper install -t pattern devel_basis
-		else
-			echo "None"
-		fi
-
-
-		{{- if eq .unix_pm "nix" }}
-		# Install nix
-		install-nix
-		install-nix-tools
-		{{- else if eq .unix_pm "brew" -}}
-		# Install brew
-		install-brew
-		install-brew-tools
-		{{- else -}}
-		exit
-		{{- end -}}
+		echo "None"
 	fi
-	chezmoi apply -k
+
+
+	{{- if eq .unix_pm "nix" }}
+	# Install nix
+	install-nix
+	install-nix-tools
+	{{- else if eq .unix_pm "brew" -}}
+	# Install brew
+	install-brew
+	install-brew-tools
+	{{- else -}}
+	exit
+	{{- end -}}
+fi
+chezmoi apply -k
 {{- end -}}
