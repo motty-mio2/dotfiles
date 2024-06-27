@@ -68,6 +68,12 @@ function Set-Pyenv-Path {
     }
 }
 
+function Install-Scoop {
+    if ( -not (Get-Command "scoop")) {
+        Invoke-WebRequest -useb get.scoop.sh | Invoke-Expression
+    }
+}
+
 function Install-Rye {
     param (
         $url = "https://github.com/astral-sh/rye/releases/latest/download/rye-x86_64-windows.exe",
