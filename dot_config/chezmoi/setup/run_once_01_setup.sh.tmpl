@@ -1,5 +1,5 @@
+{{ if ne .chezmoi.os "windows" -}}
 #!/usr/bin/bash
-{{- if ne .chezmoi.os "windows" -}}
 eval "$(curl -s https://raw.githubusercontent.com/motty-mio2/dotfiles/main/dot_profile)"
 eval "$(curl -s https://raw.githubusercontent.com/motty-mio2/dotfiles/main/tools/posix/conf/devtools.sh)"
 
