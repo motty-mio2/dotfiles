@@ -1,0 +1,7 @@
+{{ if ne .chezmoi.os "windows" -}}
+
+#!/bin/sh
+
+rm -f "$HOME/.config/zsh/.zcompdump"
+
+{{ end }}
