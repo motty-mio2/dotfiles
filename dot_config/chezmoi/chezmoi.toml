@@ -1,7 +1,0 @@
-[data]
-    # starship oh-my-posh"
-    powershell = "oh-my-posh"
-    # starship oh-my-posh
-    bash = "oh-my-posh"
-    # starship oh-my-posh powerlevel10k
-    zsh = "oh-my-posh"
