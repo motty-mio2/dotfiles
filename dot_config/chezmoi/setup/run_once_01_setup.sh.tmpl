@@ -21,18 +21,17 @@ else
 		echo "None"
 	fi
 
-
 	{{- if eq .unix_pm "nix" }}
 	# Install nix
 	install-nix
 	install-nix-tools
-	{{- else if eq .unix_pm "brew" -}}
+	{{- else if eq .unix_pm "brew" }}
 	# Install brew
 	install-brew
 	install-brew-tools
-	{{- else -}}
+	{{- else }}
 	exit
-	{{- end -}}
+	{{- end }}
 fi
 chezmoi apply -k
-{{- end -}}
+{{- end }}
