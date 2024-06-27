@@ -9,12 +9,12 @@
 
 
 [data]
-powershell = {{- $powershell_prompt | quote -}}
-bash =  {{- $bash_prompt | quote -}}
-zsh = {{- $zsh_prompt | quote -}}
+powershell = {{ $powershell_prompt | quote }}
+bash =  {{ $bash_prompt | quote }}
+zsh = {{ $zsh_prompt | quote }}
 
 {{ if ne .chezmoi.os "windows" }}
 {{- $unix_app_manager_list := list "nix" "brew" -}}
 {{- $unix_app_manager := promptChoiceOnce . "unix_app_manager" "Which Manager do you want for" $unix_app_manager_list "nix" -}}
-unix_pm = {{- $unix_app_manager | quote -}}
+unix_pm = {{ $unix_app_manager | quote }}
 {{ end }}
