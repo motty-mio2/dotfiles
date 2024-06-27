@@ -8,7 +8,9 @@ for file in "$conf_folder"/*.sh ; do
     source "${file}"
 done
 
-eval "$(sheldon source)"
+source "$XDG_CONFIG_HOME/zsh/plugins/zsh-completions/zsh-completions.plugin.zsh"
+source "$XDG_CONFIG_HOME/zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.plugin.zsh"
+source "$XDG_CONFIG_HOME/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.plugin.zsh"
 
 fpath=("$HOME/.config/zsh/completion" $fpath)
 fpath=("$HOME/.nix-profile/share/zsh/site-functions" $fpath)
@@ -74,6 +76,7 @@ precmd_functions+=(set-window-title)
 eval "$(oh-my-posh init zsh --config ~/.config/omp.toml)"
 {{ else }}
 # POWERLEVEL
+source "$XDG_CONFIG_HOME/zsh/plugins/powerlevel10k/powerlevel10k.zsh-theme"
 POWERLEVEL9K_DISABLE_CONFIGURATION_WIZARD=true
 source $ZDOTDIR/.p10k.zsh
 {{ end }}
