@@ -5,7 +5,7 @@
 ### Linux
 
 ```bash
-curl https://raw.githubusercontent.com/motty-mio2/dotfiles/main/tools/posix/setup.sh | bash
+sh -c "$(curl -fsLS get.chezmoi.io)" -- init --apply motty-mio2
 ```
 
 ### Windows
