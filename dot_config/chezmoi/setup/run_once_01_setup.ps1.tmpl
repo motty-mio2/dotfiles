@@ -1,3 +1,4 @@
+{{- if eq .chezmoi.os "windows" -}}
 Set-ExecutionPolicy -ExecutionPolicy RemoteSigned -Scope CurrentUser
 Set-ExecutionPolicy RemoteSigned -Scope CurrentUser -Force
 
@@ -47,3 +48,4 @@ reg add "HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Explorer\Ad
 reg add "HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced" /v "HideDrivesWithNoMedia" /t REG_DWORD /d "1" /f
 # 「登録されている拡張子は表示しない」をオフに設定
 reg add "HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced" /v "HideFileExt" /t REG_DWORD /d "0" /f
+{{- end -}}
