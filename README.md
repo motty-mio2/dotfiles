@@ -11,8 +11,7 @@ sh -c "$(curl -fsLS get.chezmoi.io)" -- init --apply motty-mio2
 ### Windows
 
 ```powershell
-$tempFile = $(New-TemporaryFile).FullName + ".exe"; Invoke-WebRequest -Uri "https://github.com/twpayne/chezmoi/releases/latest/download/chezmoi-windows-amd64.exe" -OutFile $tempFile; & $tempFile init --apply motty-mio2
-
+$tempFile = $(New-TemporaryFile).FullName + ".exe"; Invoke-WebRequest -Uri "https://github.com/twpayne/chezmoi/releases/latest/download/chezmoi-windows-amd64.exe" -OutFile $tempFile; . $tempFile init --apply motty-mio2; Remove-Item $tempFile
 ```
 
 ## Included Tools
