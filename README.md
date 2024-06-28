@@ -5,13 +5,13 @@
 ### Linux
 
 ```bash
-curl https://raw.githubusercontent.com/motty-mio2/dotfiles/main/tools/posix/setup.sh | bash
+sh -c "$(curl -fsLS get.chezmoi.io)" -- init --apply motty-mio2
 ```
 
 ### Windows
 
 ```powershell
-iwr https://raw.githubusercontent.com/motty-mio2/dotfiles/main/tools/windows/setup.ps1 | iex
+$tempFile = $(New-TemporaryFile).FullName + ".exe"; Invoke-WebRequest -Uri "https://github.com/twpayne/chezmoi/releases/latest/download/chezmoi-windows-amd64.exe" -OutFile $tempFile; . $tempFile init --apply motty-mio2; Remove-Item $tempFile
 ```
 
 ## Included Tools
