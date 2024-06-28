@@ -1,0 +1,7 @@
+{{ if ne .chezmoi.os "windows" -}}
+
+#!/bin/sh
+
+mkdir -p "$HOME/.local/share/shell"
+
+{{ end }}
