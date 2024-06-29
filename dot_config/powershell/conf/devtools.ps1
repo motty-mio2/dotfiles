@@ -68,6 +68,24 @@ function Set-Pyenv-Path {
     }
 }
 
+function Install-Scoop {
+    if ( -not (Get-Command "scoop")) {
+        Invoke-WebRequest -useb get.scoop.sh | Invoke-Expression
+    }
+
+    scoop reset *
+
+    # scoop alias add upgrade 'scoop update; scoop update *' 'update all'
+    # scoop alias add backup 'scoop export > ~\scoop.txt'
+    # scoop alias add reinstall "scoop uninstall {0}; scoop install {0}"
+
+    scoop bucket add extras
+    scoop bucket add java
+    scoop bucket add versions
+    scoop bucket add nerd-fonts
+    scoop bucket add motty https://github.com/motty-mio2/scoop_bucket.git
+}
+
 function Install-Rye {
     param (
         $url = "https://github.com/astral-sh/rye/releases/latest/download/rye-x86_64-windows.exe",
@@ -135,17 +153,11 @@ function Set-SVLINT-PATH {
 }
 
 function Install-Scoop-Apps {
-    scoop bucket add extras
-    scoop bucket add java
-    scoop bucket add versions
-    scoop bucket add nerd-font
-    scoop bucket add motty https://github.com/motty-mio2/scoop_bucket.git
-
     scoop install `
-        7zip bat chezmoi cloudflared fd fzf geekuninstaller gh git gsudo nano `
+        7zip bat chezmoi cloudflared curl fd fzf geekuninstaller gh git grep gsudo `
         less llvm make nano neovim `
-        oh-my-posh posh-git psfzf ripgrep shellcheck shfmt starship svlint svls sysinternals `
-        verible wezterm wget which
+        oh-my-posh posh-git psfzf psreadline ripgrep shellcheck shfmt starship sysinternals `
+        wezterm wget which
 }
 
 function Install-Cargo-Tools() {

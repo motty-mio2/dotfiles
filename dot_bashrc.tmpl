@@ -95,17 +95,16 @@ if ! shopt -oq posix; then
     fi
 fi
 
-conf_folder="${HOME}/.local/share/chezmoi/tools/posix/conf"
-# if [ -d "$conf_folder" ]; then
+conf_folder="${HOME}/.config/shell"
 for file in "$conf_folder"/*.sh ; do
     #shellcheck source=/dev/null
     source "${file}"
 done
 
 {{ if (eq .bash "starship") }}
-eval "$(starship init bash)"
+{{ output "starship" "init" "bash" }}
 starship_precmd_user_func="set-window-title"
 {{ else if (eq .bash "oh-my-posh") }}
-eval "$(oh-my-posh init bash --config ~/.config/omp.toml)"
+{{ output "oh-my-posh" "init" "bash" "--config" "~/.config/omp.toml" }}
 {{ end }}
 
