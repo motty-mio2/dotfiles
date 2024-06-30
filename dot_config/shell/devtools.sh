@@ -15,13 +15,13 @@ install-volta() {
 }
 
 install-homebrew() {
-	if ! command -v brew &>/dev/null; then
+	if [ -e "$BREW_PREFIX/bin/brew" ]; then
+		echo "Homebrew is already installed."
+	else
 		mkdir -p "$BREW_PREFIX"
 		curl -L https://github.com/Homebrew/brew/tarball/master | tar xz --strip-components 1 -C $BREW_PREFIX
 		eval "$($BREW_PREFIX/bin/brew shellenv)"
 		brew update --force --quiet
-	else
-		echo "Homebrew is already installed."
 	fi
 }
 
@@ -93,17 +93,17 @@ install-debian-tools() {
 install-homebrew-tools() {
 	brew tap wez/wezterm-linuxbrew
 	brew install \
-		bat chezmoi fd fzf gh \
-		neovim \
-		starship svls svlint tree \
+		bat chezmoi go-task \
+		lazygit neovim \
+		oh-my-posh shellcheck shfmt starship stylua svls svlint \
 		wezterm
 }
 
 install-nix-tools() {
 	nix-env -i \
-		arduino-language-server bat chezmoi fd go-task \
+		arduino-language-server bat chezmoi go-task \
 		lazygit neovim \
-		oh-my-posh ripgrep shellcheck shfmt stylua starship svls svlint \
+		oh-my-posh shellcheck shfmt starship stylua svls svlint \
 		verible
 }
 
