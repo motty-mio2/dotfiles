@@ -1,14 +1,14 @@
 {{ if ne .chezmoi.os "windows" -}}
 #!/usr/bin/bash
 eval "$(curl -sSL https://raw.githubusercontent.com/motty-mio2/dotfiles/main/dot_profile)"
-eval "$(curl -sSL https://raw.githubusercontent.com/motty-mio2/dotfiles/main/tools/posix/conf/devtools.sh)"
+eval "$(curl -sSL https://raw.githubusercontent.com/motty-mio2/dotfiles/main/dot_config/shell/devtools.sh)"
 
 if type "pacman" >/dev/null 2>&1; then
 	install-arch-tools
 
 else
 	if type "apt" >/dev/null 2>&1; then
-		echo "Ubuntu Mode"
+		echo "Debian Mode"
 		#     sudo sed -i.org -e 's|archive.ubuntu.com|ftp.jaist.ac.jp/pub/Linux|g' /etc/apt/sources.list
 		install-debian-tools
 	elif type "dnf" >/dev/null 2>&1; then
