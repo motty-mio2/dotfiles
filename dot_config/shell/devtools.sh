@@ -14,12 +14,12 @@ install-volta() {
 	curl https://get.volta.sh | bash
 }
 
-install-homebrew() {
+install-brew() {
 	if [ -e "$BREW_PREFIX/bin/brew" ]; then
-		echo "Homebrew is already installed."
+		echo "brew is already installed."
 	else
 		mkdir -p "$BREW_PREFIX"
-		curl -L https://github.com/Homebrew/brew/tarball/master | tar xz --strip-components 1 -C $BREW_PREFIX
+		curl -L https://github.com/brew/brew/tarball/master | tar xz --strip-components 1 -C $BREW_PREFIX
 		eval "$($BREW_PREFIX/bin/brew shellenv)"
 		brew update --force --quiet
 	fi
@@ -90,7 +90,7 @@ install-debian-tools() {
 		wget zsh
 }
 
-install-homebrew-tools() {
+install-brew-tools() {
 	brew tap wez/wezterm-linuxbrew
 	brew install \
 		bat chezmoi go-task \
