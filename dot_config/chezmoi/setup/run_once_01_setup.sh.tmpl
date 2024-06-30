@@ -25,7 +25,7 @@ else
 	install-nix
 	{{- else if eq .unix_pm "brew" }}
 	# Install brew
-	install-homebrew
+	install-brew
 	{{- else }}
 	exit
 	{{- end }}
