@@ -15,10 +15,14 @@ install-volta() {
 }
 
 install-homebrew() {
-	mkdir -p "$BREW_PREFIX"
-	curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh | bash -s -- --prefix="$BREW_PREFIX"
-
-	eval "$("$BREW_PREFIX/bin/brew" shellenv)"
+	if ! command -v brew &>/dev/null; then
+		mkdir -p "$BREW_PREFIX"
+		curl -L https://github.com/Homebrew/brew/tarball/master | tar xz --strip-components 1 -C $BREW_PREFIX
+		eval "$($BREW_PREFIX/bin/brew shellenv)"
+		brew update --force --quiet
+	else
+		echo "Homebrew is already installed."
+	fi
 }
 
 install-nix() {
