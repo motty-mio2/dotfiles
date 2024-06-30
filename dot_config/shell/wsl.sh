@@ -8,6 +8,7 @@ if grep -q microsoft /proc/version; then
 	# Enable SSH Agent
 	agent_binary="$HOME/.local/bin/wsl2-ssh-agent"
 	if [ ! -f "$agent_binary" ]; then
+		mkdir -p "$HOME/.local/bin"
 		curl -L https://github.com/mame/wsl2-ssh-agent/releases/latest/download/wsl2-ssh-agent --output "$agent_binary"
 		chmod 755 "$agent_binary"
 	fi
