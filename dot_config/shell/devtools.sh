@@ -22,14 +22,18 @@ install-homebrew() {
 }
 
 install-nix() {
-	if grep -q microsoft /proc/version; then
-		sh <(curl -L https://nixos.org/nix/install) --no-daemon
-	else
-		sh <(curl -L https://nixos.org/nix/install) --daemon
-	fi
+	if ! command -v nix-env &>/dev/null; then
+		if grep -q microsoft /proc/version; then
+			sh <(curl -L https://nixos.org/nix/install) --no-daemon
+		else
+			sh <(curl -L https://nixos.org/nix/install) --daemon
+		fi
 
-	# shellcheck source=/dev/null
-	source "$HOME/.nix-profile/etc/profile.d/nix.sh"
+		# shellcheck source=/dev/null
+		source "$HOME/.nix-profile/etc/profile.d/nix.sh"
+	else
+		echo "Nix is already installed."
+	fi
 }
 
 # Install Tools
