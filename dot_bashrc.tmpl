@@ -101,10 +101,10 @@ for file in "$conf_folder"/*.sh ; do
     source "${file}"
 done
 
-{{ if (eq .bash "starship") }}
+{{ if and (lookPath "starship") (eq .bash "starship") }}
 {{ output "starship" "init" "bash" }}
 starship_precmd_user_func="set-window-title"
-{{ else if (eq .bash "oh-my-posh") }}
+{{ else if and (lookPath "oh-my-posh") (eq .bash "oh-my-posh") }}
 {{ output "oh-my-posh" "init" "bash" "--config" "~/.config/omp.toml" }}
 {{ end }}
 

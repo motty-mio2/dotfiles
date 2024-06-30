@@ -67,10 +67,10 @@ bindkey '^r' select-history
 bindkey "^[[1~" beginning-of-line
 bindkey "^[[4~" end-of-line
 
-{{ if (eq .zsh "starship") }}
+{{ if and (lookPath "starship") (eq .zsh "starship") }}
 {{ output "starship" "init" "zsh" }}
 precmd_functions+=(set-window-title)
-{{ else if (eq .zsh "oh-my-posh") }}
+{{ else if and (lookPath "oh-my-posh") (eq .zsh "oh-my-posh") }}
 {{ output "oh-my-posh" "init" "zsh" "--config" "~/.config/omp.toml" }}
 {{ else }}
 # POWERLEVEL
