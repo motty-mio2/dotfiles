@@ -27,8 +27,8 @@ else
 	install-nix-tools
 	{{- else if eq .unix_pm "brew" }}
 	# Install brew
-	install-brew
-	install-brew-tools
+	install-homebrew
+	install-homebrew-tools
 	{{- else }}
 	exit
 	{{- end }}
