@@ -1,0 +1,32 @@
+{{ if glob ( joinPath .chezmoi.homeDir "/.local/share/brew/bin/brew" ) -}}
+{{  output ( joinPath .chezmoi.homeDir "/.local/share/brew/bin/brew" ) "shellenv" }}
+{{ end -}}
+
+{{ if eq .chezmoi.os "linux" }}
+{{  if (.chezmoi.kernel.osrelease | lower | contains "microsoft") }}
+export LD_LIBRARY_PATH=/usr/lib/wsl/lib:$LD_LIBRARY_PATH
+{{      if glob ( joinPath .chezmoi.homeDir "/.local/bin/wsl2-ssh-agent" ) }}
+{{          output ( joinPath .chezmoi.homeDir "/.local/bin/wsl2-ssh-agent" ) }}
+{{      end }}
+open() {
+    if [ $# != 1 ]; then
+        explorer.exe .
+    else
+        if [ -e "$1" ]; then
+            cmd.exe /c start "$(wslpath -w "$1")" 2>/dev/null
+
+        else
+            if [ -e "$1" ]; then
+                cmd.exe /c start "$(wslpath -w "$1")" 2>/dev/null
+            else
+                echo "open: $1 : No such file or directory"
+            fi
+        fi
+    fi
+}
+
+paste() {
+    powershell.exe -command "[Console]::OutputEncoding = [System.Text.Encoding]::GetEncoding('utf-8');Get-Clipboard"
+}
+{{  end }}
+{{ end }}
