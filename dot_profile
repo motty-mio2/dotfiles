@@ -53,9 +53,9 @@ done
 array=(
     "$HOME/bin"
     "$HOME/.local/bin"
-    "$HOME/go/bin"
+    "$GOPATH/bin"
     "$PYENV_ROOT/bin"
-    "$HOME/.cargo/bin"
+    "$CARGO_HOME/bin"
     "$VOLTA_HOME/bin"
     "$RYE_HOME/shims"
 )
