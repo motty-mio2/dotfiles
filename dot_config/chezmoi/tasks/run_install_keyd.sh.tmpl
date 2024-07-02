@@ -1,0 +1,19 @@
+{{ if and (eq .chezmoi.os "linux") ( or (eq .machine_type "laptop") (eq .machine_type "desktop") ) -}}
+
+#!/usr/bin/bash
+
+{{ $keyd_version := (gitHubLatestRelease "rvaiya/keyd").TagName }}
+if ! command -v keyd &> /dev/null || [ "$(keyd --version | cut -d " " -f 2)" != {{ $keyd_version }} ] ; then
+    DIR=$(mktemp -d)
+    wget -P $DIR "https://github.com/rvaiya/keyd/archive/refs/tags/{{ $keyd_version }}.zip"
+    unzip $DIR/{{ $keyd_version }}.zip -d $DIR
+    cd $DIR/keyd-$(echo "{{ $keyd_version }}" | cut -c 2-)
+    make
+    sudo make install
+fi
+
+if [ ! -d "/etc/keyd" ]; then
+    sudo ln -s "$HOME/.config/keyd" "/etc/keyd"
+fi
+
+{{ end }}
