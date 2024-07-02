@@ -1,3 +1,6 @@
+{{- $machine_type_prompt_list := list "desktop" "laptop" "server" -}}
+{{- $machine_type_prompt := promptChoiceOnce . "machine_type_prompt" "Choice Machine Type (WSL is server)" $machine_type_prompt_list "server" -}}
+
 {{- $bash_prompt_list := list "oh-my-posh" "starship" -}}
 {{- $bash_prompt := promptChoiceOnce . "bash_prompt" "Choice Prompt Handler for Bash" $bash_prompt_list "oh-my-posh" -}}
 
@@ -12,6 +15,7 @@
 powershell = {{ $powershell_prompt | quote }}
 bash =  {{ $bash_prompt | quote }}
 zsh = {{ $zsh_prompt | quote }}
+machine_type = {{ $machine_type_prompt | quote }}
 
 {{ if ne .chezmoi.os "windows" }}
 {{- $unix_app_manager_list := list "nix" "brew" -}}
