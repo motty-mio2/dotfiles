@@ -33,7 +33,9 @@ install-hackgen() {
 	WORKDIR="$HOME/tmp/hackgen"
 	mapfile -t array < <(curl -s https://api.github.com/repos/yuru7/HackGen/releases/latest | grep browser_download_url | cut -d : -f 2,3 | tr -d \")
 
-	mkdir -p "$HOME/.fonts"
+	FONT_DIR="$XDG_DATA_HOME/fonts"
+
+	mkdir -p "$FONT_DIR"
 
 	mkdir -p "$WORKDIR"
 	cd "$WORKDIR" || exit
@@ -50,7 +52,7 @@ install-hackgen() {
 	for a in ./*; do
 		di=$(echo "$a" | cut -d / -f 2)
 		echo "$di"
-		cp -r "$WORKDIR/$di/"* "$HOME/.fonts/"
+		cp -r "$WORKDIR/$di/"* "$FONT_DIR"
 	done
 
 	rm -rf "$WORKDIR"
