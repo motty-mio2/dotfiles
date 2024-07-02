@@ -24,6 +24,7 @@ export LIMA_HOME="$XDG_DATA_HOME/lima"
 export RYE_HOME="$XDG_DATA_HOME/rye"
 export VOLTA_HOME="$XDG_DATA_HOME/volta"
 export WGETRC="$XDG_CONFIG_HOME/wgetrc"
+export ZDOTDIR=$HOME/.config/zsh
 
 # devenv
 export SVLINT_CONFIG="$HOME/.config/svls/.svlint.toml"
