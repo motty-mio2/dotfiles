@@ -3,6 +3,9 @@
 eval "$(curl -sSL https://raw.githubusercontent.com/motty-mio2/dotfiles/main/dot_profile)"
 eval "$(curl -sSL https://raw.githubusercontent.com/motty-mio2/dotfiles/main/dot_config/shell/devtools.sh)"
 
+mkdir -p "$XDG_STATE_HOME"
+touch "$XDG_STATE_HOME"/python_history
+
 if type "pacman" >/dev/null 2>&1; then
 	install-arch-tools
 
