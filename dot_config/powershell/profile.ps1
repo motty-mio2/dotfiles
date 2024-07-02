@@ -17,7 +17,7 @@ $Env:GTK2_RC_FILES = "$Env:XDG_CONFIG_HOME/gtk-2.0/gtkrc"
 $Env:GOPATH = "$Env:XDG_DATA_HOME/go"
 $Env:LIMA_HOME = "$Env:XDG_DATA_HOME/lima"
 $Env:RYE_HOME = "$Env:XDG_DATA_HOME/rye"
-$Env:WGETRC = "$Env:XDG_CONFIG_HOME/wgetrc"
+$Env:WGETRC = "$Env:XDG_CONFIG_HOME/wget/wgetrc"
 
 # devenv
 $Env:SVLINT_CONFIG = "$Env:HOME/.config/svls/.svlint.toml"

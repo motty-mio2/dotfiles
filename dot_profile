@@ -3,7 +3,6 @@
 # Environment Variables
 
 ## XDG
-export XDG_CONFIG_HOME="$HOME/.config"
 export XDG_CACHE_HOME="$HOME/.local/cache"
 export XDG_DATA_HOME="$HOME/.local/share"
 export XDG_STATE_HOME="$HOME/.local/state"
@@ -30,6 +29,7 @@ export RYE_HOME="$XDG_DATA_HOME/rye"
 export VOLTA_HOME="$XDG_DATA_HOME/volta"
 export XCURSOR_PATH=/usr/share/icons:$XDG_DATA_HOME/icons
 export ERRFILE="$XDG_CACHE_HOME/X11/xsession-errors"
+export WGETRC="$XDG_CONFIG_HOME/wget/wgetrc"
 export ZDOTDIR=$HOME/.config/zsh
 
 # devenv
