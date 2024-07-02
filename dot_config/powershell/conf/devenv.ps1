@@ -2,6 +2,10 @@
 Set-Alias python3 python
 Set-Alias pip3 pip
 
+function wget  {
+    wget --hsts-file="$Env:XDG_DATA_HOME/wget-hsts" $args
+}
+
 function ghf {
     gh repo clone $(gh repo list -L 10000 | fzf).Split("`t")[0]
 }
