@@ -19,8 +19,8 @@ install-brew() {
 		echo "brew is already installed."
 	else
 		mkdir -p "$BREW_PREFIX"
-		curl -L https://github.com/brew/brew/tarball/master | tar xz --strip-components 1 -C $BREW_PREFIX
-		eval "$($BREW_PREFIX/bin/brew shellenv)"
+		curl -L https://github.com/brew/brew/tarball/master | tar xz --strip-components 1 -C "$BREW_PREFIX"
+		eval "$("$BREW_PREFIX"/bin/brew shellenv)"
 		brew update --force --quiet
 	fi
 }
