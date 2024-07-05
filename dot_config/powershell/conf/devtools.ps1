@@ -83,7 +83,7 @@ function Install-Scoop {
     scoop bucket add java
     scoop bucket add versions
     scoop bucket add nerd-fonts
-    scoop bucket add motty https://github.com/motty-mio2/scoop_bucket.git
+    scoop bucket add motty https://github.com/motty-mio2/scoop-bucket.git
 }
 
 function Install-Rye {
