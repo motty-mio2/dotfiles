@@ -29,30 +29,18 @@ mygitconfig() {
 
 # fonts
 install-hackgen() {
-	array=()
-	WORKDIR="$HOME/tmp/hackgen"
-	mapfile -t array < <(curl -s https://api.github.com/repos/yuru7/HackGen/releases/latest | grep browser_download_url | cut -d : -f 2,3 | tr -d \")
+	WORKDIR=$(mktemp -d)
 
 	FONT_DIR="$XDG_DATA_HOME/fonts"
 
 	mkdir -p "$FONT_DIR"
 
-	mkdir -p "$WORKDIR"
-	cd "$WORKDIR" || exit
-
-	for i in "${array[@]}"; do
+	for i in $(curl -s https://api.github.com/repos/yuru7/HackGen/releases/latest | grep browser_download_url | cut -d : -f 2,3 | tr -d \"); do
 		url=$(echo "$i" | tr -d ' ')
 		echo "$url"
-		curl -sL -o ./tmp.zip "$url"
+		curl -sL -o "$WORKDIR/tmp.zip" "$url"
 
-		unzip -oq ./tmp.zip
-		rm ./tmp.zip
-	done
-
-	for a in ./*; do
-		di=$(echo "$a" | cut -d / -f 2)
-		echo "$di"
-		cp -r "$WORKDIR/$di/"* "$FONT_DIR"
+		unzip -oq "$WORKDIR/tmp.zip" -d "$FONT_DIR"
 	done
 
 	rm -rf "$WORKDIR"
