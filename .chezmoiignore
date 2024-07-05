@@ -8,7 +8,8 @@ tools
 {{ if eq .chezmoi.os "windows" }}
     .bash_logout
     .bashrc
-    .profile
+    .bash_profile
+    .zprofile
     .zshenv
     .config/bash-completion.d
     .config/chezmoi/setup/run_once_01_setup.sh
