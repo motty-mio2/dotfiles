@@ -68,10 +68,15 @@ install-volta-tools() {
 }
 
 install-arch-tools() {
-	sudo pacman -Sy --noconfirm --needed base-devel git go openssl tk xz zlib
-	git clone https://aur.archlinux.org/yay.git
-	cd yay || exit
-	makepkg --noconfirm -si
+	sudo pacman -Sy --noconfirm --needed base-devel git
+	if [ -e "/usr/bin/yay" ]; then
+		echo "yay is already installed."
+	else
+		WORK_DIR=$(mktemp -d)
+		git clone https://aur.archlinux.org/yay-bin.git "$WORK_DIR" --depth 1
+		eval cd "$WORK_DIR" && makepkg --noconfirm -si
+		rm -rf "$WORK_DIR"
+	fi
 	yay -Sy --noconfirm \
 		bat byobu chezmoi curl fd fzf git github-cli go \
 		htop jq nano neovim \
