@@ -1,6 +1,6 @@
 {{ if ne .chezmoi.os "windows" -}}
 #!/usr/bin/bash
-eval "$(curl -sSL https://raw.githubusercontent.com/motty-mio2/dotfiles/main/dot_profile)"
+eval "$(curl -sSL https://raw.githubusercontent.com/motty-mio2/dotfiles/main/dot_bash_profile)"
 eval "$(curl -sSL https://raw.githubusercontent.com/motty-mio2/dotfiles/main/dot_config/shell/devtools.sh)"
 
 mkdir -p "$XDG_STATE_HOME"
