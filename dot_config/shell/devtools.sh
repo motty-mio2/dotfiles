@@ -78,9 +78,9 @@ install-arch-tools() {
 		rm -rf "$WORK_DIR"
 	fi
 	yay -Sy --noconfirm \
-		bat byobu chezmoi curl fd fzf git github-cli go \
+		bat byobu chezmoi curl fd fzf git github-cli go go-task-bin \
 		htop jq nano neovim \
-		oh-my-posh pkg-config screen starship tree ttf-hackgen unarchiver unzip \
+		oh-my-posh-bin pkg-config screen starship tree ttf-hackgen unarchiver unzip \
 		wget zsh
 }
 
