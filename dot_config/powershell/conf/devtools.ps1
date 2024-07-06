@@ -133,6 +133,9 @@ function Install-Rye-Tools {
 }
 
 function Install-Volta-Tools {
+    param (
+        $VOLTA_HOME = "$Env:VOLTA_HOME"
+    )
 
     & "$VOLTA_HOME\bin\volta" install node@lts
 
