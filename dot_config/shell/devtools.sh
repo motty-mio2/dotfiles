@@ -43,7 +43,7 @@ install-nix() {
 # Install Tools
 
 install-cargo-tools() {
-	"$HOME/.cargo/bin/cargo" install cargo-update sccache git-ignore-generator
+	"$CARGO_HOME/bin/cargo" install cargo-update sccache git-ignore-generator
 }
 
 install-rye-tools() {
