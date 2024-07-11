@@ -20,7 +20,6 @@ $Env:NPM_CONFIG_USERCONFIG = "$Env:XDG_CONFIG_HOME/npm/npmrc"
 $Env:PLATFORMIO_CORE_DIR = "$Env:XDG_DATA_HOME/platformio"
 $Env:PYTHONSTARTUP = "$Env:XDG_CONFIG_HOME/python/pythonrc"
 $Env:RYE_HOME = "$Env:XDG_DATA_HOME/rye"
-$Env:WGETRC = "$Env:XDG_CONFIG_HOME/wget/wgetrc"
 
 # devenv
 $Env:SVLINT_CONFIG = "$Env:HOME/.config/svls/.svlint.toml"
