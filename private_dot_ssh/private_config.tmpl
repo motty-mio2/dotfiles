@@ -1,4 +1,4 @@
-Include ~/.ssh/config.d/*.conf
+Include {{ joinPath .chezmoi.homeDir "/.ssh/config.d/*.conf" }}
 
 Match User *,!git
     ForwardAgent yes
