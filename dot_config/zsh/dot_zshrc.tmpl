@@ -65,7 +65,7 @@ bindkey "^[[1~" beginning-of-line
 bindkey "^[[4~" end-of-line
 
 conf_folder="${HOME}/.config/shell"
-for file in "$conf_folder"/*.sh ; do
+for file in $(find "$conf_folder" -name "*.sh"); do
     #shellcheck source=/dev/null
     source "${file}"
 done

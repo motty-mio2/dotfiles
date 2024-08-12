@@ -97,7 +97,7 @@ if ! shopt -oq posix; then
 fi
 
 conf_folder="${HOME}/.config/shell"
-for file in "$conf_folder"/*.sh ; do
+for file in $(find "$conf_folder" -name "*.sh"); do
     #shellcheck source=/dev/null
     source "${file}"
 done
