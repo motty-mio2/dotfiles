@@ -16,7 +16,7 @@ alias ivx="iverilog -g2012"
 # Others
 alias doc='docker compose'
 alias rsmv='\rsync -avhPR --remove-source-files'
-alias wget=wget --hsts-file='$XDG_DATA_HOME/wget-hsts'
+alias wget='\wget --hsts-file=$XDG_DATA_HOME/wget-hsts'
 
 ghf() {
 	gh repo clone "$(gh repo list -L 10000 | fzf | awk '{print $1}')"
@@ -43,5 +43,6 @@ install-hackgen() {
 		unzip -oq "$WORKDIR/tmp.zip" -d "$FONT_DIR"
 	done
 
-	rm -rf "$WORKDIR"
+ 	rm -rf "$WORKDIR"
 }
+
