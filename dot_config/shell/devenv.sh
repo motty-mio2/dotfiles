@@ -9,10 +9,6 @@ fi
 alias iv="iverilog"
 alias ivx="iverilog -g2012"
 
-# Verilog
-alias iv="iverilog"
-alias ivx="iverilog -g2012"
-
 # Others
 alias doc='docker compose'
 alias rsmv='\rsync -avhPR --remove-source-files'
@@ -43,6 +39,5 @@ install-hackgen() {
 		unzip -oq "$WORKDIR/tmp.zip" -d "$FONT_DIR"
 	done
 
- 	rm -rf "$WORKDIR"
+	rm -rf "$WORKDIR"
 }
-
