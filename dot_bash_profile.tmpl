@@ -1,1 +1,6 @@
 {{- include "dot_profile" -}}
+
+if [ "$BASH" ] && [ -f ~/.bashrc ]; then
+    #shellcheck source=/dev/null
+    . ~/.bashrc
+fi
