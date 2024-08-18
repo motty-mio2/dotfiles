@@ -72,7 +72,6 @@ for item in "${array[@]}"; do
 done
 
 array=(
-    "$HOME/.nix-profile/etc/profile.d/nix.sh"
     "/nix/var/nix/profiles/default/etc/profile.d/nix.sh"
 )
 
