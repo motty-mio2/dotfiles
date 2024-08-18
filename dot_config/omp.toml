@@ -1,6 +1,7 @@
 "$schema" = "https://raw.githubusercontent.com/JanDeDobbeleer/oh-my-posh/main/themes/schema.json"
 
 version = 2
+disable_notice = false
 
 [palette]
   powerline = "#444444"
@@ -22,7 +23,7 @@ version = 2
     template = """ \
     {{ .HostName }} \
     """
-  
+
   [[blocks.segments]]
     type = "path"
     style = "plain"
