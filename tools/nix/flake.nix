@@ -1,29 +1,31 @@
 {
   description = "A very basic flake";
 
-  inputs = {
-    nixpkgs.url = "github:nixos/nixpkgs?ref=nixos-unstable";
-  };
+  inputs = { nixpkgs.url = "github:nixos/nixpkgs?ref=nixos-unstable"; };
 
-  outputs = { self, nixpkgs }: {
-    packages.x86_64-linux.cli = nixpkgs.legacyPackages.x86_64-linux.buildEnv {
-      name = "my-packages-list";
-      paths = with nixpkgs.legacyPackages.x86_64-linux;
-      [
-        arduino-language-server
-        bat
-        chezmoi
-        cloudflared
-        fd
-        go-task
-        lazygit
-        neovim
-        oh-my-posh
-        shellcheck
-        shfmt
-        starship
-        stylua
-      ];
+  outputs = { self, nixpkgs }:
+    let
+      system = "x86_64-linux";
+      pkgs = nixpkgs.legacyPackages.${system};
+    in {
+      packages.${system}.cli = pkgs.buildEnv {
+        name = "base cli apps";
+        paths = with pkgs; [
+          arduino-language-server
+          bat
+          chezmoi
+          cloudflared
+          fd
+          go-task
+          lazygit
+          neovim
+          nixfmt
+          oh-my-posh
+          shellcheck
+          shfmt
+          starship
+          stylua
+        ];
+      };
     };
-  };
 }
