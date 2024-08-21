@@ -1,4 +1,7 @@
 Include {{ joinPath .chezmoi.homeDir "/.ssh/config.d/*.conf" }}
+{{ if glob (joinPath .chezmoi.homeDir ""/.local/share/lima/*/ssh.config" -}}
+Include {{ joinPath .chezmoi.homeDir "/.local/share/lima/*/ssh.config" }}
+{{ end -}}
 
 Match User *,!git
     ForwardAgent yes
