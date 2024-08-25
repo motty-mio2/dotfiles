@@ -1,7 +1,7 @@
 Include {{ joinPath .chezmoi.homeDir "/.ssh/config.d/*.conf" }}
-{{ if glob (joinPath .chezmoi.homeDir ""/.local/share/lima/*/ssh.config" -}}
+{{- if glob ( joinPath .chezmoi.homeDir "/.local/share/lima/*/ssh.config" ) }}
 Include {{ joinPath .chezmoi.homeDir "/.local/share/lima/*/ssh.config" }}
-{{ end -}}
+{{- end }}
 
 Match User *,!git
     ForwardAgent yes
@@ -12,7 +12,7 @@ Match User *,!git
 Match User git
     RequestTTY no
 
-{{ if glob ( joinPath .chezmoi.homeDir "/.ssh/id_ed25519" ) }}
+{{- if glob ( joinPath .chezmoi.homeDir "/.ssh/id_ed25519" ) }}
 Host *
     IdentitiesOnly yes
     IdentityFile ~/.ssh/id_ed25519
