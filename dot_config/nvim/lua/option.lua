@@ -23,7 +23,7 @@ vim.opt.tabstop = 4
 vim.opt.expandtab = true
 vim.opt.autoindent = true
 vim.opt.smartindent = true
-vim.opt.swapfile = false -- creates a swapfile
+vim.opt.swapfile = true -- creates a swapfile
 vim.opt.wrap = false -- display lines as one long line
 vim.opt.signcolumn = "yes" -- always show the sign column, otherwise it would shift the text each time
 
