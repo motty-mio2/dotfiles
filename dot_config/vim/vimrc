@@ -1,7 +1,6 @@
 " setting
 set encoding=utf-8
 set nobackup
-set noswapfile
 set autoread
 set hidden
 set showcmd
@@ -28,3 +27,6 @@ set incsearch
 set wrapscan
 set hlsearch
 
+set viminfo+=n~/.config/vim/viminfo
+set directory=~/.local/state/vim/swap
+set undodir=~/.local/state/vim/undo
