@@ -1,5 +1,4 @@
-{{ if lookPath "copyq" }}
-
+{{- if lookPath "copyq" }}
 vim.g.clipboard = {
     name = 'copyq',
     copy = {
@@ -12,5 +11,6 @@ vim.g.clipboard = {
     },
     cache_enabled = 1,
 }
-
-{{ end }}
+{{- else }}
+vim.opt.clipboard:append({"unnamedplus"})
+{{- end }}
