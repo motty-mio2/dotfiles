@@ -9,7 +9,7 @@
       pkgs = nixpkgs.legacyPackages.${system};
     in {
       packages.${system}.cli = pkgs.buildEnv {
-        name = "base cli apps";
+        name = "dev";
         paths = with pkgs; [
           arduino-language-server
           nixfmt
