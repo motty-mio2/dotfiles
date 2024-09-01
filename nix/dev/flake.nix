@@ -8,11 +8,11 @@
       system = "x86_64-linux";
       pkgs = nixpkgs.legacyPackages.${system};
     in {
-      packages.${system}.cli = pkgs.buildEnv {
+      packages.${system}.dev = pkgs.buildEnv {
         name = "dev";
         paths = with pkgs; [
           arduino-language-server
-          nixfmt
+          nixfmt-rfc-style
           shfmt
           stylua
           svlint
