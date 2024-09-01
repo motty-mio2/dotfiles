@@ -11,7 +11,6 @@
       packages.${system}.cli = pkgs.buildEnv {
         name = "base cli apps";
         paths = with pkgs; [
-          arduino-language-server
           bat
           chezmoi
           cloudflared
@@ -19,12 +18,8 @@
           go-task
           lazygit
           neovim
-          nixfmt
           oh-my-posh
-          shellcheck
-          shfmt
           starship
-          stylua
         ];
       };
     };

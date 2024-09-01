@@ -3,6 +3,7 @@ doc
 LICENSE
 
 README.md
+nix
 tools
 
 {{ if eq .chezmoi.os "windows" }}
