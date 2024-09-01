@@ -16,6 +16,7 @@
           cloudflared
           fd
           go-task
+          jq
           lazygit
           neovim
           oh-my-posh
