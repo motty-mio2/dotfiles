@@ -2,6 +2,10 @@
 
 # Install Package Manager
 
+install-deno() {
+	curl -fsSL https://deno.land/install.sh | sh
+}
+
 install-rust() {
 	curl https://sh.rustup.rs -sSf | sh -s -- -y
 }
