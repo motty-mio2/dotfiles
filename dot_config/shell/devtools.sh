@@ -101,11 +101,8 @@ install-brew-tools() {
 }
 
 install-nix-tools() {
-	nix-env -i \
-		arduino-language-server bat chezmoi go-task \
-		lazygit neovim \
-		oh-my-posh shellcheck shfmt starship stylua svls svlint \
-		verible
+	nix profile install "$(chezmoi source-path)/nix/cli/.#cli"
+	nix profile install "$(chezmoi source-path)/nix/dev/.#dev"
 }
 
 install-arch-desktop-dependency() {
