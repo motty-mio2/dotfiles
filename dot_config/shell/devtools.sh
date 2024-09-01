@@ -26,15 +26,11 @@ install-brew() {
 }
 
 install-nix() {
-	if ! command -v nix-env &>/dev/null; then
-		if grep -q microsoft /proc/version; then
-			sh <(curl -L https://nixos.org/nix/install) --no-daemon
-		else
-			sh <(curl -L https://nixos.org/nix/install) --daemon
-		fi
+	if ! command -v nix &>/dev/null; then
+		curl --proto '=https' --tlsv1.2 -sSf -L https://install.determinate.systems/nix | sh -s -- install
 
 		# shellcheck source=/dev/null
-		source "$HOME/.nix-profile/etc/profile.d/nix.sh"
+		source "/nix/var/nix/profiles/default/etc/profile.d/nix-daemon.sh"
 	else
 		echo "Nix is already installed."
 	fi
@@ -105,11 +101,8 @@ install-brew-tools() {
 }
 
 install-nix-tools() {
-	nix-env -i \
-		arduino-language-server bat chezmoi go-task \
-		lazygit neovim \
-		oh-my-posh shellcheck shfmt starship stylua svls svlint \
-		verible
+	nix profile install "$(chezmoi source-path)/nix/cli/.#cli"
+	nix profile install "$(chezmoi source-path)/nix/dev/.#dev"
 }
 
 install-arch-desktop-dependency() {

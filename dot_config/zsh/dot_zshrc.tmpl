@@ -8,7 +8,7 @@ source "$XDG_CONFIG_HOME/zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.plu
 source "$XDG_CONFIG_HOME/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.plugin.zsh"
 
 fpath=("$HOME/.config/zsh/completion" $fpath)
-fpath=("$HOME/.nix-profile/share/zsh/site-functions" $fpath)
+fpath=("$XDG_STATE_HOME/nix/profiles/profile/share/zsh/site-functions" $fpath)
 
 autoload -Uz compinit
 
