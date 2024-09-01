@@ -9,7 +9,7 @@
       pkgs = nixpkgs.legacyPackages.${system};
     in {
       packages.${system}.cli = pkgs.buildEnv {
-        name = "base cli apps";
+        name = "cli";
         paths = with pkgs; [
           bat
           chezmoi
