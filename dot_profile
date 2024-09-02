@@ -67,6 +67,7 @@ array=(
     "$VOLTA_HOME/bin"
     "$RYE_HOME/shims"
     "$DENO_INSTALL/bin"
+    "$XDG_STATE_HOME/nix/profile/profile/bin"
 )
 
 for item in "${array[@]}"; do
