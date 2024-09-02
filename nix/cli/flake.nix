@@ -21,6 +21,7 @@
           neovim
           oh-my-posh
           starship
+          vim
         ];
       };
     };
