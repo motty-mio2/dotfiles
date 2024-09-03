@@ -74,13 +74,12 @@ for item in "${array[@]}"; do
     export PATH="$item:$PATH"
 done
 
-array=(
-    "/nix/var/nix/profiles/default/etc/profile.d/nix.sh"
-)
+# array=(
+# )
 
-for item in "${array[@]}"; do
-    if [ -e "$item" ]; then
-        #shellcheck source=/dev/null
-        source "$item"
-    fi
-done
+# for item in "${array[@]}"; do
+#     if [ -e "$item" ]; then
+#         #shellcheck source=/dev/null
+#         source "$item"
+#     fi
+# done
