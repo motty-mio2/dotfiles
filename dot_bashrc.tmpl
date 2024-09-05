@@ -88,7 +88,7 @@ if ! shopt -oq posix; then
         done
     fi
 
-    if [ -d "$XDG_STATE_HOME/nix/profiles/profile/share/bash-completion/completions ]; then
+    if [ -d "$XDG_STATE_HOME/nix/profiles/profile/share/bash-completion/completions" ]; then
         for file in "$XDG_STATE_HOME/nix/profiles/profile/share/bash-completion/completions/"* ; do
             #shellcheck source=/dev/null
             source "${file}"
