@@ -1,18 +1,24 @@
 {
   description = "A very basic flake";
 
-  inputs = { nixpkgs.url = "github:nixos/nixpkgs?ref=nixos-unstable"; };
+  inputs = {
+    nixpkgs.url = "github:nixos/nixpkgs?ref=nixos-unstable";
+  };
 
-  outputs = { self, nixpkgs }:
+  outputs =
+    { self, nixpkgs }:
     let
       system = "x86_64-linux";
       pkgs = nixpkgs.legacyPackages.${system};
-    in {
+    in
+    {
       packages.${system}.dev = pkgs.buildEnv {
         name = "dev";
         paths = with pkgs; [
           arduino-language-server
+          hadolint
           nixfmt-rfc-style
+          shellcheck
           shfmt
           stylua
           svlint
