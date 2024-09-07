@@ -91,7 +91,7 @@ install-debian-tools() {
 	sudo apt-get install -qy \
 		bat build-essential byobu curl fd-find fzf git gh \
 		htop jq libssl-dev nano \
-		ripgrep tree unzip \
+		pkg-config ripgrep tree unzip \
 		wget zsh
 }
 
