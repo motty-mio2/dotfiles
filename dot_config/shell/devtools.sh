@@ -61,7 +61,7 @@ install-rye-tools() {
 install-volta-tools() {
 	"$VOLTA_HOME/bin/volta" install node@lts
 
-	tools=("@bitwarden/cli" "neovim" "pyright" "bash-language-server" "tree-sitter-cli")
+	tools=("biome" "@bitwarden/cli" "neovim" "pyright" "bash-language-server" "tree-sitter-cli")
 	for tool in "${tools[@]}"; do
 		"$VOLTA_HOME/bin/volta" install "$tool"
 	done
