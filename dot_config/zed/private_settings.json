@@ -1,0 +1,55 @@
+// Zed settings
+//
+// For information on how to configure Zed, see the Zed
+// documentation: https://zed.dev/docs/configuring-zed
+//
+// To see all of Zed's default settings without changing your
+// custom settings, run `zed: open default settings` from the
+// command palette
+{
+  "assistant": {
+    "default_model": {
+      "model": "claude-3-5-sonnet-20240620",
+      "provider": "zed.dev"
+    },
+    "version": "2"
+  },
+  "auto_update": true,
+  "autosave": "on_focus_change",
+  "buffer_font_family": "HackGen35",
+  "buffer_font_size": 16,
+  "features": {
+    "inline_completion_provider": "none"
+  },
+  "languages": {
+    "Python": {
+      "format_on_save": "on"
+    }
+  },
+  "lsp": {
+    "pyright": {
+      "settings": {
+        "python": {
+          "pythonPath": "./.venv/bin/python"
+        },
+        "python.analysis": {
+          "diagnosticMode": "workspace",
+          "typeCheckingMode": "strict"
+        }
+      }
+    }
+  },
+  "terminal": {
+    "font_family": "HackGen35 Console NF",
+    "shell": {
+      "program": "zsh"
+    },
+    "working_directory": "current_project_directory"
+  },
+  "theme": {
+    "dark": "One Dark",
+    "light": "Solarized Dark",
+    "mode": "system"
+  },
+  "ui_font_size": 16
+}
