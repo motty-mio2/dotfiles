@@ -10,6 +10,8 @@ alias iv="iverilog"
 alias ivx="iverilog -g2012"
 
 # Others
+alias pchezmoi='chezmoi -S $HOME/Projects/dotfiles'
+
 alias doc='docker compose'
 alias rsmv='\rsync -avhPR --remove-source-files'
 alias wget='\wget --hsts-file=$XDG_DATA_HOME/wget-hsts'

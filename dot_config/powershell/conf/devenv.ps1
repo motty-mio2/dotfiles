@@ -2,6 +2,10 @@
 Set-Alias python3 python
 Set-Alias pip3 pip
 
+function pchezmoi {
+    chezmoi -S $Env:HOME/Projects/dotfiles
+}
+
 function wget  {
     wget --hsts-file="$Env:XDG_DATA_HOME/wget-hsts" $args
 }
