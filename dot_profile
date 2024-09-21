@@ -35,7 +35,6 @@ export ZDOTDIR="$XDG_CONFIG_HOME/zsh"
 
 # devenv
 export SVLINT_CONFIG="$HOME/.config/svls/.svlint.toml"
-export EDITOR=nvim
 export PIPENV_VENV_IN_PROJECT=1
 
 export HISTFILE="$HOME/.local/share/shell/history"

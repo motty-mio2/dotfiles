@@ -1,1 +1,7 @@
 {{- include "dot_profile" -}}
+
+{{- if lookPath "nvim" }}
+export EDITOR=nvim
+{{- else if lookPath "vim" }}
+export EDITOR=vim
+{{- end }}
