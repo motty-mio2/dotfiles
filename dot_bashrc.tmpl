@@ -1,5 +1,9 @@
 #!/usr/bin/bash
 
+if [ -n VSCODE_INJECTION ]; then
+  export  EDITOR=code
+fi;
+
 # ~/.bashrc: executed by bash(1) for non-login shells.
 # see /usr/share/doc/bash/examples/startup-files (in the package bash-doc)
 # for examples

@@ -1,7 +1,10 @@
 #!/usr/bin/zsh
 
-setopt nonomatch
+if [ -n VSCODE_INJECTION ]; then
+  export  EDITOR=code
+fi;
 
+setopt nonomatch
 
 source "$XDG_CONFIG_HOME/zsh/plugins/zsh-completions/zsh-completions.plugin.zsh"
 source "$XDG_CONFIG_HOME/zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.plugin.zsh"
