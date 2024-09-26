@@ -18,10 +18,11 @@ def setup_history():
     else:
         state_home = Path.home() / ".local" / "state"
 
-    history: Path = state_home / "python_history"
+    history_file: Path = state_home / "python_history"
+    open(history_file, "w+").close()
 
-    readline.read_history_file(str(history))
-    atexit.register(readline.write_history_file, str(history))
+    readline.read_history_file(str(history_file))
+    atexit.register(readline.write_history_file, str(history_file))
 
 
 if is_vanilla():
