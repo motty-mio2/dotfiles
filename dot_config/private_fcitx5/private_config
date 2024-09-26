@@ -5,6 +5,10 @@ TriggerKeys=
 EnumerateWithTriggerKeys=True
 # Skip first input method while enumerating
 EnumerateSkipFirst=False
+# Activate Input Method
+ActivateKeys=
+# Deactivate Input Method
+DeactivateKeys=
 
 [Hotkey/AltTriggerKeys]
 0=Shift_L
@@ -20,12 +24,6 @@ EnumerateSkipFirst=False
 
 [Hotkey/EnumerateGroupBackwardKeys]
 0=Shift+Super+space
-
-[Hotkey/ActivateKeys]
-0=Henkan
-
-[Hotkey/DeactivateKeys]
-0=Muhenkan
 
 [Hotkey/PrevPage]
 0=Up
