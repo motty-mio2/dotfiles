@@ -7,49 +7,48 @@
 // custom settings, run `zed: open default settings` from the
 // command palette
 {
+  "vim_mode": false,
+  "features": {
+    "inline_completion_provider": "none"
+  },
+  "autosave": "on_focus_change",
+  "auto_update": true,
   "assistant": {
     "default_model": {
-      "model": "claude-3-5-sonnet-20240620",
-      "provider": "zed.dev"
+      "provider": "zed.dev",
+      "model": "claude-3-5-sonnet-20240620"
     },
     "version": "2"
   },
-  "auto_update": true,
-  "autosave": "on_focus_change",
-  "buffer_font_family": "HackGen35",
+  "ui_font_size": 16,
   "buffer_font_size": 16,
-  "features": {
-    "inline_completion_provider": "none"
+  "theme": {
+    "mode": "system",
+    "light": "Solarized Dark",
+    "dark": "One Dark"
+  },
+  "terminal": {
+    "font_family": "HackGen35 Console NF",
+    "shell": { "program": "zsh" },
+    "working_directory": "current_project_directory"
+  },
+  "buffer_font_family": "HackGen35",
+  "lsp": {
+    "pyright": {
+      "settings": {
+        "python.analysis": {
+          "diagnosticMode": "workspace",
+          "typeCheckingMode": "strict"
+        },
+        "python": {
+          "pythonPath": "./.venv/bin/python"
+        }
+      }
+    }
   },
   "languages": {
     "Python": {
       "format_on_save": "on"
     }
-  },
-  "lsp": {
-    "pyright": {
-      "settings": {
-        "python": {
-          "pythonPath": "./.venv/bin/python"
-        },
-        "python.analysis": {
-          "diagnosticMode": "workspace",
-          "typeCheckingMode": "strict"
-        }
-      }
-    }
-  },
-  "terminal": {
-    "font_family": "HackGen35 Console NF",
-    "shell": {
-      "program": "zsh"
-    },
-    "working_directory": "current_project_directory"
-  },
-  "theme": {
-    "dark": "One Dark",
-    "light": "Solarized Dark",
-    "mode": "system"
-  },
-  "ui_font_size": 16
+  }
 }
