@@ -5,7 +5,7 @@
 ### Linux
 
 ```bash
-sh -c "$(curl -fsLS get.chezmoi.io)" -- init --apply motty-mio2
+sh -c "$(curl -fsLS get.chezmoi.io)" -- init -b $HOME/.loca/bin --apply motty-mio2
 ```
 
 ### Windows
