@@ -22,8 +22,7 @@ install-brew() {
 	if [ -e "$BREW_PREFIX/bin/brew" ]; then
 		echo "brew is already installed."
 	else
-		mkdir -p "$BREW_PREFIX"
-		curl -L https://github.com/brew/brew/tarball/master | tar xz --strip-components 1 -C "$BREW_PREFIX"
+		git clone https://github.com/Homebrew/brew $BREW_PREFIX
 		eval "$("$BREW_PREFIX"/bin/brew shellenv)"
 		brew update --force --quiet
 	fi
@@ -96,8 +95,8 @@ install-debian-tools() {
 }
 
 install-brew-tools() {
-	brew tap wez/wezterm-linuxbrew
-	brew install \
+	"${BREW_PREFIX}/bin/brew" tap wez/wezterm-linuxbrew
+	"${BREW_PREFIX}/bin/brew" install \
 		bat chezmoi go-task \
 		lazygit neovim \
 		oh-my-posh shellcheck shfmt starship stylua svls svlint \

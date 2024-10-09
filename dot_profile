@@ -66,6 +66,7 @@ array=(
     "$VOLTA_HOME/bin"
     "$RYE_HOME/shims"
     "$DENO_INSTALL/bin"
+    "$BREW_PREFIX/bin"
     "$XDG_STATE_HOME/nix/profiles/profile/bin"
 )
 
