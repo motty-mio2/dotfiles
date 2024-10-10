@@ -1,8 +1,14 @@
 #!/usr/bin/bash
 
-if [ -n "$VSCODE_INJECTION" ]; then
-  export EDITOR=code
-fi;
+if [ -z "$MY_BASH_PROFILE" ]; then
+    source "$HOME/.bash_profile"
+fi
+
+{{- if lookPath "nvim" }}
+export EDITOR=nvim
+{{- else if lookPath "vim" }}
+export EDITOR=vim
+{{- end }}
 
 # ~/.bashrc: executed by bash(1) for non-login shells.
 # see /usr/share/doc/bash/examples/startup-files (in the package bash-doc)
