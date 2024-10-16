@@ -1,8 +1,14 @@
 #!/usr/bin/zsh
 
-if [ -n "$VSCODE_INJECTION" ]; then
-  export EDITOR=code
-fi;
+if [ -z "$MY_ZSH_PROFILE" ]; then
+    source "$HOME/.config/zsh/.zprofile"
+fi
+
+{{- if lookPath "nvim" }}
+export EDITOR=nvim
+{{- else if lookPath "vim" }}
+export EDITOR=vim
+{{- end }}
 
 setopt nonomatch
 
