@@ -86,6 +86,14 @@ function Install-Scoop {
     scoop bucket add motty https://github.com/motty-mio2/scoop-bucket.git
 }
 
+function Install-uv {
+    param (
+        $url = "https://astral.sh/uv/install.ps1"
+    )
+
+    irm $url | iex
+}
+
 function Install-Rye {
     param (
         $url = "https://github.com/astral-sh/rye/releases/latest/download/rye-x86_64-windows.exe",
@@ -117,19 +125,19 @@ function Set-Rye-Path {
     Set-Environemt-Value -ENV_NAME "RYE_HOME" -ENV_VALUE "$RYE_HOME"
 }
 
-function Install-Rye-Tools {
+function Install-uv-Tools {
     param (
-        $RYE_ENV = "$env:USERPROFILE\.local\share\rye\shims",
-        $executableName = "rye.exe"
+        $UV_ENV = "$env:CARGO_HOME\bin",
+        $executableName = "uv.exe"
     )
 
     foreach ($tool in @("poetry", "black", "flake8", "isort" , "mypy", "ruff")) {
-        & "$RYE_ENV\$executableName" uninstall $tool
-        & "$RYE_ENV\$executableName" install $tool
+        & "$UV_ENV\$executableName" tool uninstall $tool
+        & "$UV_ENV\$executableName" tool install $tool
     }
 
-    & "$RYE_ENV\$executableName" uninstall dixp
-    & "$RYE_ENV\$executableName" install --url git+https://github.com/motty-mio2/dixp dixp
+    & "$UV_ENV\$executableName" uninstall dixp
+    & "$UV_ENV\$executableName" install --url git+https://github.com/motty-mio2/dixp dixp
 }
 
 function Install-Volta-Tools {
