@@ -159,9 +159,3 @@ function Install-Scoop-Apps {
         oh-my-posh posh-git psfzf psreadline ripgrep sccache shellcheck shfmt starship sysinternals `
         wezterm wget which
 }
-
-function Install-Cargo-Tools() {
-    foreach ($tool in @("cargo-update")) {
-        & cargo install $tool
-    }
-}

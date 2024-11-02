@@ -41,10 +41,6 @@ install-nix() {
 
 # Install Tools
 
-install-cargo-tools() {
-	"$CARGO_HOME/bin/cargo" install cargo-update
-}
-
 install-rye-tools() {
 	tools=("poetry" "black" "flake8" "ignr" "isort" "mypy" "ruff")
 
