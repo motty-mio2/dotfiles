@@ -9,5 +9,7 @@ if ( -not (Get-Command "scoop")) {
 Write-Output "Install Git"
 . $HOME\scoop\shims\scoop.cmd install git
 
+$Env:Path="$HOME\\scoop\\shims;$ENV:Path"
+
 # winget install Microsoft.OpenSSH.Beta --override ADDLOCAL=Client
 {{ end }}
