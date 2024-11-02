@@ -156,12 +156,12 @@ function Install-Scoop-Apps {
     scoop install `
         7zip bat chezmoi cloudflared curl fd fzf geekuninstaller gh git grep gsudo `
         less llvm make nano neovim `
-        oh-my-posh posh-git psfzf psreadline ripgrep shellcheck shfmt starship sysinternals `
+        oh-my-posh posh-git psfzf psreadline ripgrep sccache shellcheck shfmt starship sysinternals `
         wezterm wget which
 }
 
 function Install-Cargo-Tools() {
-    foreach ($tool in @("cargo-update" , "sccache")) {
+    foreach ($tool in @("cargo-update")) {
         & cargo install $tool
     }
 }

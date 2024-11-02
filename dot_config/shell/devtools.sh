@@ -42,7 +42,7 @@ install-nix() {
 # Install Tools
 
 install-cargo-tools() {
-	"$CARGO_HOME/bin/cargo" install cargo-update sccache
+	"$CARGO_HOME/bin/cargo" install cargo-update
 }
 
 install-rye-tools() {
@@ -99,7 +99,7 @@ install-brew-tools() {
 	"${BREW_PREFIX}/bin/brew" install \
 		bat chezmoi go-task \
 		lazygit neovim \
-		oh-my-posh shellcheck shfmt starship stylua svls svlint \
+		oh-my-posh sccache shellcheck shfmt starship stylua svls svlint \
 		wezterm
 }
 
