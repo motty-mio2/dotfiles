@@ -7,5 +7,7 @@ if ( -not (Get-Command "scoop")) {
     Invoke-WebRequest -useb get.scoop.sh | Invoke-Expression
 }
 
+. $HOME\scoop\shims\scoop.cmd install git
+
 # winget install Microsoft.OpenSSH.Beta --override ADDLOCAL=Client
 {{ end }}
