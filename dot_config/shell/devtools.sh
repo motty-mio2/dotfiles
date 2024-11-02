@@ -42,11 +42,11 @@ install-nix() {
 # Install Tools
 
 install-cargo-tools() {
-	"$CARGO_HOME/bin/cargo" install cargo-update sccache git-ignore-generator
+	"$CARGO_HOME/bin/cargo" install cargo-update sccache
 }
 
 install-rye-tools() {
-	tools=("poetry" "black" "flake8" "isort" "mypy" "ruff")
+	tools=("poetry" "black" "flake8" "ignr" "isort" "mypy" "ruff")
 
 	for tool in "${tools[@]}"; do
 		"$RYE_HOME/shims/rye" uninstall "$tool"

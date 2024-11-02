@@ -123,7 +123,7 @@ function Install-Rye-Tools {
         $executableName = "rye.exe"
     )
 
-    foreach ($tool in @("poetry", "black", "flake8", "isort" , "mypy", "ruff")) {
+    foreach ($tool in @("poetry", "black", "flake8", "ignr", "isort" , "mypy", "ruff")) {
         & "$RYE_ENV\$executableName" uninstall $tool
         & "$RYE_ENV\$executableName" install $tool
     }
@@ -161,7 +161,7 @@ function Install-Scoop-Apps {
 }
 
 function Install-Cargo-Tools() {
-    foreach ($tool in @("cargo-update" , "sccache" , "git-ignore-generator")) {
+    foreach ($tool in @("cargo-update" , "sccache")) {
         & cargo install $tool
     }
 }
