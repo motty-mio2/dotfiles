@@ -6,7 +6,7 @@ Set-ExecutionPolicy RemoteSigned -Scope CurrentUser -Force
 if ( -not (Get-Command "scoop")) {
     Invoke-WebRequest -useb get.scoop.sh | Invoke-Expression
 }
-
+Write-Output "Install Git"
 . $HOME\scoop\shims\scoop.cmd install git
 
 # winget install Microsoft.OpenSSH.Beta --override ADDLOCAL=Client
