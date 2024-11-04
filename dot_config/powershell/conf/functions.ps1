@@ -262,13 +262,13 @@ function Set-Better-Windows {
     # https://forest.watch.impress.co.jp/docs/serial/yajiuma/1523696.html
 
     # C:\Program Files\Windows Defender\MsMpEng.exe を除外パスに追加
-    reg add "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows Defender\Exclusions\Paths" /v "C:\Program Files\Windows Defender\MsMpEng.exe" /t REG_DWORD /d "0" /f
+    sudo reg add "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows Defender\Exclusions\Paths" /v "C:\Program Files\Windows Defender\MsMpEng.exe" /t REG_DWORD /d "0" /f
     # MsMpEng.exe を除外プロセスに追加
-    reg add "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows Defender\Exclusions\Processes" /v "MsMpEng.exe" /t REG_DWORD /d "0" /f
+    sudo reg add "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows Defender\Exclusions\Processes" /v "MsMpEng.exe" /t REG_DWORD /d "0" /f
     # C:\Program Files\Windows Defender\MsMpEng.exe の除外パス設定をクエリ
-    reg query "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows Defender\Exclusions\Paths" /v "C:\Program Files\Windows Defender\MsMpEng.exe"
+    sudo reg query "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows Defender\Exclusions\Paths" /v "C:\Program Files\Windows Defender\MsMpEng.exe"
     # MsMpEng.exe の除外プロセス設定をクエリ
-    reg query "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows Defender\Exclusions\Processes" /v "MsMpEng.exe"
+    sudo reg query "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows Defender\Exclusions\Processes" /v "MsMpEng.exe"
 
     # 「ときどきスタートにおすすめを表示する」をオフに設定
     reg add "HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\ContentDeliveryManager" /v "SystemPaneSuggestionsEnabled" /t REG_DWORD /d "0" /f
