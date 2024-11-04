@@ -131,7 +131,7 @@ function Install-uv-Tools {
         $executableName = "uv.exe"
     )
 
-    foreach ($tool in @("poetry", "black", "flake8", "isort" , "mypy", "ruff")) {
+    foreach ($tool in @("poetry", "black", "flake8", "ignr", "isort" , "mypy", "ruff")) {
         & "$UV_ENV\$executableName" tool uninstall $tool
         & "$UV_ENV\$executableName" tool install $tool
     }
@@ -164,12 +164,6 @@ function Install-Scoop-Apps {
     scoop install `
         7zip bat chezmoi cloudflared curl fd fzf geekuninstaller gh git grep gsudo `
         less llvm make nano neovim `
-        oh-my-posh posh-git psfzf psreadline ripgrep shellcheck shfmt starship sysinternals `
+        oh-my-posh posh-git psfzf psreadline ripgrep sccache shellcheck shfmt starship sysinternals `
         wezterm wget which
-}
-
-function Install-Cargo-Tools() {
-    foreach ($tool in @("cargo-update" , "sccache" , "git-ignore-generator")) {
-        & cargo install $tool
-    }
 }

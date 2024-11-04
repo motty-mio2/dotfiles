@@ -7,5 +7,9 @@ if ( -not (Get-Command "scoop")) {
     Invoke-WebRequest -useb get.scoop.sh | Invoke-Expression
 }
 
+$Env:Path="$HOME\\scoop\\shims;$ENV:Path"
+scoop install 7zip git chezmoi
+
+
 # winget install Microsoft.OpenSSH.Beta --override ADDLOCAL=Client
 {{ end }}
