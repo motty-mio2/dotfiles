@@ -18,6 +18,7 @@
           arduino-language-server
           hadolint
           nixfmt-rfc-style
+          sccache
           shellcheck
           shfmt
           stylua

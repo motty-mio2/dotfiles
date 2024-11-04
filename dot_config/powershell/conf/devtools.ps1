@@ -123,7 +123,7 @@ function Install-Rye-Tools {
         $executableName = "rye.exe"
     )
 
-    foreach ($tool in @("poetry", "black", "flake8", "isort" , "mypy", "ruff")) {
+    foreach ($tool in @("poetry", "black", "flake8", "ignr", "isort" , "mypy", "ruff")) {
         & "$RYE_ENV\$executableName" uninstall $tool
         & "$RYE_ENV\$executableName" install $tool
     }
@@ -156,12 +156,6 @@ function Install-Scoop-Apps {
     scoop install `
         7zip bat chezmoi cloudflared curl fd fzf geekuninstaller gh git grep gsudo `
         less llvm make nano neovim `
-        oh-my-posh posh-git psfzf psreadline ripgrep shellcheck shfmt starship sysinternals `
+        oh-my-posh posh-git psfzf psreadline ripgrep sccache shellcheck shfmt starship sysinternals `
         wezterm wget which
-}
-
-function Install-Cargo-Tools() {
-    foreach ($tool in @("cargo-update" , "sccache" , "git-ignore-generator")) {
-        & cargo install $tool
-    }
 }
