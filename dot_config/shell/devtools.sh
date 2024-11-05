@@ -14,6 +14,10 @@ install-rye() {
 	curl -sSf https://rye.astral.sh/get | bash
 }
 
+install-uv() {
+    curl -LsSf https://astral.sh/uv/install.sh | sh
+}
+
 install-volta() {
 	curl https://get.volta.sh | bash
 }
@@ -41,16 +45,16 @@ install-nix() {
 
 # Install Tools
 
-install-rye-tools() {
+install-uv-tools() {
 	tools=("poetry" "black" "flake8" "ignr" "isort" "mypy" "ruff")
 
 	for tool in "${tools[@]}"; do
-		"$RYE_HOME/shims/rye" uninstall "$tool"
-		"$RYE_HOME/shims/rye" install "$tool"
+		"$CARGO_HOME/bin/uv" uninstall "$tool"
+		"$CARGO_HOME/bin/uv" install "$tool"
 	done
 
-	"$RYE_HOME/shims/rye" uninstall "dixp"
-	"$RYE_HOME/shims/rye" install --url git+https://github.com/motty-mio2/dixp.git dixp
+	"$CARGO_HOME/bin/uv" uninstall "dixp"
+	"$CARGO_HOME/bin/uv" install --from git+https://github.com/motty-mio2/dixp.git dixp
 }
 
 install-volta-tools() {

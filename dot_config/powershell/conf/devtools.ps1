@@ -130,8 +130,8 @@ function Install-uv-Tools {
         & "$UV_ENV\$executableName" tool install $tool
     }
 
-    & "$UV_ENV\$executableName" uninstall dixp
-    & "$UV_ENV\$executableName" install --url git+https://github.com/motty-mio2/dixp dixp
+    & "$UV_ENV\$executableName" tool uninstall dixp
+    & "$UV_ENV\$executableName" tool install --from git+https://github.com/motty-mio2/dixp dixp
 }
 
 function Install-Volta-Tools {
