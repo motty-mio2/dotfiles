@@ -78,12 +78,6 @@ function Install-Scoop {
     # scoop alias add upgrade 'scoop update; scoop update *' 'update all'
     # scoop alias add backup 'scoop export > ~\scoop.txt'
     # scoop alias add reinstall "scoop uninstall {0}; scoop install {0}"
-
-    scoop bucket add extras
-    scoop bucket add java
-    scoop bucket add versions
-    scoop bucket add nerd-fonts
-    scoop bucket add motty https://github.com/motty-mio2/scoop-bucket.git
 }
 
 function Install-uv {
@@ -161,6 +155,12 @@ function Set-SVLINT-PATH {
 }
 
 function Install-Scoop-Apps {
+    scoop bucket add extras
+    scoop bucket add java
+    scoop bucket add versions
+    scoop bucket add nerd-fonts
+    scoop bucket add motty https://github.com/motty-mio2/scoop-bucket.git
+
     scoop install `
         7zip bat chezmoi cloudflared curl fd fzf geekuninstaller gh git grep gsudo `
         less llvm make nano neovim `
