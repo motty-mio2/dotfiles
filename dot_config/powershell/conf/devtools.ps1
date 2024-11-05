@@ -126,12 +126,10 @@ function Install-uv-Tools {
     )
 
     foreach ($tool in @("poetry", "black", "flake8", "ignr", "isort" , "mypy", "ruff")) {
-        & "$UV_ENV\$executableName" tool uninstall $tool
-        & "$UV_ENV\$executableName" tool install $tool
+        & "$UV_ENV\$executableName" tool install --upgrade $tool
     }
 
-    & "$UV_ENV\$executableName" tool uninstall dixp
-    & "$UV_ENV\$executableName" tool install --from git+https://github.com/motty-mio2/dixp dixp
+    & "$UV_ENV\$executableName" tool install --upgrade --from git+https://github.com/motty-mio2/dixp dixp
 }
 
 function Install-Volta-Tools {

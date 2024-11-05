@@ -15,7 +15,7 @@ install-rye() {
 }
 
 install-uv() {
-    curl -LsSf https://astral.sh/uv/install.sh | sh
+	curl -LsSf https://astral.sh/uv/install.sh | sh
 }
 
 install-volta() {
@@ -49,12 +49,10 @@ install-uv-tools() {
 	tools=("poetry" "black" "flake8" "ignr" "isort" "mypy" "ruff")
 
 	for tool in "${tools[@]}"; do
-		"$CARGO_HOME/bin/uv" tool uninstall "$tool"
-		"$CARGO_HOME/bin/uv" tool install "$tool"
+		"$CARGO_HOME/bin/uv" tool install --upgrade "$tool"
 	done
 
-	"$CARGO_HOME/bin/uv" tool uninstall "dixp"
-	"$CARGO_HOME/bin/uv" tool install --from git+https://github.com/motty-mio2/dixp.git dixp
+	"$CARGO_HOME/bin/uv" tool install --upgrade --from git+https://github.com/motty-mio2/dixp.git dixp
 }
 
 install-volta-tools() {
