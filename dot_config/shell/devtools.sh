@@ -49,12 +49,12 @@ install-uv-tools() {
 	tools=("poetry" "black" "flake8" "ignr" "isort" "mypy" "ruff")
 
 	for tool in "${tools[@]}"; do
-		"$CARGO_HOME/bin/uv" uninstall "$tool"
-		"$CARGO_HOME/bin/uv" install "$tool"
+		"$CARGO_HOME/bin/uv" tool uninstall "$tool"
+		"$CARGO_HOME/bin/uv" tool install "$tool"
 	done
 
-	"$CARGO_HOME/bin/uv" uninstall "dixp"
-	"$CARGO_HOME/bin/uv" install --from git+https://github.com/motty-mio2/dixp.git dixp
+	"$CARGO_HOME/bin/uv" tool uninstall "dixp"
+	"$CARGO_HOME/bin/uv" tool install --from git+https://github.com/motty-mio2/dixp.git dixp
 }
 
 install-volta-tools() {
