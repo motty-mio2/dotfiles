@@ -27,3 +27,7 @@ $Env:VOLTA_HOME = "$Env:USERPROFILE\scoop\apps\volta\current\appdata"
 $Env:EDITOR = "nvim"
 $Env:PIPENV_VENV_IN_PROJECT = "1"
 $Env:DISPLAY = "localhost:0.0"
+
+$Env:PATH = "$Env:USERPROFILE/.local/bin;$Env:PATH"
+
+
