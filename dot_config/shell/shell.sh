@@ -50,20 +50,6 @@ cats() {
 	grep <"$1" -vE "^\s*#" | grep -vE '^\s*$'
 }
 
-envup() {
-	dirs=("$HOME/.pyenv")
-
-	for target in "${dirs[@]}"; do
-		if [ -d "$target" ]; then
-			echo "$target"
-			git -C "$target" pull
-		fi
-	done
-
-	rustup update
-	cargo install-update --all
-}
-
 webp2png() {
 	while [[ "${1:-}" = -* ]]; do shift; done
 

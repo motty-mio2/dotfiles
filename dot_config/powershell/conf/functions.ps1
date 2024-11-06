@@ -225,21 +225,6 @@ function doc {
     docker compose $Args
 }
 
-function envup {
-    $dirs = @(
-        "$HOME/.pyenv"
-    )
-
-    foreach ($target in $dirs) {
-        if (Test-Path $target ) {
-            Write-Host $target
-            git -C $target pull
-        }
-    }
-    rustup update
-    cargo install-update --all
-}
-
 function paste {
     powershell.exe -command "[Console]::OutputEncoding = [System.Text.Encoding]::GetEncoding('utf-8');Get-Clipboard"
 }
