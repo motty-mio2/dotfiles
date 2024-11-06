@@ -75,7 +75,7 @@ install-arch-tools() {
 		rm -rf "$WORK_DIR"
 	fi
 	yay -Sy --noconfirm \
-		bat byobu chezmoi curl fd fzf git github-cli go go-task-bin \
+		bat byobu chezmoi curl fd fzf git github-cli glab go go-task-bin \
 		htop jq nano neovim \
 		oh-my-posh-bin pkg-config screen shellcheck-bin shfmt starship tree ttf-hackgen unarchiver unzip \
 		wget zsh
@@ -86,7 +86,7 @@ install-debian-tools() {
 	sudo apt-get update
 	sudo apt-get upgrade -qy
 	sudo apt-get install -qy \
-		bat build-essential byobu curl fd-find fzf git gh \
+		bat build-essential byobu curl fd-find fzf git \
 		htop jq libssl-dev nano \
 		ripgrep tree unzip \
 		wget zsh
@@ -95,7 +95,7 @@ install-debian-tools() {
 install-brew-tools() {
 	"${BREW_PREFIX}/bin/brew" tap wez/wezterm-linuxbrew
 	"${BREW_PREFIX}/bin/brew" install \
-		bat chezmoi go-task \
+		bat chezmoi gh glab go-task \
 		lazygit neovim \
 		oh-my-posh sccache shellcheck shfmt starship stylua svls svlint \
 		wezterm

@@ -19,6 +19,8 @@
           chezmoi
           cloudflared
           fd
+          gh
+          glab
           go-task
           jq
           lazygit
