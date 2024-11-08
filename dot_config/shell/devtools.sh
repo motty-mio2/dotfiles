@@ -49,10 +49,10 @@ install-uv-tools() {
 	tools=("poetry" "black" "flake8" "ignr" "isort" "mypy" "ruff")
 
 	for tool in "${tools[@]}"; do
-		"$CARGO_HOME/bin/uv" tool install --upgrade "$tool"
+		"$HOME/.local/bin/uv" tool install --upgrade "$tool"
 	done
 
-	"$CARGO_HOME/bin/uv" tool install --upgrade --from git+https://github.com/motty-mio2/dixp.git dixp
+	"$HOME/.loca/bin/uv" tool install --upgrade --from git+https://github.com/motty-mio2/dixp.git dixp
 }
 
 install-volta-tools() {
