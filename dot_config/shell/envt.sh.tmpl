@@ -6,7 +6,7 @@
 {{  if (.chezmoi.kernel.osrelease | lower | contains "microsoft") }}
 export LD_LIBRARY_PATH=/usr/lib/wsl/lib:$LD_LIBRARY_PATH
 {{      if glob ( joinPath .chezmoi.homeDir "/.local/bin/wsl2-ssh-agent" ) }}
-{{          output ( joinPath .chezmoi.homeDir "/.local/bin/wsl2-ssh-agent" ) }}
+eval $( {{  joinPath .chezmoi.homeDir "/.local/bin/wsl2-ssh-agent" }} )
 {{      end }}
 open() {
     if [ $# != 1 ]; then
@@ -30,3 +30,4 @@ paste() {
 }
 {{  end }}
 {{ end }}
+
