@@ -121,7 +121,7 @@ function Set-Rye-Path {
 
 function Install-uv-Tools {
     param (
-        $UV_ENV = "$env:CARGO_HOME\bin",
+        $UV_ENV = "$env:USERPROFILE\.local\bin",
         $executableName = "uv.exe"
     )
 
