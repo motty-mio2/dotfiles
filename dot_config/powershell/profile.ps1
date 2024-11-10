@@ -1,8 +1,8 @@
 # XDG
-$Env:XDG_CONFIG_HOME = "$Env:USERPROFILE\.config"
-$Env:XDG_DATA_HOME = "$Env:USERPROFILE\.local\share"
-$Env:XDG_CACHE_HOME = "$Env:USERPROFILE\.local\cache"
-$Env:XDG_STATE_HOME = "$Env:USERPROFILE\.local\state"
+$Env:XDG_CONFIG_HOME = "$Env:USERPROFILE/.config"
+$Env:XDG_DATA_HOME = "$Env:USERPROFILE/.local/share"
+$Env:XDG_CACHE_HOME = "$Env:USERPROFILE/.local/cache"
+$Env:XDG_STATE_HOME = "$Env:USERPROFILE/.local/state"
 
 # Use XDG
 $Env:AWS_CONFIG_FILE = "$Env:XDG_CONFIG_HOME/aws/config"
@@ -22,8 +22,8 @@ $Env:PYTHONSTARTUP = "$Env:XDG_CONFIG_HOME/python/pythonrc"
 $Env:RYE_HOME = "$Env:XDG_DATA_HOME/rye"
 
 # devenv
-$Env:SVLINT_CONFIG = "$Env:HOME/.config/svls/.svlint.toml"
-$Env:VOLTA_HOME = "$Env:USERPROFILE\scoop\apps\volta\current\appdata"
+$Env:SVLINT_CONFIG = "$Env:USERPROFILE/.config/svls/.svlint.toml"
+$Env:VOLTA_HOME = "$Env:USERPROFILE/scoop/apps/volta/current/appdata"
 $Env:EDITOR = "nvim"
 $Env:PIPENV_VENV_IN_PROJECT = "1"
 $Env:DISPLAY = "localhost:0.0"

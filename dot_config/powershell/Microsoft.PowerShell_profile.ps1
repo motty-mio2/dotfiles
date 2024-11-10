@@ -1,4 +1,4 @@
-$configure_folder = $HOME + "\.config\powershell"
+$configure_folder = $Env:USERPROFILE + "\.config\powershell"
 
 Get-ChildItem -Path ("$configure_folder\conf") -Recurse -Include *.ps1 | ForEach-Object -Process {
     Invoke-Expression (". " + $_)
