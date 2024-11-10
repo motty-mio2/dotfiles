@@ -26,7 +26,7 @@ install-brew() {
 	if [ -e "$BREW_PREFIX/bin/brew" ]; then
 		echo "brew is already installed."
 	else
-		git clone https://github.com/Homebrew/brew $BREW_PREFIX
+		git clone https://github.com/Homebrew/brew "$BREW_PREFIX"
 		eval "$("$BREW_PREFIX"/bin/brew shellenv)"
 		brew update --force --quiet
 	fi
@@ -52,7 +52,7 @@ install-uv-tools() {
 		"$HOME/.local/bin/uv" tool install --upgrade "$tool"
 	done
 
-	"$HOME/.loca/bin/uv" tool install --upgrade --from git+https://github.com/motty-mio2/dixp.git dixp
+	"$HOME/.local/bin/uv" tool install --upgrade --from git+https://github.com/motty-mio2/dixp.git dixp
 }
 
 install-volta-tools() {
