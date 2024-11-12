@@ -62,7 +62,6 @@ array=(
     "$HOME/bin"
     "$HOME/.local/bin"
     "$GOPATH/bin"
-    "$PYENV_ROOT/bin"
     "$CARGO_HOME/bin"
     "$VOLTA_HOME/bin"
     "$RYE_HOME/shims"

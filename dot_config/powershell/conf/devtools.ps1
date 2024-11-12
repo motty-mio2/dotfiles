@@ -54,20 +54,6 @@ function Disable-Vispaly-Venv {
     Set-Environemt-Value -ENV_NAME "VIRTUAL_ENV_DISABLE_PROMPT" -ENV_VALUE "1"
 }
 
-function Set-Pyenv-Path {
-    param (
-        $PYENV_DIR = $env:USERPROFILE + "\.pyenv\pyenv-win"
-    )
-
-    foreach ($target in @( "PYENV", "PYENV_HOME", "PYENV_ROOT")) {
-        Set-Environemt-Value -ENV_NAME $target -ENV_VALUE $PYENV_DIR
-    }
-
-    foreach ($target in @( "\bin", "\shims")) {
-        Set-Environemt-Value -ENV_NAME $PYENV_DIR + $target -ENV_VALUE $PYENV_DIR
-    }
-}
-
 function Install-Scoop {
     if ( -not (Get-Command "scoop")) {
         Invoke-WebRequest -useb get.scoop.sh | Invoke-Expression
@@ -125,7 +111,7 @@ function Install-uv-Tools {
         $executableName = "uv.exe"
     )
 
-    foreach ($tool in @("poetry", "black", "flake8", "ignr", "isort" , "mypy", "ruff")) {
+    foreach ($tool in @("black", "flake8", "ignr", "isort" , "mypy", "ruff")) {
         & "$UV_ENV\$executableName" tool install --upgrade $tool
     }
 

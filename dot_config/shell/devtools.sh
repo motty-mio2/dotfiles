@@ -46,7 +46,7 @@ install-nix() {
 # Install Tools
 
 install-uv-tools() {
-	tools=("poetry" "black" "flake8" "ignr" "isort" "mypy" "ruff")
+	tools=("black" "flake8" "ignr" "isort" "mypy" "ruff")
 
 	for tool in "${tools[@]}"; do
 		"$HOME/.local/bin/uv" tool install --upgrade "$tool"
