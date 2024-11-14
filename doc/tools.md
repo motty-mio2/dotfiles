@@ -28,12 +28,12 @@
 |      Lua      |        Stylua        |  Scoop  |    native    |            |
 |    NodeJS     |        Volta         | native  |    native    |            |
 |   Markdown    |       Marksman       |  scoop  | AUR/nix/brew |            |
-|    Python     |         rye          | native  |    native    |            |
-|    Python     |        black         |   rye   |     rye      |    pip     |
-|    Python     |        flake8        |   rye   |     rye      |    pip     |
-|    Python     |        isort         |   rye   |     rye      |    pip     |
-|    Python     |         mypy         |   rye   |     rye      |    pip     |
-|    Python     |         ruff         |   rye   |     rye      |    pip     |
+|    Python     |          uv          | native  |    native    |            |
+|    Python     |        black         |   uv    |      uv      |    pip     |
+|    Python     |        flake8        |   uv    |      uv      |    pip     |
+|    Python     |        isort         |   uv    |      uv      |    pip     |
+|    Python     |         mypy         |   uv    |      uv      |    pip     |
+|    Python     |         ruff         |   uv    |      uv      |    pip     |
 |    Python     |       pyright        |  volta  |    volta     |   nodejs   |
 |     Shell     | bash-language-server |  volta  |    volta     |   nodejs   |
 |     Shell     |      shellcheck      |  scoop  | AUR/nix/brew |            |

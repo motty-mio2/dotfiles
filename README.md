@@ -22,7 +22,7 @@ $tempFile = $(New-TemporaryFile).FullName + ".exe"; Invoke-WebRequest -Uri "http
 - neovim
 - git
 - volta
-- rye
+- uv
 - golang
 - cargo/rust
 
