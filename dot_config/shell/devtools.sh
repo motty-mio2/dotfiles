@@ -58,7 +58,7 @@ install-uv-tools() {
 install-volta-tools() {
 	"$VOLTA_HOME/bin/volta" install node@lts
 
-	tools=("biome" "@bitwarden/cli" "neovim" "pyright" "bash-language-server" "tree-sitter-cli")
+	tools=("@bitwarden/cli" "bash-language-server" "biome" "markdownlint-cli" "neovim" "pyright" "tree-sitter-cli")
 	for tool in "${tools[@]}"; do
 		"$VOLTA_HOME/bin/volta" install "$tool"
 	done
