@@ -10,10 +10,6 @@ install-rust() {
 	curl https://sh.rustup.rs -sSf | sh -s -- -y
 }
 
-install-rye() {
-	curl -sSf https://rye.astral.sh/get | bash
-}
-
 install-uv() {
 	curl -LsSf https://astral.sh/uv/install.sh | sh
 }

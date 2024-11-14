@@ -71,38 +71,7 @@ function Install-uv {
         $url = "https://astral.sh/uv/install.ps1"
     )
 
-    irm $url | iex
-}
-
-function Install-Rye {
-    param (
-        $url = "https://github.com/astral-sh/rye/releases/latest/download/rye-x86_64-windows.exe",
-        $RYE_HOME = "$env:USERPROFILE\.local\share\rye",
-        $executableName = "rye.exe"
-    )
-
-    if (-Not(Get-Command rye -ea SilentlyContinue) ) {
-        # Set Rye HOME
-        if (-not (Test-Path "$RYE_HOME\$executableName")) {
-            New-Item -Path $RYE_HOME -ItemType Directory -Force
-
-            # Install Rye
-            Invoke-WebRequest -Uri $url -OutFile (Join-Path -Path $RYE_HOME -ChildPath $executableName)
-            & "$RYE_HOME\$executableName"
-
-            Remove-Item "$RYE_HOME\$executableName"
-        }
-
-        Set-Rye-Path -RYE_HOME $RYE_HOME
-    }
-}
-
-function Set-Rye-Path {
-    param (
-        $RYE_HOME = "$env:USERPROFILE\.local\share\rye"
-    )
-    Set-Environemt-Path -ENV_NAME "PATH" -ENV_VALUE "$RYE_HOME\shims"
-    Set-Environemt-Value -ENV_NAME "RYE_HOME" -ENV_VALUE "$RYE_HOME"
+    Invoke-RestMethod $url | Invoke-Expression
 }
 
 function Install-uv-Tools {
