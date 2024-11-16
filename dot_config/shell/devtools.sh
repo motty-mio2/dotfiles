@@ -10,10 +10,6 @@ install-rust() {
 	curl https://sh.rustup.rs -sSf | sh -s -- -y
 }
 
-install-rye() {
-	curl -sSf https://rye.astral.sh/get | bash
-}
-
 install-uv() {
 	curl -LsSf https://astral.sh/uv/install.sh | sh
 }
@@ -46,7 +42,7 @@ install-nix() {
 # Install Tools
 
 install-uv-tools() {
-	tools=("poetry" "black" "flake8" "ignr" "isort" "mypy" "ruff")
+	tools=("black" "flake8" "ignr" "isort" "mypy" "ruff")
 
 	for tool in "${tools[@]}"; do
 		"$HOME/.local/bin/uv" tool install --upgrade "$tool"

@@ -19,7 +19,6 @@ $Env:LESSHISTFILE = "$Env:XDG_STATE_HOME/less/history"
 $Env:NPM_CONFIG_USERCONFIG = "$Env:XDG_CONFIG_HOME/npm/npmrc"
 $Env:PLATFORMIO_CORE_DIR = "$Env:XDG_DATA_HOME/platformio"
 $Env:PYTHONSTARTUP = "$Env:XDG_CONFIG_HOME/python/pythonrc"
-$Env:RYE_HOME = "$Env:XDG_DATA_HOME/rye"
 
 # devenv
 $Env:SVLINT_CONFIG = "$Env:USERPROFILE/.config/svls/.svlint.toml"
