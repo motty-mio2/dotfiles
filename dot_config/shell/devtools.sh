@@ -105,3 +105,17 @@ install-nix-tools() {
 install-arch-desktop-dependency() {
 	yay -Sy fcitx5-im fcitx5-configtool fcitx5-mozc visual-studio-code-bin
 }
+
+install-keyd() {
+	sudo ln -s "$HOME/.config/keyd" "/etc/keyd"
+
+	keyd_version=$(curl -s https://api.github.com/repos/rvaiya/keyd/releases/latest | jq -r .tag_name)
+	if ! command -v keyd &>/dev/null || [ "$(keyd --version | cut -d " " -f 2)" != "$keyd_version" ]; then
+		DIR=$(mktemp -d)
+		wget -P "$DIR" "https://github.com/rvaiya/keyd/archive/refs/tags/{{ $keyd_version }}.zip"
+		unzip "$DIR/$keyd_version.zip" -d "$DIR"
+		cd "$DIR/keyd-$keyd_version" || return
+		make
+		sudo make install
+	fi
+}
