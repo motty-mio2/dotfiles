@@ -73,7 +73,7 @@ install-arch-tools() {
 	yay -Sy --noconfirm \
 		bat byobu chezmoi curl fd fzf git github-cli glab go go-task-bin \
 		htop jq nano neovim \
-		oh-my-posh-bin pkg-config screen shellcheck-bin shfmt starship tree ttf-hackgen unarchiver unzip \
+		oh-my-posh-bin pkg-config screen shellcheck-bin shfmt starship stylua tree ttf-hackgen unarchiver unzip \
 		wget zsh
 }
 
