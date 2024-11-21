@@ -1,5 +1,5 @@
 return {
-	{ "nvimtools/none-ls-extras.nvim",dependencies = { "nvimtools/none-ls.nvim" }},
+	{ "nvimtools/none-ls-extras.nvim", dependencies = { "nvimtools/none-ls.nvim" } },
 	{ "nvimtools/none-ls.nvim", dependencies = { "nvim-lua/plenary.nvim" }, config = true },
 	{ "neovim/nvim-lspconfig" },
 	{ "nvim-treesitter/nvim-treesitter" },

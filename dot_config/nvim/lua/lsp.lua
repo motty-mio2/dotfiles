@@ -27,12 +27,11 @@ require("lspconfig").pyright.setup({
 	root_dir = nvim_lsp.util.root_pattern(".git", "pyproject.toml", ".python-version"),
 })
 require("lspconfig").rust_analyzer.setup({
-    on_attach = on_attach,
-    flags = lsp_flags,
+	on_attach = on_attach,
+	flags = lsp_flags,
 })
 require("lspconfig").svls.setup({
 	on_attach = on_attach,
 	flags = lsp_flags,
 	root_dir = nvim_lsp.util.root_pattern(".git"),
 })
-
