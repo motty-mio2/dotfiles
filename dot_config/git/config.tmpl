@@ -1,9 +1,13 @@
 [user]
     name = motty
     email = motty.mio2@gmail.com
-    signingkey =  ~/.ssh/id_ed25519.pub
+{{- if glob ( joinPath .chezmoi.homeDir "/.ssh/id_ed25519" ) }}
+    signingkey = ~/.ssh/id_ed25519.pub
 [commit]
-        gpgsign = true
+    gpgsign = true
+[gpg]
+    format = ssh
+{{ end }}
 [core]
     autocrlf = input
     filemode = false
@@ -14,8 +18,6 @@
     smudge = git-lfs smudge -- %f
     process = git-lfs filter-process
     required = true
-[gpg]
-    format = ssh
 [init]
     defaultBranch = main
 [merge]
