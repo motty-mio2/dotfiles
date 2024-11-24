@@ -7,8 +7,7 @@ touch "$XDG_STATE_HOME"/python_history
 
 if type "pacman" >/dev/null 2>&1; then
 	sudo pacman -S base-devel
-
-if type "apt" >/dev/null 2>&1; then
+elif type "apt" >/dev/null 2>&1; then
 	echo "Debian Mode"
 	sudo apt install build-essential
 elif type "dnf" >/dev/null 2>&1; then
@@ -20,3 +19,4 @@ else
 	echo "Unknown OS or Distribution"
 fi
 {{- end }}
+
