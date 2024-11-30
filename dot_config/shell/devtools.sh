@@ -112,9 +112,9 @@ install-keyd() {
 	keyd_version=$(curl -s https://api.github.com/repos/rvaiya/keyd/releases/latest | jq -r .tag_name)
 	if ! command -v keyd &>/dev/null || [ "$(keyd --version | cut -d " " -f 2)" != "$keyd_version" ]; then
 		DIR=$(mktemp -d)
-		wget -P "$DIR" "https://github.com/rvaiya/keyd/archive/refs/tags/{{ $keyd_version }}.zip"
+		wget -P "$DIR" "https://github.com/rvaiya/keyd/archive/refs/tags/$keyd_version.zip"
 		unzip "$DIR/$keyd_version.zip" -d "$DIR"
-		cd "$DIR/keyd-$keyd_version" || return
+		cd "$DIR/keyd-${keyd_version:1}" || return
 		make
 		sudo make install
 	fi
