@@ -5,6 +5,7 @@ $Env:XDG_CACHE_HOME = "$Env:USERPROFILE/.local/cache"
 $Env:XDG_STATE_HOME = "$Env:USERPROFILE/.local/state"
 
 # Use XDG
+$Env:AQUA_GLOBAL_CONFIG="$Env:XDG_CONFIG_HOME/aquaproj-aqua/aqua.yaml"
 $Env:AWS_CONFIG_FILE = "$Env:XDG_CONFIG_HOME/aws/config"
 $Env:CARGO_HOME = "$Env:XDG_DATA_HOME/cargo"
 $Env:RUSTUP_HOME = "$Env:XDG_DATA_HOME/rustup"
