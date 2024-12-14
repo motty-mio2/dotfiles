@@ -1,19 +1,28 @@
 [data]
 
-{{- $machine_type_prompt_list := list "desktop" "laptop" "server" -}}
-{{- $machine_type_prompt := promptChoiceOnce . "machine_type_prompt" "Choice Machine Type (WSL is server)" $machine_type_prompt_list "server" }}
-machine_type = {{ $machine_type_prompt | quote }}
+{{- $codespaces:= env "CODESPACES" | not | not -}}
+{{- if $codespaces }}
+machine_type = "server"
+powershell = "oh-my-posh"
+bash = "oh-my-posh"
+zsh = "oh-my-posh"
 
-{{- $powershell_prompt_list := list "oh-my-posh" "starship" -}}
-{{- $powershell_prompt := promptChoiceOnce . "powershell_prompt" "Choice Prompt Handler for PowerShell" $powershell_prompt_list "oh-my-posh" }}
+{{- else }}{{/* Interactive setup, so prompt for an email address */}}
+{{-     $machine_type_prompt_list := list "desktop" "laptop" "server" -}}
+{{-     $machine_type_prompt := promptChoiceOnce . "machine_type_prompt" "Choice Machine Type (WSL is server)" $machine_type_prompt_list "server" }}
+
+{{-     $powershell_prompt_list := list "oh-my-posh" "starship" -}}
+{{-     $powershell_prompt := promptChoiceOnce . "powershell_prompt" "Choice Prompt Handler for PowerShell" $powershell_prompt_list "oh-my-posh" }}
+machine_type = {{ $machine_type_prompt | quote }}
 powershell = {{ $powershell_prompt | quote }}
 
-{{ if ne .chezmoi.os "windows" }}
-{{-     $bash_prompt_list := list "oh-my-posh" "starship" -}}
-{{-     $bash_prompt := promptChoiceOnce . "bash_prompt" "Choice Prompt Handler for Bash" $bash_prompt_list "oh-my-posh" }}
-bash =  {{ $bash_prompt | quote }}
+{{      if ne .chezmoi.os "windows" }}
+{{-         $bash_prompt_list := list "oh-my-posh" "starship" -}}
+{{-         $bash_prompt := promptChoiceOnce . "bash_prompt" "Choice Prompt Handler for Bash" $bash_prompt_list "oh-my-posh" }}
 
-{{-     $zsh_prompt_list := list "oh-my-posh" "starship" "powerlevel10k" -}}
-{{-     $zsh_prompt := promptChoiceOnce . "zsh_prompt" "Choice Prompt Handler for Zsh" $zsh_prompt_list "oh-my-posh" }}
+{{-         $zsh_prompt_list := list "oh-my-posh" "starship" "powerlevel10k" -}}
+{{-         $zsh_prompt := promptChoiceOnce . "zsh_prompt" "Choice Prompt Handler for Zsh" $zsh_prompt_list "oh-my-posh" }}
+bash =  {{ $bash_prompt | quote }}
 zsh = {{ $zsh_prompt | quote }}
-{{ end }}
+{{-     end }}
+{{- end }}
