@@ -17,6 +17,7 @@
         paths = with pkgs; [
           arduino-language-server
           hadolint
+          neovim
           nixfmt-rfc-style
           sccache
           shellcheck
@@ -24,6 +25,7 @@
           stylua
           svlint
           svls
+          vim
           verible
         ];
       };

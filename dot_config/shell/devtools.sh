@@ -97,6 +97,15 @@ install-brew-tools() {
 		wezterm
 }
 
+install-brew-dev-tools(){
+	"${BREW_PREFIX}/bin/brew" tap wez/wezterm-linuxbrew
+	"${BREW_PREFIX}/bin/brew" install \
+		bat chezmoi gh glab go-task \
+		lazygit neovim \
+		oh-my-posh sccache shellcheck shfmt starship stylua svls svlint \
+		wezterm
+}
+
 install-nix-tools() {
 	nix profile install "$(chezmoi source-path)/nix/cli/.#cli"
 	nix profile install "$(chezmoi source-path)/nix/dev/.#dev"
