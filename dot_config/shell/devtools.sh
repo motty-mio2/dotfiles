@@ -78,7 +78,6 @@ install-arch-tools() {
 }
 
 install-debian-tools() {
-	sudo add-apt-repository ppa:longsleep/golang-backports
 	sudo apt-get update
 	sudo apt-get upgrade -qy
 	sudo apt-get install -qy \
@@ -89,6 +88,7 @@ install-debian-tools() {
 }
 
 install-ubuntu-dev-tools() {
+	sudo add-apt-repository ppa:longsleep/golang-backports
 	sudo apt-get install ca-certificates curl
 
 	echo "VSCode"
@@ -114,6 +114,7 @@ install-ubuntu-dev-tools() {
 	echo 'deb [signed-by=/etc/apt/keyrings/wezterm-fury.gpg] https://apt.fury.io/wez/ * *' | sudo tee /etc/apt/sources.list.d/wezterm.list
 
 	sudo apt-get update
+	sudo apt-get install golang
 	sudo apt-get install code
 	sudo apt-get install wezterm
 	sudo apt-get install docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin
