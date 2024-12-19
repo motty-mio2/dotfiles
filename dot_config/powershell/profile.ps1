@@ -21,7 +21,7 @@ $Env:PLATFORMIO_CORE_DIR = "$Env:XDG_DATA_HOME/platformio"
 $Env:PYTHONSTARTUP = "$Env:XDG_CONFIG_HOME/python/pythonrc"
 
 # devenv
-$Env:SVLINT_CONFIG = "$Env:USERPROFILE/.config/svls/.svlint.toml"
+$Env:SVLINT_CONFIG = "$Env:USERPROFILE/.config/svlint/.svlint.toml"
 $Env:VOLTA_HOME = "$Env:USERPROFILE/scoop/apps/volta/current/appdata"
 $Env:EDITOR = "nvim"
 $Env:PIPENV_VENV_IN_PROJECT = "1"
