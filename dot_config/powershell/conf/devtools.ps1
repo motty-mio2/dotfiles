@@ -80,7 +80,7 @@ function Install-uv-Tools {
         $executableName = "uv.exe"
     )
 
-    foreach ($tool in @("black", "flake8", "ignr", "isort" , "mypy", "ruff")) {
+    foreach ($tool in @("black", "flake8", "ignr", "isort" , "mypy", "pyright", "ruff")) {
         & "$UV_ENV\$executableName" tool install --upgrade $tool
     }
 
@@ -94,7 +94,7 @@ function Install-Volta-Tools {
 
     & "$VOLTA_HOME\bin\volta" install node@lts
 
-    foreach ($tool in @( "@bitwarden/cli", "neovim", "pyright", "bash-language-server", "tree-sitter-cli")) {
+    foreach ($tool in @( "@bitwarden/cli", "neovim", "bash-language-server")) {
         & "$VOLTA_HOME\bin\volta" install $tool
     }
 }
