@@ -278,3 +278,12 @@ function Set-Better-Windows {
     # 「登録されている拡張子は表示しない」をオフに設定
     reg add "HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced" /v "HideFileExt" /t REG_DWORD /d "0" /f
 }
+
+function Reset-Broken-Windows {
+    # https://togetter.com/li/2473163
+
+    sudo sfc /scannow
+    sudo DISM /Online /Cleanup-Image /CheckHealth
+    sudo DISM /Online /Cleanup-Image /ScanHealth
+    sudo DISM /Online /Cleanup-Image /RestoreHealth
+}
