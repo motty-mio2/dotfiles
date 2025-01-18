@@ -42,7 +42,7 @@ install-nix() {
 # Install Tools
 
 install-uv-tools() {
-	tools=("black" "flake8" "ignr" "isort" "mypy" "ruff")
+	tools=("black" "flake8" "ignr" "isort" "mypy" "pyright" "ruff")
 
 	for tool in "${tools[@]}"; do
 		"$HOME/.local/bin/uv" tool install --upgrade "$tool"
@@ -54,7 +54,7 @@ install-uv-tools() {
 install-volta-tools() {
 	"$VOLTA_HOME/bin/volta" install node@lts
 
-	tools=("@bitwarden/cli" "bash-language-server" "biome" "markdownlint-cli" "neovim" "pyright" "tree-sitter-cli")
+	tools=("@bitwarden/cli" "bash-language-server" "biome" "markdownlint-cli" "neovim")
 	for tool in "${tools[@]}"; do
 		"$VOLTA_HOME/bin/volta" install "$tool"
 	done
