@@ -3,6 +3,7 @@
 alias aupdate='sudo apt update && sudo apt upgrade -y && sudo apt autoremove -y'
 alias bupdate='brew update && brew upgrade'
 alias dupdate='sudo dnf update -y'
+alias fupdate='flatpak update'
 alias pupdate='sudo pacman -Syu'
 alias yupdate='yay -Syu'
 alias zupdate='sudo zypper ref && sudo zypper update -y'

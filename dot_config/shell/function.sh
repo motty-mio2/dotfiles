@@ -4,7 +4,6 @@ install-flatpak-apps() {
 	flatpak remote-add --if-not-exists flathub https://dl.flathub.org/repo/flathub.flatpakrepo
 
 	flatpak install com.discordapp.Discord
-	flatpak install com.discordapp.Discord
 	flatpak install com.google.Chrome
 	flatpak install com.slack.Slack
 	flatpak install com.vivaldi.Vivaldi
