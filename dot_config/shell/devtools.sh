@@ -78,7 +78,6 @@ install-arch-tools() {
 }
 
 install-debian-tools() {
-	sudo add-apt-repository ppa:longsleep/golang-backports
 	sudo apt-get update
 	sudo apt-get upgrade -qy
 	sudo apt-get install -qy \
@@ -86,6 +85,42 @@ install-debian-tools() {
 		htop jq libssl-dev nano \
 		ripgrep tree unzip \
 		wget zsh
+}
+
+install-ubuntu-dev-tools() {
+	sudo add-apt-repository ppa:longsleep/golang-backports
+	sudo apt-get install ca-certificates curl
+
+	echo "VSCode"
+	curl https://packages.microsoft.com/keys/microsoft.asc | sudo gpg --yes --dearmor -o /etc/apt/trusted.gpg.d/microsoft.gpg
+	echo "deb [arch=amd64 signed-by=/etc/apt/trusted.gpg.d/microsoft.gpg] https://packages.microsoft.com/repos/vscode stable main" | sudo tee /etc/apt/sources.list.d/vscode.list
+
+	echo "Docker"
+	if [ ! -f "/etc/apt/keyrings/docker.asc" ]; then
+		sudo apt purge -y docker.io docker-doc docker-compose docker-compose-v2 podman-docker containerd runc
+		sudo install -m 0755 -d /etc/apt/keyrings
+		sudo curl -fsSL https://download.docker.com/linux/ubuntu/gpg -o /etc/apt/keyrings/docker.asc
+		sudo chmod a+r /etc/apt/keyrings/docker.asc
+	fi
+
+	# Add the repository to Apt sources:
+	echo \
+		"deb [arch=$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/docker.asc] https://download.docker.com/linux/ubuntu \
+      $(cat /etc/os-release && echo "$VERSION_CODENAME") stable" |
+		sudo tee /etc/apt/sources.list.d/docker.list >/dev/null
+
+	echo "Wezterm"
+	curl -fsSL https://apt.fury.io/wez/gpg.key | sudo gpg --yes --dearmor -o /etc/apt/keyrings/wezterm-fury.gpg
+	echo 'deb [signed-by=/etc/apt/keyrings/wezterm-fury.gpg] https://apt.fury.io/wez/ * *' | sudo tee /etc/apt/sources.list.d/wezterm.list
+
+	sudo apt-get update
+	sudo apt-get install golang
+	sudo apt-get install code
+	sudo apt-get install flatpak
+	sudo apt-get install wezterm
+	sudo apt-get install docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin
+
+	sudo apt-get install clangd clang-format clang-tidy
 }
 
 install-brew-tools() {
