@@ -10,6 +10,4 @@ if ( -not (Get-Command "scoop")) {
 $Env:Path="$Env:USERPROFILE\\scoop\\shims;$ENV:Path"
 scoop install 7zip git chezmoi
 
-
-# winget install Microsoft.OpenSSH.Beta --override ADDLOCAL=Client
 {{ end }}
