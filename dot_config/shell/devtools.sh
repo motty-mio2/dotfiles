@@ -120,7 +120,7 @@ install-ubuntu-dev-tools() {
 	sudo apt-get install wezterm
 	sudo apt-get install docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin
 
-	sudo apt-get install clangd clang-format clang-tidy
+	sudo apt-get install clangd clang-format clang-tidy lld
 }
 
 install-brew-tools() {
