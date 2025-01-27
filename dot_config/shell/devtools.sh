@@ -54,7 +54,7 @@ install-uv-tools() {
 install-volta-tools() {
 	"$VOLTA_HOME/bin/volta" install node@lts
 
-	tools=("@bitwarden/cli" "bash-language-server" "biome" "markdownlint-cli" "neovim")
+	tools=("@bitwarden/cli" "bash-language-server" "biome" "markdownlint-cli" "neovim" "pnpm")
 	for tool in "${tools[@]}"; do
 		"$VOLTA_HOME/bin/volta" install "$tool"
 	done
