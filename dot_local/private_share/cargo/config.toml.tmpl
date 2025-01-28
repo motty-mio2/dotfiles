@@ -2,6 +2,7 @@
 [build]
 rustc-wrapper = "sccache"
 {{ end }}
+{{ if (lookPath "lld") -}}
 [target.x86_64-unknown-linux-gnu]
 rustflags = ["-C", "link-arg=-fuse-ld=lld"]
-
+{{ end }}
