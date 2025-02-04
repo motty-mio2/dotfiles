@@ -17,3 +17,7 @@ bash =  {{ $bash_prompt | quote }}
 {{-     $zsh_prompt := promptChoiceOnce . "zsh_prompt" "Choice Prompt Handler for Zsh" $zsh_prompt_list "oh-my-posh" }}
 zsh = {{ $zsh_prompt | quote }}
 {{ end }}
+
+[data.dependencies]
+uv = ["black", "flake8", "ignr", "isort" , "mypy", "pyright", "ruff"]
+volta = ["@bitwarden/cli", "bash-language-server", "biome", "markdownlint-cli", "neovim", "pnpm"]
