@@ -74,49 +74,10 @@ function Install-uv {
     Invoke-RestMethod $url | Invoke-Expression
 }
 
-function Install-uv-Tools {
-    param (
-        $UV_ENV = "$env:USERPROFILE\.local\bin",
-        $executableName = "uv.exe"
-    )
-
-    foreach ($tool in @("black", "flake8", "ignr", "isort" , "mypy", "pyright", "ruff")) {
-        & "$UV_ENV\$executableName" tool install --upgrade $tool
-    }
-
-    & "$UV_ENV\$executableName" tool install --upgrade --from git+https://github.com/motty-mio2/dixp dixp
-}
-
-function Install-Volta-Tools {
-    param (
-        $VOLTA_HOME = "$Env:VOLTA_HOME"
-    )
-
-    & "$VOLTA_HOME\bin\volta" install node@lts
-
-    foreach ($tool in @( "@bitwarden/cli", "bash-language-server", "biome", "markdownlint-cli", "neovim", "pnpm" ) ) {
-        & "$VOLTA_HOME\bin\volta" install $tool
-    }
-}
-
 function Set-SVLINT-PATH {
     param (
         $SVLINT_CONFIG = $env:USERPROFILE + "\.config\svlint\svlint.toml"
     )
 
     Set-Environemt-Path -ENV_NAME "SVLINT_CONFIG" -ENV_VALUE $SVLINT_CONFIG
-}
-
-function Install-Scoop-Apps {
-    scoop bucket add extras
-    scoop bucket add java
-    scoop bucket add versions
-    scoop bucket add nerd-fonts
-    scoop bucket add motty https://github.com/motty-mio2/scoop-bucket.git
-
-    scoop install `
-        7zip bat chezmoi cloudflared curl fd fzf geekuninstaller gh git glab grep gsudo `
-        less llvm make nano neovim `
-        oh-my-posh posh-git psfzf psreadline ripgrep sccache shellcheck shfmt starship stylua sysinternals task `
-        wezterm wget which
 }
