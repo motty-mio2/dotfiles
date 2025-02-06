@@ -29,9 +29,9 @@ install-arch-tools() {
 		rm -rf "$WORK_DIR"
 	fi
 	yay -Sy --noconfirm \
-		bat byobu chezmoi curl fd fzf git github-cli glab go go-task-bin \
-		htop jq nano neovim \
-		oh-my-posh-bin pkg-config screen shellcheck-bin shfmt starship stylua tree ttf-hackgen unarchiver unzip \
+		byobu curl git github-cli go  \
+		htop  \
+		pkg-config screen tree ttf-hackgen unarchiver unzip \
 		wget zsh
 }
 
@@ -39,9 +39,9 @@ install-debian-tools() {
 	sudo apt-get update
 	sudo apt-get upgrade -qy
 	sudo apt-get install -qy \
-		bat build-essential byobu curl fd-find fzf git \
-		htop jq libssl-dev nano \
-		ripgrep tree unzip \
+		build-essential byobu curl git \
+		htop  libssl-dev \
+		tree unzip \
 		wget zsh
 }
 
@@ -83,17 +83,11 @@ install-ubuntu-dev-tools() {
 	sudo apt-get install flatpak
 	sudo apt-get install wezterm
 	sudo apt-get install docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin
-
-	sudo apt-get install clangd clang-format clang-tidy lld
 }
 
 install-brew-tools() {
 	"${BREW_PREFIX}/bin/brew" tap wez/wezterm-linuxbrew
 	"${BREW_PREFIX}/bin/brew" install \
-		bat chezmoi gh glab go-task \
-		lazygit neovim \
-		oh-my-posh sccache shellcheck shfmt starship stylua svls svlint \
-		wezterm
 }
 
 install-nix-tools() {
@@ -107,13 +101,4 @@ install-arch-desktop-dependency() {
 
 install-flatpak-apps() {
 	flatpak remote-add --if-not-exists flathub https://dl.flathub.org/repo/flathub.flatpakrepo
-
-	flatpak install com.discordapp.Discord
-	flatpak install com.google.Chrome
-	flatpak install com.slack.Slack
-	flatpak install com.vivaldi.Vivaldi
-	flatpak install org.angryip.ipscan
-	flatpak install org.kicad.KiCad
-	flatpak install org.libreoffice.LibreOffice
-	flatpak install org.mozilla.firefox
 }

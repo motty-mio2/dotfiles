@@ -21,3 +21,177 @@ zsh = {{ $zsh_prompt | quote }}
 [data.dependencies]
 uv = ["black", "flake8", "ignr", "isort" , "mypy", "pyright", "ruff"]
 volta = ["@bitwarden/cli", "bash-language-server", "biome", "markdownlint-cli", "neovim", "pnpm"]
+cli = [
+    "bat" = [
+        scoop = "bat",
+        aur = "nix",
+        apt = "bat",
+        brew = "bat",
+        nix = "bat",
+    ],
+    "chezmoi" = [
+        scoop = "chezmoi",
+        aur = "chezmoi",
+        apt = "chezmoi",
+        brew = "chezmoi",
+        nix = "chezmoi",
+    ],
+    "fd" = [
+        scoop = "fd",
+        aur = "fd",
+        apt = "fd-find",
+        brew = "fd",
+        nix = "fd",
+    ],
+    "fzf" = [
+        scoop = "fzf",
+        aur = "fzf",
+        apt = "fzf",
+        brew = "fzf",
+        nix = "fzf",
+    ],
+    gh = [
+        scoop = "gh",
+        aur = "gh",
+        brew = "gh",
+        nix = "gh",
+    ],
+    glab = [
+        scoop = "glab",
+        aur = "glab",
+        brew = "glab",
+        nix = "glab",
+    ],
+    task = [
+        aur = "go-task-bin",
+        brew = "go-task",
+        scoop = "task",
+    ],
+    nano = [
+        apt = "nano",
+        aur = "nano",
+        scoop = "nano",
+    ],
+    neovim = [
+        aur = "neovim",
+        brew = "neovim",
+        nix = "neovim",
+    ],
+    lazygit = [
+        aur = "lazygit",
+        brew = "lazygit",
+        scoop = "lazygit",
+    ],
+    oh-my-posh = [
+        scoop = "oh-my-posh",
+        aur = "oh-my-posh-bin",
+        brew = "oh-my-posh",
+        nix = "oh-my-posh",
+    ],
+    starship = [
+        scoop = "starship",
+        aur = "starship",
+        brew = "starship",
+        nix = "starship",
+    ],
+    ripgrep = [
+        scoop = "ripgrep",
+        apt = "ripgrep",
+    ],
+    jq = [
+        scoop = "jq",
+        apt = "jq",
+        aur = "jq",
+        nix = "jq",
+    ],
+]
+dev = [
+    clangd = [
+        scoop = "llvm",
+        apt = "clangd",
+    ],
+    clang-format = [
+        apt = "clang-format",
+    ],
+    clang-tidy = [
+        apt = "clang-tidy",
+    ],
+    lld = [
+        apt = "lld",
+    ],
+    sccache = [
+        scoop = "sccache",
+        aur = "sccache",
+        brew = "sccache",
+        nix = "sccache",
+    ],
+    shfmt = [
+        scoop = "shfmt",
+        aur = "shfmt",
+        brew = "shfmt",
+        nix = "shfmt",
+    ],
+    stylua = [
+        scoop = "stylua",
+        aur = "stylua",
+        brew = "stylua",
+        nix = "stylua",
+    ],
+    shellcheck = [
+        scoop = "shellcheck",
+        aur = "shellcheck-bin",
+        brew = "shellcheck",
+        nix = "shellcheck",
+    ],
+    svls = [
+        scoop = "svls",
+        aur = "svls",
+        brew = "svls",
+        nix = "svls",
+    ],
+    svlint = [
+        scoop = "svlint",
+        aur = "svlint",
+        brew = "svlint",
+        nix = "svlint",
+    ],
+]
+desktop = [
+    discord = [
+        flatpak = "com.discordapp.Discord",
+        winget = "XPDC2RH70K22MN",
+    ],
+    Chrome = [
+        flatpak = "com.google.Chrome",
+        winget = "Google.Chrome.EXE",
+    ],
+    Slack = [
+        flatpak = "com.slack.Slack",
+        winget = "9WZDNCRDK3WP",
+    ],
+    Vivaldi = [
+        flatpak = "com.vivaldi.Vivaldi",
+        winget = "XP99GVQDX7JPR4"
+    ],
+    ipscan = [
+        flatpak = "org.angryip.ipscan"
+    ],
+    KiCad = [
+        flatpak = "org.kicad.KiCad"
+    ],
+    LibreOffice = [
+        flatpak = "org.libreoffice.LibreOffice"
+    ],
+    firefox = [
+        flatpak = "org.mozilla.firefox"
+    ],
+    notion = [
+        winget = "Notion.Notoin"
+    ],
+    wezterm = [
+        scoop = "wezterm",
+    ],
+    zoom = [
+        scoop = "XP99J3KP4XZ4VV"
+    ],
+]
