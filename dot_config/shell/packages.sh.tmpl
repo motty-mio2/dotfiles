@@ -51,7 +51,10 @@ install-ubuntu-dev-tools() {
 
 	echo "VSCode"
 	curl https://packages.microsoft.com/keys/microsoft.asc | sudo gpg --yes --dearmor -o /etc/apt/trusted.gpg.d/microsoft.gpg
-	echo "deb [arch=amd64 signed-by=/etc/apt/trusted.gpg.d/microsoft.gpg] https://packages.microsoft.com/repos/vscode stable main" | sudo tee /etc/apt/sources.list.d/vscode.list
+	echo \
+		"deb [arch=amd64 signed-by=/etc/apt/trusted.gpg.d/microsoft.gpg] \
+		https://packages.microsoft.com/repos/vscode stable main" | \
+		sudo tee /etc/apt/sources.list.d/vscode.list
 
 	echo "Docker"
 	if [ ! -f "/etc/apt/keyrings/docker.asc" ]; then
@@ -63,13 +66,16 @@ install-ubuntu-dev-tools() {
 
 	# Add the repository to Apt sources:
 	echo \
-		"deb [arch=$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/docker.asc] https://download.docker.com/linux/ubuntu \
-      $(cat /etc/os-release && echo "$VERSION_CODENAME") stable" |
+		"deb [arch=$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/docker.asc] \
+		https://download.docker.com/linux/ubuntu \
+		$(. /etc/os-release && echo "${UBUNTU_CODENAME:-$VERSION_CODENAME}") stable" | \
 		sudo tee /etc/apt/sources.list.d/docker.list >/dev/null
 
 	echo "Wezterm"
 	curl -fsSL https://apt.fury.io/wez/gpg.key | sudo gpg --yes --dearmor -o /etc/apt/keyrings/wezterm-fury.gpg
-	echo 'deb [signed-by=/etc/apt/keyrings/wezterm-fury.gpg] https://apt.fury.io/wez/ * *' | sudo tee /etc/apt/sources.list.d/wezterm.list
+	echo \
+		"deb [signed-by=/etc/apt/keyrings/wezterm-fury.gpg] https://apt.fury.io/wez/ * *" | \
+		sudo tee /etc/apt/sources.list.d/wezterm.list >/dev/null
 
 	sudo apt-get update
 	sudo apt-get install golang
