@@ -96,5 +96,3 @@ set-window-title() {
 	fi
 	echo -ne "\033]0; $title \007"
 }
-
-set-window-title
