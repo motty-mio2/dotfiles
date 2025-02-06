@@ -10,6 +10,10 @@ install-rust() {
 	curl https://sh.rustup.rs -sSf | sh -s -- -y
 }
 
+install-rust-tools() {
+	rustup component add clippy rust-analysis rust-src rust-docs rustfmt rust-analyzer
+}
+
 install-uv() {
 	curl -LsSf https://astral.sh/uv/install.sh | sh
 }

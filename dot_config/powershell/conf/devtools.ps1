@@ -11,6 +11,10 @@ function Install-Scoop {
     # scoop alias add reinstall "scoop uninstall {0}; scoop install {0}"
 }
 
+function Install-rust-Tools {
+    rustup component add clippy rust-analysis rust-src rust-docs rustfmt rust-analyzer
+}
+
 function Install-uv {
     param (
         $url = "https://astral.sh/uv/install.ps1"
