@@ -1,3 +1,7 @@
+function Install-rust-Tools {
+    rustup component add {{- .dependencies.rust -}}
+}
+
 function Install-uv-Tools {
     param (
         $UV_ENV = "$env:USERPROFILE\.local\bin",

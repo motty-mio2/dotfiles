@@ -1,4 +1,9 @@
 #!/usr/bin/env bash
+
+install-rust-tools() {
+	rustup component add {{- .dependencies.rust -}}
+}
+
 install-uv-tools() {
 	tools=( {{- .dependencies.uv | quoteList | join " " -}} )
 
