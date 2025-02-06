@@ -36,3 +36,11 @@ tasks:
       - task: de_template_shell
       - task: check-shell
       - task: template_shell
+
+  check_toml:
+    cmds:
+      - find . \( -name "*.toml" \) -exec taplo lint {} \; -exec taplo format --check {} \;
+
+  fix_toml:
+    cmds:
+      - find . \( -name "*.toml" \) -exec taplo lint {} \; -exec taplo format {} \;
