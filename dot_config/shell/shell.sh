@@ -21,6 +21,8 @@ alias egrep='egrep --color=auto'
 alias rmrf='rm -rf'
 alias watch="watch "
 
+alias gtask='task -t $XDG_CONFIG_HOME/go-task/Taskfile.yml'
+
 nupdate() {
 	for item in $(nix profile list --json | jq -r ".elements | keys | .[] "); do
 		nix flake update --flake "$(chezmoi source-path)/$item"
