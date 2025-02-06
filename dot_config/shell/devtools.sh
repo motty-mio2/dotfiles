@@ -39,8 +39,6 @@ install-nix() {
 	fi
 }
 
-# Install Tools
-
 install-keyd() {
 	sudo ln -s "$HOME/.config/keyd" "/etc/keyd"
 
