@@ -1,0 +1,38 @@
+# https://taskfile.dev
+
+version: "3"
+
+vars:
+  GREETING: Hello, World!
+
+tasks:
+  default:
+    cmds:
+      - echo "{{.GREETING}}"
+    silent: true
+
+  actions:
+    cmds:
+      - actionlint
+
+  de_template_shell:
+    cmds:
+      - find . -name "*.sh.tmpl" -exec sed -i '/{{/s/^/# /' {} \;
+
+  check_shell:
+    cmds:
+      - find . \( -name "*.sh" -or -name "*.sh.tmpl" \) -exec shfmt -d {} \; -exec shellcheck {} \;
+
+  fix_shell:
+    cmds:
+      - find . \( -name "*.sh" -or -name "*.sh.tmpl" \) -exec shfmt -w {} \;
+
+  template_shell:
+    cmds:
+      - find . -name "*.sh.tmpl" -exec sed -i '/{{/s/^# //' {} \;
+
+  shell:
+    cmds:
+      - task: de_template_shell
+      - task: check-shell
+      - task: template_shell
