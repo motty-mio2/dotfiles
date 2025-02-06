@@ -44,3 +44,11 @@ tasks:
   fix_toml:
     cmds:
       - find . \( -name "*.toml" \) -exec taplo lint {} \; -exec taplo format {} \;
+
+  lua:check:
+    cmds:
+      - find . -name "*.lua" -exec stylua -c {} \;
+
+  lua:fix:
+    cmds:
+      - find . -name "*.lua" -exec stylua {} \;
