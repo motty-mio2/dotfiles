@@ -1,4 +1,3 @@
-
 function Install-Scoop {
     if ( -not (Get-Command "scoop")) {
         Invoke-WebRequest -useb get.scoop.sh | Invoke-Expression
