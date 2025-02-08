@@ -24,14 +24,6 @@ function touch {
     New-Item -type file $args
 }
 
-function python3 {
-    python $args
-}
-
-function pip3 {
-    python -m pip $args
-}
-
 function single2double($Target_Path) {
     $str = Convert-Path $Target_Path
     $out = ""
@@ -146,14 +138,6 @@ function supdate {
 
 function wupdate {
     winget upgrade $args
-}
-
-function iv {
-    iverilog $args
-}
-
-function ivx {
-    iverilog -g2012 $args
 }
 
 function codex {
