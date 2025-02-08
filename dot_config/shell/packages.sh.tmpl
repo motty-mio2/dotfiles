@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
 install-rust-tools() {
-	rustup component add {{- .dependencies.rust -}}
+	rustup component add {{- .dependencies.rustup -}}
 }
 
 install-uv-tools() {
