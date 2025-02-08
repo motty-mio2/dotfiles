@@ -121,6 +121,6 @@ function Install-Scoop-Apps {
     scoop install `
         7zip bat chezmoi cloudflared curl fd fzf geekuninstaller gh git glab grep gsudo `
         less llvm make nano neovim `
-        oh-my-posh posh-git psfzf psreadline ripgrep sccache shellcheck shfmt starship stylua sysinternals task `
+        oh-my-posh ripgrep sccache shellcheck shfmt starship stylua sysinternals task `
         wezterm wget which
 }

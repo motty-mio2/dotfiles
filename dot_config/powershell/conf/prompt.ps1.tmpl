@@ -1,7 +1,7 @@
 try {
     Import-Module PSReadLine
 } catch {
-    scoop install PSReadLine
+    Install-Module PSReadLine -Force
     Import-Module PSReadLine
 } finally {
     Set-PSReadLineKeyHandler -Key Tab -Function MenuComplete
@@ -16,14 +16,14 @@ try {
 try {
     Import-Module posh-git
 } catch {
-    scoop install posh-git
+    Install-Module posh-git -Force
     Import-Module posh-git
 }
 
 try {
     Import-Module PSFzf
 } catch {
-    scoop install PSFzf
+    Install-Module PSFzf -Force
     Import-Module PSFzf
 } finally {
     Set-PSFzfOption -PSReadlineChordProvider 'Ctrl+t'
