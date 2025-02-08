@@ -116,6 +116,6 @@ done
 {{ output "starship" "init" "bash" }}
 starship_precmd_user_func="set-window-title"
 {{ else if and (lookPath "oh-my-posh") (eq .bash "oh-my-posh") }}
-{{ output "oh-my-posh" "init" "bash" "--config" "~/.config/omp.toml" }}
+{{ output "oh-my-posh" "init" "bash" "--config" "~/.config/omp.toml" | replaceAllRegex "export POSH_SESSION_ID.+" "" }}
 {{ end }}
 
