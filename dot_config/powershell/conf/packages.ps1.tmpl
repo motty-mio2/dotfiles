@@ -1,5 +1,5 @@
 function Install-rust-Tools {
-    rustup component add {{- .dependencies.rustup -}}
+    rustup component add {{- .dependencies.rustup | join "," }}
 }
 
 function Install-uv-Tools {
@@ -27,34 +27,42 @@ function Install-Volta-Tools {
     }
 }
 
-function Install-Scoop-Apps {
-    scoop bucket add extras
-    scoop bucket add java
-    scoop bucket add versions
-    scoop bucket add nerd-fonts
-    scoop bucket add motty https://github.com/motty-mio2/scoop-bucket.git
-
+function Install-Scoop-Tools {
     scoop install `
-        7zip cloudflared geekuninstaller git grep gsudo `
-        less make  `
-        posh-git psfzf psreadline sysinternals `
-        which
+        {{ range $name, $managers := .dependencies.cli -}}
+        {{- get $managers "scoop" | printf "%s " -}}
+        {{- end }}
 }
 
+function Install-Scoop-Dev-Tools {
+    scoop install `
+        {{ range $name, $managers := .dependencies.dev -}}
+        {{- get $managers "scoop" | printf "%s " -}}
+        {{- end }}
+}
+
+function Install-Scoop-GUI-Tools {
+    scoop install `
+        7zip geekuninstaller gsudo sysinternals `
+        {{ range $name, $managers := .dependencies.desktop -}}
+        {{- get $managers "scoop" | printf "%s " -}}
+        {{- end }}
+}
 
 function Install-Windows-Software {
-    # PowerToys
-    winget install --id XP89DCGQ3K6VLD
-
-    # Bitwarden
-    winget install --id Bitwarden.Bitwarden
-
-    # Visual Studio Code
-    winget install --id Microsoft.VisualStudioCode --override "/VERYSILENT /NORESTART /MERGETASKS=!runcode,addcontextmenufiles,addcontextmenufolders,associatewithfiles,addtopath"
-
     # OpenSSH
     winget install --id Microsoft.OpenSSH.Beta --override ADDLOCAL=Client
 
     # PowerShell
     winget install --id  Microsoft.PowerShell
+    
+    # PowerToys
+    winget install --id XP89DCGQ3K6VLD
+
+    # Visual Studio Code
+    winget install --id Microsoft.VisualStudioCode --override "/VERYSILENT /NORESTART /MERGETASKS=!runcode,addcontextmenufiles,addcontextmenufolders,associatewithfiles,addtopath"
+
+    {{ range $name, $managers := .dependencies.desktop -}}
+    winget install --id {{- get $managers "winget" | printf "%s " -}}
+    {{- end }}
 }
