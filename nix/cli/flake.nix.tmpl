@@ -12,19 +12,12 @@
       pkgs = nixpkgs.legacyPackages.${system};
     in
     {
-      packages.${system}.dev = pkgs.buildEnv {
-        name = "dev";
+      packages.${system}.cli = pkgs.buildEnv {
+        name = "cli";
         paths = with pkgs; [
-          arduino-language-server
-          hadolint
-          nixfmt-rfc-style
-          sccache
-          shellcheck
-          shfmt
-          stylua
-          svlint
-          svls
-          verible
+        {{- range .dependencies.cli -}}
+        {{ get $managers "nix" | printf "%s " -}}
+        {{- end -}}
         ];
       };
     };

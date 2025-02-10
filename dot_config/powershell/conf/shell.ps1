@@ -226,41 +226,6 @@ function bwx {
     }
 }
 
-function Install-Windows-Software {
-    # PowerToys
-    winget install --id XP89DCGQ3K6VLD
-
-    # Bitwarden
-    winget install --id Bitwarden.Bitwarden
-
-    # Visual Studio Code
-    winget install --id Microsoft.VisualStudioCode --override "/VERYSILENT /NORESTART /MERGETASKS=!runcode,addcontextmenufiles,addcontextmenufolders,associatewithfiles,addtopath"
-
-    # OpenSSH
-    winget install --id Microsoft.OpenSSH.Beta --override ADDLOCAL=Client
-
-    # PowerShell
-    winget install --id  Microsoft.PowerShell
-
-    # Notion
-    winget install --id Notion.Notoin
-
-    # Google Chrome
-    winget install --id Google.Chrome.EXE
-
-    # Vivaldi
-    winget install --id XP99GVQDX7JPR4
-
-    # Discord
-    winget install --id XPDC2RH70K22MN
-
-    # Slack
-    winget install --id 9WZDNCRDK3WP
-
-    # Zoom
-    winget install --id XP99J3KP4XZ4VV
-}
-
 function Set-Better-Windows {
     # エクスプローラ周り重い人向け覚書
     # https://forest.watch.impress.co.jp/docs/serial/yajiuma/1523696.html

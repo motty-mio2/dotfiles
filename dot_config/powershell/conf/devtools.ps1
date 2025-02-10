@@ -5,9 +5,11 @@ function Install-Scoop {
 
     scoop reset *
 
-    # scoop alias add upgrade 'scoop update; scoop update *' 'update all'
-    # scoop alias add backup 'scoop export > ~\scoop.txt'
-    # scoop alias add reinstall "scoop uninstall {0}; scoop install {0}"
+    scoop bucket add extras
+    scoop bucket add java
+    scoop bucket add versions
+    scoop bucket add nerd-fonts
+    scoop bucket add motty https://github.com/motty-mio2/scoop-bucket.git
 }
 
 function Install-uv {

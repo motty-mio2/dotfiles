@@ -1,10 +1,12 @@
 #!/usr/bin/env bash
 
 install-rust-tools() {
-	rustup component add {{- .dependencies.rustup -}}
+	# shellcheck disable=SC1083
+	rustup component add {{- .dependencies.rustup | join " " -}}
 }
 
 install-uv-tools() {
+	# shellcheck disable=SC1009,SC1072,SC1073,SC1083
 	tools=( {{- .dependencies.uv | quoteList | join " " -}} )
 
 	for tool in "${tools[@]}"; do
@@ -23,7 +25,7 @@ install-volta-tools() {
 	done
 }
 
-install-arch-tools() {
+install-yay() {
 	sudo pacman -Sy --noconfirm --needed base-devel git
 	if [ -e "/usr/bin/yay" ]; then
 		echo "yay is already installed."
@@ -33,30 +35,60 @@ install-arch-tools() {
 		eval cd "$WORK_DIR" && makepkg --noconfirm -si
 		rm -rf "$WORK_DIR"
 	fi
+}
+
+install-aur-tools() {
 	yay -Sy --noconfirm \
-		bat byobu chezmoi curl fd fzf git github-cli glab go go-task-bin \
-		htop jq nano neovim \
-		oh-my-posh-bin pkg-config screen shellcheck-bin shfmt starship stylua tree ttf-hackgen unarchiver unzip \
-		wget zsh
+		ttf-hackgen unarchiver
+		{{ range $name, $managers := .dependencies.cli -}}
+        {{- get $managers "aur" | printf "%s " -}}
+        {{- end }}
+}
+
+install-aur-dev-tools() {
+	yay -Sy --noconfirm \
+		ttf-hackgen unarchiver
+		{{ range $name, $managers := .dependencies.dev -}}
+        {{- get $managers "aur" | printf "%s " -}}
+        {{- end }}
+}
+
+install-aur-desktop-tools() {
+	yay -Sy --noconfirm \
+		ttf-hackgen unarchiver
+		{{ range $name, $managers := .dependencies.desktop -}}
+        {{- get $managers "aur" | printf "%s " -}}
+        {{- end }}
 }
 
 install-debian-tools() {
 	sudo apt-get update
-	sudo apt-get upgrade -qy
 	sudo apt-get install -qy \
-		bat build-essential byobu curl fd-find fzf git \
-		htop jq libssl-dev nano \
-		ripgrep tree unzip \
-		wget zsh
+		build-essential libssl-dev \
+        {{ range $name, $managers := .dependencies.cli -}}
+        {{- get $managers "apt" | printf "%s " -}}
+        {{- end }}
+}
+
+install-debian-dev-tools() {
+	sudo apt-get update
+	sudo apt-get install -qy \
+		build-essential libssl-dev \
+        {{ range $name, $managers := .dependencies.cli -}}
+        {{- get $managers "apt" | printf "%s " -}}
+        {{- end }}
 }
 
 install-ubuntu-dev-tools() {
 	sudo add-apt-repository ppa:longsleep/golang-backports
-	sudo apt-get install ca-certificates curl
+	sudo apt-get install ca-certificates
 
 	echo "VSCode"
 	curl https://packages.microsoft.com/keys/microsoft.asc | sudo gpg --yes --dearmor -o /etc/apt/trusted.gpg.d/microsoft.gpg
-	echo "deb [arch=amd64 signed-by=/etc/apt/trusted.gpg.d/microsoft.gpg] https://packages.microsoft.com/repos/vscode stable main" | sudo tee /etc/apt/sources.list.d/vscode.list
+	echo \
+		"deb [arch=amd64 signed-by=/etc/apt/trusted.gpg.d/microsoft.gpg] \
+		https://packages.microsoft.com/repos/vscode stable main" | \
+		sudo tee /etc/apt/sources.list.d/vscode.list
 
 	echo "Docker"
 	if [ ! -f "/etc/apt/keyrings/docker.asc" ]; then
@@ -68,13 +100,16 @@ install-ubuntu-dev-tools() {
 
 	# Add the repository to Apt sources:
 	echo \
-		"deb [arch=$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/docker.asc] https://download.docker.com/linux/ubuntu \
-      $(cat /etc/os-release && echo "$VERSION_CODENAME") stable" |
+		"deb [arch=$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/docker.asc] \
+		https://download.docker.com/linux/ubuntu \
+		$(. /etc/os-release && echo "${UBUNTU_CODENAME:-$VERSION_CODENAME}") stable" | \
 		sudo tee /etc/apt/sources.list.d/docker.list >/dev/null
 
 	echo "Wezterm"
 	curl -fsSL https://apt.fury.io/wez/gpg.key | sudo gpg --yes --dearmor -o /etc/apt/keyrings/wezterm-fury.gpg
-	echo 'deb [signed-by=/etc/apt/keyrings/wezterm-fury.gpg] https://apt.fury.io/wez/ * *' | sudo tee /etc/apt/sources.list.d/wezterm.list
+	echo \
+		"deb [signed-by=/etc/apt/keyrings/wezterm-fury.gpg] https://apt.fury.io/wez/ * *" | \
+		sudo tee /etc/apt/sources.list.d/wezterm.list >/dev/null
 
 	sudo apt-get update
 	sudo apt-get install golang
@@ -82,17 +117,27 @@ install-ubuntu-dev-tools() {
 	sudo apt-get install flatpak
 	sudo apt-get install wezterm
 	sudo apt-get install docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin
-
-	sudo apt-get install clangd clang-format clang-tidy lld
 }
 
 install-brew-tools() {
-	"${BREW_PREFIX}/bin/brew" tap wez/wezterm-linuxbrew
 	"${BREW_PREFIX}/bin/brew" install \
-		bat chezmoi gh glab go-task \
-		lazygit neovim \
-		oh-my-posh sccache shellcheck shfmt starship stylua svls svlint \
-		wezterm
+		{{ range .dependencies.cli -}}
+		{{- get $managers "brew" | printf "%s " -}}
+		{{- end }}
+}
+
+install-brew-dev-tools() {
+	"${BREW_PREFIX}/bin/brew" install \
+		{{ range .dependencies.dev -}}
+		{{- get $managers "brew" | printf "%s " -}}
+		{{- end }}
+}
+
+install-brew-desktop-tools() {
+	"${BREW_PREFIX}/bin/brew" install \
+		{{ range .dependencies.desktop -}}
+		{{- get $managers "brew" | printf "%s " -}}
+		{{- end }}
 }
 
 install-nix-tools() {
@@ -106,13 +151,4 @@ install-arch-desktop-dependency() {
 
 install-flatpak-apps() {
 	flatpak remote-add --if-not-exists flathub https://dl.flathub.org/repo/flathub.flatpakrepo
-
-	flatpak install com.discordapp.Discord
-	flatpak install com.google.Chrome
-	flatpak install com.slack.Slack
-	flatpak install com.vivaldi.Vivaldi
-	flatpak install org.angryip.ipscan
-	flatpak install org.kicad.KiCad
-	flatpak install org.libreoffice.LibreOffice
-	flatpak install org.mozilla.firefox
 }
