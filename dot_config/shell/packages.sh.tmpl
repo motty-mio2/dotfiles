@@ -1,4 +1,9 @@
 #!/usr/bin/env bash
+
+install-rust-tools() {
+	rustup component add {{- .dependencies.rustup -}}
+}
+
 install-uv-tools() {
 	tools=( {{- .dependencies.uv | quoteList | join " " -}} )
 
@@ -83,11 +88,17 @@ install-ubuntu-dev-tools() {
 	sudo apt-get install flatpak
 	sudo apt-get install wezterm
 	sudo apt-get install docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin
+
+	sudo apt-get install clangd clang-format clang-tidy lld
 }
 
 install-brew-tools() {
 	"${BREW_PREFIX}/bin/brew" tap wez/wezterm-linuxbrew
 	"${BREW_PREFIX}/bin/brew" install \
+		bat chezmoi gh glab go-task \
+		lazygit neovim \
+		oh-my-posh sccache shellcheck shfmt starship stylua svls svlint \
+		wezterm
 }
 
 install-nix-tools() {
