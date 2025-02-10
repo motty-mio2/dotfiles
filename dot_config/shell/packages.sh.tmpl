@@ -34,7 +34,7 @@ install-arch-tools() {
 		rm -rf "$WORK_DIR"
 	fi
 	yay -Sy --noconfirm \
-		byobu curl git go  \
+		byobu git go  \
 		htop  \
 		pkg-config screen tree ttf-hackgen unarchiver unzip \
 		zsh
@@ -44,7 +44,7 @@ install-debian-tools() {
 	sudo apt-get update
 	sudo apt-get upgrade -qy
 	sudo apt-get install -qy \
-		build-essential byobu curl git \
+		build-essential byobu git \
 		htop  libssl-dev \
 		tree unzip \
 		zsh
@@ -52,7 +52,7 @@ install-debian-tools() {
 
 install-ubuntu-dev-tools() {
 	sudo add-apt-repository ppa:longsleep/golang-backports
-	sudo apt-get install ca-certificates curl
+	sudo apt-get install ca-certificates
 
 	echo "VSCode"
 	curl https://packages.microsoft.com/keys/microsoft.asc | sudo gpg --yes --dearmor -o /etc/apt/trusted.gpg.d/microsoft.gpg
