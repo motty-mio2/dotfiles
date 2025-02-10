@@ -23,9 +23,12 @@ install-brew() {
 		echo "brew is already installed."
 	else
 		git clone https://github.com/Homebrew/brew "$BREW_PREFIX"
-		eval "$("$BREW_PREFIX"/bin/brew shellenv)"
+		eval "$(BREW_PREFIX/bin/brew shellenv)"
 		brew update --force --quiet
 	fi
+
+	"$BREW_PREFIX/bin/brew" tap wez/wezterm-linuxbrew
+
 }
 
 install-nix() {
