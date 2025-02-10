@@ -1,0 +1,22 @@
+on:
+  pull_request:
+    types: [opened, synchronize]
+    paths:
+      - "**.sh"
+      - "**.sh.tmpl"
+
+jobs:
+  shellscript:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: mfinelli/setup-shfmt@v3
+      - uses: arduino/setup-task@v2
+
+      - name: Deactivate Template in Shell
+        run: |
+          find . -name "*.sh.tmpl" -exec sed -i '/{{/s/^/# /' {} \;
+
+      - name: Do Check
+        run: |
+          task check_shell

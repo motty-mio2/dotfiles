@@ -96,4 +96,3 @@ style_user = "bg:base_background"
 style_root = "bg:base_background"
 format = '[$user]($style)'
 show_always = true
-
