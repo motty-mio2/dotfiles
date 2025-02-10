@@ -1,3 +1,7 @@
+if ([string]::IsNullOrEmpty($Env:USERPROFILE)) {
+    $Env:USERPROFILE = "$Env:HOME"
+}
+
 # XDG
 $Env:XDG_CONFIG_HOME = "$Env:USERPROFILE/.config"
 $Env:XDG_DATA_HOME = "$Env:USERPROFILE/.local/share"
