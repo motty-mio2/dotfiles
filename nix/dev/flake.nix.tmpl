@@ -12,22 +12,13 @@
       pkgs = nixpkgs.legacyPackages.${system};
     in
     {
-      packages.${system}.cli = pkgs.buildEnv {
-        name = "cli";
+      packages.${system}.dev = pkgs.buildEnv {
+        name = "dev";
         paths = with pkgs; [
-          bat
-          chezmoi
-          cloudflared
-          fd
-          gh
-          glab
-          go-task
-          jq
-          lazygit
-          neovim
-          oh-my-posh
-          starship
-          vim
+          arduino-language-server
+        {{- range .dependencies.dev -}}
+        {{ get $managers "nix" | printf "%s " -}}
+        {{- end -}}
         ];
       };
     };
