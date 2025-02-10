@@ -121,21 +121,21 @@ install-ubuntu-dev-tools() {
 
 install-brew-tools() {
 	"${BREW_PREFIX}/bin/brew" install \
-		{{ range .dependencies.cli -}}
+		{{ range $name, $managers := .dependencies.cli -}}
 		{{- get $managers "brew" | printf "%s " -}}
 		{{- end }}
 }
 
 install-brew-dev-tools() {
 	"${BREW_PREFIX}/bin/brew" install \
-		{{ range .dependencies.dev -}}
+		{{ range $name, $managers := .dependencies.dev -}}
 		{{- get $managers "brew" | printf "%s " -}}
 		{{- end }}
 }
 
 install-brew-desktop-tools() {
 	"${BREW_PREFIX}/bin/brew" install \
-		{{ range .dependencies.desktop -}}
+		{{ range $name, $managers := .dependencies.desktop -}}
 		{{- get $managers "brew" | printf "%s " -}}
 		{{- end }}
 }
