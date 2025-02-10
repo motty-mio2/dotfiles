@@ -1,0 +1,21 @@
+on:
+  pull_request:
+    types: [opened, synchronize]
+    paths:
+      - "**.toml"
+
+jobs:
+  toml:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: arduino/setup-task@v2
+
+      - name: Install taplo
+        shell: bash
+        run: |
+          curl -fsSL "https://github.com/tamasfe/taplo/releases/latest/download/taplo-full-linux-$(uname -m).gz" | gzip -d - | install -m 755 /dev/stdin /usr/local/bin/taplo
+
+      - name: Do Check
+        run: |
+          task check_toml
