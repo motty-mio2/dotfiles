@@ -74,7 +74,7 @@ install-debian-dev-tools() {
 	sudo apt-get update
 	sudo apt-get install -qy \
 		build-essential libssl-dev \
-        {{ range $name, $managers := .dependencies.cli -}}
+        {{ range $name, $managers := .dependencies.dev -}}
         {{- get $managers "apt" | printf "%s " -}}
         {{- end }}
 }
@@ -141,8 +141,11 @@ install-brew-desktop-tools() {
 }
 
 install-nix-tools() {
-	nix profile install "$(chezmoi source-path)/nix/cli/.#cli"
-	nix profile install "$(chezmoi source-path)/nix/dev/.#dev"
+	nix profile install "$XDG_DATA_HOME/nix/cli/.#cli"
+}
+
+install-nix-dev-tools() {
+	nix profile install "$XDG_DATA_HOME/nix/dev/.#dev"
 }
 
 install-arch-desktop-dependency() {

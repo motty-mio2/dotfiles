@@ -12,11 +12,10 @@
       pkgs = nixpkgs.legacyPackages.${system};
     in
     {
-      packages.${system}.dev = pkgs.buildEnv {
-        name = "dev";
+      packages.${system}.cli = pkgs.buildEnv {
+        name = "cli";
         paths = with pkgs; [
-          arduino-language-server
-        {{- range .dependencies.dev -}}
+        {{- range $name, $managers := .dependencies.cli -}}
         {{ get $managers "nix" | printf "%s " -}}
         {{- end -}}
         ];
