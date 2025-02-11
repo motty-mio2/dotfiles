@@ -23,7 +23,7 @@ alias watch="watch "
 
 nupdate() {
 	for item in $(nix profile list --json | jq -r ".elements | keys | .[] "); do
-		nix flake update --flake "$(chezmoi source-path)/$item"
+		nix flake update --flake "$XDG_DATA_HOME/nix/$item"
 		nix profile upgrade "$item"
 	done
 
