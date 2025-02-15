@@ -2,7 +2,7 @@
 
 install-rust-tools() {
 	# shellcheck disable=SC1083
-	rustup component add {{- .dependencies.rustup | join " " -}}
+	rustup component add {{ .dependencies.rustup | join " " }}
 }
 
 install-uv-tools() {

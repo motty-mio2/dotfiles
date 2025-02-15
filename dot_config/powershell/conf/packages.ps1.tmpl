@@ -1,5 +1,5 @@
 function Install-rust-Tools {
-    rustup component add {{- .dependencies.rustup | join "," }}
+    rustup component add {{ .dependencies.rustup | join " " }}
 }
 
 function Install-uv-Tools {
@@ -55,7 +55,7 @@ function Install-Windows-Software {
 
     # PowerShell
     winget install --id  Microsoft.PowerShell
-    
+
     # PowerToys
     winget install --id XP89DCGQ3K6VLD
 
