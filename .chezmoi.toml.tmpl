@@ -53,6 +53,7 @@ which = { scoop = "which" }
 zsh = { apt = "zsh", aur = "zsh" }
 
 [data.dependencies.dev]
+arduino-cli = { scoop = "arduino-cli", nix ="arduino-cli" }
 actionlint = { scoop = "actionlint", aur = "actionlint", brew = "actionlint", nix = "actionlint" }
 clangd = { scoop = "llvm", apt = "clangd" }
 clang-format = { apt = "clang-format" }
@@ -68,6 +69,8 @@ svls = { scoop = "svls", aur = "svls", brew = "svls", nix = "svls" }
 verible = { scoop = "verible", nix = "verible" }
 
 [data.dependencies.desktop]
+ArduinoIDE = { flatpak = "cc.arduino.arduinoide" }
+ArduinoIDE2 = { flatpak = "cc.arduino.IDE2" }
 Bitwarden = { winget = "Bitwarden.Bitwarden" }
 Chrome = { flatpak = "com.google.Chrome", winget = "Google.Chrome.EXE" }
 Discord = { flatpak = "com.discordapp.Discord", winget = "XPDC2RH70K22MN" }
@@ -80,3 +83,4 @@ Slack = { flatpak = "com.slack.Slack", winget = "9WZDNCRDK3WP" }
 Vivaldi = { flatpak = "com.vivaldi.Vivaldi", winget = "XP99GVQDX7JPR4" }
 Wezterm = { scoop = "wezterm", brew = "wezterm" }
 Zoom = { winget = "XP99J3KP4XZ4VV" }
+
