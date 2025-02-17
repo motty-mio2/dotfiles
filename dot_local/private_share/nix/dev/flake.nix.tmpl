@@ -3,23 +3,26 @@
 
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs?ref=nixos-unstable";
+    flake-utils.url = "github:numtide/flake-utils";
   };
 
   outputs =
-    { self, nixpkgs }:
-    let
-      system = "x86_64-linux";
-      pkgs = nixpkgs.legacyPackages.${system};
-    in
-    {
-      packages.${system}.dev = pkgs.buildEnv {
-        name = "dev";
-        paths = with pkgs; [
-          arduino-language-server
-        {{range $name, $managers := .dependencies.dev -}}
-        {{ get $managers "nix" | printf "%s " -}}
-        {{- end -}}
-        ];
-      };
-    };
+    { self, nixpkgs, flake-utils }:
+    flake-utils.lib.eachDefaultSystem(
+      system:
+      let 
+        pkgs = nixpkgs.legacyPackages.${system};
+      in
+      {
+        packages.dev = pkgs.buildEnv {
+          name = "dev";
+          paths = with pkgs; [
+            arduino-language-server
+            {{range $name, $managers := .dependencies.dev -}}
+            {{ get $managers "nix" | printf "%s " -}}
+            {{- end }}
+          ];
+        };
+      }
+    );
 }

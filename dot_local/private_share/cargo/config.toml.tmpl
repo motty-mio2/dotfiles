@@ -3,6 +3,13 @@
 rustc-wrapper = "sccache"
 {{ end }}
 {{ if (lookPath "lld") -}}
+{{   if eq .chezmoi.os "linux" -}}
+{{     if eq .chezmoi.arch "amd64" -}}
 [target.x86_64-unknown-linux-gnu]
 rustflags = ["-C", "link-arg=-fuse-ld=lld"]
-{{ end }}
+{{      else if eq .chezmoi.arch "aarch64}}
+[target.x86_64-unknown-linux-gnu]
+rustflags = ["-C", "link-arg=-fuse-ld=lld"]
+{{      end -}}
+{{   end -}}
+{{ end -}}
