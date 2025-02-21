@@ -1,0 +1,23 @@
+#!/bin/bash
+
+if [ $# -ne 1 ]; then
+    echo "Usage: git clone-default <repository-url>"
+    exit 1
+fi
+
+repo_url="$1"
+
+tmp_dir=$(mktemp -d)
+
+if ! git clone -q --depth 1 "$repo_url" "$tmp_dir"; then
+    echo "Error: Failed to clone repository."
+    exit 1
+fi
+
+repo_name=$(basename -s .git "$repo_url")
+
+default_branch=$(git -C "$tmp_dir" symbolic-ref --short HEAD)
+
+mkdir -p "$repo_name"
+
+mv "$tmp_dir" "$repo_name/$default_branch"

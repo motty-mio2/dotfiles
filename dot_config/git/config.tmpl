@@ -7,7 +7,7 @@
     gpgsign = true
 [gpg]
     format = ssh
-{{ end }}
+{{ end -}}
 [core]
     autocrlf = input
     filemode = false
@@ -24,3 +24,7 @@
     ff = false
 [pull]
     ff = only
+[alias]
+    wad = "!f(){ git worktree add --guess-remote -b \"$1\" ../$1;};f"
+    wcl = "!git-clone-workspace"
+
