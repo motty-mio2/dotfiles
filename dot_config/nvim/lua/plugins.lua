@@ -85,10 +85,10 @@ return {
 		event = { "BufReadPre", "BufNewFile" },
 		config = function()
 			require("hlchunk").setup({
-				chunk = { enable = true },
+				chunk = { enable = false },
 				indent = { enable = true },
-				line_num = { enable = true },
-				blank = { enable = true },
+				line_num = { enable = false },
+				blank = { enable = false },
 			})
 		end,
 	},
