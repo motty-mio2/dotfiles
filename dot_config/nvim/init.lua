@@ -19,11 +19,13 @@ require("lazy").setup({
 	},
 })
 
+vim.cmd("source ~/.config/vim/option.vim")
+
 require("completion")
 require("keymap")
 require("lsp")
 require("neotree")
-require("option")
 require("treesitter")
 require("clipboard")
 require("everforest").load()
+
