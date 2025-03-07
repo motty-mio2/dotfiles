@@ -9,7 +9,7 @@ if type "pacman" >/dev/null 2>&1; then
 	sudo pacman -S base-devel
 elif type "apt" >/dev/null 2>&1; then
 	echo "Debian Mode"
-	sudo apt install build-essential
+	sudo apt install build-essential git python3-pip
 elif type "dnf" >/dev/null 2>&1; then
 	echo "RHEL Mode"
 	sudo dnf -q -y groupinstall "Development Tools"
