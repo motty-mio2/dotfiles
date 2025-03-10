@@ -1,5 +1,5 @@
 try {
-    Import-Module PSReadLine
+    Import-Module PSReadLine -ErrorAction Stop
 } catch {
     Install-Module PSReadLine -Force -Scope CurrentUser
     Import-Module PSReadLine
@@ -14,14 +14,14 @@ try {
 }
 
 try {
-    Import-Module posh-git
+    Import-Module posh-git -ErrorAction Stop
 } catch {
     Install-Module posh-git -Force -Scope CurrentUser
     Import-Module posh-git
 }
 
 try {
-    Import-Module PSFzf
+    Import-Module PSFzf -ErrorAction Stop
 } catch {
     Install-Module PSFzf -Force -Scope CurrentUser
     Import-Module PSFzf
