@@ -1,5 +1,5 @@
-set viminfo+=n~/.config/vim/viminfo
-set directory=~/.local/state/vim/swap
-set undodir=~/.local/state/vim/undo
+set viminfo+=n$XDG_CONFIG_HOME/vim/viminfo
+set directory=$XDG_STATE_HOME/vim/swap
+set undodir=$XDG_STATE_HOME/vim/undo
 
-source ./option.vim
+source $XDG_CONFIG_HOME/vim/option.vim
