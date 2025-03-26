@@ -36,10 +36,6 @@ set smartindent  " スマートインデントを有効にする
 set tabstop=4  " タブ文字の幅を4文字に設定
 
 
-" --- キーマッピング ---
-nnoremap j gj  " jキーで画面上の次の行に移動する
-nnoremap k gk  " kキーで画面上の前の行に移動する
-
 " --- その他 ---
 set clipboard=unnamedplus  " システムのクリップボードと連携する
 set mouse=a  " マウスの使用を有効にする
