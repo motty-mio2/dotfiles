@@ -35,7 +35,7 @@ export ERRFILE="$XDG_CACHE_HOME/X11/xsession-errors"
 export ZDOTDIR="$XDG_CONFIG_HOME/zsh"
 
 # devenv
-export SVLINT_CONFIG="$HOME/.config/svlint/.svlint.toml"
+export SVLINT_CONFIG="$XDG_CONFIG_HOME/svlint/.svlint.toml"
 export PIPENV_VENV_IN_PROJECT=1
 
 export HISTFILE="$XDG_STATE_HOME/shell_history"
