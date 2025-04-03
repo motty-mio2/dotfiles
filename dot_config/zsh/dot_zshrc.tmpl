@@ -1,7 +1,7 @@
 #!/usr/bin/zsh
 
 if [ -z "$MY_ZSH_PROFILE" ]; then
-    source "$XDG_CONFIG_HOME/zsh/.zprofile"
+    source "$HOME/.config/zsh/.zprofile"
 fi
 
 {{- if lookPath "nvim" }}
