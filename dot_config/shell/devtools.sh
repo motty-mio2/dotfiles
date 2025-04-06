@@ -43,7 +43,9 @@ install-nix() {
 }
 
 install-keyd() {
-	sudo ln -s "$XDG_CONFIG_HOME/keyd" "/etc/keyd"
+	if [ ! -e "/etc/keyd" ]; then
+		sudo ln -s "$XDG_CONFIG_HOME/keyd" "/etc/keyd"
+	fi
 
 	if type "apt" &>/dev/null; then
 		sudo add-apt-repository ppa:keyd-team/ppa

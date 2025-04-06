@@ -19,6 +19,7 @@ tools
     .config/input-remapper-2
     .config/keyd
     .config/shell
+    .config/udev
     .config/zsh
 {{ end }}
 
