@@ -1,0 +1,3 @@
+#!/bin/bash
+
+git worktree add --guess-remote -b "$1" "$(git-worktree-root)/../$1"
