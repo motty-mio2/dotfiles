@@ -43,3 +43,12 @@ else
 	fi
 fi
 
+{{ if or (eq .machine_type "laptop") (eq .machine_type "desktop") -}}
+install-keyboard() {
+	for rule_file in $(find $HOME/.config/udev -name "*.rules"); do
+		sudo ln -s $rule_file /etc/udev/rules.d/
+	done
+	sudo udevadm control --reload-rules
+	sudo udevadm trigger
+}
+{{- end -}}
