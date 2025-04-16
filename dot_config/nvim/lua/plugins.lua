@@ -34,6 +34,13 @@ return {
 	{
 		"nvim-telescope/telescope.nvim",
 		dependencies = { "nvim-lua/plenary.nvim" },
+		opts = {},
+		keys = {
+			{ "<leader>fg", function() require("telescope.builtin").live_grep() end, desc = "Telescope live grep" },
+			{ "<leader>ff", function() require("telescope.builtin").find_files() end, desc = "Telescope find files" },
+			{ "<leader>fb", function() require("telescope.builtin").buffers() end, desc = "Telescope buffers" },
+			{ "<leader>fh", function() require("telescope.builtin").help_tags() end, desc = "Telescope help tags" },
+		},
 	},
 	{
 		"nvim-neo-tree/neo-tree.nvim",
@@ -62,13 +69,7 @@ return {
 		event = "VeryLazy",
 		opts = {},
 		keys = {
-			{
-				"<leader>?",
-				function()
-					require("which-key").show({ global = false })
-				end,
-				desc = "Buffer Local Keymaps (which-key)",
-			},
+			{ "<leader>?", function() require("which-key").show({ global = false }) end, desc = "Buffer Local Keymaps (which-key)" },
 		},
 	},
 	{
@@ -82,36 +83,12 @@ return {
 		opts = {},
 		cmd = "Trouble",
 		keys = {
-			{
-				"<leader>xx",
-				"<cmd>Trouble diagnostics toggle<cr>",
-				desc = "Diagnostics (Trouble)",
-			},
-			{
-				"<leader>xX",
-				"<cmd>Trouble diagnostics toggle filter.buf=0<cr>",
-				desc = "Buffer Diagnostics (Trouble)",
-			},
-			{
-				"<leader>cs",
-				"<cmd>Trouble symbols toggle focus=false<cr>",
-				desc = "Symbols (Trouble)",
-			},
-			{
-				"<leader>cl",
-				"<cmd>Trouble lsp toggle focus=false win.position=right<cr>",
-				desc = "LSP Definitions / references / ... (Trouble)",
-			},
-			{
-				"<leader>xL",
-				"<cmd>Trouble loclist toggle<cr>",
-				desc = "Location List (Trouble)",
-			},
-			{
-				"<leader>xQ",
-				"<cmd>Trouble qflist toggle<cr>",
-				desc = "Quickfix List (Trouble)",
-			},
+			{ "<leader>xx", "<cmd>Trouble diagnostics toggle<cr>", desc = "Diagnostics (Trouble)" },
+			{ "<leader>xX", "<cmd>Trouble diagnostics toggle filter.buf=0<cr>", desc = "Buffer Diagnostics (Trouble)" },
+			{ "<leader>cs", "<cmd>Trouble symbols toggle focus=false<cr>", desc = "Symbols (Trouble)" },
+			{ "<leader>cl", "<cmd>Trouble lsp toggle focus=false win.position=right<cr>", desc = "LSP Definitions / references / ... (Trouble)" },
+			{ "<leader>xL", "<cmd>Trouble loclist toggle<cr>", desc = "Location List (Trouble)" },
+			{ "<leader>xQ", "<cmd>Trouble qflist toggle<cr>", desc = "Quickfix List (Trouble)" },
 		},
 	},
 	{
