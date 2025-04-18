@@ -34,7 +34,7 @@ return {
 	{
 		"nvim-telescope/telescope.nvim",
 		dependencies = { "nvim-lua/plenary.nvim" },
-		opts = {},
+		opts = {defaults = {file_ignore_patterns = { ".*.lock" }}},
 		keys = {
 			{ "<leader>fg", function() require("telescope.builtin").live_grep() end, desc = "Telescope live grep" },
 			{ "<leader>ff", function() require("telescope.builtin").find_files() end, desc = "Telescope find files" },
