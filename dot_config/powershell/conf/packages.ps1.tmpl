@@ -65,7 +65,7 @@ function Install-Windows-Software {
     # Install Apps
     {{- range $name, $managers := .dependencies.desktop -}}
     {{  if get $managers "winget" }}
-    winget install --id {{- get $managers "winget" | printf "%s " }}
+    winget install --id {{ get $managers "winget" | printf "%s " }}
     {{- end }}
     {{- end }}
 }
