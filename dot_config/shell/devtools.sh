@@ -40,6 +40,12 @@ install-nix() {
 	else
 		echo "Nix is already installed."
 	fi
+
+	if nix config show | grep 'use-xdg-base-directories = true' &>/dev/null; then
+		echo "Nix is already configured to use XDG base directories."
+	else
+		echo "use-xdg-base-directories = true" | sudo tee -a /etc/nix/nix.conf
+	fi
 }
 
 install-keyd() {
