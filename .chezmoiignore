@@ -17,6 +17,7 @@ tools
     .config/chezmoi/setup/run_once_01_setup.sh
     .conifg/fcitx5
     .config/keyd
+    .config/nix
     .config/shell
     .config/udev
     .config/zsh

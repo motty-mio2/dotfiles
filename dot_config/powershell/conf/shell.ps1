@@ -239,7 +239,7 @@ function Set-Better-Windows {
     # MsMpEng.exe の除外プロセス設定をクエリ
     sudo reg query "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows Defender\Exclusions\Processes" /v "MsMpEng.exe"
     # 24H2 sudo を有効化、gsudo がないとできないという矛盾はいったん置いておく
-    sudo reg add "HKEY_LOCAL_MACHINE\Software\Microsoft\Windows\CurrentVersion\Sudo" /v "Enabled" /t REG_DWORD /d "0" /f
+    sudo reg add "HKEY_LOCAL_MACHINE\Software\Microsoft\Windows\CurrentVersion\Sudo" /v "Enabled" /t REG_DWORD /d "1" /f
 
     # スタートメニュー
     # 「ときどきスタートにおすすめを表示する」をオフに設定
@@ -278,7 +278,9 @@ function Set-Better-Windows {
     # 「タイトルバーに完全なパスを表示する」をオンに設定
     reg add "HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Explorer\CabinetState" /v "FullPath" /t REG_DWORD /d "1" /f
     # 「ファイル拡張子を表示する」をオンに設定
-    reg add "HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced" /v "HideFileExt" /t REG_DWORD /d "0" /f
+    reg add "HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced" /v "HideFileExt" /t REG_DWORD /d "1" /f
+    # 「Office.comのファイルを表示する」をオフに設定
+    reg add "HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Explorer" /v "ShowCloudFilesInQuickAccess" /t REG_DWORD /d "0" /f
 }
 
 function Reset-Broken-Windows {
