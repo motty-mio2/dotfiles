@@ -16,7 +16,6 @@ tools
     .config/bash-completion.d
     .config/chezmoi/setup/run_once_01_setup.sh
     .conifg/fcitx5
-    .config/input-remapper-2
     .config/keyd
     .config/shell
     .config/udev
