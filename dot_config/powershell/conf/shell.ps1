@@ -229,7 +229,8 @@ function bwx {
 function Set-Better-Windows {
     # エクスプローラ周り重い人向け覚書
     # https://forest.watch.impress.co.jp/docs/serial/yajiuma/1523696.html
-
+    # ハードウェアクロックをUTCに変更
+    sudo reg add "HKEY_LOCAL_MACHINE\System\CurrentControlSet\Control\TimeZoneInformation" /v RealTimeIsUniversal /d 1 /t REG_DWORD /f
     # C:\Program Files\Windows Defender\MsMpEng.exe を除外パスに追加
     sudo reg add "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows Defender\Exclusions\Paths" /v "C:\Program Files\Windows Defender\MsMpEng.exe" /t REG_DWORD /d "0" /f
     # MsMpEng.exe を除外プロセスに追加
