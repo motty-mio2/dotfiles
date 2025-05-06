@@ -1,0 +1,12 @@
+[general]
+import = ["~/.config/alacritty/os-specified.toml"]
+
+[window]
+blur = true
+opacity = 0.8
+
+[font]
+normal.family = "HackGen35 Console NF"
+
+[cursor]
+style = "Beam"

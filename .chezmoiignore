@@ -8,10 +8,10 @@ tools
 
 {{ if eq .chezmoi.os "windows" }}
     .bash_logout
-    .bashrc
     .bash_profile
-    .zprofile
+    .bashrc
     .profile
+    .zprofile
     .zshenv
     .config/bash-completion.d
     .config/chezmoi/setup/run_once_01_setup.sh
@@ -20,6 +20,7 @@ tools
     .config/nix
     .config/shell
     .config/udev
+    .config/zellij
     .config/zsh
 {{ end }}
 

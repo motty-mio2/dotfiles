@@ -1,0 +1,7 @@
+{{ if eq .chezmoi.os "windows" }}
+[terminal]
+shell = { program = "wsl" }
+{{ else if eq .chezmoi.os "linux" }}
+[terminal]
+shell = { program = "zsh" , args = ["--login"] }
+{{ end }}
