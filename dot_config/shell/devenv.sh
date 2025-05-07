@@ -1,4 +1,6 @@
 #!/bin/bash
+# Uv
+export INSTALLER_NO_MODIFY_PATH
 
 # Verilog
 alias iv="iverilog"
