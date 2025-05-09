@@ -1,0 +1,29 @@
+# Chezmoi
+{{ if lookPath "chezmoi" }}
+{{ output "chezmoi" "completion" .shell }}
+{{ end }}
+
+# Deno
+{{ if lookPath "deno" }}
+{{ output "deno" "completions" .shell }}
+{{ end }}
+
+# Rustup
+{{ if lookPath "rustup" }}
+{{ output "rustup" "completions" .shell }}
+{{ end }}
+
+# uv
+{{ if lookPath "uv" }}
+{{ output "uv" "generate-shell-completion" .shell }}
+{{ end }}
+
+# Volta
+{{ if lookPath "volta" }}
+{{ output "volta" "completions" .shell }}
+{{ end }}
+
+# Zellij
+{{ if lookPath "zellij" }}
+{{ output "zellij" "setup" "--generate-completion" .shell }}
+{{ end }}
