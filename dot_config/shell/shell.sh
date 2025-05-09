@@ -9,6 +9,8 @@ alias supdate='sudo snap refresh'
 alias yupdate='yay -Syu'
 alias zupdate='sudo zypper ref && sudo zypper update -y'
 
+alias alert='notify-send --urgency=low -i "$([ $? = 0 ] && echo terminal || echo error)" "$(history|tail -n1|sed -e '\''s/^\s*[0-9]\+\s*//;s/[;&|]\s*alert$//'\'')"'
+
 alias ls="ls --color=auto"
 alias ll='ls -lahF'
 alias lh='ls -ldF .*'
@@ -27,7 +29,6 @@ nupdate() {
 		nix flake update --flake "$XDG_DATA_HOME/nix/$item"
 		nix profile upgrade "$item"
 	done
-
 }
 
 #!/usr/bin/bash
