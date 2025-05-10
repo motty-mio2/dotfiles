@@ -36,8 +36,9 @@ done
 {{ end }}
 
 # Zellij
+# https://github.com/ahmetb/kubectx/issues/285
 {{ if lookPath "zellij" }}
-{{ output "zellij" "setup" "--generate-completion" .shell }}
+{{ output "zellij" "setup" "--generate-completion" .shell | replaceAllRegex "_zellij \"\\$@\"" "compdef _jellij zellij" }}
 {{ end }}
 
 # Shell Framework
