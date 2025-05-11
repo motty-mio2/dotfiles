@@ -10,36 +10,36 @@ for file in $(find "${HOME}/.config/shell" -name "*.sh"); do
     source "${file}"
 done
 
+{{- if lookPath "chezmoi" }}
 # Chezmoi
-{{ if lookPath "chezmoi" }}
-{{ output "chezmoi" "completion" .shell }}
-{{ end }}
+{{- output "chezmoi" "completion" .shell }}
+{{- end }}
 
+{{- if lookPath "deno" }}
 # Deno
-{{ if lookPath "deno" }}
-{{ output "deno" "completions" .shell }}
-{{ end }}
+{{- output "deno" "completions" .shell }}
+{{- end }}
 
+{{- if lookPath "rustup" }}
 # Rustup
-{{ if lookPath "rustup" }}
-{{ output "rustup" "completions" .shell }}
-{{ end }}
+{{- output "rustup" "completions" .shell }}
+{{- end }}
 
+{{- if lookPath "uv" }}
 # uv
-{{ if lookPath "uv" }}
-{{ output "uv" "generate-shell-completion" .shell }}
-{{ end }}
+{{- output "uv" "generate-shell-completion" .shell }}
+{{- end }}
 
+{{- if lookPath "volta" }}
 # Volta
-{{ if lookPath "volta" }}
-{{ output "volta" "completions" .shell }}
-{{ end }}
+{{- output "volta" "completions" .shell }}
+{{- end }}
 
+{{- if lookPath "zellij" }}
 # Zellij
 # https://github.com/ahmetb/kubectx/issues/285
-{{ if lookPath "zellij" }}
-{{ output "zellij" "setup" "--generate-completion" .shell | replaceAllRegex "_zellij \"\\$@\"" "compdef _jellij zellij" }}
-{{ end }}
+{{- output "zellij" "setup" "--generate-completion" .shell | replaceAllRegex "_zellij \"\\$@\"" "compdef _jellij zellij" }}
+{{- end }}
 
 # Shell Framework
 {{ if eq .shell "bash" }}

@@ -28,8 +28,8 @@ if ! shopt -oq posix; then
         source /usr/share/bash-completion/bash_completion
     fi
 
-    if [ -d "$XDG_CONFIG_HOME/bash_completion.d" ]; then
-        for file in "$XDG_CONFIG_HOME/bash_completion.d"/* ; do
+    if [ -d "$XDG_CONFIG_HOME/bash/completion" ]; then
+        for file in "$XDG_CONFIG_HOME/bash/completion"/* ; do
             #shellcheck source=/dev/null
             source "${file}"
         done
@@ -43,4 +43,5 @@ if ! shopt -oq posix; then
     fi
 fi
 
+# Include shell template
 {{ includeTemplate "shell_rc.tmpl" (dict "shell" "bash") }}

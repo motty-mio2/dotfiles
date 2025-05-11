@@ -10,6 +10,7 @@ source "$XDG_CONFIG_HOME/zsh/plugins/zsh-completions/zsh-completions.plugin.zsh"
 source "$XDG_CONFIG_HOME/zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.plugin.zsh"
 source "$XDG_CONFIG_HOME/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.plugin.zsh"
 
+fpath=("$XDG_CONFIG_HOME/zsh/completion" $fpath)
 fpath=("$XDG_STATE_HOME/nix/profiles/profile/share/zsh/site-functions" $fpath)
 
 autoload -Uz compinit
@@ -67,4 +68,5 @@ bindkey '^r' select-history
 bindkey "^[[1~" beginning-of-line
 bindkey "^[[4~" end-of-line
 
+# Include shell template
 {{ includeTemplate "shell_rc.tmpl" (dict "shell" "zsh") }}
