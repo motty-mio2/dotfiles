@@ -1,4 +1,4 @@
-[data.dependencies]
+[dependencies]
 uv = ["black", "flake8", "ignr", "isort", "mypy", "pyright", "ruff"]
 volta = [
     "@bitwarden/cli",
@@ -17,7 +17,7 @@ rustup = [
     "rust-analyzer",
 ]
 
-[data.dependencies.cli]
+[dependencies.cli]
 act = { aur = "act-bin", brew = "act", nix = "act" }
 bat = { scoop = "bat", apt = "bat", aur = "bat", brew = "bat", nix = "bat" }
 byobu = { apt = "byobu", aur = "byobu" }
@@ -46,7 +46,7 @@ wget = { scoop = "wget", apt = "wget", aur = "wget" }
 which = { scoop = "which" }
 zsh = { apt = "zsh", aur = "zsh" }
 
-[data.dependencies.dev]
+[dependencies.dev]
 arduino-cli = { scoop = "arduino-cli", nix = "arduino-cli" }
 actionlint = { scoop = "actionlint", aur = "actionlint", brew = "actionlint", nix = "actionlint" }
 clangd = { scoop = "llvm", apt = "clangd" }
@@ -62,7 +62,7 @@ svlint = { scoop = "svlint", aur = "svlint", brew = "svlint", nix = "svlint" }
 svls = { scoop = "svls", aur = "svls", brew = "svls", nix = "svls" }
 verible = { scoop = "verible", nix = "verible" }
 
-[data.dependencies.desktop]
+[dependencies.desktop]
 ArduinoIDE = { flatpak = "cc.arduino.arduinoide" }
 ArduinoIDE2 = { flatpak = "cc.arduino.IDE2" }
 Bitwarden = { winget = "Bitwarden.Bitwarden" }
