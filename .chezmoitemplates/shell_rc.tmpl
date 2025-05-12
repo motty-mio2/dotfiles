@@ -20,7 +20,7 @@ done
 {{- output "deno" "completions" .shell }}
 {{- end }}
 
-{{- if lookPath "rustup" }}
+{{- if and (eq .shell "zsh") (lookPath "rustup") }}
 # Rustup
 {{- output "rustup" "completions" .shell }}
 {{- end }}
@@ -35,7 +35,7 @@ done
 {{- output "volta" "completions" .shell }}
 {{- end }}
 
-{{- if lookPath "zellij" }}
+{{- if and (eq .shell "zsh") (lookPath "zellij") }}
 # Zellij
 # https://github.com/ahmetb/kubectx/issues/285
 {{- output "zellij" "setup" "--generate-completion" .shell | replaceAllRegex "_zellij \"\\$@\"" "compdef _jellij zellij" }}
