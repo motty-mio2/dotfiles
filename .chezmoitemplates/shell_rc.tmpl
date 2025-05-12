@@ -1,0 +1,67 @@
+# Environement
+{{- if lookPath "nvim" }}
+export EDITOR=nvim
+{{- else if lookPath "vim" }}
+export EDITOR=vim
+{{- end }}
+
+for file in $(find "${HOME}/.config/shell" -name "*.sh"); do
+    #shellcheck source=/dev/null
+    source "${file}"
+done
+
+{{- if lookPath "chezmoi" }}
+# Chezmoi
+{{- output "chezmoi" "completion" .shell }}
+{{- end }}
+
+{{- if lookPath "deno" }}
+# Deno
+{{- output "deno" "completions" .shell }}
+{{- end }}
+
+{{- if and (eq .shell "zsh") (lookPath "rustup") }}
+# Rustup
+{{- output "rustup" "completions" .shell }}
+{{- end }}
+
+{{- if lookPath "uv" }}
+# uv
+{{- output "uv" "generate-shell-completion" .shell }}
+{{- end }}
+
+{{- if lookPath "volta" }}
+# Volta
+{{- output "volta" "completions" .shell }}
+{{- end }}
+
+{{- if and (eq .shell "zsh") (lookPath "zellij") }}
+# Zellij
+# https://github.com/ahmetb/kubectx/issues/285
+{{- output "zellij" "setup" "--generate-completion" .shell | replaceAllRegex "_zellij \"\\$@\"" "compdef _jellij zellij" }}
+{{- end }}
+
+# Shell Framework
+{{ if eq .shell "bash" }}
+{{  if and (lookPath "starship") (eq .bash "starship") }}
+{{      output "starship" "init" "bash" }}
+starship_precmd_user_func="set-window-title"
+{{  else if and (lookPath "oh-my-posh") (eq .bash "oh-my-posh") }}
+{{      output "oh-my-posh" "init" "bash" "--config" "~/.config/omp.toml" | replaceAllRegex "export POSH_SESSION_ID.+" "" }}
+{{  else }}
+PS1='\[\033[01;32m\]\u@\h\[\033[00m\]:\[\033[01;34m\]\w\[\033[00m\]\$ '
+{{  end }}
+{{ else if eq .shell "zsh" }}
+{{  if and (lookPath "starship") (eq .zsh "starship") }}
+{{      output "starship" "init" "zsh" }}
+precmd_functions+=(set-window-title)
+{{  else if and (lookPath "oh-my-posh") (eq .zsh "oh-my-posh") }}
+{{      output "oh-my-posh" "init" "zsh" "--config" "~/.config/omp.toml" | replaceAllRegex "export POSH_SESSION_ID.+" "" }}
+{{  else }}
+# POWERLEVEL
+source "$XDG_CONFIG_HOME/zsh/plugins/powerlevel10k/powerlevel10k.zsh-theme"
+POWERLEVEL9K_DISABLE_CONFIGURATION_WIZARD=true
+{{      include "dot_config/zsh/dot_p10k.zsh" }}
+{{  end }}
+{{ end }}
+

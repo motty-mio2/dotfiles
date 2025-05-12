@@ -30,13 +30,14 @@ export LIMA_HOME="$XDG_DATA_HOME/lima"
 export NPM_CONFIG_USERCONFIG="$XDG_CONFIG_HOME/npm/npmrc"
 export PLATFORMIO_CORE_DIR="$XDG_DATA_HOME/platformio"
 export PYTHONSTARTUP="$XDG_CONFIG_HOME/python/pythonrc"
+export SVLINT_CONFIG="$XDG_CONFIG_HOME/svlint/.svlint.toml"
 export VOLTA_HOME="$XDG_DATA_HOME/volta"
 export XCURSOR_PATH="/usr/share/icons:$XDG_DATA_HOME/icons"
 export ERRFILE="$XDG_CACHE_HOME/X11/xsession-errors"
 export ZDOTDIR="$XDG_CONFIG_HOME/zsh"
 
 # devenv
-export SVLINT_CONFIG="$XDG_CONFIG_HOME/svlint/.svlint.toml"
+export INSTALLER_NO_MODIFY_PATH=1
 export PIPENV_VENV_IN_PROJECT=1
 
 export HISTFILE="$XDG_STATE_HOME/shell_history"
@@ -74,12 +75,4 @@ for item in "${array[@]}"; do
     export PATH="$item:$PATH"
 done
 
-# array=(
-# )
-
-# for item in "${array[@]}"; do
-#     if [ -e "$item" ]; then
-#         #shellcheck source=/dev/null
-#         source "$item"
-#     fi
-# done
+unset array
