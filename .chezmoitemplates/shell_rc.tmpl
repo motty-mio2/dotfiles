@@ -43,19 +43,19 @@ done
 
 # Shell Framework
 {{ if eq .shell "bash" }}
-{{  if and (lookPath "starship") (eq .bash "starship") }}
+{{  if and (lookPath "starship") (eq .framework "starship") }}
 {{      output "starship" "init" "bash" }}
 starship_precmd_user_func="set-window-title"
-{{  else if and (lookPath "oh-my-posh") (eq .bash "oh-my-posh") }}
+{{  else if and (lookPath "oh-my-posh") (eq .framework "oh-my-posh") }}
 {{      output "oh-my-posh" "init" "bash" "--config" "~/.config/omp.toml" | replaceAllRegex "export POSH_SESSION_ID.+" "" }}
 {{  else }}
 PS1='\[\033[01;32m\]\u@\h\[\033[00m\]:\[\033[01;34m\]\w\[\033[00m\]\$ '
 {{  end }}
 {{ else if eq .shell "zsh" }}
-{{  if and (lookPath "starship") (eq .zsh "starship") }}
+{{  if and (lookPath "starship") (eq .framework "starship") }}
 {{      output "starship" "init" "zsh" }}
 precmd_functions+=(set-window-title)
-{{  else if and (lookPath "oh-my-posh") (eq .zsh "oh-my-posh") }}
+{{  else if and (lookPath "oh-my-posh") (eq .framework "oh-my-posh") }}
 {{      output "oh-my-posh" "init" "zsh" "--config" "~/.config/omp.toml" | replaceAllRegex "export POSH_SESSION_ID.+" "" }}
 {{  else }}
 # POWERLEVEL

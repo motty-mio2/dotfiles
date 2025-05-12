@@ -44,4 +44,4 @@ if ! shopt -oq posix; then
 fi
 
 # Include shell template
-{{ includeTemplate "shell_rc.tmpl" (dict "shell" "bash") }}
+{{ includeTemplate "shell_rc.tmpl" (dict "shell" "bash" "framework" .bash) }}
