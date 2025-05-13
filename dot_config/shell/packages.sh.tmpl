@@ -14,6 +14,7 @@ nupdate() {
 		nix flake update --flake "$XDG_DATA_HOME/nix/$item"
 		nix profile upgrade "$item"
 	done
+    unlink "$HOME/.nix-profile"
 }
 
 
