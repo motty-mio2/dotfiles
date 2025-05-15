@@ -13,7 +13,7 @@ tools
     .profile
     .zprofile
     .zshenv
-    .config/bash-completion.d
+    .config/bash
     .config/chezmoi/setup/run_once_01_setup.sh
     .conifg/fcitx5
     .config/keyd
