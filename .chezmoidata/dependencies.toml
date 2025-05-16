@@ -6,7 +6,6 @@ volta = [
     "biome",
     "markdownlint-cli",
     "neovim",
-    "pnpm",
 ]
 rustup = [
     "clippy",
