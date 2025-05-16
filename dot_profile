@@ -39,6 +39,7 @@ export ZDOTDIR="$XDG_CONFIG_HOME/zsh"
 # devenv
 export INSTALLER_NO_MODIFY_PATH=1
 export PIPENV_VENV_IN_PROJECT=1
+export VOLTA_FEATURE_PNPM=1
 
 export HISTFILE="$XDG_STATE_HOME/shell_history"
 export HISTSIZE=10000
