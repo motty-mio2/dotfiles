@@ -1,0 +1,52 @@
+#!/usr/bin/bash
+
+# XDG CONFIG DIRS
+{{- range $key, $value := .environment.xdg }}
+export {{ $key }}="${{ $value }}"
+{{- end }}
+export XDG_RUNTIME_DIR="/run/user/$UID"
+
+# APPLICATIONS PATH
+{{- range $key, $value := .environment.application_path }}
+export {{ $key }}="${{ $value }}"
+{{- end }}
+export XCURSOR_PATH="/usr/share/icons:$XDG_DATA_HOME/icons"
+
+
+# APPLICATIONS CONFIG
+{{- range $key, $value := .environment.application_config }}
+export {{ $key }}={{ $value }}
+{{- end }}
+
+export HISTFILE="$XDG_STATE_HOME/shell_history"
+export HISTSIZE=10000
+export SAVEHIST=10000
+
+array=(
+    "/usr/bin/lesspipe"
+    "/usr/bin/lesspipe.sh"
+)
+
+for item in "${array[@]}"; do
+    if [ -e "$item" ]; then
+        export LESSOPEN="|$item %s"
+        export LESSCLOSE="$item %s %s"
+    fi
+done
+
+#PATH
+array=(
+    "$GOPATH/bin"
+    "$CARGO_HOME/bin"
+    "$BREW_PREFIX/bin"
+    "$XDG_STATE_HOME/nix/profiles/profile/bin"
+)
+
+for item in "${array[@]}"; do
+    export PATH="$item:$PATH"
+done
+unset array
+
+# PATH
+$PATH = "${{ .environment.path | join ":$"}};$PATH"
+

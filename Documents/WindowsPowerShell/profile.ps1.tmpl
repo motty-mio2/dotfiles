@@ -1,1 +1,1 @@
-{{- include "dot_config/powershell/profile.ps1" -}}
+{{- includeTemplate "dot_config/powershell/profile.ps1.tmpl" (dict "environment" .environment) -}}
