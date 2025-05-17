@@ -1,3 +1,3 @@
-{{- include "dot_profile" -}}
+{{- includeTemplate "dot_profile.tmpl" (dict "environment" .environment) -}}
 
 export MY_BASH_PROFILE=1
