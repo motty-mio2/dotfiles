@@ -8,11 +8,13 @@ $directory\
 $git_branch($git_status)\
 $python\
 $cmd_duration\
-
-
-[](fg:base_background)\
- $os\
+[](fg:base_background)
+ $os \
 $character\
+"""
+
+right_format = """
+$time
 """
 
 # Inserts a blank line between shell prompts
@@ -34,7 +36,7 @@ separator = '#868686'
 disabled = true
 
 [cmd_duration]
-min_time = 0
+min_time = 100
 format = '[](fg:separator bg:base_background)[ $duration]($style)'
 style = 'bg:base_background'
 
@@ -72,7 +74,7 @@ trim_at = '.'
 
 [os]
 format = "[$symbol]($style)"
-style = "fg:bold blue bg:base_background"
+style = "fg:bold blue"
 disabled = false
 
 [os.symbols]
