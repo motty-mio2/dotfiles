@@ -48,6 +48,8 @@ fi
 
 {{ if and (lookPath "starship") (eq .bash "starship") }}
 {{      output "starship" "init" "bash" }}
+bleopt prompt_ps1_transient=always
+bleopt prompt_ps1_final='$(starship module character)'
 starship_precmd_user_func="set-window-title"
 {{ else if and (lookPath "oh-my-posh") (eq .bash "oh-my-posh") }}
 {{      output "oh-my-posh" "init" "bash" "--config" "~/.config/omp.toml" | replaceAllRegex "export POSH_SESSION_ID.+" "" }}
