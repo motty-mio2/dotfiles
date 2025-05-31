@@ -45,6 +45,7 @@ if ! shopt -oq posix; then
 fi
 
 # Include shell template
+{{ includeTemplate "shell_rc.tmpl" (dict "shell" "bash" ) }}
 
 {{ if and (lookPath "starship") (eq .bash "starship") }}
 {{      output "starship" "init" "bash" }}
