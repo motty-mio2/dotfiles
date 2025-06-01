@@ -9,6 +9,7 @@ $Env:{{ $key }} = "$Env:{{ $value }}"
 {{- range $key, $value := .environment.application_path }}
 $Env:{{ $key }} = "$Env:{{ $value }}"
 {{- end }}
+$Env:VOLTA_HOME = "$HOME/scoop/apps/volta/current/appdata"
 
 # APPLICATIONS CONFIG
 {{- range $key, $value := .environment.application_config }}

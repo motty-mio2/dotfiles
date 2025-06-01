@@ -1,14 +1,16 @@
 # incheck
-{{ $incheck_version:= "0.1.1" }}
+{{ $incheck_version:= "0.1.3" }}
+{{- if eq .chezmoi.os "windows" }}
+["incheck.exe"]
+path = "incheck.exe"
+{{- else }}
 ["incheck"]
+path = "incheck"
+{{- end }}
 type = "archive-file"
 executable = true
 refreshPeriod = "168h"
-path = "incheck"
-{{ if and (eq .chezmoi.os "linux") (eq .chezmoi.arch "amd64") -}}
 url = "https://github.com/motty-mio2/incheck/releases/download/v{{ $incheck_version }}/incheck_{{ $incheck_version }}_{{ .chezmoi.os }}_{{ .chezmoi.arch }}.tar.gz"
-{{ end }}
-
 
 # WSL2 SSH Agent
 {{ if and (eq .chezmoi.os "linux") (.chezmoi.kernel.osrelease | lower | contains "microsoft") -}}
