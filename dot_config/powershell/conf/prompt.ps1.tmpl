@@ -30,6 +30,13 @@ try {
     Set-PSFzfOption -PSReadlineChordReverseHistory 'Ctrl+r'
 }
 
+try {
+    Invoke-Expression (&scoop-search --hook)
+} catch {
+    scoop install scoop-search
+    Invoke-Expression (&scoop-search --hook)
+}
+
 
 Register-ArgumentCompleter -Native -CommandName winget -ScriptBlock {
     param($wordToComplete, $commandAst, $cursorPosition)
