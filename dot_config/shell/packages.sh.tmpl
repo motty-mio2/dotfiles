@@ -241,11 +241,11 @@ install-nix() {
 }
 
 install-nix-tools() {
-	nix profile install "$XDG_DATA_HOME/nix/cli/.#cli"
+	nix profile add "$XDG_DATA_HOME/nix/cli/.#cli"
 }
 
 install-nix-dev-tools() {
-	nix profile install "$XDG_DATA_HOME/nix/dev/.#dev"
+	nix profile add "$XDG_DATA_HOME/nix/dev/.#dev"
 }
 
 install-arch-desktop-dependency() {
