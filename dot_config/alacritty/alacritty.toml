@@ -9,4 +9,5 @@ opacity = 0.8
 normal.family = "HackGen35 Console NF"
 
 [cursor]
-style = "Beam"
+style = { shape = "Beam", blinking = "Off" }
+
