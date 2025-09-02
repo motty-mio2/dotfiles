@@ -4,6 +4,7 @@ volta = [
     "@bitwarden/cli",
     "bash-language-server",
     "biome",
+    "@google/getmini-cli",
     "markdownlint-cli",
     "neovim",
 ]
