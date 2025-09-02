@@ -13,6 +13,7 @@ cmp.setup({
 		{ name = "nvim_lua" },
 		{ name = "luasnip" },
 		{ name = "cmdline" },
+		{ name = "copilot" },
 		{ name = "git" },
 	},
 	mapping = cmp.mapping.preset.insert({

@@ -34,12 +34,36 @@ return {
 	{
 		"nvim-telescope/telescope.nvim",
 		dependencies = { "nvim-lua/plenary.nvim" },
-		opts = {defaults = {file_ignore_patterns = { ".*.lock" }}},
+		opts = { defaults = { file_ignore_patterns = { ".*.lock" } } },
 		keys = {
-			{ "<leader>fg", function() require("telescope.builtin").live_grep() end, desc = "Telescope live grep" },
-			{ "<leader>ff", function() require("telescope.builtin").find_files() end, desc = "Telescope find files" },
-			{ "<leader>fb", function() require("telescope.builtin").buffers() end, desc = "Telescope buffers" },
-			{ "<leader>fh", function() require("telescope.builtin").help_tags() end, desc = "Telescope help tags" },
+			{
+				"<leader>fg",
+				function()
+					require("telescope.builtin").live_grep()
+				end,
+				desc = "Telescope live grep",
+			},
+			{
+				"<leader>ff",
+				function()
+					require("telescope.builtin").find_files()
+				end,
+				desc = "Telescope find files",
+			},
+			{
+				"<leader>fb",
+				function()
+					require("telescope.builtin").buffers()
+				end,
+				desc = "Telescope buffers",
+			},
+			{
+				"<leader>fh",
+				function()
+					require("telescope.builtin").help_tags()
+				end,
+				desc = "Telescope help tags",
+			},
 		},
 	},
 	{
@@ -69,14 +93,17 @@ return {
 		event = "VeryLazy",
 		opts = {},
 		keys = {
-			{ "<leader>?", function() require("which-key").show({ global = false }) end, desc = "Buffer Local Keymaps (which-key)" },
+			{
+				"<leader>?",
+				function()
+					require("which-key").show({ global = false })
+				end,
+				desc = "Buffer Local Keymaps (which-key)",
+			},
 		},
 	},
 	{
 		"lewis6991/gitsigns.nvim",
-	},
-	{
-		"github/copilot.vim",
 	},
 	{
 		"folke/trouble.nvim",
@@ -86,7 +113,11 @@ return {
 			{ "<leader>xx", "<cmd>Trouble diagnostics toggle<cr>", desc = "Diagnostics (Trouble)" },
 			{ "<leader>xX", "<cmd>Trouble diagnostics toggle filter.buf=0<cr>", desc = "Buffer Diagnostics (Trouble)" },
 			{ "<leader>cs", "<cmd>Trouble symbols toggle focus=false<cr>", desc = "Symbols (Trouble)" },
-			{ "<leader>cl", "<cmd>Trouble lsp toggle focus=false win.position=right<cr>", desc = "LSP Definitions / references / ... (Trouble)" },
+			{
+				"<leader>cl",
+				"<cmd>Trouble lsp toggle focus=false win.position=right<cr>",
+				desc = "LSP Definitions / references / ... (Trouble)",
+			},
 			{ "<leader>xL", "<cmd>Trouble loclist toggle<cr>", desc = "Location List (Trouble)" },
 			{ "<leader>xQ", "<cmd>Trouble qflist toggle<cr>", desc = "Quickfix List (Trouble)" },
 		},
@@ -140,5 +171,16 @@ return {
 			zindex = 20, -- The Z-index of the context window
 			on_attach = nil, -- (fun(buf: integer): boolean) return false to disable attaching
 		},
+	},
+	{
+		"zbirenbaum/copilot-cmp",
+		opts = {
+			suggestion = { enabled = false },
+			panel = { enabled = false },
+		},
+	},
+	{
+		"zbirenbaum/copilot.lua",
+		requires = { "zbirenbaum/copilot-cmp" },
 	},
 }
