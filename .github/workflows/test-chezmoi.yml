@@ -19,7 +19,7 @@ jobs:
       - name: Install chezmoi
         run: |
           curl -sfL https://get.chezmoi.io | sh
-          echo "$HOME/bin" >> $GITHUB_PATH
+          echo "$HOME/bin" >> "$GITHUB_PATH"
 
       - name: Run chezmoi init
         run: chezmoi init
