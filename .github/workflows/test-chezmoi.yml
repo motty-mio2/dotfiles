@@ -1,28 +1,12 @@
-name: Test chezmoi setup
-
+name: test
 on:
-  push:
-    branches:
-      - main
-  pull_request:
-    branches:
-      - main
-
+  - push
 jobs:
   test:
-    runs-on: ubuntu-latest
-
+    name: test
+    runs-on: macos-latest
+    timeout-minutes: 10
     steps:
-      - name: Checkout repository
-        uses: actions/checkout@v4
-
-      - name: Install chezmoi
-        run: |
-          curl -sfL https://get.chezmoi.io | sh
-          echo "$HOME/bin" >> "$GITHUB_PATH"
-
-      - name: Run chezmoi init
-        run: chezmoi init
-
-      - name: Run chezmoi apply
-        run: chezmoi apply -v
+      - uses: actions/checkout@v3
+      - name: Install dotfiles
+        run: sh -c "$(curl -fsLS chezmoi.io/get)" -- init --apply -S .
