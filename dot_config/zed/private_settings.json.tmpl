@@ -9,27 +9,29 @@
 {
   "vim_mode": false,
   "features": {
-    "edit_prediction_provider": "zed"
+    "edit_prediction_provider": "copilot"
   },
   "autosave": "on_focus_change",
   "auto_update": true,
-  "assistant": {
+  "agent": {
+    "always_allow_tool_actions": true,
     "default_model": {
       "provider": "copilot_chat",
-      "model": "gpt-4o"
-    },
-    "version": "2"
+      "model": "gpt-4.1"
+    }
   },
   "ui_font_size": 16,
   "buffer_font_size": 16,
   "theme": {
     "mode": "system",
-    "light": "Solarized Dark",
+    "light": "One Dark",
     "dark": "One Dark"
   },
   "terminal": {
     "font_family": "HackGen35 Console NF",
-    "shell": { "program": "zsh" },
+    "shell": {
+      "program": "zsh"
+    },
     "working_directory": "current_project_directory"
   },
   "buffer_font_family": "HackGen35",
@@ -49,6 +51,29 @@
   "languages": {
     "Python": {
       "format_on_save": "on"
+    }
+  },
+  "context_servers": {
+    "notion": {
+      "source": "custom",
+      "command": "npx",
+      "args": [
+        "-y",
+        "@notionhq/notion-mcp-server"
+      ],
+      "env": {
+        "NOTION_TOKEN": "{{ (bitwarden "item" "www.notion.so") | jq ".fields[] | select(.name == \"BearerForMCP\").value" | first }}"
+      }
+    },
+    "mcp-obsidian": {
+      "source": "custom",
+      "command": "npx",
+      "args": [
+        "-y",
+        "mcp-obsidian",
+        "{{ joinPath .chezmoi.homeDir "Documents/Obsidian Vault" -}}"
+      ],
+      "env": {}
     }
   }
 }
