@@ -39,11 +39,11 @@ tasks:
 
   check_toml:
     cmds:
-      - find . \( -name "*.toml" \) -exec taplo lint {} \; -exec taplo format --check {} \;
+      - find . \( -name "*.toml" \) -exec tombi lint {} \; -exec tombi format --check {} \;
 
   fix_toml:
     cmds:
-      - find . \( -name "*.toml" \) -exec taplo lint {} \; -exec taplo format {} \;
+      - find . \( -name "*.toml" \) -exec tombi lint {} \; -exec tombi format {} \;
 
   lua:check:
     cmds:
