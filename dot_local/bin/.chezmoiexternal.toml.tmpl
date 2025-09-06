@@ -1,3 +1,18 @@
+# incheck
+{{ $incheck_version:= "0.1.3" }}
+{{- if eq .chezmoi.os "windows" }}
+["incheck.exe"]
+path = "incheck.exe"
+{{- else }}
+["incheck"]
+path = "incheck"
+{{- end }}
+type = "archive-file"
+executable = true
+refreshPeriod = "168h"
+url = "https://github.com/motty-mio2/incheck/releases/download/v{{ $incheck_version }}/incheck_{{ $incheck_version }}_{{ .chezmoi.os }}_{{ .chezmoi.arch }}.tar.gz"
+
+# WSL2 SSH Agent
 {{ if and (eq .chezmoi.os "linux") (.chezmoi.kernel.osrelease | lower | contains "microsoft") -}}
 {{   if eq .chezmoi.arch "amd64" -}}
 ["wsl2-ssh-agent"]
@@ -11,5 +26,19 @@ type = "file"
 refreshPeriod = "168h"
 executable = true
 url = "https://github.com/mame/wsl2-ssh-agent/releases/latest/download/wsl2-ssh-agent-arm64"
+{{   end }}
+{{ end }}
+
+# Zellij
+{{ if eq .chezmoi.os "linux" }}
+["zellij"]
+type = "archive-file"
+executable = true
+refreshPeriod = "168h"
+path = "zellij"
+{{   if eq .chezmoi.arch "amd64" }}
+url = "https://github.com/zellij-org/zellij/releases/latest/download/zellij-x86_64-unknown-linux-musl.tar.gz"
+{{   else  }} # if eq .chezmoi.arch "arm"
+url = "https://github.com/zellij-org/zellij/releases/latest/download/zellij-aarch64-unknown-linux-musl.tar.gz"
 {{   end }}
 {{ end }}

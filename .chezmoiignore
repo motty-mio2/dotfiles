@@ -8,18 +8,19 @@ tools
 
 {{ if eq .chezmoi.os "windows" }}
     .bash_logout
-    .bashrc
     .bash_profile
-    .zprofile
+    .bashrc
     .profile
+    .zprofile
     .zshenv
-    .config/bash-completion.d
+    .config/bash
     .config/chezmoi/setup/run_once_01_setup.sh
     .conifg/fcitx5
-    .config/input-remapper-2
     .config/keyd
+    .config/nix
     .config/shell
     .config/udev
+    .config/zellij
     .config/zsh
 {{ end }}
 

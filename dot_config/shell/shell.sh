@@ -1,12 +1,6 @@
 #!/usr/bin/env bash
 
-alias aupdate='sudo apt update && sudo apt upgrade -y && sudo apt autoremove -y'
-alias bupdate='brew update && brew upgrade'
-alias dupdate='sudo dnf update -y'
-alias fupdate='flatpak update'
-alias pupdate='sudo pacman -Syu'
-alias yupdate='yay -Syu'
-alias zupdate='sudo zypper ref && sudo zypper update -y'
+alias alert='notify-send --urgency=low -i "$([ $? = 0 ] && echo terminal || echo error)" "$(history|tail -n1|sed -e '\''s/^\s*[0-9]\+\s*//;s/[;&|]\s*alert$//'\'')"'
 
 alias ls="ls --color=auto"
 alias ll='ls -lahF'
@@ -19,15 +13,20 @@ alias fgrep='fgrep --color=auto'
 alias egrep='egrep --color=auto'
 
 alias rmrf='rm -rf'
+alias rsmv='\rsync -avhPR --remove-source-files'
 alias watch="watch "
+alias wget='\wget --hsts-file=$XDG_DATA_HOME/wget-hsts'
 
-nupdate() {
-	for item in $(nix profile list --json | jq -r ".elements | keys | .[] "); do
-		nix flake update --flake "$XDG_DATA_HOME/nix/$item"
-		nix profile upgrade "$item"
-	done
+# Others
+alias doc='docker compose'
+alias pchezmoi='chezmoi -S $HOME/Projects/dotfiles'
 
-}
+# Verilog
+alias iv="iverilog"
+alias ivx="iverilog -g2012"
+
+# Vim
+alias vim='VIMINIT=":source $XDG_CONFIG_HOME/vim/vimrc" vim'
 
 #!/usr/bin/bash
 
@@ -90,13 +89,6 @@ bwx() {
 	done
 }
 
-# Others
-alias pchezmoi='chezmoi -S $HOME/Projects/dotfiles'
-
-alias doc='docker compose'
-alias rsmv='\rsync -avhPR --remove-source-files'
-alias wget='\wget --hsts-file=$XDG_DATA_HOME/wget-hsts'
-
 ghf() {
 	gh repo clone "$(gh repo list -L 10000 | fzf | awk '{print $1}')"
 }
@@ -110,25 +102,6 @@ mygitconfig() {
 if ! hash task &>/dev/null && hash go-task &>/dev/null; then
 	alias task=go-task
 fi
-
-# fonts
-install-hackgen() {
-	WORKDIR=$(mktemp -d)
-
-	FONT_DIR="$XDG_DATA_HOME/fonts"
-
-	mkdir -p "$FONT_DIR"
-
-	for i in $(curl -s https://api.github.com/repos/yuru7/HackGen/releases/latest | grep browser_download_url | cut -d : -f 2,3 | tr -d \"); do
-		url=$(echo "$i" | tr -d ' ')
-		echo "$url"
-		curl -sL -o "$WORKDIR/tmp.zip" "$url"
-
-		unzip -oq "$WORKDIR/tmp.zip" -d "$FONT_DIR"
-	done
-
-	rm -rf "$WORKDIR"
-}
 
 set-window-title() {
 	local title="$1"

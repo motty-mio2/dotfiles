@@ -1,0 +1,39 @@
+[environment.xdg]
+XDG_CONFIG_HOME = "HOME/.config"
+XDG_DATA_HOME = "HOME/.local/share"
+XDG_CACHE_HOME = "HOME/.local/cache"
+XDG_STATE_HOME = "HOME/.local/state"
+
+[environment.application_path]
+AWS_CONFIG_FILE = "XDG_CONFIG_HOME/aws/config"
+AWS_SHARED_CREDENTIALS_FILE = "XDG_CONFIG_HOME/aws/credentials"
+BREW_PREFIX = "XDG_DATA_HOME/brew"
+CARGO_HOME = "XDG_DATA_HOME/cargo"
+CONDARC = "XDG_CONFIG_HOME/conda/condarc"
+CUDA_CACHE_PATH = "XDG_CACHE_HOME/nv"
+DENO_INSTALL = "XDG_DATA_HOME/deno"
+DOCKER_CONFIG = "XDG_CONFIG_HOME/docker"
+DOTNET_CLI_HOME = "XDG_DATA_HOME/dotnet"
+ERRFILE = "XDG_CACHE_HOME/X11/xsession-errors"
+GOPATH = "XDG_DATA_HOME/go"
+GTK_RC_FILES = "XDG_CONFIG_HOME/gtk-1.0/gtkrc"
+GTK2_RC_FILES = "XDG_CONFIG_HOME/gtk-2.0/gtkrc"
+IDF_PATH = "XDG_DATA_HOME/esp/esp-idf"
+IDF_TOOLS_PATH = "XDG_DATA_HOME/espressif"
+LESSHISTFILE = "XDG_STATE_HOME/less_history"
+LIMA_HOME = "XDG_DATA_HOME/lima"
+NPM_CONFIG_USERCONFIG = "XDG_CONFIG_HOME/npm/npmrc"
+PLATFORMIO_CORE_DIR = "XDG_DATA_HOME/platformio"
+PYTHONSTARTUP = "XDG_CONFIG_HOME/python/pythonrc"
+RUSTUP_HOME = "XDG_DATA_HOME/rustup"
+SVLINT_CONFIG = "XDG_CONFIG_HOME/svlint/.svlint.toml"
+VOLTA_HOME = "XDG_DATA_HOME/volta"
+ZDOTDIR = "XDG_CONFIG_HOME/zsh"
+
+[environment.application_config]
+INSTALLER_NO_MODIFY_PATH = "1"
+PIPENV_VENV_IN_PROJECT = "1"
+VOLTA_FEATURE_PNPM = "1"
+
+[environment]
+path = ["HOME/.local/bin", "VOLTA_HOME/bin", "DENO_INSTALL/bin"]

@@ -1,8 +1,65 @@
 #!/usr/bin/env bash
 
+alias aupdate='sudo apt update && sudo apt upgrade -y && sudo apt autoremove -y'
+alias bupdate='brew update && brew upgrade'
+alias dupdate='sudo dnf update -y'
+alias fupdate='sudo flatpak update && sudo flatpak remove --unused'
+alias pupdate='sudo pacman -Syu'
+alias supdate='sudo snap refresh'
+alias yupdate='yay -Syu'
+alias zupdate='sudo zypper ref && sudo zypper update -y'
+
+nupdate() {
+	for item in $(nix profile list --json | jq -r ".elements | keys | .[] "); do
+		nix flake update --flake "$XDG_DATA_HOME/nix/$item"
+		nix profile upgrade "$item"
+	done
+
+	if [ -e "$HOME/.nix-profile" ]; then
+		unlink "$HOME/.nix-profile"
+	fi
+}
+
+
+# fonts
+install-hackgen() {
+	WORKDIR=$(mktemp -d)
+
+	FONT_DIR="$XDG_DATA_HOME/fonts"
+
+	mkdir -p "$FONT_DIR"
+
+	for i in $(curl -s https://api.github.com/repos/yuru7/HackGen/releases/latest | grep browser_download_url | cut -d : -f 2,3 | tr -d \"); do
+		url=$(echo "$i" | tr -d ' ')
+		echo "$url"
+		curl -sL -o "$WORKDIR/tmp.zip" "$url"
+
+		unzip -oq "$WORKDIR/tmp.zip" -d "$FONT_DIR"
+	done
+
+	rm -rf "$WORKDIR"
+}
+
+install-docker() {
+	curl https://get.docker.com | sh
+	sudo gpasswd -a $USER docker
+}
+
+install-deno() {
+	curl -fsSL https://deno.land/install.sh | sh
+}
+
+install-rust() {
+	curl https://sh.rustup.rs -sSf | sh -s -- -y
+}
+
 install-rust-tools() {
 	# shellcheck disable=SC1083
 	rustup component add {{ .dependencies.rustup | join " " }}
+}
+
+install-uv() {
+	curl -LsSf https://astral.sh/uv/install.sh | sh
 }
 
 install-uv-tools() {
@@ -14,6 +71,10 @@ install-uv-tools() {
 	done
 
 	"$HOME/.local/bin/uv" tool install --upgrade --from git+https://github.com/motty-mio2/dixp.git dixp
+}
+
+install-volta() {
+	curl https://get.volta.sh | bash
 }
 
 install-volta-tools() {
@@ -90,20 +151,15 @@ install-ubuntu-dev-tools() {
 		https://packages.microsoft.com/repos/vscode stable main" | \
 		sudo tee /etc/apt/sources.list.d/vscode.list
 
-	echo "Docker"
-	if [ ! -f "/etc/apt/keyrings/docker.asc" ]; then
-		sudo apt purge -y docker.io docker-doc docker-compose docker-compose-v2 podman-docker containerd runc
-		sudo install -m 0755 -d /etc/apt/keyrings
-		sudo curl -fsSL https://download.docker.com/linux/ubuntu/gpg -o /etc/apt/keyrings/docker.asc
-		sudo chmod a+r /etc/apt/keyrings/docker.asc
-	fi
-
 	# Add the repository to Apt sources:
 	echo \
 		"deb [arch=$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/docker.asc] \
 		https://download.docker.com/linux/ubuntu \
 		$(. /etc/os-release && echo "${UBUNTU_CODENAME:-$VERSION_CODENAME}") stable" | \
 		sudo tee /etc/apt/sources.list.d/docker.list >/dev/null
+
+	echo "Alacritty"
+	sudo add-apt-repository ppa:aslatter/ppa
 
 	echo "Wezterm"
 	curl -fsSL https://apt.fury.io/wez/gpg.key | sudo gpg --yes --dearmor -o /etc/apt/keyrings/wezterm-fury.gpg
@@ -115,8 +171,35 @@ install-ubuntu-dev-tools() {
 	sudo apt-get install golang
 	sudo apt-get install code
 	sudo apt-get install flatpak
+	sudo apt-get install alacritty
 	sudo apt-get install wezterm
-	sudo apt-get install docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin
+}
+
+install-keyd() {
+	if [ ! -e "/etc/keyd" ]; then
+		sudo ln -s "$XDG_CONFIG_HOME/keyd" "/etc/keyd"
+	fi
+
+	if type "apt" &>/dev/null; then
+		sudo add-apt-repository ppa:keyd-team/ppa
+		sudo apt update
+		sudo apt install keyd
+	else
+		echo "Unsupported OS."
+		exit 1
+	fi
+}
+
+install-brew() {
+	if [ -e "$BREW_PREFIX/bin/brew" ]; then
+		echo "brew is already installed."
+	else
+		git clone https://github.com/Homebrew/brew "$BREW_PREFIX"
+		eval "$(BREW_PREFIX/bin/brew shellenv)"
+		brew update --force --quiet
+	fi
+
+	"$BREW_PREFIX/bin/brew" tap wez/wezterm-linuxbrew
 }
 
 install-brew-tools() {
@@ -140,12 +223,29 @@ install-brew-desktop-tools() {
 		{{- end }}
 }
 
+install-nix() {
+	if ! command -v nix &>/dev/null; then
+		curl --proto '=https' --tlsv1.2 -sSf -L https://install.determinate.systems/nix | sh -s -- install
+
+		# shellcheck source=/dev/null
+		source "/nix/var/nix/profiles/default/etc/profile.d/nix-daemon.sh"
+	else
+		echo "Nix is already installed."
+	fi
+
+	if nix config show | grep 'use-xdg-base-directories = true' &>/dev/null; then
+		echo "Nix is already configured to use XDG base directories."
+	else
+		echo "use-xdg-base-directories = true" | sudo tee -a /etc/nix/nix.conf
+	fi
+}
+
 install-nix-tools() {
-	nix profile install "$XDG_DATA_HOME/nix/cli/.#cli"
+	nix profile add "$XDG_DATA_HOME/nix/cli/.#cli"
 }
 
 install-nix-dev-tools() {
-	nix profile install "$XDG_DATA_HOME/nix/dev/.#dev"
+	nix profile add "$XDG_DATA_HOME/nix/dev/.#dev"
 }
 
 install-arch-desktop-dependency() {

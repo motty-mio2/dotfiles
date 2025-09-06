@@ -10,8 +10,15 @@ sh -c "$(curl -fsLS get.chezmoi.io)" -- -b $HOME/.local/bin init --apply motty-m
 
 ### Windows
 
+In Devlopper Setting
+
+- ローカルPowerShellスクリプトを許可する
+- sudo 有効化する
+
 ```powershell
-$tempFile = $(New-TemporaryFile).FullName + ".exe"; Invoke-WebRequest -Uri "https://github.com/twpayne/chezmoi/releases/latest/download/chezmoi-windows-amd64.exe" -OutFile $tempFile; . $tempFile init --apply -k motty-mio2; Remove-Item $tempFile
+New-Item -ItemType Directory -Force $HOME/.local/bin
+Invoke-WebRequest -Uri "https://github.com/twpayne/chezmoi/releases/latest/download/chezmoi-windows-amd64.exe" -OutFile $HOME/.local/bin/chezmoi.exe
+."$HOME/.local/bin/chezmoi.exe" init --apply -k motty-mio2
 ```
 
 ## Included Tools

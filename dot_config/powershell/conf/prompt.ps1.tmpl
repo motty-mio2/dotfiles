@@ -6,7 +6,7 @@ try {
 } finally {
     Set-PSReadLineKeyHandler -Key Tab -Function MenuComplete
     Set-PSReadlineKeyHandler -Key ctrl+d -Function DeleteCharOrExit
-    Set-PSReadLineOption -PredictionViewStyle InlineView
+    Set-PSReadLineOption
 
     Set-PSReadLineOption -Colors @{
         "Parameter" = [ConsoleColor]::Cyan
@@ -28,6 +28,13 @@ try {
 } finally {
     Set-PSFzfOption -PSReadlineChordProvider 'Ctrl+t'
     Set-PSFzfOption -PSReadlineChordReverseHistory 'Ctrl+r'
+}
+
+try {
+    Invoke-Expression (&scoop-search --hook)
+} catch {
+    scoop install scoop-search
+    Invoke-Expression (&scoop-search --hook)
 }
 
 

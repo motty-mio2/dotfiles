@@ -4,12 +4,6 @@ if [ -z "$MY_ZSH_PROFILE" ]; then
     source "$HOME/.config/zsh/.zprofile"
 fi
 
-{{- if lookPath "nvim" }}
-export EDITOR=nvim
-{{- else if lookPath "vim" }}
-export EDITOR=vim
-{{- end }}
-
 setopt nonomatch
 
 source "$XDG_CONFIG_HOME/zsh/plugins/zsh-completions/zsh-completions.plugin.zsh"
@@ -74,20 +68,17 @@ bindkey '^r' select-history
 bindkey "^[[1~" beginning-of-line
 bindkey "^[[4~" end-of-line
 
-conf_folder="${HOME}/.config/shell"
-for file in $(find "$conf_folder" -name "*.sh"); do
-    #shellcheck source=/dev/null
-    source "${file}"
-done
+# Include shell template
+{{ includeTemplate "shell_rc.tmpl" (dict "shell" "zsh" ) }}
 
 {{ if and (lookPath "starship") (eq .zsh "starship") }}
-{{ output "starship" "init" "zsh" }}
+{{      output "starship" "init" "zsh" }}
 precmd_functions+=(set-window-title)
 {{ else if and (lookPath "oh-my-posh") (eq .zsh "oh-my-posh") }}
-{{ output "oh-my-posh" "init" "zsh" "--config" "~/.config/omp.toml" | replaceAllRegex "export POSH_SESSION_ID.+" "" }}
+{{      output "oh-my-posh" "init" "zsh" "--config" "~/.config/omp.toml" | replaceAllRegex "export POSH_SESSION_ID.+" "" }}
 {{ else }}
 # POWERLEVEL
 source "$XDG_CONFIG_HOME/zsh/plugins/powerlevel10k/powerlevel10k.zsh-theme"
 POWERLEVEL9K_DISABLE_CONFIGURATION_WIZARD=true
-{{ include "dot_config/zsh/dot_p10k.zsh" }}
+{{      include "dot_config/zsh/dot_p10k.zsh" }}
 {{ end }}

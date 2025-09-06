@@ -1,0 +1,81 @@
+[dependencies]
+uv = ["black", "flake8", "ignr", "isort", "mypy", "pyright", "ruff"]
+volta = [
+    "@bitwarden/cli",
+    "bash-language-server",
+    "biome",
+    "@google/getmini-cli",
+    "markdownlint-cli",
+    "neovim",
+]
+rustup = [
+    "clippy",
+    "rust-analysis",
+    "rust-src",
+    "rust-docs",
+    "rustfmt",
+    "rust-analyzer",
+]
+
+[dependencies.cli]
+act = { aur = "act-bin", brew = "act", nix = "act" }
+bat = { scoop = "bat", apt = "bat", aur = "bat", brew = "bat", nix = "bat" }
+byobu = { apt = "byobu", aur = "byobu" }
+chezmoi = { scoop = "chezmoi", aur = "chezmoi", brew = "chezmoi", nix = "chezmoi" }
+cloudflared = { scoop = "cloudflared", aur = "cloudflared", brew = "cloudflared", nix = "cloudflared" }
+curl = { scoop = "curl", apt = "curl", aur = "curl", brew = "curl", nix = "curl" }
+fd = { scoop = "fd", apt = "fd-find", aur = "fd", brew = "fd", nix = "fd" }
+fzf = { scoop = "fzf", apt = "fzf", aur = "fzf", brew = "fzf", nix = "fzf" }
+gh = { scoop = "gh", aur = "github-cli", brew = "gh", nix = "gh" }
+git = { scoop = "git", apt = "git", aur = "git" }
+glab = { scoop = "glab", aur = "glab", brew = "glab", nix = "glab" }
+grep = { scoop = "grep", apt = "grep" }
+htop = { apt = "htop", aur = "htop" }
+jq = { scoop = "jq", apt = "jq", aur = "jq", nix = "jq" }
+lazygit = { scoop = "lazygit", aur = "lazygit", brew = "lazygit", nix = "lazygit" }
+less = { scoop = "less", apt = "less" }
+nano = { scoop = "nano", apt = "nano", aur = "nano" }
+neovim = { scoop = "neovim", aur = "neovim", brew = "neovim", nix = "neovim" }
+oh-my-posh = { scoop = "oh-my-posh", aur = "oh-my-posh-bin", brew = "oh-my-posh", nix = "oh-my-posh" }
+ripgrep = { scoop = "ripgrep", apt = "ripgrep" }
+starship = { scoop = "starship", aur = "starship", brew = "starship", nix = "starship" }
+task = { scoop = "task", aur = "go-task-bin", brew = "go-task", nix = "go-task" }
+tombi = { nix = "tombi" }
+unzip = { scoop = "unzip", apt = "unzip", aur = "unzip" }
+vim = { scoop = "vim", aur = "vim" }
+wget = { scoop = "wget", apt = "wget", aur = "wget" }
+which = { scoop = "which" }
+zsh = { apt = "zsh", aur = "zsh" }
+
+[dependencies.dev]
+arduino-cli = { scoop = "arduino-cli", nix = "arduino-cli" }
+actionlint = { scoop = "actionlint", aur = "actionlint", brew = "actionlint", nix = "actionlint" }
+clangd = { scoop = "llvm", apt = "clangd" }
+clang-format = { apt = "clang-format" }
+clang-tidy = { apt = "clang-tidy" }
+hadolint = { scoop = "hadolint", nix = "hadolint" }
+lld = { apt = "lld" }
+sccache = { scoop = "sccache", aur = "sccache", brew = "sccache", nix = "sccache" }
+shellcheck = { scoop = "shellcheck", aur = "shellcheck-bin", brew = "shellcheck", nix = "shellcheck" }
+shfmt = { scoop = "shfmt", aur = "shfmt", brew = "shfmt", nix = "shfmt" }
+stylua = { scoop = "stylua", aur = "stylua", brew = "stylua", nix = "stylua" }
+svlint = { scoop = "svlint", aur = "svlint", brew = "svlint", nix = "svlint" }
+svls = { scoop = "svls", aur = "svls", brew = "svls", nix = "svls" }
+verible = { scoop = "verible", nix = "verible" }
+
+[dependencies.desktop]
+ArduinoIDE = { flatpak = "cc.arduino.arduinoide" }
+ArduinoIDE2 = { flatpak = "cc.arduino.IDE2" }
+Bitwarden = { winget = "Bitwarden.Bitwarden" }
+Chrome = { flatpak = "com.google.Chrome", winget = "Google.Chrome.EXE" }
+Discord = { flatpak = "com.discordapp.Discord", winget = "XPDC2RH70K22MN" }
+Firefox = { flatpak = "org.mozilla.firefox" }
+IPscan = { flatpak = "org.angryip.ipscan" }
+KiCad = { scoop = "kicad", flatpak = "org.kicad.KiCad" }
+LibreOffice = { flatpak = "org.libreoffice.LibreOffice" }
+Notion = { winget = "Notion.Notion" }
+Slack = { flatpak = "com.slack.Slack", winget = "9WZDNCRDK3WP" }
+Vivaldi = { flatpak = "com.vivaldi.Vivaldi", winget = "XP99GVQDX7JPR4" }
+Vcxsrv = { winget = "marha.VcXsrv" }
+Wezterm = { scoop = "wezterm", brew = "wezterm" }
+Zoom = { winget = "XP99J3KP4XZ4VV" }

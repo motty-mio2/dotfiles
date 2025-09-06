@@ -1,6 +1,6 @@
 return {
 	{ "nvimtools/none-ls-extras.nvim", dependencies = { "nvimtools/none-ls.nvim" } },
-	{ "nvimtools/none-ls.nvim", dependencies = { "nvim-lua/plenary.nvim" }, config = true },
+	{ "nvimtools/none-ls.nvim", dependencies = { "nvim-lua/plenary.nvim" }, opts = {} },
 	{ "neovim/nvim-lspconfig" },
 	{ "nvim-treesitter/nvim-treesitter" },
 	{
@@ -15,30 +15,56 @@ return {
 	},
 	{
 		"lewis6991/gitsigns.nvim",
-		config = function()
-			require("gitsigns").setup()
-		end,
+		opts = {},
 	},
 	{
 		"windwp/nvim-autopairs",
 		event = "InsertEnter",
-		config = true,
+		opts = {},
 	},
 	{
 		"neanias/everforest-nvim",
 		version = false,
 		lazy = false,
 		priority = 1000, -- make sure to load this before all the other start plugins
-		-- Optional; default configuration will be used if setup isn't called.
 		config = function()
-			require("everforest").setup({
-				-- Your config here
-			})
+			require("everforest").setup({})
 		end,
 	},
 	{
 		"nvim-telescope/telescope.nvim",
 		dependencies = { "nvim-lua/plenary.nvim" },
+		opts = { defaults = { file_ignore_patterns = { ".*.lock" } } },
+		keys = {
+			{
+				"<leader>fg",
+				function()
+					require("telescope.builtin").live_grep()
+				end,
+				desc = "Telescope live grep",
+			},
+			{
+				"<leader>ff",
+				function()
+					require("telescope.builtin").find_files()
+				end,
+				desc = "Telescope find files",
+			},
+			{
+				"<leader>fb",
+				function()
+					require("telescope.builtin").buffers()
+				end,
+				desc = "Telescope buffers",
+			},
+			{
+				"<leader>fh",
+				function()
+					require("telescope.builtin").help_tags()
+				end,
+				desc = "Telescope help tags",
+			},
+		},
 	},
 	{
 		"nvim-neo-tree/neo-tree.nvim",
@@ -56,25 +82,16 @@ return {
 		},
 		event = "VeryLazy",
 		opts = {},
-		config = function()
-			require("noice").setup({})
-		end,
 	},
 	{
 		"numToStr/Comment.nvim",
-		opts = {
-			-- add any options here
-		},
+		opts = {},
 		lazy = false,
 	},
 	{
 		"folke/which-key.nvim",
 		event = "VeryLazy",
-		opts = {
-			-- your configuration comes here
-			-- or leave it empty to use the default settings
-			-- refer to the configuration section below
-		},
+		opts = {},
 		keys = {
 			{
 				"<leader>?",
@@ -89,43 +106,20 @@ return {
 		"lewis6991/gitsigns.nvim",
 	},
 	{
-		"github/copilot.vim",
-	},
-	{
 		"folke/trouble.nvim",
-		opts = {}, -- for default options, refer to the configuration section for custom setup.
+		opts = {},
 		cmd = "Trouble",
 		keys = {
-			{
-				"<leader>xx",
-				"<cmd>Trouble diagnostics toggle<cr>",
-				desc = "Diagnostics (Trouble)",
-			},
-			{
-				"<leader>xX",
-				"<cmd>Trouble diagnostics toggle filter.buf=0<cr>",
-				desc = "Buffer Diagnostics (Trouble)",
-			},
-			{
-				"<leader>cs",
-				"<cmd>Trouble symbols toggle focus=false<cr>",
-				desc = "Symbols (Trouble)",
-			},
+			{ "<leader>xx", "<cmd>Trouble diagnostics toggle<cr>", desc = "Diagnostics (Trouble)" },
+			{ "<leader>xX", "<cmd>Trouble diagnostics toggle filter.buf=0<cr>", desc = "Buffer Diagnostics (Trouble)" },
+			{ "<leader>cs", "<cmd>Trouble symbols toggle focus=false<cr>", desc = "Symbols (Trouble)" },
 			{
 				"<leader>cl",
 				"<cmd>Trouble lsp toggle focus=false win.position=right<cr>",
 				desc = "LSP Definitions / references / ... (Trouble)",
 			},
-			{
-				"<leader>xL",
-				"<cmd>Trouble loclist toggle<cr>",
-				desc = "Location List (Trouble)",
-			},
-			{
-				"<leader>xQ",
-				"<cmd>Trouble qflist toggle<cr>",
-				desc = "Quickfix List (Trouble)",
-			},
+			{ "<leader>xL", "<cmd>Trouble loclist toggle<cr>", desc = "Location List (Trouble)" },
+			{ "<leader>xQ", "<cmd>Trouble qflist toggle<cr>", desc = "Quickfix List (Trouble)" },
 		},
 	},
 	{
@@ -137,22 +131,17 @@ return {
 		"rachartier/tiny-inline-diagnostic.nvim",
 		event = "VeryLazy", -- Or `LspAttach`
 		priority = 1000, -- needs to be loaded in first
-		config = function()
-			require("tiny-inline-diagnostic").setup()
-			vim.diagnostic.config({ virtual_text = false }) -- Only if needed in your configuration, if you already have native LSP diagnostics
-		end,
+		opts = { virtual_text = false },
 	},
 	{
 		"shellRaining/hlchunk.nvim",
 		event = { "BufReadPre", "BufNewFile" },
-		config = function()
-			require("hlchunk").setup({
-				chunk = { enable = false },
-				indent = { enable = true },
-				line_num = { enable = false },
-				blank = { enable = false },
-			})
-		end,
+		opts = {
+			chunk = { enable = false },
+			indent = { enable = true },
+			line_num = { enable = false },
+			blank = { enable = false },
+		},
 	},
 	{
 		"pwntester/octo.nvim",
@@ -163,28 +152,35 @@ return {
 			-- OR 'folke/snacks.nvim',
 			"nvim-tree/nvim-web-devicons",
 		},
-		config = function()
-			require("octo").setup()
-		end,
+		opts = {},
 	},
 	{
 		"nvim-treesitter/nvim-treesitter-context",
-		config = function()
-			require("treesitter-context").setup({
-				enable = true, -- Enable this plugin (Can be enabled/disabled later via commands)
-				multiwindow = false, -- Enable multiwindow support.
-				max_lines = 0, -- How many lines the window should span. Values <= 0 mean no limit.
-				min_window_height = 0, -- Minimum editor window height to enable context. Values <= 0 mean no limit.
-				line_numbers = true,
-				multiline_threshold = 20, -- Maximum number of lines to show for a single context
-				trim_scope = "outer", -- Which context lines to discard if `max_lines` is exceeded. Choices: 'inner', 'outer'
-				mode = "topline", -- Line used to calculate context. Choices: 'cursor', 'topline'
-				-- Separator between context and content. Should be a single character string, like '-'.
-				-- When separator is set, the context will only show up when there are at least 2 lines above cursorline.
-				separator = nil,
-				zindex = 20, -- The Z-index of the context window
-				on_attach = nil, -- (fun(buf: integer): boolean) return false to disable attaching
-			})
-		end,
+		opts = {
+			enable = true, -- Enable this plugin (Can be enabled/disabled later via commands)
+			multiwindow = false, -- Enable multiwindow support.
+			max_lines = 0, -- How many lines the window should span. Values <= 0 mean no limit.
+			min_window_height = 0, -- Minimum editor window height to enable context. Values <= 0 mean no limit.
+			line_numbers = true,
+			multiline_threshold = 20, -- Maximum number of lines to show for a single context
+			trim_scope = "outer", -- Which context lines to discard if `max_lines` is exceeded. Choices: 'inner', 'outer'
+			mode = "topline", -- Line used to calculate context. Choices: 'cursor', 'topline'
+			-- Separator between context and content. Should be a single character string, like '-'.
+			-- When separator is set, the context will only show up when there are at least 2 lines above cursorline.
+			separator = nil,
+			zindex = 20, -- The Z-index of the context window
+			on_attach = nil, -- (fun(buf: integer): boolean) return false to disable attaching
+		},
+	},
+	{
+		"zbirenbaum/copilot-cmp",
+		opts = {
+			suggestion = { enabled = false },
+			panel = { enabled = false },
+		},
+	},
+	{
+		"zbirenbaum/copilot.lua",
+		requires = { "zbirenbaum/copilot-cmp" },
 	},
 }

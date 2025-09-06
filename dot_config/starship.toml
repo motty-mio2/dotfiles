@@ -2,18 +2,19 @@
 
 format = """
 [ ](fg:separator bg:base_background)\
+[$username@$hostname](bg:base_background)\
+[  ](fg:separator bg:base_background)\
 $directory\
-[](fg:separator bg:base_background)\
 $git_branch($git_status)\
-[](fg:separator bg:base_background)\
 $python\
-[](fg:separator bg:base_background)\
 $cmd_duration\
-
 [](fg:base_background)
-[ $os $username@$hostname](bg:base_background)\
-[](fg:base_background)\
+ $os \
 $character\
+"""
+
+right_format = """
+$time
 """
 
 # Inserts a blank line between shell prompts
@@ -34,10 +35,9 @@ separator = '#868686'
 [package]
 disabled = true
 
-
 [cmd_duration]
-min_time = 0
-format = '[ $duration]($style)'
+min_time = 100
+format = '[](fg:separator bg:base_background)[ $duration ]($style)'
 style = 'bg:base_background'
 
 [directory]
@@ -52,8 +52,8 @@ use_os_path_sep = false
 
 [git_branch]
 style = "bg:base_background"
-symbol = ' '
-format = '([ $symbol$branch(:$remote_branch) ]($style))'
+symbol = ''
+format = '[](fg:separator bg:base_background)([ $symbol$branch(:$remote_branch) ]($style))'
 
 [git_status]
 style = "bg:base_background"
@@ -74,7 +74,7 @@ trim_at = '.'
 
 [os]
 format = "[$symbol]($style)"
-style = "fg:bold blue bg:base_background"
+style = "fg:bold blue"
 disabled = false
 
 [os.symbols]
@@ -85,14 +85,16 @@ Arch = "󰣇"
 Fedora = " "
 
 [python]
-symbol = '🐍 '
-pyenv_version_name = true
 style = "bg:base_background"
 python_binary = ['python', 'python3', 'python3.exe', 'python3.bat']
-format = '[ ${symbol}${version}(\($virtualenv\)) ]($style)'
+format = '[ [](fg:separator bg:base_background) ${symbol}${version} ]($style)'
 
 [username]
 style_user = "bg:base_background"
 style_root = "bg:base_background"
 format = '[$user]($style)'
 show_always = true
+
+[time]
+disabled = false
+format = '[$time]($style) '

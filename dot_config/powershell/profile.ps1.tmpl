@@ -1,0 +1,25 @@
+$Env:HOME = "$Env:USERPROFILE"
+
+# XDG CONFIG DIRS
+{{- range $key, $value := .environment.xdg }}
+$Env:{{ $key }} = "$Env:{{ $value }}"
+{{- end }}
+
+# APPLICATIONS PATH
+{{- range $key, $value := .environment.application_path }}
+$Env:{{ $key }} = "$Env:{{ $value }}"
+{{- end }}
+$Env:VOLTA_HOME = "$HOME/scoop/apps/volta/current/appdata"
+
+# APPLICATIONS CONFIG
+{{- range $key, $value := .environment.application_config }}
+$Env:{{ $key }} = {{ $value }}
+{{- end }}
+
+# PATH
+$Env:PATH = "$Env:{{ .environment.path | join ";$Env:"}};$Env:PATH"
+
+# devenv
+$Env:EDITOR = "nvim"
+$Env:DISPLAY = "localhost:0.0"
+

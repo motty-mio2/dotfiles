@@ -28,4 +28,3 @@ require("neotree")
 require("treesitter")
 require("clipboard")
 require("everforest").load()
-

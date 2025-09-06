@@ -1,0 +1,42 @@
+# Environement
+{{- if lookPath "nvim" }}
+export EDITOR=nvim
+{{- else if lookPath "vim" }}
+export EDITOR=vim
+{{- end }}
+
+for file in $(find "${HOME}/.config/shell" -name "*.sh"); do
+    #shellcheck source=/dev/null
+    source "${file}"
+done
+
+{{- if lookPath "chezmoi" }}
+# Chezmoi
+{{- output "chezmoi" "completion" .shell }}
+{{- end }}
+
+{{- if and (eq .shell "zsh") (lookPath "deno") }}
+# Deno
+{{- output "deno" "completions" .shell }}
+{{- end }}
+
+{{- if and (eq .shell "zsh") (lookPath "rustup") }}
+# Rustup
+{{- output "rustup" "completions" .shell }}
+{{- end }}
+
+{{- if and (eq .shell "zsh") (lookPath "uv") }}
+# uv
+{{- output "uv" "generate-shell-completion" .shell }}
+{{- end }}
+
+{{- if and (eq .shell "zsh") (lookPath "volta") }}
+# Volta
+{{- output "volta" "completions" .shell }}
+{{- end }}
+
+{{- if and (eq .shell "zsh") (lookPath "zellij") }}
+# Zellij
+# https://github.com/ahmetb/kubectx/issues/285
+{{- output "zellij" "setup" "--generate-completion" .shell | replaceAllRegex "_zellij \"\\$@\"" "compdef _zellij zellij" }}
+{{- end }}
