@@ -11,10 +11,7 @@ jobs:
       - uses: actions/checkout@v4
       - uses: arduino/setup-task@v2
 
-      - name: Install taplo
-        shell: bash
-        run: |
-          curl -fsSL "https://github.com/tamasfe/taplo/releases/latest/download/taplo-full-linux-$(uname -m).gz" | gzip -d - | install -m 755 /dev/stdin /usr/local/bin/taplo
+      - uses: tombi-toml/setup-tombi@v1
 
       - name: Do Check
         run: |

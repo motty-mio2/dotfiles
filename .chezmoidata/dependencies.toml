@@ -39,6 +39,7 @@ oh-my-posh = { scoop = "oh-my-posh", aur = "oh-my-posh-bin", brew = "oh-my-posh"
 ripgrep = { scoop = "ripgrep", apt = "ripgrep" }
 starship = { scoop = "starship", aur = "starship", brew = "starship", nix = "starship" }
 task = { scoop = "task", aur = "go-task-bin", brew = "go-task", nix = "go-task" }
+tombi = { nix = "tombi" }
 unzip = { scoop = "unzip", apt = "unzip", aur = "unzip" }
 vim = { scoop = "vim", aur = "vim" }
 wget = { scoop = "wget", apt = "wget", aur = "wget" }
