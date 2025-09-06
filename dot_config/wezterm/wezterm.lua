@@ -29,5 +29,5 @@ return {
 	disable_default_key_bindings = true,
 	default_prog = default_prog,
 	launch_menu = clm,
-    default_cursor_style = "SteadyBar",
+	default_cursor_style = "SteadyBar",
 }
