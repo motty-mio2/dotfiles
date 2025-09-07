@@ -1,3 +1,7 @@
+function Install-aqua-Tools {
+    aqua install --all
+}
+
 function Install-rust-Tools {
     rustup component add {{ .dependencies.rustup | join " " }}
 }
