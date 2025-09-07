@@ -49,6 +49,10 @@ install-deno() {
 	curl -fsSL https://deno.land/install.sh | sh
 }
 
+install-aqua-tools() {
+	aqua install --all
+}
+
 install-rust() {
 	curl https://sh.rustup.rs -sSf | sh -s -- -y
 }
