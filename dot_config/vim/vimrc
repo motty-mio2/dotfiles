@@ -2,4 +2,7 @@ set viminfo+=n$XDG_CONFIG_HOME/vim/viminfo
 set directory=$XDG_STATE_HOME/vim/swap
 set undodir=$XDG_STATE_HOME/vim/undo
 
+:call system('mkdir $XDG_STATE_HOME/vim/swap')
+:call system('mkdir $XDG_STATE_HOME/vim/undo')
+
 source $XDG_CONFIG_HOME/vim/option.vim
