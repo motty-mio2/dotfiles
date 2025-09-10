@@ -42,7 +42,7 @@ starship = { scoop = "starship", aur = "starship", brew = "starship", nix = "sta
 task = { scoop = "task", aur = "go-task-bin", brew = "go-task", nix = "go-task" }
 tombi = { nix = "tombi" }
 unzip = { scoop = "unzip", apt = "unzip", aur = "unzip" }
-vim = { scoop = "vim", aur = "vim" }
+vim = { scoop = "vim", apt = "vim", aur = "vim" }
 wget = { scoop = "wget", apt = "wget", aur = "wget" }
 which = { scoop = "which" }
 zsh = { apt = "zsh", aur = "zsh" }
