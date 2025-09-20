@@ -1,12 +1,11 @@
-
 let s:config_home = exists('$XDG_CONFIG_HOME') ? $XDG_CONFIG_HOME : expand('~/.config')
 let s:state_home = exists('$XDG_STATE_HOME') ? $XDG_STATE_HOME : expand('~/.local/state')
 
-:call system('mkdir $s:state_home/vim/swap')
-:call system('mkdir $s:state_home/vim/undo')
+call system('mkdir -p ' . shellescape(s:state_home . '/vim/swap'))
+call system('mkdir -p ' . shellescape(s:state_home . '/vim/undo'))
 
-set viminfo+=n$s:config_home/vim/viminfo
-set directory=$s:state_home/vim/swap
-set undodir=$s:state_home/vim/undo
+execute 'set viminfo+=n' . fnameescape(s:config_home . '/vim/viminfo')
+execute 'set directory=' . fnameescape(s:state_home . '/vim/swap')
+execute 'set undodir=' . fnameescape(s:state_home . '/vim/undo')
 
-source $s:config_home/vim/option.vim
+execute 'source ' . fnameescape(s:config_home . '/vim/option.vim')
