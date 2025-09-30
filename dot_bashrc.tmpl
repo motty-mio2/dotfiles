@@ -29,13 +29,6 @@ if ! shopt -oq posix; then
         source /usr/share/bash-completion/bash_completion
     fi
 
-    if [ -d "$XDG_CONFIG_HOME/bash/completion" ]; then
-        for file in "$XDG_CONFIG_HOME/bash/completion"/* ; do
-            #shellcheck source=/dev/null
-            source "${file}"
-        done
-    fi
-
     if [ -d "$XDG_STATE_HOME/nix/profiles/profile/share/bash-completion/completions" ]; then
         for file in "$XDG_STATE_HOME/nix/profiles/profile/share/bash-completion/completions/"* ; do
             #shellcheck source=/dev/null
