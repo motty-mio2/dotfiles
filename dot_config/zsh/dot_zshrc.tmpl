@@ -75,7 +75,7 @@ bindkey "^[[4~" end-of-line
 {{      output "starship" "init" "zsh" }}
 precmd_functions+=(set-window-title)
 {{ else if and (lookPath "oh-my-posh") (eq .zsh "oh-my-posh") }}
-{{      output "oh-my-posh" "init" "zsh" "--config" "~/.config/omp.toml" | replaceAllRegex "export POSH_SESSION_ID.+" "" }}
+eval $(oh-my-posh init zsh --config {{ joinPath .chezmoi.homeDir ".config/omp.toml" }})
 {{ else }}
 # POWERLEVEL
 source "$XDG_CONFIG_HOME/zsh/plugins/powerlevel10k/powerlevel10k.zsh-theme"
