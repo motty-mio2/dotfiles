@@ -24,7 +24,7 @@
       "args": [
         "-y",
         "mcp-obsidian",
-        "{{ joinPath .chezmoi.homeDir "Documents/Obsidian Vault" -}}"
+        "{{ joinPath .chezmoi.homeDir "Documents/Obsidian" | replace "\\" "/" }}"
       ]
     }
   }
