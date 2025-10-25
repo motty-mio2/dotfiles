@@ -20,6 +20,9 @@ nupdate() {
 	fi
 }
 
+is-arch() {
+    [[ -f /etc/os-release ]] && grep -qi '^ID=arch' /etc/os-release
+}
 
 # fonts
 install-hackgen() {
@@ -41,7 +44,11 @@ install-hackgen() {
 }
 
 install-docker() {
-	curl https://get.docker.com | sh
+	if is-arch; then
+		sudo pacman -Sy --noconfirm --needed docker docker-compose
+	else
+		curl https://get.docker.com | sh
+	fi
 	sudo gpasswd -a $USER docker
 }
 
@@ -54,7 +61,13 @@ install-aqua-tools() {
 }
 
 install-rust() {
-	curl https://sh.rustup.rs -sSf | sh -s -- -y
+	if is-arch; then
+		sudo pacman -Sy --noconfirm --needed rustup
+		rustup default stable
+		return
+	else
+		curl https://sh.rustup.rs -sSf | sh -s -- -y
+	fi
 }
 
 install-rust-tools() {
