@@ -1,20 +1,19 @@
 [dependencies]
 uv = ["black", "flake8", "ignr", "isort", "mypy", "pyright", "ruff"]
 volta = [
-    "@bitwarden/cli",
-    "bash-language-server",
-    "biome",
-    "@google/gemini-cli",
-    "markdownlint-cli",
-    "neovim",
+  "@bitwarden/cli",
+  "bash-language-server",
+  "@google/gemini-cli",
+  "markdownlint-cli",
+  "neovim",
 ]
 rustup = [
-    "clippy",
-    "rust-analysis",
-    "rust-src",
-    "rust-docs",
-    "rustfmt",
-    "rust-analyzer",
+  "clippy",
+  "rust-analysis",
+  "rust-src",
+  "rust-docs",
+  "rustfmt",
+  "rust-analyzer",
 ]
 
 [dependencies.cli]
