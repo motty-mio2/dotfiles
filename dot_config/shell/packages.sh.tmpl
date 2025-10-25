@@ -103,20 +103,28 @@ install-volta-tools() {
 	done
 }
 
-install-yay() {
+install-aur() {
 	sudo pacman -Sy --noconfirm --needed base-devel git
-	if [ -e "/usr/bin/yay" ]; then
-		echo "yay is already installed."
+	local aur_helper="${1:-yay}"
+
+	if [ -e "/usr/bin/$aur_helper" ]; then
+		echo "$aur_helper is already installed."
 	else
 		WORK_DIR=$(mktemp -d)
-		git clone https://aur.archlinux.org/yay-bin.git "$WORK_DIR" --depth 1
+		if [ "$aur_helper" = "paru" ]; then
+			git clone https://aur.archlinux.org/paru-bin.git "$WORK_DIR" --depth 1
+		else then
+			git clone https://aur.archlinux.org/yay-bin.git "$WORK_DIR" --depth 1
+		fi
+		
 		eval cd "$WORK_DIR" && makepkg --noconfirm -si
 		rm -rf "$WORK_DIR"
 	fi
 }
 
 install-aur-tools() {
-	yay -Sy --noconfirm \
+	local aur_helper="${1:-yay}"
+    "$aur_helper" -Sy --noconfirm \
 		ttf-hackgen unarchiver \
 		{{ range $name, $managers := .dependencies.cli -}}
         {{- get $managers "aur" | printf "%s " -}}
@@ -124,7 +132,8 @@ install-aur-tools() {
 }
 
 install-aur-dev-tools() {
-	yay -Sy --noconfirm \
+	local aur_helper="${1:-yay}"
+    "$aur_helper" -Sy --noconfirm \
 		ttf-hackgen unarchiver \
 		{{ range $name, $managers := .dependencies.dev -}}
         {{- get $managers "aur" | printf "%s " -}}
@@ -132,7 +141,8 @@ install-aur-dev-tools() {
 }
 
 install-aur-desktop-tools() {
-	yay -Sy --noconfirm \
+    local aur_helper="${1:-yay}"
+    "$aur_helper"ay -Sy --noconfirm \
 		ttf-hackgen unarchiver \
 		{{ range $name, $managers := .dependencies.desktop -}}
         {{- get $managers "aur" | printf "%s " -}}
