@@ -142,7 +142,7 @@ install-aur-dev-tools() {
 
 install-aur-desktop-tools() {
     local aur_helper="${1:-yay}"
-    "$aur_helper"ay -Sy --noconfirm \
+    "$aur_helper" -Sy --noconfirm \
 		ttf-hackgen unarchiver \
 		{{ range $name, $managers := .dependencies.desktop -}}
         {{- get $managers "aur" | printf "%s " -}}
