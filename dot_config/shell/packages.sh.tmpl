@@ -113,7 +113,7 @@ install-aur() {
 		WORK_DIR=$(mktemp -d)
 		if [ "$aur_helper" = "paru" ]; then
 			git clone https://aur.archlinux.org/paru-bin.git "$WORK_DIR" --depth 1
-		else then
+		else
 			git clone https://aur.archlinux.org/yay-bin.git "$WORK_DIR" --depth 1
 		fi
 		
