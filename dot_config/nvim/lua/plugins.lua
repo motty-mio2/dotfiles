@@ -183,4 +183,15 @@ return {
 		"zbirenbaum/copilot.lua",
 		requires = { "zbirenbaum/copilot-cmp" },
 	},
+	{
+		"vim-denops/denops.vim",
+		lazy = false,
+	},
+	{
+		"nekowasabi/hellshake-yano.vim",
+		dependencies = { "vim-denops/denops.vim" },
+		config = function()
+			-- Configuration here
+		end,
+	},
 }
