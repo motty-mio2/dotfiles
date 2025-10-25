@@ -17,7 +17,7 @@ rustup = [
 ]
 
 [dependencies.cli]
-act = { aur = "act-bin", brew = "act", nix = "act" }
+act = { aur = "act", brew = "act", nix = "act" }
 bat = { scoop = "bat", apt = "bat", aur = "bat", brew = "bat", nix = "bat" }
 byobu = { apt = "byobu", aur = "byobu" }
 chezmoi = { scoop = "chezmoi", aur = "chezmoi", brew = "chezmoi", nix = "chezmoi" }
@@ -39,7 +39,7 @@ oh-my-posh = { scoop = "oh-my-posh", aur = "oh-my-posh-bin", brew = "oh-my-posh"
 ripgrep = { scoop = "ripgrep", apt = "ripgrep" }
 starship = { scoop = "starship", aur = "starship", brew = "starship", nix = "starship" }
 task = { scoop = "task", aur = "go-task-bin", brew = "go-task", nix = "go-task" }
-tombi = { nix = "tombi" }
+tombi = { aur="tombi", nix = "tombi" }
 unzip = { scoop = "unzip", apt = "unzip", aur = "unzip" }
 vim = { scoop = "vim", apt = "vim", aur = "vim" }
 wget = { scoop = "wget", apt = "wget", aur = "wget" }
