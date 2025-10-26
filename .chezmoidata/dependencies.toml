@@ -1,7 +1,17 @@
 [dependencies]
-uv = ["black", "flake8", "ignr", "isort", "mypy", "pyright", "ruff"]
+uv = [
+  "black",
+  "cmake-language-server",
+  "flake8",
+  "ignr",
+  "isort",
+  "mypy",
+  "pyright",
+  "ruff"
+]
 volta = [
   "@bitwarden/cli",
+  "@github/copilot-language-server",
   "bash-language-server",
   "@google/gemini-cli",
   "markdownlint-cli",
