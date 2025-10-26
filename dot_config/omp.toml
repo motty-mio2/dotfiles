@@ -1,144 +1,144 @@
 version = 3
 
 [palette]
-accent = '#98c379'
-powerline = '#444444'
-separator = '#868686'
-text = '#ffffff'
+accent = "#98c379"
+powerline = "#444444"
+separator = "#868686"
+text = "#ffffff"
 
 [transient_prompt]
-template = '❯ '
+template = "❯ "
 
 [[blocks]]
-type = 'prompt'
-alignment = 'left'
+type = "prompt"
+alignment = "left"
 
 [[blocks.segments]]
-template = ' {{ .HostName }} '
-foreground = 'p:text'
-background = 'p:powerline'
-type = 'session'
-style = 'plain'
+template = " {{ .HostName }} "
+foreground = "p:text"
+background = "p:powerline"
+type = "session"
+style = "plain"
 
 [blocks.segments.properties]
-cache_duration = 'none'
+cache_duration = "none"
 
 [[blocks.segments]]
-template = '<p:separator></> <cyan>{{ .Parent }}</><green>{{ .Path }}</> '
-foreground = 'p:text'
-background = 'p:powerline'
-type = 'path'
-style = 'plain'
+template = "<p:separator></> <cyan>{{ .Parent }}</><green>{{ .Path }}</> "
+foreground = "p:text"
+background = "p:powerline"
+type = "path"
+style = "plain"
 
 [blocks.segments.properties]
-cache_duration = 'none'
-folder_separator_icon = '/'
-style = 'folder'
+cache_duration = "none"
+folder_separator_icon = "/"
+style = "folder"
 
 [[blocks.segments]]
-template = '<p:separator></> {{ .HEAD }}{{if .BranchStatus }} {{ .BranchStatus }}{{ end }}{{ if .Working.Changed }}  {{ .Working.String }}{{ end }}{{ if and (.Staging.Changed) (.Working.Changed) }} |{{ end }}{{ if .Staging.Changed }}  {{ .Staging.String }}{{ end }} '
-foreground = 'p:text'
-background = 'p:powerline'
-type = 'git'
-style = 'plain'
+template = "<p:separator></> {{ .HEAD }}{{if .BranchStatus }} {{ .BranchStatus }}{{ end }}{{ if .Working.Changed }}  {{ .Working.String }}{{ end }}{{ if and (.Staging.Changed) (.Working.Changed) }} |{{ end }}{{ if .Staging.Changed }}  {{ .Staging.String }}{{ end }} "
+foreground = "p:text"
+background = "p:powerline"
+type = "git"
+style = "plain"
 
 [blocks.segments.properties]
-cache_duration = 'none'
+cache_duration = "none"
 fetch_status = true
 fetch_upstream_icon = true
 
 [[blocks.segments]]
-template = '<p:separator></>  {{ if .Error }}{{ .Error }}{{ else }}{{ .Full }}{{ end }} '
-foreground = 'p:text'
-background = 'p:powerline'
-type = 'python'
-style = 'plain'
+template = "<p:separator></>  {{ if .Error }}{{ .Error }}{{ else }}{{ .Full }}{{ end }} "
+foreground = "p:text"
+background = "p:powerline"
+type = "python"
+style = "plain"
 
 [blocks.segments.properties]
-cache_duration = 'none'
+cache_duration = "none"
 
 [[blocks.segments]]
-template = '<p:separator></> {{ .FormattedMs }} '
-foreground = 'p:text'
-background = 'p:powerline'
-type = 'executiontime'
-style = 'plain'
+template = "<p:separator></> {{ .FormattedMs }} "
+foreground = "p:text"
+background = "p:powerline"
+type = "executiontime"
+style = "plain"
 
 [blocks.segments.properties]
 always_enabled = false
-cache_duration = 'none'
-style = 'austin'
+cache_duration = "none"
+style = "austin"
 threshold = 10.0
 
 [[blocks.segments]]
-template = ''
-foreground = 'p:powerline'
-background = 'transparent'
-type = 'text'
-style = 'plain'
+template = ""
+foreground = "p:powerline"
+background = "transparent"
+type = "text"
+style = "plain"
 
 [blocks.segments.properties]
-cache_duration = 'none'
+cache_duration = "none"
 
 [[blocks]]
-type = 'prompt'
-alignment = 'right'
+type = "prompt"
+alignment = "right"
 
 [[blocks.segments]]
-template = ' '
-foreground = 'p:powerline'
-background = 'transparent'
-type = 'text'
-style = 'plain'
+template = " "
+foreground = "p:powerline"
+background = "transparent"
+type = "text"
+style = "plain"
 
 [blocks.segments.properties]
-cache_duration = 'none'
+cache_duration = "none"
 
 [[blocks.segments]]
-template = '{{if .Namespace}} {{.Namespace}}{{end}} '
-foreground = 'p:text'
-background = 'p:powerline'
-type = 'kubectl'
-style = 'plain'
+template = "{{if .Namespace}} {{.Namespace}}{{end}} "
+foreground = "p:text"
+background = "p:powerline"
+type = "kubectl"
+style = "plain"
 
 [blocks.segments.properties]
-cache_duration = 'none'
+cache_duration = "none"
 
 [[blocks.segments]]
-template = ' {{ .CurrentDate | date .Format }} '
-foreground = 'p:text'
-background = 'p:powerline'
-type = 'time'
-style = 'plain'
+template = " {{ .CurrentDate | date .Format }} "
+foreground = "p:text"
+background = "p:powerline"
+type = "time"
+style = "plain"
 
 [blocks.segments.properties]
-cache_duration = 'none'
-time_format = '15:04:05'
+cache_duration = "none"
+time_format = "15:04:05"
 
 [[blocks]]
-type = 'prompt'
-alignment = 'left'
+type = "prompt"
+alignment = "left"
 newline = true
 
 [[blocks.segments]]
-template = ' {{ .Icon }}  '
-foreground = 'p:text'
-background = 'transparent'
-type = 'os'
-style = 'plain'
+template = " {{ .Icon }}  "
+foreground = "p:text"
+background = "transparent"
+type = "os"
+style = "plain"
 
 [blocks.segments.properties]
-cache_duration = 'none'
-windows = '<cyan></>'
+cache_duration = "none"
+windows = "<cyan></>"
 
 [[blocks.segments]]
-template = '❯ '
-foreground = 'p:accent'
-background = 'transparent'
-type = 'text'
-style = 'plain'
-foreground_templates = ['{{ if gt .Code 0 }}#FF5252{{ end }}']
+template = "❯ "
+foreground = "p:accent"
+background = "transparent"
+type = "text"
+style = "plain"
+foreground_templates = ["{{ if gt .Code 0 }}#FF5252{{ end }}"]
 
 [blocks.segments.properties]
 always_enabled = true
-cache_duration = 'none'
+cache_duration = "none"
