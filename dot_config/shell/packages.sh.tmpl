@@ -20,28 +20,41 @@ nupdate() {
 	fi
 }
 
+is-arch() {
+    [[ -f /etc/os-release ]] && grep -qi '^ID=arch' /etc/os-release
+}
 
 # fonts
 install-hackgen() {
-	WORKDIR=$(mktemp -d)
+	local aur_helper="${1:-yay}"
 
-	FONT_DIR="$XDG_DATA_HOME/fonts"
+	if is-arch; then
+		$aur_helper -Sy --noconfirm --needed ttf-hackgen
+	else
+		WORKDIR=$(mktemp -d)
 
-	mkdir -p "$FONT_DIR"
+		FONT_DIR="$XDG_DATA_HOME/fonts"
 
-	for i in $(curl -s https://api.github.com/repos/yuru7/HackGen/releases/latest | grep browser_download_url | cut -d : -f 2,3 | tr -d \"); do
-		url=$(echo "$i" | tr -d ' ')
-		echo "$url"
-		curl -sL -o "$WORKDIR/tmp.zip" "$url"
+		mkdir -p "$FONT_DIR"
 
-		unzip -oq "$WORKDIR/tmp.zip" -d "$FONT_DIR"
-	done
+		for i in $(curl -s https://api.github.com/repos/yuru7/HackGen/releases/latest | grep browser_download_url | cut -d : -f 2,3 | tr -d \"); do
+			url=$(echo "$i" | tr -d ' ')
+			echo "$url"
+			curl -sL -o "$WORKDIR/tmp.zip" "$url"
 
-	rm -rf "$WORKDIR"
+			unzip -oq "$WORKDIR/tmp.zip" -d "$FONT_DIR"
+		done
+
+		rm -rf "$WORKDIR"
+	fi
 }
 
 install-docker() {
-	curl https://get.docker.com | sh
+	if is-arch; then
+		sudo pacman -Sy --noconfirm --needed docker docker-compose
+	else
+		curl https://get.docker.com | sh
+	fi
 	sudo gpasswd -a $USER docker
 }
 
@@ -54,7 +67,13 @@ install-aqua-tools() {
 }
 
 install-rust() {
-	curl https://sh.rustup.rs -sSf | sh -s -- -y
+	if is-arch; then
+		sudo pacman -Sy --noconfirm --needed rustup
+		rustup default stable
+		return
+	else
+		curl https://sh.rustup.rs -sSf | sh -s -- -y
+	fi
 }
 
 install-rust-tools() {
@@ -90,37 +109,45 @@ install-volta-tools() {
 	done
 }
 
-install-yay() {
+install-aur() {
 	sudo pacman -Sy --noconfirm --needed base-devel git
-	if [ -e "/usr/bin/yay" ]; then
-		echo "yay is already installed."
+	local aur_helper="${1:-yay}"
+
+	if [ -e "/usr/bin/$aur_helper" ]; then
+		echo "$aur_helper is already installed."
 	else
 		WORK_DIR=$(mktemp -d)
-		git clone https://aur.archlinux.org/yay-bin.git "$WORK_DIR" --depth 1
+		if [ "$aur_helper" = "paru" ]; then
+			git clone https://aur.archlinux.org/paru-bin.git "$WORK_DIR" --depth 1
+		else
+			git clone https://aur.archlinux.org/yay-bin.git "$WORK_DIR" --depth 1
+		fi
+		
 		eval cd "$WORK_DIR" && makepkg --noconfirm -si
 		rm -rf "$WORK_DIR"
 	fi
 }
 
 install-aur-tools() {
-	yay -Sy --noconfirm \
-		ttf-hackgen unarchiver
+	local aur_helper="${1:-yay}"
+    "$aur_helper" -Sy --noconfirm \
+		unarchiver \
 		{{ range $name, $managers := .dependencies.cli -}}
         {{- get $managers "aur" | printf "%s " -}}
         {{- end }}
 }
 
 install-aur-dev-tools() {
-	yay -Sy --noconfirm \
-		ttf-hackgen unarchiver
+	local aur_helper="${1:-yay}"
+    "$aur_helper" -Sy --noconfirm \
 		{{ range $name, $managers := .dependencies.dev -}}
         {{- get $managers "aur" | printf "%s " -}}
         {{- end }}
 }
 
 install-aur-desktop-tools() {
-	yay -Sy --noconfirm \
-		ttf-hackgen unarchiver
+    local aur_helper="${1:-yay}"
+    "$aur_helper" -Sy --noconfirm \
 		{{ range $name, $managers := .dependencies.desktop -}}
         {{- get $managers "aur" | printf "%s " -}}
         {{- end }}
