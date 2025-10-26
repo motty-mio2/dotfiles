@@ -26,21 +26,27 @@ is-arch() {
 
 # fonts
 install-hackgen() {
-	WORKDIR=$(mktemp -d)
+	local aur_helper="${1:-yay}"
 
-	FONT_DIR="$XDG_DATA_HOME/fonts"
+	if is-arch; then
+		$aur_helper -Sy --noconfirm --needed ttf-hackgen
+	else
+		WORKDIR=$(mktemp -d)
 
-	mkdir -p "$FONT_DIR"
+		FONT_DIR="$XDG_DATA_HOME/fonts"
 
-	for i in $(curl -s https://api.github.com/repos/yuru7/HackGen/releases/latest | grep browser_download_url | cut -d : -f 2,3 | tr -d \"); do
-		url=$(echo "$i" | tr -d ' ')
-		echo "$url"
-		curl -sL -o "$WORKDIR/tmp.zip" "$url"
+		mkdir -p "$FONT_DIR"
 
-		unzip -oq "$WORKDIR/tmp.zip" -d "$FONT_DIR"
-	done
+		for i in $(curl -s https://api.github.com/repos/yuru7/HackGen/releases/latest | grep browser_download_url | cut -d : -f 2,3 | tr -d \"); do
+			url=$(echo "$i" | tr -d ' ')
+			echo "$url"
+			curl -sL -o "$WORKDIR/tmp.zip" "$url"
 
-	rm -rf "$WORKDIR"
+			unzip -oq "$WORKDIR/tmp.zip" -d "$FONT_DIR"
+		done
+
+		rm -rf "$WORKDIR"
+	fi
 }
 
 install-docker() {
@@ -125,7 +131,7 @@ install-aur() {
 install-aur-tools() {
 	local aur_helper="${1:-yay}"
     "$aur_helper" -Sy --noconfirm \
-		ttf-hackgen unarchiver \
+		unarchiver \
 		{{ range $name, $managers := .dependencies.cli -}}
         {{- get $managers "aur" | printf "%s " -}}
         {{- end }}
@@ -134,7 +140,6 @@ install-aur-tools() {
 install-aur-dev-tools() {
 	local aur_helper="${1:-yay}"
     "$aur_helper" -Sy --noconfirm \
-		ttf-hackgen unarchiver \
 		{{ range $name, $managers := .dependencies.dev -}}
         {{- get $managers "aur" | printf "%s " -}}
         {{- end }}
@@ -143,7 +148,6 @@ install-aur-dev-tools() {
 install-aur-desktop-tools() {
     local aur_helper="${1:-yay}"
     "$aur_helper" -Sy --noconfirm \
-		ttf-hackgen unarchiver \
 		{{ range $name, $managers := .dependencies.desktop -}}
         {{- get $managers "aur" | printf "%s " -}}
         {{- end }}
