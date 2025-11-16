@@ -28,7 +28,6 @@ packages:
   - name: zyedidia/micro@v2.0.14
   - name: JanDeDobbeleer/oh-my-posh@v26.20.1
   - name: starship/starship@v1.23.0
-  - name: go-task/task@v3.44.1
   - name: casey/just@1.42.4
   - name: tombi-toml/tombi@v0.5.18
   - name: arduino/arduino-language-server@0.7.7
