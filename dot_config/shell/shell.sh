@@ -98,11 +98,6 @@ mygitconfig() {
 	git config --local user.email "motty.mio2@gmail.com"
 }
 
-# task
-if ! hash task &>/dev/null && hash go-task &>/dev/null; then
-	alias task=go-task
-fi
-
 set-window-title() {
 	local title="$1"
 
