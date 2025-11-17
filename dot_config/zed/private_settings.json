@@ -7,6 +7,7 @@
 // custom settings, run `zed: open default settings` from the
 // command palette
 {
+  "disable_ai": false,
   "vim_mode": false,
   "features": {
     "edit_prediction_provider": "copilot"
@@ -14,6 +15,7 @@
   "autosave": "on_focus_change",
   "auto_update": true,
   "agent": {
+    "enable_feedback": false,
     "always_allow_tool_actions": true,
     "default_model": {
       "provider": "copilot_chat",
@@ -54,6 +56,14 @@
     }
   },
   "context_servers": {
+    "chrome-devtools": {
+      "source": "custom",
+      "enabled": true,
+      "command": "npx",
+      "args": [
+        "chrome-devtools-mcp@latest"
+      ]
+    },
     "hatago": {
       "source": "custom",
       "command": "npx",
