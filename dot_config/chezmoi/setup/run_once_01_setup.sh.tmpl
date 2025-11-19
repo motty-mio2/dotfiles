@@ -1,6 +1,6 @@
 {{ if ne .chezmoi.os "windows" -}}
 #!/usr/bin/bash
-eval "$HOME/.local/bin/chezmoi execute-template < ~/.local/share/chezmoi/dot_profile.tmpl"
+eval "$($HOME/.local/bin/chezmoi execute-template < ~/.local/share/chezmoi/dot_profile.tmpl)"
 
 mkdir -p "$XDG_STATE_HOME"
 touch "$XDG_STATE_HOME"/python_history
