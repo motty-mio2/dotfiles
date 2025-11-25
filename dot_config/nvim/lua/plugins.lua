@@ -173,17 +173,6 @@ return {
 		},
 	},
 	{
-		"zbirenbaum/copilot-cmp",
-		opts = {
-			suggestion = { enabled = false },
-			panel = { enabled = false },
-		},
-	},
-	{
-		"zbirenbaum/copilot.lua",
-		requires = { "zbirenbaum/copilot-cmp" },
-	},
-	{
 		"vim-denops/denops.vim",
 		lazy = false,
 	},
