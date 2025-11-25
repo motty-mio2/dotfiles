@@ -156,7 +156,7 @@ install-aur-desktop-tools() {
 install-debian-tools() {
 	sudo apt-get update
 	sudo apt-get install -qy \
-		build-essential libssl-dev \
+		build-essential libssl-dev libreadline-dev \
         {{ range $name, $managers := .dependencies.cli -}}
         {{- get $managers "apt" | printf "%s " -}}
         {{- end }}
