@@ -7,6 +7,9 @@
 // custom settings, run `zed: open default settings` from the
 // command palette
 {
+  "git_panel": {
+    "sort_by_path": true
+  },
   "disable_ai": false,
   "vim_mode": false,
   "features": {

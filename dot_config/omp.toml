@@ -9,6 +9,8 @@ text = "#ffffff"
 [transient_prompt]
 template = "❯ "
 
+# Left Prompt Blocks
+
 [[blocks]]
 type = "prompt"
 alignment = "left"
@@ -80,6 +82,8 @@ style = "plain"
 [blocks.segments.properties]
 cache_duration = "none"
 
+# Right Prompt Blocks
+
 [[blocks]]
 type = "prompt"
 alignment = "right"
@@ -114,6 +118,8 @@ style = "plain"
 [blocks.segments.properties]
 cache_duration = "none"
 time_format = "15:04:05"
+
+# Left Secondary Prompt Blocks
 
 [[blocks]]
 type = "prompt"

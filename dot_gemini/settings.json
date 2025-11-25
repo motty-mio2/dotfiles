@@ -1,36 +1,41 @@
 {
-    "ide": {
-        "hasSeenNudge": true,
-        "enabled": true
+  "ide": {
+    "hasSeenNudge": true,
+    "enabled": true
+  },
+  "mcpServers": {
+    "chrome-devtools": {
+      "command": "npx",
+      "args": [
+        "chrome-devtools-mcp@latest"
+      ]
     },
-    "mcpServers": {
-        "chrome-devtools": {
-            "command": "npx",
-            "args": [
-                "chrome-devtools-mcp@latest"
-            ]
-        },
-        "hatago": {
-            "command": "npx",
-            "args": [
-                "-y",
-                "@himorishige/hatago-mcp-hub",
-                "serve",
-                "--stdio",
-                "--config",
-                "$HOME/.config/hatago/hatago.config.json"
-            ]
-        }
-    },
-    "general": {
-        "preferredEditor": "vscode"
-    },
-    "security": {
-        "auth": {
-            "selectedType": "oauth-personal"
-        }
-    },
-    "ui": {
-        "theme": "Dracula"
+    "hatago": {
+      "command": "npx",
+      "args": [
+        "-y",
+        "@himorishige/hatago-mcp-hub",
+        "serve",
+        "--stdio",
+        "--config",
+        "$HOME/.config/hatago/hatago.config.json"
+      ]
     }
+  },
+  "general": {
+    "preferredEditor": "vscode",
+    "previewFeatures": true,
+    "enablePromptCompletion": true
+  },
+  "security": {
+    "auth": {
+      "selectedType": "oauth-personal"
+    }
+  },
+  "ui": {
+    "theme": "Dracula"
+  },
+  "output": {
+    "format": "text"
+  }
 }
