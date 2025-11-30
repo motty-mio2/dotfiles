@@ -1,7 +1,17 @@
 [dependencies]
-uv = ["black", "flake8", "ignr", "isort", "mypy", "pyright", "ruff"]
+uv = [
+  "black",
+  "cmake-language-server",
+  "flake8",
+  "ignr",
+  "isort",
+  "mypy",
+  "pyright",
+  "ruff"
+]
 volta = [
   "@bitwarden/cli",
+  "@github/copilot-language-server",
   "bash-language-server",
   "@google/gemini-cli",
   "markdownlint-cli",
@@ -38,8 +48,7 @@ neovim = { scoop = "neovim", aur = "neovim", brew = "neovim", nix = "neovim" }
 oh-my-posh = { scoop = "oh-my-posh", aur = "oh-my-posh-bin", brew = "oh-my-posh", nix = "oh-my-posh" }
 ripgrep = { scoop = "ripgrep", apt = "ripgrep" }
 starship = { scoop = "starship", aur = "starship", brew = "starship", nix = "starship" }
-task = { scoop = "task", aur = "go-task", brew = "go-task", nix = "go-task" }
-tombi = { aur="tombi", nix = "tombi" }
+tombi = { aur = "tombi", nix = "tombi" }
 unzip = { scoop = "unzip", apt = "unzip", aur = "unzip" }
 vim = { scoop = "vim", apt = "vim", aur = "vim" }
 wget = { scoop = "wget", apt = "wget", aur = "wget" }

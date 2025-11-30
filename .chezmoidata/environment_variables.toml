@@ -3,7 +3,6 @@ path = [
   "HOME/.local/bin",
   "VOLTA_HOME/bin",
   "DENO_INSTALL/bin",
-  "HOME/.local/share/aquaproj-aqua/bin",
 ]
 
 [environment.xdg]
@@ -13,7 +12,6 @@ XDG_CACHE_HOME = "HOME/.local/cache"
 XDG_STATE_HOME = "HOME/.local/state"
 
 [environment.application_path]
-AQUA_GLOBAL_CONFIG = "XDG_CONFIG_HOME/aqua/aqua.yaml"
 AWS_CONFIG_FILE = "XDG_CONFIG_HOME/aws/config"
 AWS_SHARED_CREDENTIALS_FILE = "XDG_CONFIG_HOME/aws/credentials"
 BREW_PREFIX = "XDG_DATA_HOME/brew"
