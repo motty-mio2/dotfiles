@@ -153,6 +153,13 @@ install-aur-desktop-tools() {
         {{- end }}
 }
 
+install-aur-hyprland-tools(){
+    local aur_helper="${1:-yay}"
+    "$aur_helper" -Sy --noconfirm \
+	  hyprland waybar \
+      brightnessctl hyprpolkitagent ulauncher
+}
+
 install-debian-tools() {
 	sudo apt-get update
 	sudo apt-get install -qy \
