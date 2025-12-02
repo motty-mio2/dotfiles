@@ -15,18 +15,6 @@ function Install-uv-Tools {
     & "$UV_ENV\$executableName" tool install --upgrade --from git+https://github.com/motty-mio2/dixp dixp
 }
 
-function Install-Volta-Tools {
-    param (
-        $VOLTA_HOME = "$Env:VOLTA_HOME"
-    )
-
-    & "$VOLTA_HOME\bin\volta" install node@lts
-
-    foreach ($tool in @( {{- .dependencies.volta | quoteList | join ", " -}} ) ) {
-        & "$VOLTA_HOME\bin\volta" install $tool
-    }
-}
-
 function Install-Scoop-Tools {
     scoop install `
         {{ range $name, $managers := .dependencies.cli -}}

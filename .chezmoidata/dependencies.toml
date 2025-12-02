@@ -9,14 +9,6 @@ uv = [
   "pyright",
   "ruff"
 ]
-volta = [
-  "@bitwarden/cli",
-  "@github/copilot-language-server",
-  "bash-language-server",
-  "@google/gemini-cli",
-  "markdownlint-cli",
-  "neovim",
-]
 rustup = [
   "clippy",
   "rust-analysis",

@@ -28,7 +28,6 @@ Invoke-WebRequest -Uri "https://github.com/twpayne/chezmoi/releases/latest/downl
 - chezmoi
 - neovim
 - git
-- volta
 - uv
 - golang
 - cargo/rust
