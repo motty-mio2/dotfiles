@@ -138,7 +138,7 @@ install-aur-desktop-tools() {
 install-aur-hyprland-tools(){
     local aur_helper="${1:-yay}"
     "$aur_helper" -Sy --noconfirm \
-	  hyprland waybar \
+	  hyprland waybar dunst \
       brightnessctl hyprpolkitagent ulauncher
 }
 
