@@ -9,14 +9,6 @@ uv = [
   "pyright",
   "ruff"
 ]
-volta = [
-  "@bitwarden/cli",
-  "@github/copilot-language-server",
-  "bash-language-server",
-  "@google/gemini-cli",
-  "markdownlint-cli",
-  "neovim",
-]
 rustup = [
   "clippy",
   "rust-analysis",
@@ -67,14 +59,14 @@ sccache = { scoop = "sccache", aur = "sccache-bin", brew = "sccache", nix = "scc
 shellcheck = { scoop = "shellcheck", aur = "shellcheck-bin", brew = "shellcheck", nix = "shellcheck" }
 shfmt = { scoop = "shfmt", aur = "shfmt", brew = "shfmt", nix = "shfmt" }
 stylua = { scoop = "stylua", aur = "stylua", brew = "stylua", nix = "stylua" }
-svlint = { scoop = "svlint", aur = "svlint-bin", brew = "svlint", nix = "svlint" }
-svls = { scoop = "svls", aur = "svls", brew = "svls", nix = "svls" }
-verible = { scoop = "verible", nix = "verible" }
+# svlint = { scoop = "svlint", aur = "svlint-bin", brew = "svlint", nix = "svlint" }
+# svls = { scoop = "svls", aur = "svls", brew = "svls", nix = "svls" }
+# verible = { scoop = "verible", nix = "verible" }
 
 [dependencies.desktop]
 ArduinoIDE = { flatpak = "cc.arduino.arduinoide" }
 ArduinoIDE2 = { flatpak = "cc.arduino.IDE2" }
-Bitwarden = { winget = "Bitwarden.Bitwarden" }
+Bitwarden = { winget = "Bitwarden.Bitwarden", snap = "bitwarden" }
 Chrome = { flatpak = "com.google.Chrome", winget = "Google.Chrome.EXE" }
 Discord = { flatpak = "com.discordapp.Discord", winget = "XPDC2RH70K22MN" }
 Firefox = { flatpak = "org.mozilla.firefox" }

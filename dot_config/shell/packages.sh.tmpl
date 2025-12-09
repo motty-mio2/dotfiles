@@ -92,19 +92,6 @@ install-uv-tools() {
 	"$HOME/.local/bin/uv" tool install --upgrade --from git+https://github.com/motty-mio2/dixp.git dixp
 }
 
-install-volta() {
-	curl https://get.volta.sh | bash
-}
-
-install-volta-tools() {
-	"$VOLTA_HOME/bin/volta" install node@lts
-
-	tools=( {{- .dependencies.volta | quoteList | join " " -}} )
-	for tool in "${tools[@]}"; do
-		"$VOLTA_HOME/bin/volta" install "$tool"
-	done
-}
-
 install-aur() {
 	sudo pacman -Sy --noconfirm --needed base-devel git
 	local aur_helper="${1:-yay}"
