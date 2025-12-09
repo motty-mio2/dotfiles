@@ -67,7 +67,7 @@ install-rust() {
 		sudo pacman -Sy --noconfirm --needed rustup
 		rustup default stable
 		return
-	else
+	els
 		curl https://sh.rustup.rs -sSf | sh -s -- -y
 	fi
 }
@@ -161,7 +161,6 @@ install-debian-dev-tools() {
 }
 
 install-ubuntu-dev-tools() {
-	sudo add-apt-repository ppa:longsleep/golang-backports
 	sudo apt-get install ca-certificates
 
 	echo "VSCode"
@@ -188,7 +187,6 @@ install-ubuntu-dev-tools() {
 		sudo tee /etc/apt/sources.list.d/wezterm.list >/dev/null
 
 	sudo apt-get update
-	sudo apt-get install golang
 	sudo apt-get install code
 	sudo apt-get install flatpak
 	sudo apt-get install alacritty
@@ -206,7 +204,7 @@ install-keyd() {
 		sudo apt install keyd
 	else
 		echo "Unsupported OS."
-		exit 1
+		return 1
 	fi
 }
 
