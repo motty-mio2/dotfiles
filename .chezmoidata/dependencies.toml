@@ -59,14 +59,14 @@ sccache = { scoop = "sccache", aur = "sccache", brew = "sccache", nix = "sccache
 shellcheck = { scoop = "shellcheck", aur = "shellcheck-bin", brew = "shellcheck", nix = "shellcheck" }
 shfmt = { scoop = "shfmt", aur = "shfmt", brew = "shfmt", nix = "shfmt" }
 stylua = { scoop = "stylua", aur = "stylua", brew = "stylua", nix = "stylua" }
-svlint = { scoop = "svlint", aur = "svlint", brew = "svlint", nix = "svlint" }
-svls = { scoop = "svls", aur = "svls", brew = "svls", nix = "svls" }
-verible = { scoop = "verible", nix = "verible" }
+# svlint = { scoop = "svlint", aur = "svlint", brew = "svlint", nix = "svlint" }
+# svls = { scoop = "svls", aur = "svls", brew = "svls", nix = "svls" }
+# verible = { scoop = "verible", nix = "verible" }
 
 [dependencies.desktop]
 ArduinoIDE = { flatpak = "cc.arduino.arduinoide" }
 ArduinoIDE2 = { flatpak = "cc.arduino.IDE2" }
-Bitwarden = { winget = "Bitwarden.Bitwarden" }
+Bitwarden = { winget = "Bitwarden.Bitwarden", snap = "bitwarden" }
 Chrome = { flatpak = "com.google.Chrome", winget = "Google.Chrome.EXE" }
 Discord = { flatpak = "com.discordapp.Discord", winget = "XPDC2RH70K22MN" }
 Firefox = { flatpak = "org.mozilla.firefox" }
