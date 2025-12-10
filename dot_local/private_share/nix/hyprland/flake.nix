@@ -16,7 +16,7 @@
       {
         packages.hyprland = pkgs.buildEnv {
           name = "hyprland";
-          paths = with pkgs; [xdg-desktop-portal-hyprland waybar ulauncher wofi dunst brightnessctl hyprpolkitagent
+          paths = with pkgs; [brightnessctl dunst hyprshot ulauncher waybar wofi
           ];
         };
       }
