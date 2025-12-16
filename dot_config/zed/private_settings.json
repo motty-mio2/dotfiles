@@ -60,15 +60,11 @@
   },
   "context_servers": {
     "chrome-devtools": {
-      "source": "custom",
       "enabled": true,
       "command": "npx",
-      "args": [
-        "chrome-devtools-mcp@latest"
-      ]
+      "args": ["chrome-devtools-mcp@latest"]
     },
     "hatago": {
-      "source": "custom",
       "command": "npx",
       "args": [
         "@himorishige/hatago-mcp-hub",
