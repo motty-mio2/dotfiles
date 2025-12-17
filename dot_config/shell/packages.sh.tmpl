@@ -146,7 +146,7 @@ install-ubuntu-hyprland() {
     sudo add-apt-repository ppa:cppiber/hyprland
     sudo apt-get update
     sudo apt-get install -qy \
-        hyprland-qt-support0 hyprland
+        hyprland-qt-support0 hypridle hyprland
         hyprlock hyprpolkitagent xdg-desktop-portal-hyprland
 }
 
@@ -272,6 +272,10 @@ install-nix-tools() {
 
 install-nix-dev-tools() {
 	nix profile add "$XDG_DATA_HOME/nix/dev/.#dev"
+}
+
+install-nix-hyprland-tools() {
+	nix profile add "$XDG_DATA_HOME/nix/hyprland/.#hyprland"
 }
 
 install-arch-desktop-dependency() {
