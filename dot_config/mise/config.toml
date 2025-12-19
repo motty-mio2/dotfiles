@@ -9,7 +9,7 @@ usage = "latest"
 uv = "latest"
 # Aqua managed tools
 "aqua:arduino/arduino-language-server" = "latest"
-"aqua:aristocratos/btop" = "latest"
+"aqua:aristocratos/btop" = { version = "latest", os = ["linux"]}
 "aqua:artempyanykh/marksman" = "latest"
 "aqua:BurntSushi/ripgrep" = "latest"
 "aqua:cli/cli" = "latest"
@@ -57,4 +57,4 @@ uv = "latest"
 "pipx:mypy" = "latest"
 "pipx:ruff" = "latest"
 "pipx:yt-dlp" = "latest"
-pipx = "latest"
+pipx = { version = "latest", os = ["darwin", "linux"]}
