@@ -7,16 +7,16 @@ fi
 
 PS3="Select Git user: "
 
-keys=()
-names=()
-values=()
+keys=("motty <motty.mio2@gmail.com>")
+names=("motty")
+values=("motty.mio2@gmail.com")
 
 {{ if lookPath "bw" -}}
 {{    range (bitwarden "item" "87a4afa9-31ce-4707-aab5-b3a3002b227e").fields -}}
 keys+=("{{ .name }} <{{ .value }}>")
 names+=("{{ .name }}")
 values+=("{{ .value }}")
-{{    end -}}
+{{    end }}
 {{ end -}}
 
 select item in "${keys[@]}"; do
