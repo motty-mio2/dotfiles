@@ -2,11 +2,16 @@
 experimental = true
 
 [tools]
+biome = "latest"
+delta = "latest"
 deno = "latest"
 node = "lts"
+pipx = { version = "latest", os = ["darwin", "linux"]}
+pnpm = "latest"
 tree-sitter = "latest"
 usage = "latest"
 uv = "latest"
+
 # Aqua managed tools
 "aqua:arduino/arduino-language-server" = "latest"
 "aqua:aristocratos/btop" = { version = "latest", os = ["linux"]}
@@ -32,6 +37,7 @@ uv = "latest"
 "aqua:ynqa/jnv" = "latest"
 # Github based tools
 "github:docker/docker-language-server" = "latest"
+"github:satococoa/wtp" = "latest"
 "github:terror/just-lsp" = "latest"
 # Node.js based tools
 "npm:@bitwarden/cli" = "latest"
@@ -57,4 +63,4 @@ uv = "latest"
 "pipx:mypy" = "latest"
 "pipx:ruff" = "latest"
 "pipx:yt-dlp" = "latest"
-pipx = { version = "latest", os = ["darwin", "linux"]}
+

@@ -55,11 +55,11 @@ clang-format = { apt = "clang-format" }
 clang-tidy = { apt = "clang-tidy" }
 hadolint = { scoop = "hadolint", nix = "hadolint" }
 lld = { apt = "lld" }
-sccache = { scoop = "sccache", aur = "sccache", brew = "sccache", nix = "sccache" }
+sccache = { scoop = "sccache", aur = "sccache-bin", brew = "sccache", nix = "sccache" }
 shellcheck = { scoop = "shellcheck", aur = "shellcheck-bin", brew = "shellcheck", nix = "shellcheck" }
 shfmt = { scoop = "shfmt", aur = "shfmt", brew = "shfmt", nix = "shfmt" }
 stylua = { scoop = "stylua", aur = "stylua", brew = "stylua", nix = "stylua" }
-# svlint = { scoop = "svlint", aur = "svlint", brew = "svlint", nix = "svlint" }
+# svlint = { scoop = "svlint", aur = "svlint-bin", brew = "svlint", nix = "svlint" }
 # svls = { scoop = "svls", aur = "svls", brew = "svls", nix = "svls" }
 # verible = { scoop = "verible", nix = "verible" }
 
