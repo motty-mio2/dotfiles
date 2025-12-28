@@ -12,11 +12,7 @@
 		"hyprland/scratchpad",
 		"custom/media"
 	],
-	"modules-center": [
-		"clock",
-		"custom/update",
-		"custom/screenrecording-indicator"
-	],
+	"modules-center": ["clock", "custom/update", "custom/recorder"],
 	"modules-right": [
 		"idle_inhibitor",
 		"pulseaudio",
@@ -220,5 +216,12 @@
 			"suspend": "systemctl suspend",
 			"hibernate": "systemctl hibernate"
 		}
+	},
+	"custom/recorder": {
+		"format": "{}",
+		"interval": 1, // 1秒ごとにチェック
+		"exec": "~/.config/waybar/scripts/record_timer.sh",
+		"on-click": "pkill -INT wf-recorder", // クリックで録画停止
+		"tooltip": false
 	}
 }
