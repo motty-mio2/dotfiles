@@ -3,7 +3,7 @@
 
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs?ref=nixos-unstable";
-    flake-utils.url = "github:numtide/flake-utils"; 
+    flake-utils.url = "github:numtide/flake-utils";
   };
 
   outputs =
@@ -16,7 +16,9 @@
       {
         packages.hyprland = pkgs.buildEnv {
           name = "hyprland";
-          paths = with pkgs; [brightnessctl dunst hyprshot waybar wofi wl-paste wf-recorder grim slurp cliphist
+          paths = with pkgs; [
+            brightnessctl cliphist dunst grim hyprshot slurp
+            waybar wf-recorder wl-clipboard wofi
           ];
         };
       }
