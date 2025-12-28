@@ -82,3 +82,7 @@ source "$XDG_CONFIG_HOME/zsh/plugins/powerlevel10k/powerlevel10k.zsh-theme"
 POWERLEVEL9K_DISABLE_CONFIGURATION_WIZARD=true
 {{      include "dot_config/zsh/dot_p10k.zsh" }}
 {{ end }}
+
+{{ if lookPath "mise" }}
+{{      output "mise" "activate" "zsh" }}
+{{ end }}
