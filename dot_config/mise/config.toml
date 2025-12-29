@@ -14,7 +14,6 @@ uv = "latest"
 
 # Aqua managed tools
 "aqua:arduino/arduino-language-server" = "latest"
-"aqua:aristocratos/btop" = { version = "latest", os = ["linux"]}
 "aqua:artempyanykh/marksman" = "latest"
 "aqua:BurntSushi/ripgrep" = "latest"
 "aqua:cli/cli" = "latest"
@@ -39,6 +38,7 @@ uv = "latest"
 "github:docker/docker-language-server" = "latest"
 "github:satococoa/wtp" = "latest"
 "github:terror/just-lsp" = "latest"
+"github:aristocratos/btop"  = {version = "latest", os = ["linux"]}
 # Node.js based tools
 "npm:@bitwarden/cli" = "latest"
 "npm:@github/copilot-language-server" = "latest"
