@@ -9,7 +9,7 @@
     "github": {
       "url": "https://api.githubcopilot.com/mcp/"
     },
-    {{ if and (lookPath "bw") (not (empty (env "BW_SESSION")) ) -}}
+    {{ if lookPath "bw" -}}
     "notion": {
       "command": "npx",
       "args": [
