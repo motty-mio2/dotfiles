@@ -4,6 +4,14 @@ if ! git rev-parse --is-inside-work-tree &>/dev/null; then
   echo "このディレクトリはGit管理されていません。"
   exit 1
 fi
+current_name="$(git config user.name)"
+current_email="$(git config user.email)"
+
+if [[ -n $current_name && -n $current_email ]]; then
+    echo "Current: $current_name <$current_email>"
+else
+    echo "Invalid or not set."
+fi
 
 PS3="Select Git user: "
 
