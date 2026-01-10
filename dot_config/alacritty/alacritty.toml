@@ -10,3 +10,7 @@ normal.family = "HackGen35 Console NF"
 
 [cursor]
 style = { shape = "Beam", blinking = "Off" }
+
+[env]
+TERM = "xterm-256color"
+
