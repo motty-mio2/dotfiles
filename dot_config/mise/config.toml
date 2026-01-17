@@ -2,7 +2,6 @@
 experimental = true
 
 [tools]
-biome = "latest"
 delta = "latest"
 deno = "latest"
 node = "lts"
@@ -63,4 +62,5 @@ uv = "latest"
 "pipx:mypy" = "latest"
 "pipx:ruff" = "latest"
 "pipx:yt-dlp" = "latest"
+"npm:@biomejs/biome" = "latest"
 
