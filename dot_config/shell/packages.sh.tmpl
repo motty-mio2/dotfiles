@@ -58,10 +58,6 @@ install-docker() {
 	sudo gpasswd -a $USER docker
 }
 
-install-deno() {
-	curl -fsSL https://deno.land/install.sh | sh
-}
-
 install-rust() {
 	if is-arch; then
 		sudo pacman -Sy --noconfirm --needed rustup

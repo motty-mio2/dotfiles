@@ -1,7 +1,6 @@
 [environment]
 path = [
   "HOME/.local/bin",
-  "DENO_INSTALL/bin",
 ]
 
 [environment.xdg]
@@ -17,7 +16,6 @@ BREW_PREFIX = "XDG_DATA_HOME/brew"
 CARGO_HOME = "XDG_DATA_HOME/cargo"
 CONDARC = "XDG_CONFIG_HOME/conda/condarc"
 CUDA_CACHE_PATH = "XDG_CACHE_HOME/nv"
-DENO_INSTALL = "XDG_DATA_HOME/deno"
 DOCKER_CONFIG = "XDG_CONFIG_HOME/docker"
 DOTNET_CLI_HOME = "XDG_DATA_HOME/dotnet"
 ERRFILE = "XDG_CACHE_HOME/X11/xsession-errors"
