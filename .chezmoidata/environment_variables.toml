@@ -1,6 +1,7 @@
 [environment]
 path = [
   "HOME/.local/bin",
+  "HOME/.local/share/mise/shims",
 ]
 
 [environment.xdg]
