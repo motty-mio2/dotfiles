@@ -59,7 +59,6 @@ function Invoke-Starship-TransientFunction {
 Enable-TransientPrompt
 {{ else if and (lookPath "oh-my-posh") (eq .powershell "oh-my-posh")}}
 # oh-my-posh
-{{ output "oh-my-posh" "init" "pwsh" "--config" "~/.config/omp.toml" }}
-Enable-PoshTransientPrompt
+{{ output "oh-my-posh" "init" "pwsh" "--config" "~/.config/omp.toml" "--eval" "--print" | replaceAllRegex "export POSH_SESSION_ID.+" "" }}
 {{ end }}
 
