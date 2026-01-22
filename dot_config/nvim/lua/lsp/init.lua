@@ -1,3 +1,4 @@
+-- Builtin
 vim.lsp.enable("arduino_language_server")
 vim.lsp.enable("basedpyright")
 vim.lsp.enable("bashls")
@@ -24,3 +25,7 @@ vim.lsp.enable("ts_ls")
 vim.lsp.enable("veryl_ls")
 vim.lsp.enable("vimls")
 vim.lsp.enable("yamlls")
+
+-- Custom
+vim.lsp.enable("systemd_lsp")
+
