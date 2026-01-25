@@ -1,0 +1,13 @@
+{
+	"tags": ["document"],
+	"mcpServers": {
+		"obsidian": {
+			"command": "npx",
+			"args": [
+				"-y",
+				"mcp-obsidian",
+				"{{ joinPath .chezmoi.homeDir "Documents/Obsidian" | replace "\\" "/" }}"
+			]
+		}
+	}
+}

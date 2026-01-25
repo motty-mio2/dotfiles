@@ -5,12 +5,11 @@ experimental = true
 delta = "latest"
 deno = "latest"
 node = "lts"
-pipx = { version = "latest", os = ["darwin", "linux"]}
+pipx = { version = "latest", os = ["darwin", "linux"] }
 pnpm = "latest"
 tree-sitter = "latest"
 usage = "latest"
 uv = "latest"
-
 # Aqua managed tools
 "aqua:arduino/arduino-language-server" = "latest"
 "aqua:artempyanykh/marksman" = "latest"
@@ -37,13 +36,12 @@ uv = "latest"
 "github:docker/docker-language-server" = "latest"
 "github:satococoa/wtp" = "latest"
 "github:terror/just-lsp" = "latest"
-"github:aristocratos/btop"  = {version = "latest", os = ["linux"]}
+"github:aristocratos/btop" = { version = "latest", os = ["linux"] }
 "github:jFryy/systemd-lsp" = "latest"
 # Node.js based tools
 "npm:@bitwarden/cli" = "latest"
 "npm:@github/copilot-language-server" = "latest"
 "npm:@google/gemini-cli" = "latest"
-"npm:@himorishige/hatago-mcp-hub" = "latest"
 "npm:basedpyright" = "latest"
 "npm:bash-language-server" = "latest"
 "npm:markdownlint-cli2" = "latest"
@@ -64,4 +62,3 @@ uv = "latest"
 "pipx:ruff" = "latest"
 "pipx:yt-dlp" = "latest"
 "npm:@biomejs/biome" = "latest"
-

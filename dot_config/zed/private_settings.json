@@ -62,16 +62,16 @@
     "chrome-devtools": {
       "enabled": true,
       "command": "npx",
-      "args": ["chrome-devtools-mcp@latest"]
+      "args": [
+        "chrome-devtools-mcp@latest"
+      ]
     },
-    "hatago": {
+    "mcpc": {
       "command": "npx",
       "args": [
-        "@himorishige/hatago-mcp-hub",
-        "serve",
-        "--stdio",
-        "--config",
-        "$HOME/.config/hatago/hatago.config.json"
+        "-y",
+        "github:motty-mio2/mcpc#main",
+        "serve"
       ]
     }
   }
