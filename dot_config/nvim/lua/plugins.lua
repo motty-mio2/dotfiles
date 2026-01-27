@@ -2,7 +2,30 @@ return {
 	{ "nvimtools/none-ls-extras.nvim", dependencies = { "nvimtools/none-ls.nvim" } },
 	{ "nvimtools/none-ls.nvim", dependencies = { "nvim-lua/plenary.nvim" }, opts = {} },
 	{ "neovim/nvim-lspconfig" },
-	{ "nvim-treesitter/nvim-treesitter" },
+	{
+		"nvim-treesitter/nvim-treesitter",
+		lazy = false,
+		build = ":TSUpdate",
+		opts = {
+			highlight = {
+				enable = true,
+			},
+			indent = {
+				enable = true,
+			},
+			sync_install = false,
+			auto_install = true,
+		},
+		init = function()
+			vim.api.nvim_create_autocmd("FileType", {
+				pattern = { "<filetype>" },
+				callback = function()
+					vim.treesitter.start()
+				end,
+			})
+			vim.bo.indentexpr = "v:lua.require'nvim-treesitter'.indentexpr()"
+		end,
+	},
 	{
 		"hrsh7th/nvim-cmp",
 		dependencies = {
@@ -27,9 +50,6 @@ return {
 		version = false,
 		lazy = false,
 		priority = 1000, -- make sure to load this before all the other start plugins
-		config = function()
-			require("everforest").setup({})
-		end,
 	},
 	{
 		"nvim-telescope/telescope.nvim",
@@ -68,7 +88,11 @@ return {
 	},
 	{
 		"nvim-neo-tree/neo-tree.nvim",
-		dependencies = { "nvim-lua/plenary.nvim", "kyazdani42/nvim-web-devicons", "MunifTanjim/nui.nvim" },
+		dependencies = {
+			"nvim-lua/plenary.nvim",
+			"kyazdani42/nvim-web-devicons",
+			"MunifTanjim/nui.nvim",
+		},
 	},
 	{
 		"folke/lazy.nvim",
@@ -103,9 +127,6 @@ return {
 		},
 	},
 	{
-		"lewis6991/gitsigns.nvim",
-	},
-	{
 		"folke/trouble.nvim",
 		opts = {},
 		cmd = "Trouble",
@@ -124,7 +145,6 @@ return {
 	},
 	{
 		"nvim-telescope/telescope.nvim",
-
 		dependencies = { "nvim-lua/plenary.nvim" },
 	},
 	{
@@ -132,16 +152,6 @@ return {
 		event = "VeryLazy", -- Or `LspAttach`
 		priority = 1000, -- needs to be loaded in first
 		opts = { virtual_text = false },
-	},
-	{
-		"shellRaining/hlchunk.nvim",
-		event = { "BufReadPre", "BufNewFile" },
-		opts = {
-			chunk = { enable = false },
-			indent = { enable = true },
-			line_num = { enable = false },
-			blank = { enable = false },
-		},
 	},
 	{
 		"pwntester/octo.nvim",
@@ -179,8 +189,5 @@ return {
 	{
 		"nekowasabi/hellshake-yano.vim",
 		dependencies = { "vim-denops/denops.vim" },
-		config = function()
-			-- Configuration here
-		end,
 	},
 }
