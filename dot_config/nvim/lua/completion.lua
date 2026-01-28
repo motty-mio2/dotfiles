@@ -11,7 +11,7 @@ cmp.setup({
 		{ name = "path" },
 		{ name = "buffer" },
 		{ name = "nvim_lua" },
-		{ name = "luasnip" },
+		{ name = "vsnip" },
 		{ name = "cmdline" },
 		{ name = "copilot" },
 		{ name = "git" },
