@@ -1,4 +1,7 @@
 {
+  "context": {
+    "fileName": ["AGENTS.md", "GEMINI.md"]
+  },
   "ide": {
     "hasSeenNudge": true,
     "enabled": true

@@ -1,0 +1,5 @@
+{{- if lookPath "delta" -}}
+#!/usr/bin/env bash
+
+git diff | delta
+{{ end }}
