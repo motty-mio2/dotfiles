@@ -72,13 +72,14 @@ bindkey "^[[4~" end-of-line
 {{ includeTemplate "shell_rc.tmpl" (dict "shell" "zsh" ) }}
 
 {{ if and (lookPath "starship") (eq .zsh "starship") }}
-{{      output "starship" "init" "zsh" }}
+{{      output "starship" "init" "zsh" "--print-full-init"
+	| replace (lookPath "starship") "starship"
+}}
 precmd_functions+=(set-window-title)
 {{ else if and (lookPath "oh-my-posh") (eq .zsh "oh-my-posh") }}
 # eval $(oh-my-posh init zsh --config {{ joinPath .chezmoi.homeDir ".config/omp.toml" }})
 {{      output "oh-my-posh" "init" "zsh" "--config" "~/.config/omp.toml" "--eval" "--print"
-	| replaceAllRegex "export POSH_SESSION_ID.+" ""
-	| replaceAllRegex "^_omp_executable=.+" "_omp_executable=$'oh-my-posh'"
+	| replace (lookPath "oh-my-posh") "oh-my-posh"
 }}
 {{ else }}
 # POWERLEVEL

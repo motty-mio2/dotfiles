@@ -54,11 +54,14 @@ $host.ui.RawUI.WindowTitle = "$env:USERNAME@$env:COMPUTERNAME"
 function Invoke-Starship-TransientFunction {
     &starship module character
 }
-
-{{ output "starship" "init" "powershell" }}
+{{  output "starship" "init" "powershell" "--print-full-init"
+    | replace (lookPath "starship") "starship"
+}}
 Enable-TransientPrompt
 {{ else if and (lookPath "oh-my-posh") (eq .powershell "oh-my-posh")}}
 # oh-my-posh
-{{ output "oh-my-posh" "init" "pwsh" "--config" "~/.config/omp.toml" "--eval" "--print" | replaceAllRegex ".*POSH_SESSION_ID.+" "" }}
+{{  output "oh-my-posh" "init" "pwsh" "--config" "~/.config/omp.toml" "--eval" "--print"
+    | replaceAllRegex ".*POSH_SESSION_ID.+" ""
+    | replace (lookPath "oh-my-posh") "oh-my-posh"
+}}
 {{ end }}
-
