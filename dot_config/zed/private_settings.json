@@ -7,14 +7,24 @@
 // custom settings, run `zed: open default settings` from the
 // command palette
 {
+  "edit_predictions": {
+    "provider": "copilot"
+  },
+  "git": {
+    "git_gutter": "tracked_files",
+    "path_style": "file_path_first",
+    "branch_picker": {
+      "show_author_name": false
+    },
+    "blame": {
+      "show_avatar": false
+    }
+  },
   "git_panel": {
-    "sort_by_path": true
+    "sort_by_path": true,
   },
   "disable_ai": false,
   "vim_mode": false,
-  "features": {
-    "edit_prediction_provider": "copilot"
-  },
   "autosave": "on_focus_change",
   "auto_update": true,
   "agent": {
@@ -22,57 +32,39 @@
     "always_allow_tool_actions": true,
     "default_model": {
       "provider": "copilot_chat",
-      "model": "gpt-4.1"
-    }
+      "model": "gpt-4.1",
+    },
   },
   "ui_font_size": 16,
   "buffer_font_size": 16,
   "theme": {
     "mode": "system",
     "light": "One Dark",
-    "dark": "One Dark"
+    "dark": "One Dark",
   },
   "terminal": {
     "font_family": "HackGen35 Console NF",
     "shell": {
-      "program": "zsh"
+      "program": "zsh",
     },
-    "working_directory": "current_project_directory"
+    "working_directory": "current_project_directory",
   },
   "buffer_font_family": "HackGen35",
-  "lsp": {
-    "pyright": {
-      "settings": {
-        "python.analysis": {
-          "diagnosticMode": "workspace",
-          "typeCheckingMode": "strict"
-        },
-        "python": {
-          "pythonPath": "./.venv/bin/python"
-        }
-      }
-    }
-  },
+  "lsp": {},
   "languages": {
     "Python": {
-      "format_on_save": "on"
-    }
+      "format_on_save": "on",
+    },
   },
   "context_servers": {
     "chrome-devtools": {
       "enabled": true,
       "command": "npx",
-      "args": [
-        "chrome-devtools-mcp@latest"
-      ]
+      "args": ["chrome-devtools-mcp@latest"],
     },
     "mcpc": {
       "command": "npx",
-      "args": [
-        "-y",
-        "github:motty-mio2/mcpc#main",
-        "serve"
-      ]
-    }
-  }
+      "args": ["-y", "github:motty-mio2/mcpc#main", "serve"],
+    },
+  },
 }

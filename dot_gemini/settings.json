@@ -1,6 +1,9 @@
 {
   "context": {
-    "fileName": ["AGENTS.md", "GEMINI.md"]
+    "fileName": [
+      "AGENTS.md",
+      "GEMINI.md"
+    ]
   },
   "ide": {
     "hasSeenNudge": true,
@@ -25,7 +28,8 @@
   "general": {
     "preferredEditor": "vscode",
     "previewFeatures": true,
-    "enablePromptCompletion": true
+    "enablePromptCompletion": true,
+    "enableAutoUpdate": false
   },
   "security": {
     "auth": {
