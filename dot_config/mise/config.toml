@@ -2,11 +2,14 @@
 experimental = true
 
 [tools]
+arduino-cli = "latest"
 delta = "latest"
 deno = "latest"
 node = "lts"
 pipx = { version = "latest", os = ["darwin", "linux"] }
+oh-my-posh = "latest"
 pnpm = "latest"
+starship = "latest"
 tree-sitter = "latest"
 usage = "latest"
 uv = "latest"
@@ -39,6 +42,7 @@ uv = "latest"
 "github:aristocratos/btop" = { version = "latest", os = ["linux"] }
 "github:jFryy/systemd-lsp" = "latest"
 # Node.js based tools
+"npm:@biomejs/biome" = "latest"
 "npm:@bitwarden/cli" = "latest"
 "npm:@github/copilot-language-server" = "latest"
 "npm:@google/gemini-cli" = "latest"
@@ -61,4 +65,3 @@ uv = "latest"
 "pipx:mypy" = "latest"
 "pipx:ruff" = "latest"
 "pipx:yt-dlp" = "latest"
-"npm:@biomejs/biome" = "latest"

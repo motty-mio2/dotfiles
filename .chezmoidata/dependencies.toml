@@ -48,7 +48,7 @@ which = { scoop = "which" }
 zsh = { apt = "zsh", aur = "zsh" }
 
 [dependencies.dev]
-arduino-cli = { scoop = "arduino-cli", nix = "arduino-cli" }
+arduino-cli = { scoop = "arduino-cli" }
 actionlint = { scoop = "actionlint", aur = "actionlint", brew = "actionlint", nix = "actionlint" }
 clangd = { scoop = "llvm", apt = "clangd" }
 clang-format = { apt = "clang-format" }
