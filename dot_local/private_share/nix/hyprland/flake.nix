@@ -17,7 +17,7 @@
         packages.hyprland = pkgs.buildEnv {
           name = "hyprland";
           paths = with pkgs; [
-            brightnessctl cliphist dunst grim hyprshot slurp
+            brightnessctl cliphist grim hyprshot slurp
             waybar wf-recorder wl-clipboard wofi
           ];
         };
