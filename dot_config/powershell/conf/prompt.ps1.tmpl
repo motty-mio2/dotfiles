@@ -1,42 +1,13 @@
-try {
-    Import-Module PSReadLine -ErrorAction Stop
-} catch {
-    Install-Module PSReadLine -Force -Scope CurrentUser
-    Import-Module PSReadLine
-} finally {
-    Set-PSReadLineKeyHandler -Key Tab -Function MenuComplete
-    Set-PSReadlineKeyHandler -Key ctrl+d -Function DeleteCharOrExit
-    Set-PSReadLineOption
+Import-Module PSReadLine -ErrorAction SilentlyContinue
+Import-Module posh-git -ErrorAction SilentlyContinue
+Import-Module PSFzf -ErrorAction SilentlyContinue
 
-    Set-PSReadLineOption -Colors @{
-        "Parameter" = [ConsoleColor]::Cyan
-    }
-}
+Set-PSReadLineKeyHandler -Key Tab -Function MenuComplete
+Set-PSReadlineKeyHandler -Key ctrl+d -Function DeleteCharOrExit
+Set-PSReadLineOption -Colors @{ "Parameter" = [ConsoleColor]::Cyan }
 
-try {
-    Import-Module posh-git -ErrorAction Stop
-} catch {
-    Install-Module posh-git -Force -Scope CurrentUser
-    Import-Module posh-git
-}
-
-try {
-    Import-Module PSFzf -ErrorAction Stop
-} catch {
-    Install-Module PSFzf -Force -Scope CurrentUser
-    Import-Module PSFzf
-} finally {
-    Set-PSFzfOption -PSReadlineChordProvider 'Ctrl+t'
-    Set-PSFzfOption -PSReadlineChordReverseHistory 'Ctrl+r'
-}
-
-try {
-    Invoke-Expression (&scoop-search --hook)
-} catch {
-    scoop install scoop-search
-    Invoke-Expression (&scoop-search --hook)
-}
-
+if (Get-Command Set-PSFzfOption -ErrorAction SilentlyContinue) { Set-PSFzfOption -PSReadlineChordProvider 'Ctrl+t'; Set-PSFzfOption -PSReadlineChordReverseHistory 'Ctrl+r' }
+if (Get-Command scoop-search -ErrorAction SilentlyContinue) { Invoke-Expression (&scoop-search --hook) }
 
 Register-ArgumentCompleter -Native -CommandName winget -ScriptBlock {
     param($wordToComplete, $commandAst, $cursorPosition)
@@ -62,6 +33,6 @@ Enable-TransientPrompt
 # oh-my-posh
 {{  output "oh-my-posh" "init" "pwsh" "--config" "~/.config/omp.toml" "--eval" "--print"
     | replaceAllRegex ".*POSH_SESSION_ID.+" ""
-    | replace (lookPath "oh-my-posh") "oh-my-posh"
+    | replace (lookPath "oh-my-posh" | replaceAllRegex "\\\\" "/") "oh-my-posh"
 }}
 {{ end }}
