@@ -1,3 +1,8 @@
+{{ if (lookPath "mise")}}
+{{  output "mise" "activate" "pwsh" }}
+{{ end }}
+
+
 function supdate {
     scoop update
     scoop update *
