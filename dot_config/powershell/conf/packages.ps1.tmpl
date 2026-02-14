@@ -1,3 +1,14 @@
+function supdate {
+    scoop update
+    scoop update *
+    scoop cleanup *
+}
+
+function wupdate {
+    winget upgrade $args
+}
+
+
 function Install-rust-Tools {
     rustup component add {{ .dependencies.rustup | join " " }}
 }

@@ -130,44 +130,6 @@ function uzip {
     }
 }
 
-function supdate {
-    scoop update
-    scoop update *
-    scoop cleanup *
-}
-
-function wupdate {
-    winget upgrade $args
-}
-
-function codex {
-    if ([string]::IsNullorEmpty($Args[0])) {
-        # Write-Host "This is empty args"
-        code $(Convert-Path .)
-    } else {
-        if (Test-Path (Convert-Path $Args[0]) -PathType Container) {
-            # Write-Host "This is folder"
-            $Folder = Convert-Path $Args[0]
-            # Write-Output $Folder
-            # foreach ($item in $Folder) {
-            if (Test-Path $Folder\*.code-workspace) {
-                Get-ChildItem $Folder\*.code-workspace | ForEach-Object -Process {
-                    code $(Convert-Path $_)
-                    # break
-                }
-            } else {
-                code $(Convert-Path .)
-            }
-        } elseif ((Get-ChildItem $Args[0]).Extension -eq ".code-workspace") {
-            # Write-Host "This is workspace"
-            code $Args[0]
-        } else {
-            # Write-Host "This is valid file"
-            code (Split-Path (Convert-Path $Args[0]) -parent)
-        }
-    }
-}
-
 function mkcd {
     Param ($dir)
 
@@ -224,6 +186,35 @@ function bwx {
     } catch {
         #
     }
+}
+
+function gime {
+    Param (
+        [ValidateSet ("property", "dictionary", "register", "write", "palette" )]$option)
+
+    switch ($option) {
+        "property" { $argument = " --mode=config_dialog" }
+        "dictionary" { $argument = " --mode=dictionary_tool" }
+        "register" { $argument = " --mode=word_register_dialog" }
+        "write" { $argument = " --mode=hand_writing" }
+        "palette" { $argument = " --mode=character_palette" }
+        Default { $argument = $null }
+    }
+    cmd /C (Start-Process "C:\Program Files (x86)\Google\Google Japanese Input\GoogleIMEJaTool.exe"${argument})
+}
+
+function msime {
+    Param (
+        [ValidateSet ("ADDSYSDICT", "CHECKSYSDICT", "REMOVESYSDICT"
+            , "SETKANAINPUT", "GETKANAINPUT" , "SETCUSTOMDICTPATH"
+            , "GETCUSTOMDICTPATH", "FIXCUSTOMDICT", "CODEAREAFORCONVERT"
+            , "SETOKURIGANAOPTION", "GETOKURIGANAOPTION", "SETKEYTEMPLATE"
+            , "SETKUTOUTEN", "RESET", "LOADAUTOTUNEDATA"
+            , "SAVEAUTOTUNEDATA", "REMOVEAUTOTUNEDATA", "SETFILTERDICT"
+            , "GETFILTERDICT", "REMOVEFILTERDICT", "HELP"
+        )]$argument)
+
+    C:\Windows\System32\IME\IMEJP\imjpuexc.exe ${argument}
 }
 
 function Set-Better-Windows {

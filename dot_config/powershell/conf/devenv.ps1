@@ -90,3 +90,18 @@ function Set-SVLINT-PATH {
 
     Set-Environemt-Path -ENV_NAME "SVLINT_CONFIG" -ENV_VALUE $SVLINT_CONFIG
 }
+
+function Install-Scoop {
+    if ( -not (Get-Command "scoop")) {
+        Invoke-WebRequest -useb get.scoop.sh | Invoke-Expression
+    }
+
+    scoop reset *
+
+    scoop bucket add extras
+    scoop bucket add java
+    scoop bucket add versions
+    scoop bucket add nerd-fonts
+    scoop bucket add motty https://github.com/motty-mio2/scoop-bucket.git
+}
+
