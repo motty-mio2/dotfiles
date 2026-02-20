@@ -40,5 +40,10 @@ POWERLEVEL9K_DISABLE_CONFIGURATION_WIZARD=true
 {{ end }}
 
 {{ if lookPath "zoxide" }}
+if command -v zoxide > /dev/null 2>&1; then
 {{      output "zoxide" "init" .shell }}
+alias cd="z"
+alias c="z"
+alias cz="zi"
+fi
 {{ end }}
