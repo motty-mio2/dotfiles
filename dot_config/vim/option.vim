@@ -1,6 +1,6 @@
 " --- 基本設定 ---
 set autoread  " ファイルを自動的に読み込む
-set ambiwidth=double  " 2バイト文字を正しく描画する
+set ambiwidth=single  " 2バイト文字を正しく描画する
 set cmdheight=1  " メッセージ表示欄の高さを1行に設定
 set encoding=utf-8  " ファイルのエンコーディングをUTF-8に設定
 set hidden  " 編集中のファイルを保存せずに別のファイルを開くことを許可する
