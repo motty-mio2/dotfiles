@@ -2,6 +2,11 @@
 {{  output "mise" "activate" "pwsh" }}
 {{ end }}
 
+function mupdate {
+    mise self-update --quiet
+    mise upgrade --bump
+    mise cache prune
+}
 
 function supdate {
     scoop update
