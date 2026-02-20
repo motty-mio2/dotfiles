@@ -4,27 +4,9 @@ return {
 	{ "neovim/nvim-lspconfig" },
 	{
 		"nvim-treesitter/nvim-treesitter",
+		branch = "main",
 		lazy = false,
 		build = ":TSUpdate",
-		opts = {
-			highlight = {
-				enable = true,
-			},
-			indent = {
-				enable = true,
-			},
-			sync_install = false,
-			auto_install = true,
-		},
-		init = function()
-			vim.api.nvim_create_autocmd("FileType", {
-				pattern = { "<filetype>" },
-				callback = function()
-					vim.treesitter.start()
-				end,
-			})
-			vim.bo.indentexpr = "v:lua.require'nvim-treesitter'.indentexpr()"
-		end,
 	},
 	{
 		"hrsh7th/nvim-cmp",
@@ -34,7 +16,7 @@ return {
 			"hrsh7th/cmp-path",
 			"hrsh7th/cmp-cmdline",
 			"hrsh7th/cmp-nvim-lua",
-            "hrsh7th/vim-vsnip",
+			"hrsh7th/vim-vsnip",
 		},
 	},
 	{
@@ -106,7 +88,30 @@ return {
 			"nvim-treesitter/nvim-treesitter",
 		},
 		event = "VeryLazy",
-		opts = {},
+		opts = {
+			views = {
+				cmdline_popup = {
+					border = {
+						style = "single",
+					},
+				},
+				popupmenu = {
+					border = {
+						style = "single",
+					},
+				},
+				notify = {
+					border = {
+						style = "single",
+					},
+				},
+				lsp_hover = {
+					border = {
+						style = "single",
+					},
+				},
+			},
+		},
 	},
 	{
 		"numToStr/Comment.nvim",

@@ -21,6 +21,7 @@ require("lazy").setup({
 
 vim.cmd("source ~/.config/vim/option.vim")
 
+require("treesitter")
 require("completion")
 require("keymap")
 require("lsp")

@@ -2,6 +2,7 @@
 vim.lsp.enable("arduino_language_server")
 vim.lsp.enable("basedpyright")
 vim.lsp.enable("bashls")
+vim.lsp.enable("buf_ls")
 vim.lsp.enable("biome")
 vim.lsp.enable("clangd")
 vim.lsp.enable("cmake")
@@ -14,6 +15,7 @@ vim.lsp.enable("just")
 vim.lsp.enable("lua_ls")
 vim.lsp.enable("marksman")
 vim.lsp.enable("pyright")
+vim.lsp.enable("protols")
 vim.lsp.enable("ruff")
 vim.lsp.enable("rust_analyzer")
 vim.lsp.enable("stylua")
@@ -28,4 +30,3 @@ vim.lsp.enable("yamlls")
 
 -- Custom
 vim.lsp.enable("systemd_lsp")
-
