@@ -5,6 +5,7 @@ experimental = true
 arduino-cli = "latest"
 delta = "latest"
 deno = "latest"
+just = "latest"
 node = "lts"
 pipx = { version = "latest", os = ["darwin", "linux"] }
 oh-my-posh = "latest"
