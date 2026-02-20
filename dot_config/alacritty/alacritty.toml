@@ -13,4 +13,3 @@ style = { shape = "Beam", blinking = "Off" }
 
 [env]
 TERM = "xterm-256color"
-
