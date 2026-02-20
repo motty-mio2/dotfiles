@@ -10,3 +10,35 @@ for file in $(find "${HOME}/.config/shell" -name "*.sh"); do
     source "${file}"
 done
 
+{{ if (lookPath "mise") }}
+{{      output "mise" "activate" .shell "--cd" .homeDir }}
+{{ end }}
+
+# Shell Framework
+{{  if and (lookPath "starship") (eq .framework "starship") }}
+if command -v starship > /dev/null 2>&1; then
+{{      output "starship" "init" .shell "--print-full-init"
+	| replace (lookPath "starship") "starship"
+}}
+starship_precmd_user_func="set-window-title"
+fi
+{{  else if and (lookPath "oh-my-posh") (eq .framework "oh-my-posh") }}
+if command -v oh-my-posh > /dev/null 2>&1; then
+{{      output "oh-my-posh" "init" "zsh" "--config" (joinPath .homeDir ".config/omp.toml") "--eval" "--print"
+	| replace (lookPath "oh-my-posh") "oh-my-posh"
+}}
+fi
+{{  else }}
+{{      if eq .shell "bash" }}
+PS1='\[\033[01;32m\]\u@\h\[\033[00m\]:\[\033[01;34m\]\w\[\033[00m\]\$ '
+{{      else if eq .shell "zsh" }}
+# POWERLEVEL
+source "$XDG_CONFIG_HOME/zsh/plugins/powerlevel10k/powerlevel10k.zsh-theme"
+POWERLEVEL9K_DISABLE_CONFIGURATION_WIZARD=true
+{{          include "dot_config/zsh/dot_p10k.zsh" }}
+{{      end }}
+{{ end }}
+
+{{ if lookPath "zoxide" }}
+{{      output "zoxide" "init" .shell }}
+{{ end }}

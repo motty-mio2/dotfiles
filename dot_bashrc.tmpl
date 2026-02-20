@@ -1,5 +1,7 @@
 #!/usr/bin/bash
 
+# "oh-my-posh" "init" "bash" "--config" {{ (joinPath .chezmoi.homeDir ".config/omp.toml") }} "--eval" "--print"
+
 if [ -z "$MY_BASH_PROFILE" ]; then
     source "$HOME/.bash_profile"
 fi
@@ -38,27 +40,4 @@ if ! shopt -oq posix; then
 fi
 
 # Include shell template
-{{ includeTemplate "shell_rc.tmpl" (dict "shell" "bash" ) }}
-if command -v starship > /dev/null 2>&1; then
-{{ if and (lookPath "starship") (eq .bash "starship") }}
-{{      output "starship" "init" "bash" "--print-full-init"
-	| replace (lookPath "starship") "starship"
-}}
-starship_precmd_user_func="set-window-title"
-fi
-bleopt prompt_ps1_transient=always
-bleopt prompt_ps1_final='$(starship module character)'
-{{ else if and (lookPath "oh-my-posh") (eq .bash "oh-my-posh") }}
-if command -v oh-my-posh > /dev/null 2>&1; then
-{{      output "oh-my-posh" "init" "bash" "--config" (joinPath .chezmoi.homeDir ".config/omp.toml") "--eval" "--print"
-	| replaceAllRegex "export POSH_SESSION_ID.+" ""
-	| replace (lookPath "oh-my-posh") "oh-my-posh"
-}}
-fi
-{{ else }}
-PS1='\[\033[01;32m\]\u@\h\[\033[00m\]:\[\033[01;34m\]\w\[\033[00m\]\$ '
-{{ end }}
-
-{{ if (lookPath "mise") }}
-{{      output "mise" "activate" "bash" "--cd" .chezmoi.homeDir }}
-{{ end }}
+{{ includeTemplate "shell_rc.tmpl" (dict "shell" "bash" "framework" .bash "homeDir" .chezmoi.homeDir) }}

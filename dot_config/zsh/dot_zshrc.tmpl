@@ -69,27 +69,4 @@ bindkey "^[[1~" beginning-of-line
 bindkey "^[[4~" end-of-line
 
 # Include shell template
-{{ includeTemplate "shell_rc.tmpl" (dict "shell" "zsh" ) }}
-{{ if and (lookPath "starship") (eq .zsh "starship") }}
-if command -v starship > /dev/null 2>&1; then
-{{      output "starship" "init" "zsh" "--print-full-init"
-	| replace (lookPath "starship") "starship"
-}}
-fi
-precmd_functions+=(set-window-title)
-{{ else if and (lookPath "oh-my-posh") (eq .zsh "oh-my-posh") }}
-if command -v oh-my-posh > /dev/null 2>&1; then
-{{      output "oh-my-posh" "init" "zsh" "--config" (joinPath .chezmoi.homeDir ".config/omp.toml") "--eval" "--print"
-	| replace (lookPath "oh-my-posh") "oh-my-posh"
-}}
-fi
-{{ else }}
-# POWERLEVEL
-source "$XDG_CONFIG_HOME/zsh/plugins/powerlevel10k/powerlevel10k.zsh-theme"
-POWERLEVEL9K_DISABLE_CONFIGURATION_WIZARD=true
-{{      include "dot_config/zsh/dot_p10k.zsh" }}
-{{ end }}
-
-{{ if lookPath "mise" }}
-{{      output "mise" "activate" "zsh" "--cd" .chezmoi.homeDir }}
-{{ end }}
+{{ includeTemplate "shell_rc.tmpl" (dict "shell" "zsh" "framework" .zsh "homeDir" .chezmoi.homeDir) }}

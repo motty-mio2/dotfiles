@@ -15,6 +15,7 @@ starship = "latest"
 tree-sitter = "latest"
 usage = "latest"
 uv = "latest"
+zoxide = "latest"
 # Aqua managed tools
 "aqua:arduino/arduino-language-server" = "latest"
 "aqua:artempyanykh/marksman" = "latest"

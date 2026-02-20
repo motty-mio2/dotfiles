@@ -45,6 +45,7 @@ unzip = { scoop = "unzip", apt = "unzip", aur = "unzip" }
 vim = { scoop = "vim", apt = "vim", aur = "vim" }
 wget = { scoop = "wget", apt = "wget", aur = "wget" }
 which = { scoop = "which" }
+zoxide = { aur = "zoxide", nix = "zoxide", scoop = "zoxide" }
 zsh = { apt = "zsh", aur = "zsh" }
 
 [dependencies.dev]
