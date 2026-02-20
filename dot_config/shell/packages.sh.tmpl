@@ -144,13 +144,13 @@ install-ubuntu-hyprland() {
     sudo apt-get install -qy \
         hyprland-qt-support0 hypridle hyprland \
         hyprlock hyprpolkitagent xdg-desktop-portal-hyprland \
-		pavucontrol
+		pavucontrol nemo
 }
 
 install-debian-tools() {
 	sudo apt-get update
 	sudo apt-get install -qy \
-		build-essential libssl-dev libreadline-dev \
+		build-essential libssl-dev libreadline-dev nemo \
         {{ range $name, $managers := .dependencies.cli -}}
         {{- get $managers "apt" | printf "%s " -}}
         {{- end }}
