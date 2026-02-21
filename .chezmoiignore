@@ -2,7 +2,7 @@
 doc
 LICENSE
 README.md
-Taskfile.yml
+justfile
 nix
 tools
 
