@@ -17,16 +17,12 @@ done
 # Shell Framework
 {{  if and (lookPath "starship") (eq .framework "starship") }}
 if command -v starship > /dev/null 2>&1; then
-{{      output "starship" "init" .shell "--print-full-init"
-	| replace (lookPath "starship") "starship"
-}}
+{{      output "starship" "init" .shell }}
 starship_precmd_user_func="set-window-title"
 fi
 {{  else if and (lookPath "oh-my-posh") (eq .framework "oh-my-posh") }}
 if command -v oh-my-posh > /dev/null 2>&1; then
-{{      output "oh-my-posh" "init" "zsh" "--config" (joinPath .homeDir ".config/omp.toml") "--eval" "--print"
-	| replace (lookPath "oh-my-posh") "oh-my-posh"
-}}
+{{      output "oh-my-posh" "init" .shell "--config" (joinPath .homeDir ".config/omp.toml") }}
 fi
 {{  else }}
 {{      if eq .shell "bash" }}
