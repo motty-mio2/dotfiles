@@ -11,13 +11,17 @@ for file in $(find "${HOME}/.config/shell" -name "*.sh"); do
 done
 
 {{ if (lookPath "mise") }}
-{{      output "mise" "activate" .shell "--cd" .homeDir }}
+if command -v mise > /dev/null 2>&1; then
+eval "$(mise activate {{ .shell }} --cd {{ .homeDir }})"
+fi
 {{ end }}
 
 # Shell Framework
 {{  if and (lookPath "starship") (eq .framework "starship") }}
 if command -v starship > /dev/null 2>&1; then
-{{      output "starship" "init" .shell }}
+{{      output "starship" "init" .shell 
+        | replace (lookPath "starship") "starship"
+}}
 starship_precmd_user_func="set-window-title"
 fi
 {{  else if and (lookPath "oh-my-posh") (eq .framework "oh-my-posh") }}
