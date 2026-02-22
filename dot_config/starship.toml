@@ -1,5 +1,6 @@
 "$schema" = "https://starship.rs/config-schema.json"
 format = """
+$container\
 [ ](fg:separator bg:base_background)\
 [$username@$hostname](bg:base_background)\
 [  ](fg:separator bg:base_background)\
@@ -8,7 +9,7 @@ $git_branch($git_status)\
 $python\
 $cmd_duration\
 [](fg:base_background)
- $os \
+  $os \
 $character\
 """
 right_format = """
@@ -90,6 +91,11 @@ style_user = "bg:base_background"
 style_root = "bg:base_background"
 format = "[$user]($style)"
 show_always = true
+
+[container]
+symbol = ""
+style = "bg:base_background"
+format = '[ $symbol ]($style)'
 
 [time]
 disabled = false

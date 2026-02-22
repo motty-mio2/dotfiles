@@ -16,6 +16,17 @@ type = "prompt"
 alignment = "left"
 
 [[blocks.segments]]
+type = "text"
+template = "  <p:separator></>"
+foreground = "p:text"
+background = "p:powerline"
+when = "test -f /.dockerenv"
+
+[blocks.segments.properties]
+cache_duration = "none"
+
+
+[[blocks.segments]]
 template = " {{ .HostName }} "
 foreground = "p:text"
 background = "p:powerline"
@@ -56,8 +67,7 @@ background = "p:powerline"
 type = "python"
 style = "plain"
 
-[blocks.segments.properties]
-cache_duration = "none"
+
 
 [[blocks.segments]]
 template = "<p:separator></> {{ .FormattedMs }} "
