@@ -8,7 +8,6 @@ deno = "latest"
 just = "latest"
 node = "lts"
 pipx = { version = "latest", os = ["darwin", "linux"] }
-oh-my-posh = "latest"
 pnpm = "latest"
 shellcheck = "latest"
 shfmt = "latest"

@@ -1,7 +1,5 @@
 #!/usr/bin/bash
 
-# "oh-my-posh" "init" "bash" "--config" {{ (joinPath .chezmoi.homeDir ".config/omp.toml") }} "--eval" "--print"
-
 if [ -z "$MY_BASH_PROFILE" ]; then
     source "$HOME/.bash_profile"
 fi
@@ -40,4 +38,4 @@ if ! shopt -oq posix; then
 fi
 
 # Include shell template
-{{ includeTemplate "shell_rc.tmpl" (dict "shell" "bash" "framework" .bash "homeDir" .chezmoi.homeDir) }}
+{{ includeTemplate "shell_rc.tmpl" (dict "shell" "bash" "homeDir" .chezmoi.homeDir) }}

@@ -21,7 +21,7 @@ Register-ArgumentCompleter -Native -CommandName winget -ScriptBlock {
 
 $host.ui.RawUI.WindowTitle = "$env:USERNAME@$env:COMPUTERNAME"
 
-{{ if and (lookPath "starship") (eq .powershell "starship") }}
+{{ if and (lookPath "starship") }}
 function Invoke-Starship-TransientFunction {
     &starship module character
 }
@@ -29,10 +29,4 @@ function Invoke-Starship-TransientFunction {
     | replace (lookPath "starship") "starship"
 }}
 Enable-TransientPrompt
-{{ else if and (lookPath "oh-my-posh") (eq .powershell "oh-my-posh")}}
-# oh-my-posh
-{{  output "oh-my-posh" "init" "pwsh" "--config" "~/.config/omp.toml" "--eval" "--print"
-    | replaceAllRegex ".*POSH_SESSION_ID.+" ""
-    | replace (lookPath "oh-my-posh" | replaceAllRegex "\\\\" "/") "oh-my-posh"
-}}
 {{ end }}

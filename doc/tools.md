@@ -16,7 +16,6 @@
 | :--------: | :-----: | :----------: | :--------: |
 |    Git     |  Scoop  |  OS default  |            |
 |   Neovim   |  Scoop  | AUR/nix/brew |            |
-| oh-my-posh |  Scoop  | AUR/nix/brew |            |
 |  starship  |  Scoop  | AUR/nix/brew |            |
 
 ## Language Tools

@@ -37,7 +37,6 @@ lazygit = { scoop = "lazygit", aur = "lazygit", brew = "lazygit", nix = "lazygit
 less = { scoop = "less", apt = "less" }
 nano = { scoop = "nano", apt = "nano", aur = "nano" }
 neovim = { scoop = "neovim", aur = "neovim", brew = "neovim", nix = "neovim" }
-oh-my-posh = { scoop = "oh-my-posh", aur = "oh-my-posh-bin", brew = "oh-my-posh", nix = "oh-my-posh" }
 ripgrep = { scoop = "ripgrep", apt = "ripgrep" }
 starship = { scoop = "starship", aur = "starship", brew = "starship", nix = "starship" }
 tombi = { aur = "tombi", nix = "tombi" }

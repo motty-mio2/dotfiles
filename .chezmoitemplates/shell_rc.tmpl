@@ -17,16 +17,12 @@ fi
 {{ end }}
 
 # Shell Framework
-{{  if and (lookPath "starship") (eq .framework "starship") }}
+{{  if and (lookPath "starship") }}
 if command -v starship > /dev/null 2>&1; then
-{{      output "starship" "init" .shell 
+{{      output "starship" "init" .shell
         | replace (lookPath "starship") "starship"
 }}
 starship_precmd_user_func="set-window-title"
-fi
-{{  else if and (lookPath "oh-my-posh") (eq .framework "oh-my-posh") }}
-if command -v oh-my-posh > /dev/null 2>&1; then
-{{      output "oh-my-posh" "init" .shell "--config" (joinPath .homeDir ".config/omp.toml") }}
 fi
 {{  else }}
 {{      if eq .shell "bash" }}
