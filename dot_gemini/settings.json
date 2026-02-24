@@ -29,7 +29,8 @@
     "preferredEditor": "vscode",
     "previewFeatures": true,
     "enablePromptCompletion": true,
-    "enableAutoUpdate": false
+    "enableAutoUpdate": false,
+    "vimMode": true
   },
   "security": {
     "auth": {
@@ -37,7 +38,11 @@
     }
   },
   "ui": {
-    "theme": "Dracula"
+    "theme": "Dracula",
+    "hideTips": true,
+    "footer": {
+      "hideContextPercentage": false
+    }
   },
   "output": {
     "format": "text"
