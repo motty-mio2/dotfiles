@@ -39,12 +39,13 @@ zoxide = "latest"
 "aqua:volta-cli/volta" = "latest"
 "aqua:ynqa/jnv" = "latest"
 # Github based tools
+"github:708u/twig" = "latest"
+"github:aristocratos/btop" = { version = "latest", os = ["linux"] }
 "github:coder3101/protols" = "latest"
 "github:cordx56/rustowl" = "latest"
 "github:docker/docker-language-server" = "latest"
-"github:terror/just-lsp" = "latest"
-"github:aristocratos/btop" = { version = "latest", os = ["linux"] }
 "github:jFryy/systemd-lsp" = "latest"
+"github:terror/just-lsp" = "latest"
 # Node.js based tools
 "npm:@biomejs/biome" = "latest"
 "npm:@bitwarden/cli" = "latest"
