@@ -5,18 +5,4 @@ eval "$($HOME/.local/bin/chezmoi execute-template <~/.local/share/chezmoi/dot_pr
 
 mkdir -p "$XDG_STATE_HOME"
 touch "$XDG_STATE_HOME"/python_history
-
-if type "pacman" >/dev/null 2>&1; then
-	sudo pacman -S base-devel
-elif type "apt" >/dev/null 2>&1; then
-	echo "Debian Mode"
-	sudo apt install build-essential git python3-pip python3-venv
-elif type "dnf" >/dev/null 2>&1; then
-	echo "RHEL Mode"
-	sudo dnf -q -y groupinstall "Development Tools"
-elif type "zypper" >/dev/null 2>&1; then
-	zypper install -t pattern devel_basis
-else
-	echo "Unknown OS or Distribution"
-fi
 {{ end -}}
