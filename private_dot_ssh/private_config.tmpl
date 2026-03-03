@@ -3,8 +3,6 @@ Include {{ joinPath .chezmoi.homeDir "/.ssh/config.d/*.conf" }}
 
 Match User *,!git
     ForwardAgent yes
-    ForwardX11 yes
-    ForwardX11Trusted yes
     TCPKeepAlive yes
 
 Match User git
