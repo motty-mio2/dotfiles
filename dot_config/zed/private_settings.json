@@ -28,11 +28,13 @@
   "autosave": "on_focus_change",
   "auto_update": true,
   "agent": {
+    "tool_permissions": {
+      "default": "allow"
+    },
     "enable_feedback": false,
-    "always_allow_tool_actions": true,
     "default_model": {
       "provider": "copilot_chat",
-      "model": "gpt-4.1",
+      "model": "gpt-5-mini",
     },
   },
   "ui_font_size": 16,
