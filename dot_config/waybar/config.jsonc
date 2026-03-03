@@ -8,10 +8,16 @@
 	// Choose the order of the modules
 	"modules-left": [
 		"hyprland/workspaces",
+		"custom/kb_mode",
 		// "hyprland/mode",
 		"hyprland/scratchpad",
 		"custom/media"
 	],
+	"custom/kb_mode": {
+		"format": "  {}",
+		"exec": "~/.config/waybar/scripts/kb_mode.sh",
+		"tooltip": false
+	},
 	"modules-center": [
 		"clock",
 		// "custom/update",
@@ -73,10 +79,7 @@
 	"sway/scratchpad": {
 		"format": "{icon} {count}",
 		"show-empty": false,
-		"format-icons": [
-			"",
-			""
-		],
+		"format-icons": ["", ""],
 		"tooltip": true,
 		"tooltip-format": "{app}: {title}"
 	},
@@ -140,26 +143,12 @@
 		"critical-threshold": 80,
 		// "format-critical": "{temperatureC}°C {icon}",
 		"format": "{temperatureC}°C {icon}",
-		"format-icons": [
-			"",
-			"",
-			""
-		]
+		"format-icons": ["", "", ""]
 	},
 	"backlight": {
 		// "device": "acpi_video1",
 		"format": "{percent}% {icon}",
-		"format-icons": [
-			"",
-			"",
-			"",
-			"",
-			"",
-			"",
-			"",
-			"",
-			""
-		]
+		"format-icons": ["", "", "", "", "", "", "", "", ""]
 	},
 	"battery": {
 		"states": {
@@ -174,13 +163,7 @@
 		"format-alt": "{time} {icon}",
 		// "format-good": "", // An empty format will hide the module
 		// "format-full": "",
-		"format-icons": [
-			"",
-			"",
-			"",
-			"",
-			""
-		]
+		"format-icons": ["", "", "", "", ""]
 	},
 	"power-profiles-daemon": {
 		"format": "{icon}",
@@ -217,11 +200,7 @@
 			"phone": "",
 			"portable": "",
 			"car": "",
-			"default": [
-				"",
-				"",
-				""
-			]
+			"default": ["", "", ""]
 		},
 		"on-click": "pavucontrol"
 	},

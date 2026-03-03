@@ -1,0 +1,36 @@
+;; 0. グローバル設定
+(defcfg
+    process-unmapped-keys yes   ;; defsrc で定義しないキーも通す
+)
+
+;; 1. 使用キーの定義
+;; (defsrc
+;;     esc     1       2       3       4       5       6       7       8       9       0       -       =
+;;     tab     q       w       e       r       t       y       u       i       o       p       ⎡       ⎣
+;;     caps    a       s       d       f       g       h       j       k       l       ;       apo     \     ret
+;;     lsft    z       x       c       v       b       n       m       ,       .       /       ro      rsft
+;;     lctl    lmet    lalt    ncnv   spc cnv  kana ralt menu rctl   
+;; )
+
+(defsrc
+  grave
+  h         j    k    l
+  ncnv
+)
+
+(deflayer default
++
+_          _    _    _
+   @vim
+)
+
+(deflayer arrows
+_
+left down up  rght
+  _ 
+)
+
+(defalias
+ ;; cap (tap-hold-press 200 200 caps lctl)
+  vim (tap-hold-press 200 200 ncnv (layer-toggle arrows))
+)

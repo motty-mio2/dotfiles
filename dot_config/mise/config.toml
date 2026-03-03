@@ -45,6 +45,7 @@ zoxide = "latest"
 "github:cordx56/rustowl" = "latest"
 "github:docker/docker-language-server" = "latest"
 "github:jFryy/systemd-lsp" = "latest"
+"github:jtroo/kanata" = "latest"
 "github:terror/just-lsp" = "latest"
 # Node.js based tools
 "npm:@biomejs/biome" = "latest"

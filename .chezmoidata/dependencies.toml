@@ -33,6 +33,7 @@ glab = { scoop = "glab", aur = "glab", brew = "glab", nix = "glab" }
 grep = { scoop = "grep", apt = "grep" }
 htop = { apt = "htop", aur = "htop" }
 jq = { scoop = "jq", apt = "jq", aur = "jq", nix = "jq" }
+kanata = { nix = "kanata" }
 lazygit = { scoop = "lazygit", aur = "lazygit", brew = "lazygit", nix = "lazygit" }
 less = { scoop = "less", apt = "less" }
 nano = { scoop = "nano", apt = "nano", aur = "nano" }
