@@ -3,7 +3,7 @@ local null_ls = require("null-ls")
 null_ls.setup({
 	sources = {
 		null_ls.builtins.diagnostics.actionlint,
-		null_ls.builtins.diagnostics.ansible_lint,
+		null_ls.builtins.diagnostics.ansiblelint,
 		null_ls.builtins.diagnostics.hadolint,
 		null_ls.builtins.diagnostics.markdownlint,
 		null_ls.builtins.diagnostics.mypy,
@@ -30,7 +30,5 @@ null_ls.setup({
 		null_ls.builtins.diagnostics.ruff,
 		null_ls.builtins.diagnostics.yamllint,
 		null_ls.builtins.formatting.jq,
-		null_ls.builtins.formatting.ruff,
-		null_ls.builtins.formatting.ruff_format,
 	},
 })
