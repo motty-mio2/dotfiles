@@ -12,6 +12,16 @@ executable = true
 refreshPeriod = "168h"
 url = "https://github.com/motty-mio2/incheck/releases/download/v{{ $incheck_version }}/incheck_{{ $incheck_version }}_{{ .chezmoi.os }}_{{ .chezmoi.arch }}.tar.gz"
 
+# kanata
+{{- if (eq .chezmoi.os "linux") }}
+["kanata"]
+path = "kanata_linux_x64"
+type = "archive-file"
+executable = true
+refreshPeriod = "168h"
+url = "https://github.com/jtroo/kanata/releases/latest/download/linux-binaries-x64.zip"
+{{- end }}
+
 # WSL2 SSH Agent
 {{ if and (eq .chezmoi.os "linux") (.chezmoi.kernel.osrelease | lower | contains "microsoft") -}}
 {{   if eq .chezmoi.arch "amd64" -}}
