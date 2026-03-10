@@ -6,8 +6,10 @@ fi
 
 setopt nonomatch
 
+source "$XDG_CONFIG_HOME/zsh/plugins/zsh-abbr/zsh-abbr.zsh"
 source "$XDG_CONFIG_HOME/zsh/plugins/zsh-completions/zsh-completions.plugin.zsh"
 source "$XDG_CONFIG_HOME/zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.plugin.zsh"
+source "$XDG_CONFIG_HOME/zsh/plugins/zsh-autosuggestions-abbreviations-strategy/zsh-autosuggestions-abbreviations-strategy.zsh"
 source "$XDG_CONFIG_HOME/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.plugin.zsh"
 
 fpath=("$XDG_CONFIG_HOME/zsh/completion" $fpath)
@@ -67,6 +69,15 @@ bindkey "^[[F" end-of-line
 bindkey '^r' select-history
 bindkey "^[[1~" beginning-of-line
 bindkey "^[[4~" end-of-line
+
+# Abbr Syntax Highlighting
+ZSH_AUTOSUGGEST_STRATEGY+=( abbreviations )
+
+(( ${#ABBR_REGULAR_USER_ABBREVIATIONS} )) && {
+  ZSH_HIGHLIGHT_HIGHLIGHTERS+=(regexp)
+  ZSH_HIGHLIGHT_REGEXP+=('^[[:blank:][:space:]]*('${(j:|:)${(Qk)ABBR_REGULAR_USER_ABBREVIATIONS}}')$' fg=blue)
+  ZSH_HIGHLIGHT_REGEXP+=('\<('${(j:|:)${(Qk)ABBR_GLOBAL_USER_ABBREVIATIONS}}')$' fg=green)
+}
 
 # Include shell template
 {{ includeTemplate "shell_rc.tmpl" (dict "shell" "zsh" "homeDir" .chezmoi.homeDir) }}
