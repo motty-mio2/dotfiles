@@ -1,6 +1,16 @@
 #!/usr/bin/env bash
 
-alias alert='notify-send --urgency=low -i "$([ $? = 0 ] && echo terminal || echo error)" "$(history|tail -n1|sed -e '\''s/^\s*[0-9]\+\s*//;s/[;&|]\s*alert$//'\'')"'
+if ! command -v abbr >/dev/null 2>&1; then
+	alias rmrf='rm -rf'
+	alias rsmv='\rsync -avhPR --remove-source-files'
+
+	# Others
+	alias doc='docker compose'
+
+	# Verilog
+	alias iv="iverilog"
+	alias ivx="iverilog -g2012"
+fi
 
 alias ls="ls --color=auto"
 alias ll='ls -lahF'
@@ -16,14 +26,6 @@ alias rmrf='rm -rf'
 alias rsmv='\rsync -avhPR --remove-source-files'
 alias watch="watch "
 alias wget='\wget --hsts-file=$XDG_DATA_HOME/wget-hsts'
-
-# Others
-alias doc='docker compose'
-alias pchezmoi='chezmoi -S $HOME/Projects/dotfiles'
-
-# Verilog
-alias iv="iverilog"
-alias ivx="iverilog -g2012"
 
 # Vim
 alias vim='VIMINIT=":source $XDG_CONFIG_HOME/vim/vimrc" vim'
