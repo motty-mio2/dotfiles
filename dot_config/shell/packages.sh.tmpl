@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-if ! command -v deno >/dev/null 2>&1; then
+if [[ -n $ZENO_LOADED ]]; then
 	alias aupdate='sudo apt update && sudo apt upgrade -y && sudo apt autoremove -y'
 	alias bupdate='brew update && brew upgrade'
 	alias dupdate='sudo dnf update -y'

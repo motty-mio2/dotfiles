@@ -3,6 +3,38 @@ snippets:
     keyword: aupdate
     snippet: sudo apt update && sudo apt upgrade -y && sudo apt autoremove -y
 
+  - name: brew update
+    keyword: bupdate
+    snippet: brew update && brew upgrade && brew cleanup
+
+  - name: dnf update
+    keyword: dupdate
+    snippet: sudo dnf update -y
+
+  - name: flatpak update
+    keyword: fupdate
+    snippet: sudo flatpak update && sudo flatpak remove --unused
+
+  - name: mise update
+    keyword: mupdate
+    snippet: mise self-update --quiet; mise upgrade --bump; mise cache prune
+
+  - name: pacman update
+    keyword: pupdate
+    snippet: sudo pacman -Syu
+
+  - name: snap update
+    keyword: supdate
+    snippet: sudo snap refresh
+
+  - name: yay update
+    keyword: yupdate
+    snippet: yay -Syu
+
+  - name: zypper update
+    keyword: zupdate
+    snippet: sudo zypper ref && sudo zypper update -y
+
   # snippet and keyword abbrev
   - name: git status
     keyword: gs

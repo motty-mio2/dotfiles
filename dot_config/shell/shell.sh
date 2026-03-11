@@ -1,6 +1,5 @@
 #!/usr/bin/env bash
-
-if ! command -v abbr >/dev/null 2>&1; then
+if [[ -n $ZENO_LOADED ]]; then
 	alias rmrf='rm -rf'
 	alias rsmv='\rsync -avhPR --remove-source-files'
 
