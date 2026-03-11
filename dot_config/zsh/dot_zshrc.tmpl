@@ -61,10 +61,10 @@ function select-history() {
 zle -N select-history
 
 bindkey -e
+bindkey '^r' select-history
 bindkey "^[[3~" delete-char
 bindkey "^[[H" beginning-of-line
 bindkey "^[[F" end-of-line
-bindkey '^r' select-history
 bindkey "^[[1~" beginning-of-line
 bindkey "^[[4~" end-of-line
 
