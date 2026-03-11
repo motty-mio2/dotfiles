@@ -1,4 +1,0 @@
-experimental-features = nix-command flakes
-{{ if (lookPath "gh") }}
-extra-access-tokens = github.com={{- output "gh" "auth" "token" }}
-{{ end }}
