@@ -1,7 +1,7 @@
 * {
     border: none;
     border-radius: 0;
-    font-family: "JetBrainsMono Nerd Font", "Font Awesome 6 Free", FontAwesome, Roboto, sans-serif;
+    font-family: "HackGen35 Console NF";
     font-size: 14px;
     font-weight: 600;
     min-height: 0;
@@ -12,20 +12,21 @@ window#waybar {
 }
 
 tooltip {
-    background: rgba(30, 30, 46, 0.95);
-    border: 2px solid #89b4fa;
+    background: #1e1e2e;
+    border: 1px solid #89b4fa;
     border-radius: 8px;
 }
 
 tooltip label {
     color: #cdd6f4;
+    padding: 10px;
 }
 
 /* ピル形状のモジュールベーススタイル */
 #workspaces,
 #clock,
 #battery,
-#cpu,
+#custom-cpu,
 #memory,
 #temperature,
 #backlight,
@@ -55,7 +56,6 @@ tooltip label {
 
 #workspaces button {
     padding: 0 6px;
-    font-size: 16px;
     color: rgba(166, 173, 200, 0.45); /* 空のドットはある程度見えた方が安心 */
     background-color: transparent;
     transition: all 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275);
@@ -106,7 +106,7 @@ tooltip label {
     }
 }
 
-#cpu {
+#custom-cpu {
     color: #f9e2af; /* Yellow */
 }
 

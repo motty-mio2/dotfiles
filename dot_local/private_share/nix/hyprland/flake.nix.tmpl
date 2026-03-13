@@ -17,8 +17,10 @@
         packages.hyprland = pkgs.buildEnv {
           name = "hyprland";
           paths = with pkgs; [
-            brightnessctl cliphist grim hyprshot slurp
-            waybar wf-recorder wl-clipboard wofi
+            {{range $name, $managers := .dependencies.hyprland -}}
+            {{ get $managers "nix" | printf "%s " -}}
+            {{- end }}
+            hyprshot
           ];
         };
       }
