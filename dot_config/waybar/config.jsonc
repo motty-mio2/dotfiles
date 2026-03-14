@@ -1,10 +1,13 @@
 // -*- mode: jsonc -*-
 {
-	// "layer": "top", // Waybar at top layer
-	// "position": "bottom", // Waybar position (top|bottom|left|right)
-	"height": 30, // Waybar height (to be removed for auto height)
-	// "width": 1280, // Waybar width
-	"spacing": 4, // Gaps between modules (4px)
+	"layer": "top",
+	"position": "top",
+	"margin-top": 6,
+	"margin-left": 6,
+	"margin-right": 6,
+	"margin-bottom": 0,
+	"height": 36,
+	"spacing": 3,
 	// Choose the order of the modules
 	"modules-left": [
 		"hyprland/workspaces",
@@ -29,7 +32,7 @@
 		"pulseaudio",
 		"network",
 		"power-profiles-daemon",
-		"cpu",
+		"custom/cpu",
 		"memory",
 		"temperature",
 		"backlight",
@@ -40,32 +43,25 @@
 		"custom/power"
 	],
 	"hyprland/workspaces": {
+		"all-outputs": false,
 		"on-click": "activate",
 		"format": "{icon}",
 		"format-icons": {
-			"default": "",
-			"1": "1",
-			"2": "2",
-			"3": "3",
-			"4": "4",
-			"5": "5",
-			"6": "6",
-			"7": "7",
-			"8": "8",
-			"9": "9",
-			"10": "0",
-			"active": "󱓻"
+			"active": "●",
+			"default": "○",
+			"urgent": ""
 		},
 		"persistent-workspaces": {
 			"1": [],
 			"2": [],
 			"3": [],
 			"4": [],
-			"5": []
+			"5": [],
+			"6": []
 		}
 	},
 	"keyboard-state": {
-		"numlock": true,
+		"numlock": false,
 		"capslock": true,
 		"format": "{name} {icon}",
 		"format-icons": {
@@ -130,9 +126,12 @@
 		"tooltip-format": "<big>{:%Y %B}</big>\n<tt><small>{calendar}</small></tt>",
 		"format": "{:%Y-%m-%d %H:%M}"
 	},
-	"cpu": {
-		"format": "{usage}% ",
-		"tooltip": false
+	"custom/cpu": {
+		"format": "{}",
+		"return-type": "json",
+		"interval": 2,
+		"exec": "~/.config/waybar/scripts/cpu_info.py",
+		"tooltip": true
 	},
 	"memory": {
 		"format": "{}% "

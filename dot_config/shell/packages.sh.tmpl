@@ -145,8 +145,9 @@ install-ubuntu-hyprland() {
     sudo add-apt-repository ppa:cppiber/hyprland
     sudo apt-get update
     sudo apt-get install -qy \
-        hyprland-qt-support0 hypridle hyprland \
-        hyprlock hyprpolkitagent xdg-desktop-portal-hyprland \
+		{{ range $name, $managers := .dependencies.hyprland -}}
+        {{- get $managers "apt" | printf "%s " -}}
+        {{- end }}
 		pavucontrol nemo
 }
 

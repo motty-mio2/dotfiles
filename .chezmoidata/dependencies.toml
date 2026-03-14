@@ -80,3 +80,24 @@ Vivaldi = { flatpak = "com.vivaldi.Vivaldi", winget = "XP99GVQDX7JPR4" }
 Vcxsrv = { winget = "marha.VcXsrv" }
 Wezterm = { scoop = "wezterm", brew = "wezterm" }
 Zoom = { winget = "XP99J3KP4XZ4VV" }
+
+[dependencies.hyprland]
+# Hyprland
+hypridle = { apt = "hypridle" }
+hyprland-qt-support0 = { apt = "hyprland-qt-support0" }
+hyprland = { apt = "hyprland" }
+hyprlock = { apt = "hyprlock" }
+hyprpaper = { apt = "hyprpaper" }
+hyprpolkitagent = { apt = "hyprpolkitagent" }
+hyprutils1 = { apt = "hyprutils1" }
+xdg-desktop-portal-hyprland = { apt = "xdg-desktop-portal-hyprland" }
+
+# Tools
+brightnessctl = { nix = "brightnessctl", apt = "brightnessctl", aur = "brightnessctl" }
+cliphist = { nix = "cliphist", apt = "cliphist", aur = "cliphist" }
+grim = { nix = "grim", apt = "grim", aur = "grim" }
+slurp = { nix = "slurp", apt = "slurp", aur = "slurp" }
+waybar = { nix = "waybar", apt = "waybar", aur = "waybar" }
+wf-recorder = { nix = "wf-recorder", apt = "wf-recorder", aur = "wf-recorder" }
+wl-clipboard = { nix = "wl-clipboard", apt = "wl-clipboard", aur = "wl-clipboard" }
+wofi = { nix = "wofi", apt = "wofi", aur = "wofi" }
