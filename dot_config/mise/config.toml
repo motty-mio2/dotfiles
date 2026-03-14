@@ -7,7 +7,7 @@ delta = "latest"
 deno = "latest"
 just = "latest"
 node = "lts"
-pipx = { version = "latest", os = ["darwin", "linux"] }
+# pipx = { version = "latest", os = ["darwin", "linux"] }
 pnpm = "latest"
 shellcheck = "latest"
 shfmt = "latest"
@@ -40,7 +40,6 @@ zoxide = "latest"
 "aqua:ynqa/jnv" = "latest"
 # Github based tools
 "github:708u/twig" = "latest"
-"github:aristocratos/btop" = { version = "latest", os = ["linux"] }
 "github:coder3101/protols" = "latest"
 "github:cordx56/rustowl" = "latest"
 "github:docker/docker-language-server" = "latest"
