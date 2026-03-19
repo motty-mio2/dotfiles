@@ -19,6 +19,7 @@ zoxide = "latest"
 # Aqua managed tools
 "aqua:arduino/arduino-language-server" = "latest"
 "aqua:artempyanykh/marksman" = "latest"
+"aqua:bahdotsh/wrkflw" = "latest"
 "aqua:BurntSushi/ripgrep" = "latest"
 "aqua:cli/cli" = "latest"
 "aqua:cloudflare/cloudflared" = "latest"
