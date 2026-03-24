@@ -1,0 +1,11 @@
+{{ include ".chezmoitemplates/config.kdl"}}
+
+
+// Choose the path to the default shell that zellij will use for opening new panes
+// Default: $SHELL
+//
+{{- if lookPath "zsh" }}
+default_shell "zsh"
+{{- else  }}
+default_shell "bash"
+{{- end }}

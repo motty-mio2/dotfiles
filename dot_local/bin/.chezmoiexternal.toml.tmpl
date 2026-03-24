@@ -42,13 +42,20 @@ url = "https://github.com/mame/wsl2-ssh-agent/releases/latest/download/wsl2-ssh-
 # Zellij
 {{ if eq .chezmoi.os "linux" }}
 ["zellij"]
+path = "zellij"
+{{ else if eq .chezmoi.os "windows" }}
+["zellij.exe"]
+path = "zellij.exe"
+{{ end }}
 type = "archive-file"
 executable = true
 refreshPeriod = "168h"
-path = "zellij"
+{{ if eq .chezmoi.os "linux" }}
 {{   if eq .chezmoi.arch "amd64" }}
 url = "https://github.com/zellij-org/zellij/releases/latest/download/zellij-x86_64-unknown-linux-musl.tar.gz"
-{{   else  }} # if eq .chezmoi.arch "arm"
+{{   else if eq .chezmoi.arch "arm" }}
 url = "https://github.com/zellij-org/zellij/releases/latest/download/zellij-aarch64-unknown-linux-musl.tar.gz"
 {{   end }}
+{{ else if eq .chezmoi.os "windows" }}
+url = "https://github.com/zellij-org/zellij/releases/latest/download/zellij-x86_64-pc-windows-msvc.zip"
 {{ end }}

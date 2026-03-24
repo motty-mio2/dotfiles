@@ -1,0 +1,13 @@
+{{ include ".chezmoitemplates/config.kdl"}}
+
+
+// Choose the path to the default shell that zellij will use for opening new panes
+// Default: $SHELL
+//
+{{- if lookPath "pwsh.exe" }}
+default_shell "pwsh.exe"
+{{- else if lookPath "powershell.exe" }}
+default_shell "powershell.exe"
+{{- else }}
+default_shell "cmd.exe"
+{{- end }}
