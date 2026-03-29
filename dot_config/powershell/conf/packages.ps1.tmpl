@@ -1,5 +1,5 @@
 {{ if (lookPath "mise")}}
-{{  output "mise" "activate" "pwsh" }}
+mise activate pwsh --cd $Env:USERPROFILE | Out-String | Invoke-Expression
 {{ end }}
 
 function mupdate {
