@@ -47,6 +47,7 @@ zoxide = "latest"
 "github:jFryy/systemd-lsp" = "latest"
 "github:jtroo/kanata" = "latest"
 "github:terror/just-lsp" = "latest"
+"github:trasta298/keifu" = "latest"
 # Node.js based tools
 "npm:@biomejs/biome" = "latest"
 "npm:@bitwarden/cli" = "latest"
