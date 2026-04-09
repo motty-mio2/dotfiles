@@ -1,5 +1,9 @@
 [environment]
 path = [
+  "GOPATH/bin",
+  "CARGO_HOME/bin",
+  "BREW_PREFIX/bin",
+  "XDG_STATE_HOME/nix/profiles/profile/bin",
   "HOME/.local/bin",
 ]
 

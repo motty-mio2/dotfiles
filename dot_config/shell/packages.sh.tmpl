@@ -25,31 +25,6 @@ is-arch() {
     [[ -f /etc/os-release ]] && grep -qi '^ID=arch' /etc/os-release
 }
 
-# fonts
-install-hackgen() {
-	local aur_helper="${1:-yay}"
-
-	if is-arch; then
-		$aur_helper -Sy --noconfirm --needed ttf-hackgen
-	else
-		WORKDIR=$(mktemp -d)
-
-		FONT_DIR="$XDG_DATA_HOME/fonts"
-
-		mkdir -p "$FONT_DIR"
-
-		for i in $(curl -s https://api.github.com/repos/yuru7/HackGen/releases/latest | grep browser_download_url | cut -d : -f 2,3 | tr -d \"); do
-			url=$(echo "$i" | tr -d ' ')
-			echo "$url"
-			curl -sL -o "$WORKDIR/tmp.zip" "$url"
-
-			unzip -oq "$WORKDIR/tmp.zip" -d "$FONT_DIR"
-		done
-
-		rm -rf "$WORKDIR"
-	fi
-}
-
 install-docker() {
 	if is-arch; then
 		sudo pacman -Sy --noconfirm --needed docker docker-compose
@@ -216,16 +191,20 @@ install-ubuntu-dev-tools() {
 	sudo apt-get install wezterm
 }
 
+
 install-brew() {
 	if [ -e "$BREW_PREFIX/bin/brew" ]; then
 		echo "brew is already installed."
 	else
+{{ if (eq .chezmoi.os "linux") }}
 		git clone https://github.com/Homebrew/brew "$BREW_PREFIX"
 		eval "$(BREW_PREFIX/bin/brew shellenv)"
 		brew update --force --quiet
 	fi
-
-	"$BREW_PREFIX/bin/brew" tap wez/wezterm-linuxbrew
+{{ else }}
+		/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+{{ end }}
+	# "$BREW_PREFIX/bin/brew" tap wez/wezterm-linuxbrew
 }
 
 install-brew-tools() {
