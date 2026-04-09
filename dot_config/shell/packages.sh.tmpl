@@ -196,7 +196,7 @@ install-brew() {
 	if [ -e "$BREW_PREFIX/bin/brew" ]; then
 		echo "brew is already installed."
 	else
-{{ if .chezmoi.os "linux" }}
+{{ if (eq .chezmoi.os "linux") }}
 		git clone https://github.com/Homebrew/brew "$BREW_PREFIX"
 		eval "$(BREW_PREFIX/bin/brew shellenv)"
 		brew update --force --quiet
