@@ -17,6 +17,7 @@
     pkgs.obsidian
     pkgs.raycast
     pkgs.slack
+    pkgs.tree
   ];
 
   homebrew = {
