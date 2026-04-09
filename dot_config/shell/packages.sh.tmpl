@@ -191,16 +191,20 @@ install-ubuntu-dev-tools() {
 	sudo apt-get install wezterm
 }
 
+
 install-brew() {
 	if [ -e "$BREW_PREFIX/bin/brew" ]; then
 		echo "brew is already installed."
 	else
+{{ if .chezmoi.os "linux" }}
 		git clone https://github.com/Homebrew/brew "$BREW_PREFIX"
 		eval "$(BREW_PREFIX/bin/brew shellenv)"
 		brew update --force --quiet
 	fi
-
-	"$BREW_PREFIX/bin/brew" tap wez/wezterm-linuxbrew
+{{ else }}
+		/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+{{ end }}
+	# "$BREW_PREFIX/bin/brew" tap wez/wezterm-linuxbrew
 }
 
 install-brew-tools() {

@@ -34,19 +34,5 @@ for item in "${array[@]}"; do
     fi
 done
 
-#PATH
-array=(
-    "$GOPATH/bin"
-    "$CARGO_HOME/bin"
-    "$BREW_PREFIX/bin"
-    "$XDG_STATE_HOME/nix/profiles/profile/bin"
-)
-
-for item in "${array[@]}"; do
-    export PATH="$item:$PATH"
-done
-unset array
-
 # PATH
 export PATH="${{ .environment.path | join ":$"}}:$PATH"
-
