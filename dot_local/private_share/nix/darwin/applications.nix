@@ -23,6 +23,8 @@
     enable = true;
     onActivation.cleanup = "none"; # 既存のBrewアプリを消したくない場合は "none"
     casks = [
+      "kitty"
+      "ghostty"
       "zed"
       "wezterm"
       "visual-studio-code"
