@@ -19,27 +19,27 @@ rustup = [
 ]
 
 [dependencies.cli]
-act = { aur = "act", brew = "act", nix = "act" }
-bat = { scoop = "bat", apt = "bat", aur = "bat", brew = "bat", nix = "bat" }
+act = { aur = "act", nix = "act" }
+bat = { scoop = "bat", apt = "bat", aur = "bat", nix = "bat" }
 byobu = { apt = "byobu", aur = "byobu" }
-chezmoi = { scoop = "chezmoi", aur = "chezmoi", brew = "chezmoi", nix = "chezmoi" }
-cloudflared = { scoop = "cloudflared", aur = "cloudflared", brew = "cloudflared", nix = "cloudflared" }
-curl = { scoop = "curl", apt = "curl", aur = "curl", brew = "curl", nix = "curl" }
-fd = { scoop = "fd", apt = "fd-find", aur = "fd", brew = "fd", nix = "fd" }
-fzf = { scoop = "fzf", apt = "fzf", aur = "fzf", brew = "fzf", nix = "fzf" }
-gh = { scoop = "gh", aur = "github-cli", brew = "gh", nix = "gh" }
+chezmoi = { scoop = "chezmoi", aur = "chezmoi", nix = "chezmoi" }
+cloudflared = { scoop = "cloudflared", aur = "cloudflared", nix = "cloudflared" }
+curl = { scoop = "curl", apt = "curl", aur = "curl", nix = "curl" }
+fd = { scoop = "fd", apt = "fd-find", aur = "fd", nix = "fd" }
+fzf = { scoop = "fzf", apt = "fzf", aur = "fzf", nix = "fzf" }
+gh = { scoop = "gh", aur = "github-cli", nix = "gh" }
 git = { scoop = "git", apt = "git", aur = "git" }
-glab = { scoop = "glab", aur = "glab", brew = "glab", nix = "glab" }
+glab = { scoop = "glab", aur = "glab", nix = "glab" }
 grep = { scoop = "grep", apt = "grep" }
 htop = { apt = "htop", aur = "htop" }
 jq = { scoop = "jq", apt = "jq", aur = "jq", nix = "jq" }
 kanata = { nix = "kanata" }
-lazygit = { scoop = "lazygit", aur = "lazygit", brew = "lazygit", nix = "lazygit" }
+lazygit = { scoop = "lazygit", aur = "lazygit", nix = "lazygit" }
 less = { scoop = "less", apt = "less" }
 nano = { scoop = "nano", apt = "nano", aur = "nano" }
-neovim = { scoop = "neovim", aur = "neovim", brew = "neovim", nix = "neovim" }
+neovim = { scoop = "neovim", aur = "neovim", nix = "neovim" }
 ripgrep = { scoop = "ripgrep", apt = "ripgrep", nix = "ripgrep" }
-starship = { scoop = "starship", aur = "starship", brew = "starship", nix = "starship" }
+starship = { scoop = "starship", aur = "starship", nix = "starship" }
 tombi = { aur = "tombi", nix = "tombi" }
 unzip = { scoop = "unzip", apt = "unzip", aur = "unzip" }
 vim = { scoop = "vim", apt = "vim", aur = "vim" }
@@ -50,18 +50,18 @@ zsh = { apt = "zsh", aur = "zsh" }
 
 [dependencies.dev]
 arduino-cli = { scoop = "arduino-cli" }
-actionlint = { scoop = "actionlint", aur = "actionlint", brew = "actionlint", nix = "actionlint" }
+actionlint = { scoop = "actionlint", aur = "actionlint", nix = "actionlint" }
 clangd = { scoop = "llvm", apt = "clangd" }
 clang-format = { apt = "clang-format" }
 clang-tidy = { apt = "clang-tidy" }
 hadolint = { scoop = "hadolint", nix = "hadolint" }
 lld = { apt = "lld" }
-sccache = { scoop = "sccache", aur = "sccache-bin", brew = "sccache", nix = "sccache" }
-shellcheck = { scoop = "shellcheck", aur = "shellcheck-bin", brew = "shellcheck", nix = "shellcheck" }
-shfmt = { scoop = "shfmt", aur = "shfmt", brew = "shfmt", nix = "shfmt" }
-stylua = { scoop = "stylua", aur = "stylua", brew = "stylua", nix = "stylua" }
-# svlint = { scoop = "svlint", aur = "svlint-bin", brew = "svlint", nix = "svlint" }
-# svls = { scoop = "svls", aur = "svls", brew = "svls", nix = "svls" }
+sccache = { scoop = "sccache", aur = "sccache-bin", nix = "sccache" }
+shellcheck = { scoop = "shellcheck", aur = "shellcheck-bin", nix = "shellcheck" }
+shfmt = { scoop = "shfmt", aur = "shfmt", nix = "shfmt" }
+stylua = { scoop = "stylua", aur = "stylua", nix = "stylua" }
+# svlint = { scoop = "svlint", aur = "svlint-bin", nix = "svlint" }
+# svls = { scoop = "svls", aur = "svls", nix = "svls" }
 # verible = { scoop = "verible", nix = "verible" }
 
 [dependencies.desktop]
@@ -78,7 +78,7 @@ Notion = { winget = "Notion.Notion" }
 Slack = { flatpak = "com.slack.Slack", winget = "9WZDNCRDK3WP" }
 Vivaldi = { flatpak = "com.vivaldi.Vivaldi", winget = "XP99GVQDX7JPR4" }
 Vcxsrv = { winget = "marha.VcXsrv" }
-Wezterm = { scoop = "wezterm", brew = "wezterm" }
+Wezterm = { scoop = "wezterm" }
 Zoom = { winget = "XP99J3KP4XZ4VV" }
 
 [dependencies.hyprland]
