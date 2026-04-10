@@ -5,13 +5,15 @@ experimental = true
 arduino-cli = "latest"
 delta = "latest"
 deno = "latest"
+glab = { version = "latest", exe = "glab" }
 just = "latest"
 node = "lts"
-# pipx = { version = "latest", os = ["darwin", "linux"] }
 pnpm = "latest"
+sccache = "latest"
 shellcheck = "latest"
 shfmt = "latest"
 starship = "latest"
+stylua = "latest"
 tree-sitter = "latest"
 usage = "latest"
 uv = "latest"

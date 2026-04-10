@@ -191,43 +191,6 @@ install-ubuntu-dev-tools() {
 	sudo apt-get install wezterm
 }
 
-
-install-brew() {
-	if [ -e "$BREW_PREFIX/bin/brew" ]; then
-		echo "brew is already installed."
-	else
-{{ if (eq .chezmoi.os "linux") }}
-		git clone https://github.com/Homebrew/brew "$BREW_PREFIX"
-		eval "$(BREW_PREFIX/bin/brew shellenv)"
-		brew update --force --quiet
-	fi
-{{ else }}
-		/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
-{{ end }}
-	# "$BREW_PREFIX/bin/brew" tap wez/wezterm-linuxbrew
-}
-
-install-brew-tools() {
-	"${BREW_PREFIX}/bin/brew" install \
-		{{ range $name, $managers := .dependencies.cli -}}
-		{{- get $managers "brew" | printf "%s " -}}
-		{{- end }}
-}
-
-install-brew-dev-tools() {
-	"${BREW_PREFIX}/bin/brew" install \
-		{{ range $name, $managers := .dependencies.dev -}}
-		{{- get $managers "brew" | printf "%s " -}}
-		{{- end }}
-}
-
-install-brew-desktop-tools() {
-	"${BREW_PREFIX}/bin/brew" install \
-		{{ range $name, $managers := .dependencies.desktop -}}
-		{{- get $managers "brew" | printf "%s " -}}
-		{{- end }}
-}
-
 install-nix() {
 	if ! command -v nix &>/dev/null; then
 		curl --proto '=https' --tlsv1.2 -sSf -L https://install.determinate.systems/nix | sh -s -- install
@@ -264,3 +227,4 @@ install-arch-desktop-dependency() {
 install-flatpak-apps() {
 	flatpak remote-add --if-not-exists flathub https://dl.flathub.org/repo/flathub.flatpakrepo
 }
+
