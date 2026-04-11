@@ -8,14 +8,12 @@
 
   environment.systemPackages = [
     pkgs.git
-    pkgs.alacritty
     pkgs.discord
     pkgs.firefox
     pkgs.google-chrome
     pkgs.libreoffice-bin
     pkgs.notion-app
     pkgs.obsidian
-    pkgs.raycast
     pkgs.slack
     pkgs.tree
   ];
@@ -24,18 +22,22 @@
     enable = true;
     onActivation.cleanup = "none"; # 既存のBrewアプリを消したくない場合は "none"
     casks = [
+      "bambu-studio"
       "kitty"
       "ghostty"
       "zed"
       "wezterm"
+      "raycast"
       "visual-studio-code"
       "autodesk-fusion"
       "kicad"
       "vivaldi"
+      "karabiner-elements"
     ];
     masApps = {
       Bitwarden = 1352778147;
       LINE = 539883307;
+      # Proton_Authenticator = 6741758667;
     };
   };
 

@@ -25,6 +25,7 @@
           ./configuration.nix
           ./applications.nix
           ./settings.nix
+          ./launch.nix
         ];
       };
     };
