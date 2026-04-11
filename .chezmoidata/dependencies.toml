@@ -32,6 +32,7 @@ git = { scoop = "git", apt = "git", aur = "git" }
 glab = { scoop = "glab", aur = "glab", nix = "glab" }
 grep = { scoop = "grep", apt = "grep" }
 htop = { apt = "htop", aur = "htop" }
+jujutsu = { scoop = "jjutsu", aur = "jujutsu", nix = "jujutsu" }
 jq = { scoop = "jq", apt = "jq", aur = "jq", nix = "jq" }
 kanata = { nix = "kanata" }
 lazygit = { scoop = "lazygit", aur = "lazygit", nix = "lazygit" }
