@@ -19,7 +19,7 @@
 (defsrc
   grave
   h         j    k    l
-ncnv
+  ncnv
 )
 
 (deflayer default
