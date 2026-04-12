@@ -8,6 +8,7 @@
 
   environment.systemPackages = [
     pkgs.git
+    pkgs.git-lfs
     pkgs.discord
     pkgs.firefox
     pkgs.google-chrome
