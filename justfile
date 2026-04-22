@@ -7,7 +7,7 @@ actions:
     actionlint
 
 shell-de-template:
-    find . -name "*.sh.tmpl" -exec sed -i '/{{"{{"}}/s/^/# /' {} \;
+    find . -name "*.sh.tmpl" -exec sed -i '' '/{{"{{"}}/s/^/# /' {} \;
 
 shell-check:
     find . \( -name "*.sh" -or -name "*.sh.tmpl" \) -exec shfmt -d {} \; -exec shellcheck {} \;
@@ -16,7 +16,7 @@ shell-fix:
     find . \( -name "*.sh" -or -name "*.sh.tmpl" \) -exec shfmt -w {} \;
 
 shell-template:
-    find . -name "*.sh.tmpl" -exec sed -i '/{{"{{"}}/s/^# //' {} \;
+    find . -name "*.sh.tmpl" -exec sed -i '' '/{{"{{"}}/s/^# //' {} \;
 
 shell: shell-de-template shell-check shell-template
 
