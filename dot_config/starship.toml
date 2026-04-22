@@ -95,7 +95,7 @@ show_always = true
 [container]
 symbol = ""
 style = "bg:base_background"
-format = '[ $symbol ]($style)'
+format = "[ $symbol ]($style)"
 
 [time]
 disabled = false
