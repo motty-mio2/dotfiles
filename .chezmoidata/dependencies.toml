@@ -62,8 +62,6 @@ lazygit = { scoop = "lazygit", aur = "lazygit", nix = "lazygit" }
 less = { scoop = "less", apt = "less" }
 nano = { scoop = "nano", apt = "nano", aur = "nano" }
 neovim = { scoop = "neovim", aur = "neovim", nix = "neovim" }
-node = { scoop = "nodejs", nix = "nodejs" }
-pnpm = { scoop = "pnpm", nix = "nodePackages.pnpm" }
 ripgrep = { scoop = "ripgrep", apt = "ripgrep" }
 starship = { scoop = "starship", aur = "starship", nix = "starship" }
 tombi = { scoop = "tombi", aur = "tombi", nix = "tombi" }

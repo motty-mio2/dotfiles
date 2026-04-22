@@ -6,6 +6,7 @@ deno = "latest"
 node = "lts"
 usage = "latest"
 uv = "latest"
+pnpm = "latest"
 # Niche tools (GitHub based)
 "github:708u/twig" = "latest"
 "github:coder3101/protols" = "latest"
