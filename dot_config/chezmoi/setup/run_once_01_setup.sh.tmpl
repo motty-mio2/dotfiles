@@ -1,6 +1,5 @@
-{{ if ne .chezmoi.os "windows" -}}
-#!/usr/bin/bash
-
+{{ if or (eq .chezmoi.os "linux") (eq .chezmoi.os "darwin" ) -}}
+#!/usr/bin/env bash
 eval "$($HOME/.local/bin/chezmoi execute-template <~/.local/share/chezmoi/dot_profile.tmpl)"
 
 mkdir -p "$XDG_STATE_HOME"
