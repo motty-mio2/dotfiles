@@ -13,7 +13,7 @@
       NSAutomaticPeriodSubstitutionEnabled = false; # ピリオドの自動置換を無効化
       NSAutomaticSpellingCorrectionEnabled = false; # スペル自動修正を無効化
       NSAutomaticDashSubstitutionEnabled = false; # ダッシュの自動置換を無効化
-      NSAutomaticQuoteSubstitutionEnabled = false; # クォートの自動置
+      NSAutomaticQuoteSubstitutionEnabled = false; # クォートの自動置換を無効化
       # UI
       AppleInterfaceStyle = "Dark"; # ダークモードを有効化
       NSWindowResizeTime = 0.001; # ウィンドウのリサイズ速度を高速化
