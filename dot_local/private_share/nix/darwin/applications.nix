@@ -23,7 +23,7 @@
     enable = true;
     onActivation.cleanup = "none"; # 既存のBrewアプリを消したくない場合は "none"
     brews = [
-      "azooKey"
+      "azookey"
     ];
     casks = [
       "bambu-studio"
