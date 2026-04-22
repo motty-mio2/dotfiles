@@ -1,9 +1,13 @@
 { pkgs, ... }:
 
+let
+  primaryUser = builtins.getEnv "USER";
+in
+assert primaryUser != "";
 {
   # 1. メインユーザーを指定（必須になりました）
-  # ターミナルで `whoami` と打って出てくる名前（今回は多分 user ）を入れてください
-  system.primaryUser = "user";
+  # ターミナルで `whoami` と打って出てくる名前を自動で使用します
+  system.primaryUser = primaryUser;
   nixpkgs.config.allowUnfree = true;
   # 2. nix-daemon の設定を現代風に修正
   # services.nix-daemon.enable = true;  <-- これは削除
