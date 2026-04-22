@@ -9,10 +9,10 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - uses: arduino/setup-task@v2
+      - uses: extractions/setup-just@v2
 
       - uses: tombi-toml/setup-tombi@v1
 
       - name: Do Check
         run: |
-          task check_toml
+          just toml-check

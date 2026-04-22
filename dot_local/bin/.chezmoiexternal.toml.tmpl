@@ -13,13 +13,20 @@ refreshPeriod = "168h"
 url = "https://github.com/motty-mio2/incheck/releases/download/v{{ $incheck_version }}/incheck_{{ $incheck_version }}_{{ .chezmoi.os }}_{{ .chezmoi.arch }}.tar.gz"
 
 # kanata
-{{- if (eq .chezmoi.os "linux") }}
+{{- if and (eq .chezmoi.os "linux") (eq .chezmoi.arch "amd64") }}
 ["kanata"]
 path = "kanata_linux_x64"
+url = "https://github.com/jtroo/kanata/releases/latest/download/linux-binaries-x64.zip"
 type = "archive-file"
 executable = true
 refreshPeriod = "168h"
-url = "https://github.com/jtroo/kanata/releases/latest/download/linux-binaries-x64.zip"
+{{- else if and (eq .chezmoi.os "darwin") (eq .chezmoi.arch "arm") }}
+["kanata"]
+path = "kanata_macos_arm64"
+url = "https://github.com/jtroo/kanata/releases/latest/download/macos-binaries-arm64.zip"
+type = "archive-file"
+executable = true
+refreshPeriod = "168h"
 {{- end }}
 
 # WSL2 SSH Agent
@@ -40,22 +47,24 @@ url = "https://github.com/mame/wsl2-ssh-agent/releases/latest/download/wsl2-ssh-
 {{ end }}
 
 # Zellij
-{{ if eq .chezmoi.os "linux" }}
+{{ if or (eq .chezmoi.os "linux") (eq .chezmoi.os "darwin") (eq .chezmoi.os "windows") }}
+{{  if or (eq .chezmoi.os "linux") (eq .chezmoi.os "darwin") }}
 ["zellij"]
 path = "zellij"
-{{ else if eq .chezmoi.os "windows" }}
+{{  else if eq .chezmoi.os "windows" }}
 ["zellij.exe"]
 path = "zellij.exe"
-{{ end }}
+{{  end }}
 type = "archive-file"
 executable = true
 refreshPeriod = "168h"
-{{ if eq .chezmoi.os "linux" }}
-{{   if eq .chezmoi.arch "amd64" }}
+{{  if and (eq .chezmoi.os "linux") (eq .chezmoi.arch "amd64") }}
 url = "https://github.com/zellij-org/zellij/releases/latest/download/zellij-x86_64-unknown-linux-musl.tar.gz"
-{{   else if eq .chezmoi.arch "arm" }}
+{{  else if and (eq .chezmoi.os "linux") (eq .chezmoi.arch "arm") }}
 url = "https://github.com/zellij-org/zellij/releases/latest/download/zellij-aarch64-unknown-linux-musl.tar.gz"
-{{   end }}
-{{ else if eq .chezmoi.os "windows" }}
+{{  else if and (eq .chezmoi.os "darwin") (eq .chezmoi.arch "arm64") }}
+url = "https://github.com/zellij-org/zellij/releases/latest/download/zellij-aarch64-apple-darwin.tar.gz"
+{{  else if and (eq .chezmoi.os "windows") (eq .chezmoi.arch "amd64") }}
 url = "https://github.com/zellij-org/zellij/releases/latest/download/zellij-x86_64-pc-windows-msvc.zip"
+{{  end }}
 {{ end }}

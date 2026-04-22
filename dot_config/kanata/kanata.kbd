@@ -1,4 +1,8 @@
 ;; 0. グローバル設定
+(deflocalkeys-macos
+  ncnv 123
+)
+
 (defcfg
     process-unmapped-keys yes   ;; defsrc で定義しないキーも通す
 )
