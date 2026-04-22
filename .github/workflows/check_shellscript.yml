@@ -11,12 +11,8 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - uses: mfinelli/setup-shfmt@v3
-      - uses: arduino/setup-task@v2
-
-      - name: Deactivate Template in Shell
-        run: |
-          find . -name "*.sh.tmpl" -exec sed -i '/{{/s/^/# /' {} \;
+      - uses: extractions/setup-just@v2
 
       - name: Do Check
         run: |
-          task check_shell
+          just shell

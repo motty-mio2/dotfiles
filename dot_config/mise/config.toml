@@ -17,7 +17,7 @@ uv = "latest"
 "github:trasta298/keifu" = "latest"
 "github:arduino/arduino-language-server" = "latest"
 "github:artempyanykh/marksman" = "latest"
-"github:bahdotsh/wrkflw" = {version="latest" , os =["darwin", "linux"]}
+"github:bahdotsh/wrkflw" = { version = "latest", os = ["darwin", "linux"] }
 "github:BurntSushi/ripgrep" = "latest"
 "github:cli/cli" = "latest"
 "github:cloudflare/cloudflared" = "latest"
