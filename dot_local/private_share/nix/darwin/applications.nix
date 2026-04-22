@@ -22,6 +22,9 @@
   homebrew = {
     enable = true;
     onActivation.cleanup = "none"; # 既存のBrewアプリを消したくない場合は "none"
+    brews = [
+      "azooKey"
+    ];
     casks = [
       "bambu-studio"
       "kitty"
