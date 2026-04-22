@@ -25,7 +25,7 @@ byobu = { apt = "byobu", aur = "byobu" }
 chezmoi = { scoop = "chezmoi", aur = "chezmoi", nix = "chezmoi" }
 cloudflared = { scoop = "cloudflared", aur = "cloudflared", nix = "cloudflared" }
 curl = { scoop = "curl", apt = "curl", aur = "curl", nix = "curl" }
-delta = { scoop = "delta", apt = "git-delta", aur = "git-delta", nix = "delta"}
+delta = { scoop = "delta", apt = "git-delta", aur = "git-delta", nix = "delta" }
 fd = { scoop = "fd", apt = "fd-find", aur = "fd", nix = "fd" }
 fzf = { scoop = "fzf", apt = "fzf", aur = "fzf", nix = "fzf" }
 gh = { scoop = "gh", aur = "github-cli", nix = "gh" }
