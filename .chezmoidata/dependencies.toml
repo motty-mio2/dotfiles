@@ -33,13 +33,14 @@ git = { scoop = "git", apt = "git", aur = "git" }
 glab = { scoop = "glab", aur = "glab", nix = "glab" }
 grep = { scoop = "grep", apt = "grep" }
 htop = { apt = "htop", aur = "htop" }
+jujutsu = { scoop = "jjutsu", aur = "jujutsu", nix = "jujutsu" }
 jq = { scoop = "jq", apt = "jq", aur = "jq", nix = "jq" }
 kanata = { nix = "kanata" }
 lazygit = { scoop = "lazygit", aur = "lazygit", nix = "lazygit" }
 less = { scoop = "less", apt = "less" }
 nano = { scoop = "nano", apt = "nano", aur = "nano" }
 neovim = { scoop = "neovim", aur = "neovim", nix = "neovim" }
-ripgrep = { scoop = "ripgrep", apt = "ripgrep" }
+ripgrep = { scoop = "ripgrep", apt = "ripgrep", nix = "ripgrep" }
 starship = { scoop = "starship", aur = "starship", nix = "starship" }
 tombi = { aur = "tombi", nix = "tombi" }
 unzip = { scoop = "unzip", apt = "unzip", aur = "unzip" }

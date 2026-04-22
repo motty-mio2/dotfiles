@@ -28,8 +28,6 @@ alias ivx="iverilog -g2012"
 # Vim
 alias vim='VIMINIT=":source $XDG_CONFIG_HOME/vim/vimrc" vim'
 
-#!/usr/bin/bash
-
 rmemp() {
 	local target_directory="$1"
 

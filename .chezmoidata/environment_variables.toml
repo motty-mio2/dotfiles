@@ -2,7 +2,6 @@
 path = [
   "GOPATH/bin",
   "CARGO_HOME/bin",
-  "BREW_PREFIX/bin",
   "XDG_STATE_HOME/nix/profiles/profile/bin",
   "HOME/.local/bin",
 ]
@@ -16,7 +15,6 @@ XDG_STATE_HOME = "HOME/.local/state"
 [environment.application_path]
 AWS_CONFIG_FILE = "XDG_CONFIG_HOME/aws/config"
 AWS_SHARED_CREDENTIALS_FILE = "XDG_CONFIG_HOME/aws/credentials"
-BREW_PREFIX = "XDG_DATA_HOME/brew"
 CARGO_HOME = "XDG_DATA_HOME/cargo"
 CONDARC = "XDG_CONFIG_HOME/conda/condarc"
 CUDA_CACHE_PATH = "XDG_CACHE_HOME/nv"
