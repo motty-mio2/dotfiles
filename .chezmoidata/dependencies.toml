@@ -45,7 +45,6 @@ cloudflared = { scoop = "cloudflared", aur = "cloudflared", nix = "cloudflared" 
 curl = { scoop = "curl", apt = "curl", aur = "curl", nix = "curl" }
 delta = { scoop = "delta", apt = "git-delta", aur = "git-delta", nix = "delta" }
 deno = { scoop = "deno", nix = "deno" }
-distrobox = { aur = "distrobox", apt = "distrobox" }
 eza = { scoop = "eza", nix = "eza" }
 fd = { scoop = "fd", apt = "fd-find", aur = "fd", nix = "fd" }
 fzf = { scoop = "fzf", apt = "fzf", aur = "fzf", nix = "fzf" }
