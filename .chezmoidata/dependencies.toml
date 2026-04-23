@@ -43,9 +43,9 @@ byobu = { apt = "byobu", aur = "byobu" }
 chezmoi = { scoop = "chezmoi", aur = "chezmoi", nix = "chezmoi" }
 cloudflared = { scoop = "cloudflared", aur = "cloudflared", nix = "cloudflared" }
 curl = { scoop = "curl", apt = "curl", aur = "curl", nix = "curl" }
-distrobox = { aur = "distrobox", nix = "distrobox" }
 delta = { scoop = "delta", apt = "git-delta", aur = "git-delta", nix = "delta" }
 deno = { scoop = "deno", nix = "deno" }
+distrobox = { aur = "distrobox", nix = "distrobox" }
 eza = { scoop = "eza", nix = "eza" }
 fd = { scoop = "fd", apt = "fd-find", aur = "fd", nix = "fd" }
 fzf = { scoop = "fzf", apt = "fzf", aur = "fzf", nix = "fzf" }
@@ -55,8 +55,8 @@ glab = { scoop = "glab", aur = "glab", nix = "glab" }
 grep = { scoop = "grep", apt = "grep" }
 htop = { apt = "htop", aur = "htop" }
 jnv = { scoop = "jnv", aur = "jnv", nix = "jnv" }
-jujutsu = { scoop = "jjutsu", aur = "jujutsu", nix = "jujutsu" }
 jq = { scoop = "jq", apt = "jq", aur = "jq", nix = "jq" }
+jujutsu = { scoop = "jjutsu", aur = "jujutsu", nix = "jujutsu" }
 just = { scoop = "just", nix = "just" }
 kanata = { nix = "kanata" }
 lazydocker = { scoop = "lazydocker", nix = "lazydocker" }
@@ -71,7 +71,6 @@ unzip = { scoop = "unzip", apt = "unzip", aur = "unzip" }
 usage = { nix = "usage" }
 uv = { scoop = "uv", nix = "uv" }
 vim = { scoop = "vim", apt = "vim", aur = "vim" }
-volta = { scoop = "volta", nix = "volta" }
 wget = { scoop = "wget", apt = "wget", aur = "wget" }
 which = { scoop = "which" }
 yazi = { scoop = "yazi", nix = "yazi" }
@@ -80,12 +79,12 @@ zoxide = { aur = "zoxide", nix = "zoxide", scoop = "zoxide" }
 zsh = { apt = "zsh", aur = "zsh" }
 
 [dependencies.dev]
+actionlint = { scoop = "actionlint", aur = "actionlint", nix = "actionlint" }
 arduino-cli = { scoop = "arduino-cli" }
 arduino-language-server = { nix = "arduino-language-server" }
-actionlint = { scoop = "actionlint", aur = "actionlint", nix = "actionlint" }
-clangd = { scoop = "llvm", apt = "clangd" }
 clang-format = { apt = "clang-format" }
 clang-tidy = { apt = "clang-tidy" }
+clangd = { scoop = "llvm", apt = "clangd" }
 hadolint = { scoop = "hadolint", nix = "hadolint" }
 lld = { apt = "lld" }
 lua-language-server = { scoop = "lua-language-server", nix = "lua-language-server" }
