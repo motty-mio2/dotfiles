@@ -7,6 +7,8 @@
   ];
 
   environment.systemPackages = [
+    pkgs.colima
+    pkgs.docker
     pkgs.git
     pkgs.git-lfs
     pkgs.discord
@@ -23,9 +25,9 @@
     enable = true;
     onActivation.cleanup = "none"; # 既存のBrewアプリを消したくない場合は "none"
     brews = [
-      "azookey"
     ];
     casks = [
+      "azookey"
       "bambu-studio"
       "kitty"
       "ghostty"
@@ -41,7 +43,6 @@
     masApps = {
       Bitwarden = 1352778147;
       LINE = 539883307;
-      # Proton_Authenticator = 6741758667;
     };
   };
 
