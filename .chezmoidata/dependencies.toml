@@ -1,5 +1,6 @@
 [dependencies]
 uv = [
+  "basedpyright",
   "black",
   "cmake-language-server",
   "flake8",
@@ -17,16 +18,35 @@ rustup = [
   "rustfmt",
   "rust-analyzer",
 ]
+npm = [
+  "@biomejs/biome",
+  "@github/copilot",
+  "@github/copilot-language-server",
+  "@google/gemini-cli",
+  "bash-language-server",
+  "dockerfile-language-server-nodejs",
+  "markdownlint-cli2",
+  "neovim",
+  "opencode-ai",
+  "semver",
+  "svelte-language-server",
+  "typescript-language-server",
+  "vim-language-server",
+  "yaml-language-server"
+]
 
 [dependencies.cli]
 act = { aur = "act", nix = "act" }
 bat = { scoop = "bat", apt = "bat", aur = "bat", nix = "bat" }
+bw = { scoop = "bitwarden", aur = "bitwarden-cli", nix = "bitwarden-cli" }
 byobu = { apt = "byobu", aur = "byobu" }
 chezmoi = { scoop = "chezmoi", aur = "chezmoi", nix = "chezmoi" }
 cloudflared = { scoop = "cloudflared", aur = "cloudflared", nix = "cloudflared" }
 curl = { scoop = "curl", apt = "curl", aur = "curl", nix = "curl" }
-distrobox = { aur = "distrobox", nix = "distrobox" }
 delta = { scoop = "delta", apt = "git-delta", aur = "git-delta", nix = "delta" }
+deno = { scoop = "deno", nix = "deno" }
+distrobox = { aur = "distrobox", nix = "distrobox" }
+eza = { scoop = "eza", nix = "eza" }
 fd = { scoop = "fd", apt = "fd-find", aur = "fd", nix = "fd" }
 fzf = { scoop = "fzf", apt = "fzf", aur = "fzf", nix = "fzf" }
 gh = { scoop = "gh", aur = "github-cli", nix = "gh" }
@@ -34,35 +54,47 @@ git = { scoop = "git", apt = "git", aur = "git" }
 glab = { scoop = "glab", aur = "glab", nix = "glab" }
 grep = { scoop = "grep", apt = "grep" }
 htop = { apt = "htop", aur = "htop" }
-jujutsu = { scoop = "jjutsu", aur = "jujutsu", nix = "jujutsu" }
+jnv = { scoop = "jnv", aur = "jnv", nix = "jnv" }
 jq = { scoop = "jq", apt = "jq", aur = "jq", nix = "jq" }
+jujutsu = { scoop = "jjutsu", aur = "jujutsu", nix = "jujutsu" }
+just = { scoop = "just", nix = "just" }
 kanata = { nix = "kanata" }
+lazydocker = { scoop = "lazydocker", nix = "lazydocker" }
 lazygit = { scoop = "lazygit", aur = "lazygit", nix = "lazygit" }
 less = { scoop = "less", apt = "less" }
 nano = { scoop = "nano", apt = "nano", aur = "nano" }
 neovim = { scoop = "neovim", aur = "neovim", nix = "neovim" }
 ripgrep = { scoop = "ripgrep", apt = "ripgrep", nix = "ripgrep" }
 starship = { scoop = "starship", aur = "starship", nix = "starship" }
-tombi = { aur = "tombi", nix = "tombi" }
+tombi = { scoop = "tombi", aur = "tombi", nix = "tombi" }
 unzip = { scoop = "unzip", apt = "unzip", aur = "unzip" }
+usage = { nix = "usage" }
+uv = { scoop = "uv", nix = "uv" }
 vim = { scoop = "vim", apt = "vim", aur = "vim" }
 wget = { scoop = "wget", apt = "wget", aur = "wget" }
 which = { scoop = "which" }
+yazi = { scoop = "yazi", nix = "yazi" }
+yt-dlp = { scoop = "yt-dlp", aur = "yt-dlp", nix = "yt-dlp" }
 zoxide = { aur = "zoxide", nix = "zoxide", scoop = "zoxide" }
 zsh = { apt = "zsh", aur = "zsh" }
 
 [dependencies.dev]
-arduino-cli = { scoop = "arduino-cli" }
 actionlint = { scoop = "actionlint", aur = "actionlint", nix = "actionlint" }
-clangd = { scoop = "llvm", apt = "clangd" }
+arduino-cli = { scoop = "arduino-cli" }
+arduino-language-server = { nix = "arduino-language-server" }
 clang-format = { apt = "clang-format" }
 clang-tidy = { apt = "clang-tidy" }
+clangd = { scoop = "llvm", apt = "clangd" }
 hadolint = { scoop = "hadolint", nix = "hadolint" }
 lld = { apt = "lld" }
+lua-language-server = { scoop = "lua-language-server", nix = "lua-language-server" }
+marksman = { scoop = "marksman", nix = "marksman" }
 sccache = { scoop = "sccache", aur = "sccache-bin", nix = "sccache" }
 shellcheck = { scoop = "shellcheck", aur = "shellcheck-bin", nix = "shellcheck" }
 shfmt = { scoop = "shfmt", aur = "shfmt", nix = "shfmt" }
 stylua = { scoop = "stylua", aur = "stylua", nix = "stylua" }
+systemd-lsp = { aur = "systemd-lsp", nix = "systemd-lsp" }
+tree-sitter = { scoop = "tree-sitter", nix = "tree-sitter" }
 # svlint = { scoop = "svlint", aur = "svlint-bin", nix = "svlint" }
 # svls = { scoop = "svls", aur = "svls", nix = "svls" }
 # verible = { scoop = "verible", nix = "verible" }
