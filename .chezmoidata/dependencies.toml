@@ -43,6 +43,7 @@ byobu = { apt = "byobu", aur = "byobu" }
 chezmoi = { scoop = "chezmoi", aur = "chezmoi", nix = "chezmoi" }
 cloudflared = { scoop = "cloudflared", aur = "cloudflared", nix = "cloudflared" }
 curl = { scoop = "curl", apt = "curl", aur = "curl", nix = "curl" }
+distrobox = { aur = "distrobox", nix = "distrobox" }
 delta = { scoop = "delta", apt = "git-delta", aur = "git-delta", nix = "delta" }
 deno = { scoop = "deno", nix = "deno" }
 eza = { scoop = "eza", nix = "eza" }
