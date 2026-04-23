@@ -1,0 +1,6 @@
+{{ if eq .chezmoi.os "linux" -}}
+{{ include "dot_config/kanata/kanata_linux.kbd" }}
+{{ else if eq .chezmoi.os "darwin" }}
+{{ include "dot_config/kanata/kanata_mac.kbd" }}
+{{ end }}
+
