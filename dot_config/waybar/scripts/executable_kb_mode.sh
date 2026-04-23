@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 # 接続を維持してストリームを受け取る
 while true; do
 	# --unbuffered を付けることで、データが届くたびに即座に出力します

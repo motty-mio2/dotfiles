@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
 # wf-recorder のプロセス ID を取得
 PID=$(pgrep -x wf-recorder)
