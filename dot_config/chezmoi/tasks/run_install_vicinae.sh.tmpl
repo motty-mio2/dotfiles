@@ -1,4 +1,4 @@
-{{ if eq .chezmoi.os "linux" -}}
+{{- if and (eq .chezmoi.os "linux") (or (eq .machine_type "laptop") (eq .machine_type "desktop")) -}}
 #!/usr/bin/env bash
 
 curl -fsSL https://vicinae.com/install.sh | bash -s -- --prefix ~/.local
