@@ -1,7 +1,12 @@
+[terminal]
 {{ if eq .chezmoi.os "windows" }}
-[terminal]
 shell = { program = "wsl" }
-{{ else if eq .chezmoi.os "linux" }}
-[terminal]
+{{ else if eq .chezmoi.os "darwin" }}
 shell = { program = "zsh" , args = ["--login"] }
+{{ else if eq .chezmoi.os "linux" }}
+{{   if (lookPath "zsh")}}
+shell = { program = "zsh" , args = ["--login"] }
+{{   else }}
+shell = { program = "bash" , args = ["--login"] }
+{{   end }}
 {{ end }}
