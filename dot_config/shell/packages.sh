@@ -114,7 +114,6 @@ install-aur-dev-tools() {
 
 install-aur-desktop-tools() {
 	local aur_helper="${1:-yay}"
-	# shellcheck disable=SC2016
 	# shellcheck disable=SC2016,SC2207
 	aur_desktop_pkgs=($(chezmoi execute-template '{{ range $name, $managers := .dependencies.desktop -}}{{- get $managers "aur" | printf "%s " -}}{{- end }}'))
 
@@ -126,14 +125,16 @@ install-aur-desktop-tools() {
 }
 
 install-aur-hyprland-tools() {
-	local aur_helper="${1:-yay}"
-	"$aur_helper" -Sy --noconfirm \
-		hyprland waybar dunst \
-		brightnessctl hyprpolkitagent ulauncher
+	# shellcheck disable=SC2016,SC2207
+	hypr_pkgs=($(chezmoi execute-template '{{ range $name, $managers := .dependencies.hyprland -}}{{- get $managers "aur" | printf "%s " -}}{{- end }}'))
+	if [ "${#hypr_pkgs[@]}" -gt 0 ]; then
+    local aur_helper="${1:-yay}"
+	"$aur_helper" -Sy --noconfirm "${hypr_pkgs[@]}"
+    fi
 }
 
 install-ubuntu-hyprland() {
-	sudo add-apt-repository ppa:cppiber/hyprland
+	# sudo add-apt-repository ppa:cppiber/hyprland
 	sudo apt-get update
 	# shellcheck disable=SC2016
 	# shellcheck disable=SC2016,SC2207
@@ -142,7 +143,6 @@ install-ubuntu-hyprland() {
 	if [ "${#hypr_pkgs[@]}" -gt 0 ]; then
 		sudo apt-get install -qy "${hypr_pkgs[@]}"
 	fi
-	pavucontrol nemo
 }
 
 install-base-develop() {
@@ -205,7 +205,7 @@ install-ubuntu-dev-tools() {
 		sudo tee /etc/apt/sources.list.d/docker.list >/dev/null
 
 	echo "Alacritty"
-	sudo add-apt-repository ppa:aslatter/ppa
+	# sudo add-apt-repository ppa:aslatter/ppa
 
 	echo "Wezterm"
 	curl -fsSL https://apt.fury.io/wez/gpg.key | sudo gpg --yes --dearmor -o /etc/apt/keyrings/wezterm-fury.gpg

@@ -122,14 +122,16 @@ hyprland-qt-support0 = { apt = "hyprland-qt-support0" }
 hyprland = { apt = "hyprland" }
 hyprlock = { apt = "hyprlock" }
 hyprpaper = { apt = "hyprpaper" }
-hyprpolkitagent = { apt = "hyprpolkitagent" }
+hyprpolkitagent = { apt = "hyprpolkitagent", aur = "hyprpolkitagent" }
 hyprutils1 = { apt = "hyprutils1" }
 xdg-desktop-portal-hyprland = { apt = "xdg-desktop-portal-hyprland" }
 
 # Tools
 brightnessctl = { nix = "brightnessctl", apt = "brightnessctl", aur = "brightnessctl" }
 cliphist = { nix = "cliphist", apt = "cliphist", aur = "cliphist" }
+dunst = { nix = "dunst", apt = "dunst", aur = "dunst" }
 grim = { nix = "grim", apt = "grim", aur = "grim" }
+pavucontrol = { nix = "pavucontrol", apt = "pavucontrol", aur = "pavucontrol" }
 slurp = { nix = "slurp", apt = "slurp", aur = "slurp" }
 waybar = { apt = "waybar", aur = "waybar" }
 wf-recorder = { nix = "wf-recorder", apt = "wf-recorder", aur = "wf-recorder" }
