@@ -6,6 +6,7 @@ Include {{ joinPath .chezmoi.homeDir "/.ssh/config.d/*.conf" }}
 Match User *,!git
     ForwardAgent yes
     TCPKeepAlive yes
+    SetEnv TERM=xterm
 
 Match User git
     RequestTTY no

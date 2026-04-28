@@ -11,11 +11,11 @@ pnpm = "latest"
 
 # GitHub based tools (including those to be migrated to native package managers)
 "github:708u/twig" = "latest"
+"github:bahdotsh/wrkflw" = "latest"
 "github:coder3101/protols" = "latest"
 "github:cordx56/rustowl" = "latest"
 "github:terror/just-lsp" = "latest"
 "github:trasta298/keifu" = "latest"
-"github:bahdotsh/wrkflw" = { version = "latest", os = ["darwin", "linux"] }
 
 # Node.js based tools
 "npm:@biomejs/biome" = "latest"
