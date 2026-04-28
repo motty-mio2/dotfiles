@@ -117,13 +117,14 @@ Zoom = { winget = "XP99J3KP4XZ4VV" }
 
 [dependencies.hyprland]
 # Hyprland
+hyprcursor = { apt = "hyprcursor"}
 hypridle = { apt = "hypridle" }
-hyprland-qt-support0 = { apt = "hyprland-qt-support0" }
+hyprland-qt = { apt = "hyprland-qtutils" }
 hyprland = { apt = "hyprland" }
 hyprlock = { apt = "hyprlock" }
 hyprpaper = { apt = "hyprpaper" }
 hyprpolkitagent = { apt = "hyprpolkitagent", aur = "hyprpolkitagent" }
-hyprutils1 = { apt = "hyprutils1" }
+hyprutils = { apt = "libhyprutils10" }
 xdg-desktop-portal-hyprland = { apt = "xdg-desktop-portal-hyprland" }
 
 # Tools
