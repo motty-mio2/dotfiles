@@ -43,6 +43,7 @@
     masApps = {
       Bitwarden = 1352778147;
       LINE = 539883307;
+      RunCat = 1429033973;
     };
   };
 
