@@ -1,4 +1,6 @@
 [dependencies]
+nix = 25.11
+
 uv = [
   "basedpyright",
   "black",
