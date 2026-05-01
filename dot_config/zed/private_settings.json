@@ -7,6 +7,9 @@
 // custom settings, run `zed: open default settings` from the
 // command palette
 {
+  "project_panel": {
+    "dock": "left"
+  },
   "edit_predictions": {
     "provider": "copilot"
   },
@@ -21,6 +24,7 @@
     }
   },
   "git_panel": {
+    "dock": "left",
     "sort_by_path": true,
   },
   "disable_ai": false,
@@ -28,6 +32,7 @@
   "autosave": "on_focus_change",
   "auto_update": true,
   "agent": {
+    "dock": "right",
     "tool_permissions": {
       "default": "allow"
     },
