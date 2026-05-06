@@ -12,8 +12,6 @@
     pkgs.git
     pkgs.git-lfs
     pkgs.discord
-    pkgs.firefox
-    pkgs.google-chrome
     pkgs.libreoffice-bin
     pkgs.notion-app
     pkgs.obsidian
@@ -25,6 +23,7 @@
     enable = true;
     onActivation.cleanup = "none"; # 既存のBrewアプリを消したくない場合は "none"
     brews = [
+      "mas"
     ];
     casks = [
       "azookey"
@@ -39,6 +38,8 @@
       "kicad"
       "vivaldi"
       "karabiner-elements"
+      "google-chrome"
+      "firefox"
     ];
     masApps = {
       Bitwarden = 1352778147;
