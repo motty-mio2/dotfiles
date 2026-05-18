@@ -7,6 +7,12 @@
 // custom settings, run `zed: open default settings` from the
 // command palette
 {
+  "cli_default_open_behavior": "existing_window",
+  "agent_servers": {
+    "github-copilot-cli": {
+      "type": "registry"
+    }
+  },
   "project_panel": {
     "dock": "left"
   },
@@ -32,6 +38,7 @@
   "autosave": "on_focus_change",
   "auto_update": true,
   "agent": {
+    "sidebar_side": "right",
     "dock": "right",
     "tool_permissions": {
       "default": "allow"
