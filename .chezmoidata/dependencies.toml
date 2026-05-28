@@ -1,6 +1,5 @@
 [dependencies]
 nix = 25.11
-
 uv = [
   "basedpyright",
   "black",
@@ -39,6 +38,7 @@ npm = [
 
 [dependencies.cli]
 act = { aur = "act", nix = "act" }
+atuin = { aur = "atuin", nix = "atuin" }
 bat = { scoop = "bat", apt = "bat", aur = "bat", nix = "bat" }
 bw = { scoop = "bitwarden", aur = "bitwarden-cli", nix = "bitwarden-cli" }
 byobu = { apt = "byobu", aur = "byobu" }
@@ -127,7 +127,6 @@ hyprpaper = { apt = "hyprpaper" }
 hyprpolkitagent = { apt = "hyprpolkitagent" }
 hyprutils1 = { apt = "hyprutils1" }
 xdg-desktop-portal-hyprland = { apt = "xdg-desktop-portal-hyprland" }
-
 # Tools
 brightnessctl = { nix = "brightnessctl", apt = "brightnessctl", aur = "brightnessctl" }
 cliphist = { nix = "cliphist", apt = "cliphist", aur = "cliphist" }
