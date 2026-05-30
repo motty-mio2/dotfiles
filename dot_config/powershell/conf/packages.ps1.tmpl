@@ -29,7 +29,7 @@ function Install-uv-Tools {
         $executableName = "uv.exe"
     )
 
-    foreach ($tool in @( {{- .dependencies.uv | quoteList | join ", " -}} )) {
+    foreach ($tool in @( {{- .dependencies.pip | quoteList | join ", " -}} )) {
         & "$UV_ENV\$executableName" tool install --upgrade $tool
     }
 
