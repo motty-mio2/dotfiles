@@ -1,13 +1,15 @@
 #!/usr/bin/env python3
-import time
 import json
+import time
+from typing import cast
 
-def get_stats():
-    with open('/proc/stat', 'r') as f:
+
+def get_stats() -> dict[str, tuple[int, int]]:
+    with open("/proc/stat", "r") as f:
         lines = f.readlines()
     stats = {}
     for line in lines:
-        if line.startswith('cpu'):
+        if line.startswith("cpu"):
             parts = line.split()
             name = parts[0]
             # user, nice, system, idle, iowait, irq, softirq, steal
@@ -17,13 +19,14 @@ def get_stats():
             stats[name] = (idle, total)
     return stats
 
-def main():
+
+def main() -> None:
     s1 = get_stats()
     time.sleep(1)
     s2 = get_stats()
 
     tooltip_parts = []
-    total_usage = 0
+    total_usage = 0.0
 
     # Sort cores: cpu, cpu0, cpu1, ...
     cores = sorted(s2.keys(), key=lambda x: int(x[3:]) if x[3:].isdigit() else -1)
@@ -31,12 +34,12 @@ def main():
     for i, core in enumerate(cores):
         prev_idle, prev_total = s1[core]
         curr_idle, curr_total = s2[core]
-        
+
         diff_idle = curr_idle - prev_idle
         diff_total = curr_total - prev_total
-        
-        usage = 100 * (1 - diff_idle / diff_total) if diff_total > 0 else 0
-        
+
+        usage = cast(float, 100 * (1 - diff_idle / diff_total) if diff_total > 0 else 0)
+
         if core == "cpu":
             total_usage = usage
         else:
@@ -54,9 +57,10 @@ def main():
 
     data = {
         "text": f"{total_usage:.0f}% ",
-        "tooltip": "CPU使用率詳細\n\n" + "\n".join(rows)
+        "tooltip": "CPU使用率詳細\n\n" + "\n".join(rows),
     }
     print(json.dumps(data))
+
 
 if __name__ == "__main__":
     main()
