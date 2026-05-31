@@ -11,6 +11,8 @@ tools
 .local/share/bash-completion/completions
 .config/zsh/completion
 .config/powershell/completion
+.config/powershell/conf/dotprivate
+.config/shell/dotprivate
 {{ end }}
 
 {{ if eq .chezmoi.os "windows" }}
