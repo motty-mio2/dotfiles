@@ -20,5 +20,5 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
-          sh -c "$(curl -fsLS chezmoi.io/get)"
-          ./bin/chezmoi init --apply --promptDefaults -S .
+          sh -c "$(curl -fsLS get.chezmoi.io)" -- -b $HOME/.local/bin
+          $HOME/.local/bin/chezmoi init --apply --promptDefaults -S .
