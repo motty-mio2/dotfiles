@@ -9,8 +9,11 @@ on:
       - main
 
 jobs:
-  on_ubuntu:
-    runs-on: ubuntu-latest
+  on_posix:
+    strategy:
+      matrix:
+        os: [ubuntu-latest, macos-latest]
+    runs-on: ${{ matrix.os }}
 
     steps:
       - name: Checkout repository
