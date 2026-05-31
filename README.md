@@ -28,12 +28,3 @@ mkdir -p "$HOME/.config/vim"
 wget -P "$HOME/.config/vim" https://raw.githubusercontent.com/motty-mio2/dotfiles/refs/heads/main/dot_config/vim/vimrc
 wget -P "$HOME/.config/vim" https://raw.githubusercontent.com/motty-mio2/dotfiles/refs/heads/main/dot_config/vim/option.vim
 ```
-
-## Included Tools
-
-### Common
-
-- chezmoi
-- neovim
-
-## Package Manager

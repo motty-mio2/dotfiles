@@ -1,15 +1,15 @@
 # Package Managers
 
-|                | root  | Windows | Linux | macOS | system | desktop |
-| -------------- | :---: | :-----: | :---: | :---: | :----: | :-----: |
-| mise           |   x   |    o    |   o   |   o   |   x    |    x    |
-| Homebrew       |   x   |    x    |  o→x  |   △   |   o    |    o    |
-| apt / pacman   |   o   |    x    |   o   |   x   |   o    |    o    |
-| snap / flatpak |   o   |    x    |   o   |   x   |   o    |    o    |
-| AUR            |   o   |    x    |   o   |   x   |   o    |    o    |
-| nix            |   o   |    x    |   o   |   o   |   o    |    o    |
-| scoop          |   x   |    o    |   x   |   x   |   x    |    o    |
-| winget         |   o   |    o    |   x   |   x   |   o    |    o    |
+|                | Windows | Linux | macOS | system | desktop |
+| -------------- | :-----: | :---: | :---: | :----: | :-----: |
+| mise           |    o    |   o   |   o   |   x    |    x    |
+| Homebrew       |    x    |   x   |   △   |   o    |    o    |
+| apt / pacman   |    x    |   o   |   x   |   o    |    o    |
+| snap / flatpak |    x    |   o   |   x   |   o    |    o    |
+| AUR            |    x    |   o   |   x   |   o    |    o    |
+| nix            |    x    |   o   |   o   |   o    |    o    |
+| scoop          |    o    |   x   |   x   |   x    |    o    |
+| winget         |    o    |   x   |   x   |   o    |    o    |
 
 ## common
 
