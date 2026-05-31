@@ -1,6 +1,5 @@
 {{ if or (eq .chezmoi.os "linux") (eq .chezmoi.os "darwin" ) -}}
-#!/usr/bin/env bash
-eval "$({{ .chezmoi.executable }} execute-template < {{ .chezmoi.sourceDir }}/dot_profile.tmpl)"
+{{ includeTemplate "dot_profile.tmpl" . }}
 
 mkdir -p "$XDG_STATE_HOME"
 touch "$XDG_STATE_HOME"/python_history
