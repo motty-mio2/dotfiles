@@ -19,4 +19,4 @@ jobs:
       - name: Install dotfiles
         run: |
           sh -c "$(curl -fsLS chezmoi.io/get)"
-          ./bin/chezmoi init --apply --data machine_type_prompt=server -S .
+          ./bin/chezmoi init --apply -S .
