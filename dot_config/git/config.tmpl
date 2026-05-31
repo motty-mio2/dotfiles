@@ -34,5 +34,7 @@
     wcl = "!git-workspace-clone"
 [rebase]
     reapply-cherry-picks = true
+{{ if not (env "CI") -}}
 [url "git@github.com:"]
     insteadOf = https://github.com/
+{{- end }}
