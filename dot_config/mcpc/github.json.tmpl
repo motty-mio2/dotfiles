@@ -12,7 +12,7 @@
 				"ghcr.io/github/github-mcp-server"
 			],
 			"env": {
-				"GITHUB_PERSONAL_ACCESS_TOKEN": "{{ output "gh" "auth" "token" | trim }}"
+				"GITHUB_PERSONAL_ACCESS_TOKEN": "{{ if env "GITHUB_TOKEN" }}{{ env "GITHUB_TOKEN" }}{{ else }}{{ output "gh" "auth" "token" | trim }}{{ end }}"
 			}
 		}
 	}

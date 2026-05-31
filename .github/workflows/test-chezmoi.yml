@@ -17,6 +17,8 @@ jobs:
         uses: actions/checkout@v5
 
       - name: Install dotfiles
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
           sh -c "$(curl -fsLS chezmoi.io/get)"
           ./bin/chezmoi init --apply -S .
