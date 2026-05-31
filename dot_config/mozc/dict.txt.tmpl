@@ -1,0 +1,7 @@
+{{- if lookPath "bw" }}
+{{- range (bitwarden "item" "0da6a1f5-0a53-42c6-9b43-b45b00662a17").fields -}}
+{{- if hasKey . "value" }}
+{{ .name }}	{{ .value }}	短縮よみ
+{{- end }}
+{{- end }}
+{{- end }}
