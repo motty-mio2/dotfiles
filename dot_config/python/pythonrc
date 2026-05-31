@@ -26,10 +26,11 @@ def setup_history():
         / "python_history"
     )
 
-    # https://github.com/python/cpython/issues/105694
-    if not history.is_file():
-        readline.write_history_file(str(history))
-    # breaks on macos + python3 without this.
+    if not history.exists():
+        history.parent.mkdir(parents=True, exist_ok=True)
+        history.touch()
+    elif not history.is_file():
+        history.unlink()
 
     readline.read_history_file(str(history))
     atexit.register(readline.write_history_file, history)
