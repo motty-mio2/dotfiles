@@ -13,6 +13,7 @@ tools
 .config/powershell/completion
 .config/powershell/conf/dotprivate
 .config/shell/dotprivate
+.ssh/authorized_keys
 {{ end }}
 
 {{ if eq .chezmoi.os "windows" }}
