@@ -17,4 +17,6 @@ jobs:
         uses: actions/checkout@v5
 
       - name: Install dotfiles
-        run: sh -c "$(curl -fsLS chezmoi.io/get)" -- init --apply -S .
+        run: |
+          sh -c "$(curl -fsLS chezmoi.io/get)"
+          ./bin/chezmoi init --apply --data machine_type_prompt=server .
