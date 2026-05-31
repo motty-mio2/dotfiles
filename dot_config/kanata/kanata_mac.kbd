@@ -1,0 +1,39 @@
+(deflocalkeys-macos
+  ncnv 123
+  fnkey 464
+)
+
+(defcfg
+  process-unmapped-keys yes
+)
+
+;; 1. defsrc (合計 11個)
+(defsrc
+  grave h j k l ncnv
+  fnkey f1 f2 f10 f11 f12
+)
+
+(defalias
+  vim (tap-hold-press 200 200 ncnv (layer-toggle arrows))
+  fnl (layer-toggle fn-actions)
+  pls S-;
+)
+
+;; 2. default (11個)
+(deflayer default
+  @pls _ _ _ _ @vim
+  @fnl f1 f2 f10 f11 f12
+)
+
+;; 3. fn-actions (11個)
+(deflayer fn-actions
+  _    _ _ _ _ _
+  _    brdn brup mute vold volu
+)
+
+;; 4. arrows (11個)
+(deflayer arrows
+  _    left down up rght _
+  _    _    _    _    _    _
+)
+

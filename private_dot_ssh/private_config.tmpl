@@ -1,11 +1,12 @@
+
+Include {{ joinPath .chezmoi.homeDir "/.config/colima/ssh_config" }}
 Include {{ joinPath .chezmoi.homeDir "/.local/share/lima/*/ssh.config" }}
 Include {{ joinPath .chezmoi.homeDir "/.ssh/config.d/*.conf" }}
 
 Match User *,!git
     ForwardAgent yes
-    ForwardX11 yes
-    ForwardX11Trusted yes
     TCPKeepAlive yes
+    SetEnv TERM=xterm
 
 Match User git
     RequestTTY no

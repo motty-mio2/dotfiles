@@ -28,8 +28,6 @@ alias ivx="iverilog -g2012"
 # Vim
 alias vim='VIMINIT=":source $XDG_CONFIG_HOME/vim/vimrc" vim'
 
-#!/usr/bin/bash
-
 rmemp() {
 	local target_directory="$1"
 
@@ -92,16 +90,6 @@ bwx() {
 ghf() {
 	gh repo clone "$(gh repo list -L 10000 | fzf | awk '{print $1}')"
 }
-
-mygitconfig() {
-	git config --local user.name "motty"
-	git config --local user.email "motty.mio2@gmail.com"
-}
-
-# task
-if ! hash task &>/dev/null && hash go-task &>/dev/null; then
-	alias task=go-task
-fi
 
 set-window-title() {
 	local title="$1"

@@ -1,0 +1,13 @@
+{pkgs, ... }:
+{
+    launchd.daemons.kanata = {
+  command = "${pkgs.kanata}/bin/kanata -c {{ joinPath .chezmoi.homeDir "/.config/kanata/kanata.kbd" }}";
+  serviceConfig = {
+    RunAtLoad = true;
+    KeepAlive = true;
+    # 権限問題を避けるため root で実行（daemons なのでデフォルト root）
+    StandardOutPath = "/Library/Logs/kanata.out.log";
+    StandardErrorPath = "/Library/Logs/kanata.err.log";
+  };
+};
+}

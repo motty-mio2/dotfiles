@@ -1,0 +1,23 @@
+# HackGen
+{{- if eq .chezmoi.os "linux" }}
+{{ $hackgen_version:= "v2.10.0" }}
+
+["HackGen"]
+type = "archive"
+executable = true
+refreshPeriod = "168h"
+stripComponents = 1
+exact = false
+url = "https://github.com/yuru7/HackGen/releases/download/{{ $hackgen_version }}/HackGen_{{ $hackgen_version }}.zip"
+targetPath = "fonts"
+
+["HackGen_NF"]
+type = "archive"
+executable = true
+refreshPeriod = "168h"
+stripComponents = 1
+exact = false
+url = "https://github.com/yuru7/HackGen/releases/download/{{ $hackgen_version }}/HackGen_NF_{{ $hackgen_version }}.zip"
+targetPath = "fonts"
+
+{{- end }}

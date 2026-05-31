@@ -1,8 +1,19 @@
 return {
-	{ "nvimtools/none-ls-extras.nvim", dependencies = { "nvimtools/none-ls.nvim" } },
-	{ "nvimtools/none-ls.nvim", dependencies = { "nvim-lua/plenary.nvim" }, opts = {} },
+	{
+		"nvimtools/none-ls.nvim",
+		dependencies = {
+			"nvimtools/none-ls-extras.nvim",
+			"nvim-lua/plenary.nvim",
+		},
+		opts = {},
+	},
 	{ "neovim/nvim-lspconfig" },
-	{ "nvim-treesitter/nvim-treesitter" },
+	{
+		"nvim-treesitter/nvim-treesitter",
+		branch = "main",
+		lazy = false,
+		build = ":TSUpdate",
+	},
 	{
 		"hrsh7th/nvim-cmp",
 		dependencies = {
@@ -11,6 +22,7 @@ return {
 			"hrsh7th/cmp-path",
 			"hrsh7th/cmp-cmdline",
 			"hrsh7th/cmp-nvim-lua",
+			"hrsh7th/vim-vsnip",
 		},
 	},
 	{
@@ -27,9 +39,6 @@ return {
 		version = false,
 		lazy = false,
 		priority = 1000, -- make sure to load this before all the other start plugins
-		config = function()
-			require("everforest").setup({})
-		end,
 	},
 	{
 		"nvim-telescope/telescope.nvim",
@@ -68,7 +77,11 @@ return {
 	},
 	{
 		"nvim-neo-tree/neo-tree.nvim",
-		dependencies = { "nvim-lua/plenary.nvim", "kyazdani42/nvim-web-devicons", "MunifTanjim/nui.nvim" },
+		dependencies = {
+			"nvim-lua/plenary.nvim",
+			"kyazdani42/nvim-web-devicons",
+			"MunifTanjim/nui.nvim",
+		},
 	},
 	{
 		"folke/lazy.nvim",
@@ -81,7 +94,30 @@ return {
 			"nvim-treesitter/nvim-treesitter",
 		},
 		event = "VeryLazy",
-		opts = {},
+		opts = {
+			views = {
+				cmdline_popup = {
+					border = {
+						style = "single",
+					},
+				},
+				popupmenu = {
+					border = {
+						style = "single",
+					},
+				},
+				notify = {
+					border = {
+						style = "single",
+					},
+				},
+				lsp_hover = {
+					border = {
+						style = "single",
+					},
+				},
+			},
+		},
 	},
 	{
 		"numToStr/Comment.nvim",
@@ -103,9 +139,6 @@ return {
 		},
 	},
 	{
-		"lewis6991/gitsigns.nvim",
-	},
-	{
 		"folke/trouble.nvim",
 		opts = {},
 		cmd = "Trouble",
@@ -124,7 +157,6 @@ return {
 	},
 	{
 		"nvim-telescope/telescope.nvim",
-
 		dependencies = { "nvim-lua/plenary.nvim" },
 	},
 	{
@@ -132,16 +164,6 @@ return {
 		event = "VeryLazy", -- Or `LspAttach`
 		priority = 1000, -- needs to be loaded in first
 		opts = { virtual_text = false },
-	},
-	{
-		"shellRaining/hlchunk.nvim",
-		event = { "BufReadPre", "BufNewFile" },
-		opts = {
-			chunk = { enable = false },
-			indent = { enable = true },
-			line_num = { enable = false },
-			blank = { enable = false },
-		},
 	},
 	{
 		"pwntester/octo.nvim",
@@ -173,14 +195,17 @@ return {
 		},
 	},
 	{
-		"zbirenbaum/copilot-cmp",
-		opts = {
-			suggestion = { enabled = false },
-			panel = { enabled = false },
-		},
+		"vim-denops/denops.vim",
+		lazy = false,
 	},
 	{
-		"zbirenbaum/copilot.lua",
-		requires = { "zbirenbaum/copilot-cmp" },
+		"nekowasabi/hellshake-yano.vim",
+		dependencies = { "vim-denops/denops.vim" },
+	},
+	{
+		"cordx56/rustowl",
+		version = "*", -- Latest stable version
+		lazy = false, -- This plugin is already lazy
+		opts = {},
 	},
 }

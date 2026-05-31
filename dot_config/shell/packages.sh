@@ -1,0 +1,258 @@
+#!/usr/bin/env bash
+
+alias aupdate='sudo apt update && sudo apt upgrade -y && sudo apt autoremove -y'
+alias bupdate='brew update && brew upgrade'
+alias dupdate='sudo dnf update -y'
+alias fupdate='sudo flatpak update && sudo flatpak remove --unused'
+alias mupdate='mise self-update --quiet; mise upgrade --bump; mise cache prune'
+alias pupdate='sudo pacman -Syu'
+alias supdate='sudo snap refresh'
+alias yupdate='yay -Syu'
+alias zupdate='sudo zypper ref && sudo zypper update -y'
+alias rupdate='sudo darwin-rebuild switch --flake $HOME/.local/share/nix/darwin'
+
+nupdate() {
+	for item in $(nix profile list --json | jq -r ".elements | keys | .[] "); do
+		nix flake update --flake "$XDG_DATA_HOME/nix/$item"
+		nix profile upgrade "$item"
+	done
+
+	if [ -e "$HOME/.nix-profile" ]; then
+		unlink "$HOME/.nix-profile"
+	fi
+}
+
+is-arch() {
+	[[ -f /etc/os-release ]] && grep -qi '^ID=arch' /etc/os-release
+}
+
+install-docker() {
+	if is-arch; then
+		sudo pacman -Sy --noconfirm --needed docker docker-compose
+	else
+		curl https://get.docker.com | sh
+	fi
+	sudo gpasswd -a "$USER" docker
+}
+
+install-rust() {
+	if is-arch; then
+		sudo pacman -Sy --noconfirm --needed rustup
+		rustup default stable
+		return
+	else
+		curl https://sh.rustup.rs -sSf | sh -s -- -y
+	fi
+}
+
+install-rust-tools() {
+	# shellcheck disable=SC1083,SC2207
+	components=($(chezmoi execute-template '{{.dependencies.rustup | join " " }}'))
+	if [ "${#components[@]}" -gt 0 ]; then
+		rustup component add "${components[@]}"
+	fi
+}
+
+install-uv() {
+	curl -LsSf https://astral.sh/uv/install.sh | sh
+}
+
+install-uv-tools() {
+	# shellcheck disable=SC1009,SC1072,SC1073,SC1083,SC2207
+	tools=($(chezmoi execute-template '{{- .dependencies.uv | quoteList | join " " -}}'))
+
+	for tool in "${tools[@]}"; do
+		"$HOME/.local/bin/uv" tool install --upgrade "$tool"
+	done
+
+	"$HOME/.local/bin/uv" tool install --upgrade --from git+https://github.com/motty-mio2/dixp.git dixp
+}
+
+install-aur() {
+	sudo pacman -Sy --noconfirm --needed base-devel git
+	local aur_helper="${1:-yay}"
+
+	if [ -e "/usr/bin/$aur_helper" ]; then
+		echo "$aur_helper is already installed."
+	else
+		WORK_DIR=$(mktemp -d)
+		if [ "$aur_helper" = "paru" ]; then
+			git clone https://aur.archlinux.org/paru-bin.git "$WORK_DIR" --depth 1
+		else
+			git clone https://aur.archlinux.org/yay-bin.git "$WORK_DIR" --depth 1
+		fi
+		eval cd "$WORK_DIR" && makepkg --noconfirm -si
+		rm -rf "$WORK_DIR"
+	fi
+}
+
+install-aur-tools() {
+	local aur_helper="${1:-yay}"
+	# shellcheck disable=SC2016
+	# shellcheck disable=SC2016,SC2207
+	aur_pkgs=($(chezmoi execute-template '{{ range $name, $managers := .dependencies.cli -}}{{- get $managers "aur" | printf "%s " -}}{{- end }}'))
+
+	if [ "${#aur_pkgs[@]}" -gt 0 ]; then
+		"$aur_helper" -Sy --noconfirm unarchiver "${aur_pkgs[@]}"
+	else
+		"$aur_helper" -Sy --noconfirm unarchiver
+	fi
+}
+
+install-aur-dev-tools() {
+	local aur_helper="${1:-yay}"
+	# shellcheck disable=SC2016
+	# shellcheck disable=SC2016,SC2207
+	aur_dev_pkgs=($(chezmoi execute-template '{{ range $name, $managers := .dependencies.dev -}}{{- get $managers "aur" | printf "%s " -}}{{- end }}'))
+
+	if [ "${#aur_dev_pkgs[@]}" -gt 0 ]; then
+		"$aur_helper" -Sy --noconfirm "${aur_dev_pkgs[@]}"
+	else
+		"$aur_helper" -Sy --noconfirm
+	fi
+}
+
+install-aur-desktop-tools() {
+	local aur_helper="${1:-yay}"
+	# shellcheck disable=SC2016
+	# shellcheck disable=SC2016,SC2207
+	aur_desktop_pkgs=($(chezmoi execute-template '{{ range $name, $managers := .dependencies.desktop -}}{{- get $managers "aur" | printf "%s " -}}{{- end }}'))
+
+	if [ "${#aur_desktop_pkgs[@]}" -gt 0 ]; then
+		"$aur_helper" -Sy --noconfirm "${aur_desktop_pkgs[@]}"
+	else
+		"$aur_helper" -Sy --noconfirm
+	fi
+}
+
+install-aur-hyprland-tools() {
+	local aur_helper="${1:-yay}"
+	"$aur_helper" -Sy --noconfirm \
+		hyprland waybar dunst \
+		brightnessctl hyprpolkitagent ulauncher
+}
+
+install-ubuntu-hyprland() {
+	sudo add-apt-repository ppa:cppiber/hyprland
+	sudo apt-get update
+	# shellcheck disable=SC2016
+	# shellcheck disable=SC2016,SC2207
+	hypr_pkgs=($(chezmoi execute-template '{{ range $name, $managers := .dependencies.hyprland -}}{{- get $managers "apt" | printf "%s " -}}{{- end }}'))
+
+	if [ "${#hypr_pkgs[@]}" -gt 0 ]; then
+		sudo apt-get install -qy "${hypr_pkgs[@]}"
+	fi
+	pavucontrol nemo
+}
+
+install-base-develop() {
+	if type "pacman" >/dev/null 2>&1; then
+		sudo pacman -S base-devel
+	elif type "apt" >/dev/null 2>&1; then
+		echo "Debian Mode"
+		sudo apt install build-essential git python3-pip python3-venv
+	elif type "dnf" >/dev/null 2>&1; then
+		echo "RHEL Mode"
+		sudo dnf -q -y groupinstall "Development Tools"
+	elif type "zypper" >/dev/null 2>&1; then
+		zypper install -t pattern devel_basis
+	else
+		echo "Unknown OS or Distribution"
+	fi
+}
+
+install-debian-tools() {
+	sudo apt-get update
+	# shellcheck disable=SC2016,SC2207
+	packages=($(chezmoi execute-template '{{ range $name, $managers := .dependencies.cli -}}{{- get $managers "apt" | printf "%s " -}}{{- end }}'))
+
+	if [ "${#packages[@]}" -gt 0 ]; then
+		sudo apt-get install -qy build-essential libssl-dev libreadline-dev nemo "${packages[@]}"
+	else
+		sudo apt-get install -qy build-essential libssl-dev libreadline-dev nemo
+	fi
+}
+
+install-debian-dev-tools() {
+	sudo apt-get update
+	# shellcheck disable=SC2016
+	# shellcheck disable=SC2016,SC2207
+	deb_dev_pkgs=($(chezmoi execute-template '{{ range $name, $managers := .dependencies.dev -}}{{- get $managers "apt" | printf "%s " -}}{{- end }}'))
+
+	if [ "${#deb_dev_pkgs[@]}" -gt 0 ]; then
+		sudo apt-get install -qy build-essential libssl-dev "${deb_dev_pkgs[@]}"
+	else
+		sudo apt-get install -qy build-essential libssl-dev
+	fi
+}
+
+install-ubuntu-dev-tools() {
+	sudo apt-get install ca-certificates
+
+	echo "VSCode"
+	curl https://packages.microsoft.com/keys/microsoft.asc | sudo gpg --yes --dearmor -o /etc/apt/trusted.gpg.d/microsoft.gpg
+	echo \
+		"deb [arch=amd64 signed-by=/etc/apt/trusted.gpg.d/microsoft.gpg] \
+		https://packages.microsoft.com/repos/vscode stable main" |
+		sudo tee /etc/apt/sources.list.d/vscode.list
+
+	# Add the repository to Apt sources:
+	# shellcheck source=/dev/null
+	echo \
+		"deb [arch=$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/docker.asc] \
+		https://download.docker.com/linux/ubuntu \
+		$(. /etc/os-release && echo "${UBUNTU_CODENAME:-$VERSION_CODENAME}") stable" |
+		sudo tee /etc/apt/sources.list.d/docker.list >/dev/null
+
+	echo "Alacritty"
+	sudo add-apt-repository ppa:aslatter/ppa
+
+	echo "Wezterm"
+	curl -fsSL https://apt.fury.io/wez/gpg.key | sudo gpg --yes --dearmor -o /etc/apt/keyrings/wezterm-fury.gpg
+	echo \
+		"deb [signed-by=/etc/apt/keyrings/wezterm-fury.gpg] https://apt.fury.io/wez/ * *" |
+		sudo tee /etc/apt/sources.list.d/wezterm.list >/dev/null
+
+	sudo apt-get update
+	sudo apt-get install code
+	sudo apt-get install flatpak
+	sudo apt-get install alacritty
+	sudo apt-get install wezterm
+}
+
+install-nix() {
+	if ! command -v nix &>/dev/null; then
+		curl --proto '=https' --tlsv1.2 -sSf -L https://install.determinate.systems/nix | sh -s -- install
+
+		# shellcheck source=/dev/null
+		source "/nix/var/nix/profiles/default/etc/profile.d/nix-daemon.sh"
+	else
+		echo "Nix is already installed."
+	fi
+
+	if nix config show | grep 'use-xdg-base-directories = true' &>/dev/null; then
+		echo "Nix is already configured to use XDG base directories."
+	else
+		echo "use-xdg-base-directories = true" | sudo tee -a /etc/nix/nix.conf
+	fi
+}
+
+install-nix-tools() {
+	nix profile add "$XDG_DATA_HOME/nix/cli/.#cli"
+}
+
+install-nix-dev-tools() {
+	nix profile add "$XDG_DATA_HOME/nix/dev/.#dev"
+}
+
+install-nix-hyprland-tools() {
+	nix profile add "$XDG_DATA_HOME/nix/hyprland/.#hyprland"
+}
+
+install-arch-desktop-dependency() {
+	yay -Sy fcitx5-im fcitx5-configtool fcitx5-mozc visual-studio-code-bin
+}
+
+install-flatpak-apps() {
+	flatpak remote-add --if-not-exists flathub https://dl.flathub.org/repo/flathub.flatpakrepo
+}

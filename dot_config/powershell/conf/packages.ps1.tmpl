@@ -1,3 +1,24 @@
+{{ if (lookPath "mise")}}
+mise activate pwsh --cd $Env:USERPROFILE | Out-String | Invoke-Expression
+{{ end }}
+
+function mupdate {
+    mise self-update --quiet
+    mise upgrade --bump
+    mise cache prune
+}
+
+function supdate {
+    scoop update
+    scoop update *
+    scoop cleanup *
+}
+
+function wupdate {
+    winget upgrade $args
+}
+
+
 function Install-rust-Tools {
     rustup component add {{ .dependencies.rustup | join " " }}
 }
@@ -13,18 +34,6 @@ function Install-uv-Tools {
     }
 
     & "$UV_ENV\$executableName" tool install --upgrade --from git+https://github.com/motty-mio2/dixp dixp
-}
-
-function Install-Volta-Tools {
-    param (
-        $VOLTA_HOME = "$Env:VOLTA_HOME"
-    )
-
-    & "$VOLTA_HOME\bin\volta" install node@lts
-
-    foreach ($tool in @( {{- .dependencies.volta | quoteList | join ", " -}} ) ) {
-        & "$VOLTA_HOME\bin\volta" install $tool
-    }
 }
 
 function Install-Scoop-Tools {

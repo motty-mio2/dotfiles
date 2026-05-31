@@ -1,0 +1,84 @@
+// Zed settings
+//
+// For information on how to configure Zed, see the Zed
+// documentation: https://zed.dev/docs/configuring-zed
+//
+// To see all of Zed's default settings without changing your
+// custom settings, run `zed: open default settings` from the
+// command palette
+{
+  "cli_default_open_behavior": "existing_window",
+  "agent_servers": {
+    "github-copilot-cli": {
+      "type": "registry"
+    }
+  },
+  "project_panel": {
+    "dock": "left"
+  },
+  "edit_predictions": {
+    "provider": "copilot"
+  },
+  "git": {
+    "git_gutter": "tracked_files",
+    "path_style": "file_path_first",
+    "branch_picker": {
+      "show_author_name": false
+    },
+    "blame": {
+      "show_avatar": false
+    }
+  },
+  "git_panel": {
+    "dock": "left",
+    "sort_by_path": true,
+  },
+  "disable_ai": false,
+  "vim_mode": false,
+  "autosave": "on_focus_change",
+  "auto_update": true,
+  "agent": {
+    "sidebar_side": "right",
+    "dock": "right",
+    "tool_permissions": {
+      "default": "allow"
+    },
+    "enable_feedback": false,
+    "default_model": {
+      "provider": "copilot_chat",
+      "model": "gpt-5-mini",
+    },
+  },
+  "ui_font_size": 16,
+  "buffer_font_size": 16,
+  "theme": {
+    "mode": "system",
+    "light": "One Dark",
+    "dark": "One Dark",
+  },
+  "terminal": {
+    "font_family": "HackGen35 Console NF",
+    "shell": {
+      "program": "zsh",
+    },
+    "working_directory": "current_project_directory",
+  },
+  "buffer_font_family": "HackGen35",
+  "lsp": {},
+  "languages": {
+    "Python": {
+      "format_on_save": "on",
+    },
+  },
+  "context_servers": {
+    "chrome-devtools": {
+      "enabled": true,
+      "command": "npx",
+      "args": ["chrome-devtools-mcp@latest"],
+    },
+    "mcpc": {
+      "command": "npx",
+      "args": ["-y", "github:motty-mio2/mcpc#main", "serve"],
+    },
+  },
+}

@@ -1,6 +1,4 @@
 [user]
-    name = motty
-    email = motty.mio2@gmail.com
 {{- if glob ( joinPath .chezmoi.homeDir "/.ssh/id_ed25519" ) }}
     signingkey = ~/.ssh/id_ed25519.pub
 [commit]
@@ -11,6 +9,14 @@
 [core]
     autocrlf = input
     filemode = false
+    quotepath = false
+[interactive]
+    diffFilter = delta --color-only
+[delta]
+    navigate = true  # use n and N to move between diff sections
+    dark = true      # or light = true, or omit for auto-detection
+    side-by-side = true
+    line-numbers = true
 [fetch]
     prune = true
 [filter "lfs"]
@@ -20,8 +26,6 @@
     required = true
 [init]
     defaultBranch = main
-[merge]
-    ff = false
 [pull]
     ff = only
 [alias]
@@ -30,4 +34,5 @@
     wcl = "!git-workspace-clone"
 [rebase]
     reapply-cherry-picks = true
-
+[url "git@github.com:"]
+    insteadOf = https://github.com/

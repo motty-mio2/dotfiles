@@ -1,0 +1,55 @@
+{
+  "context": {
+    "fileName": [
+      "AGENTS.md",
+      "GEMINI.md"
+    ]
+  },
+  "ide": {
+    "hasSeenNudge": true,
+    "enabled": true
+  },
+  "mcpServers": {
+    "chrome-devtools": {
+      "command": "npx",
+      "args": [
+        "chrome-devtools-mcp@latest"
+      ]
+    },
+    "mcpc": {
+      "command": "npx",
+      "args": [
+        "-y",
+        "github:motty-mio2/mcpc#main",
+        "serve"
+      ]
+    }
+  },
+  "general": {
+    "preferredEditor": "vscode",
+    "previewFeatures": true,
+    "enablePromptCompletion": true,
+    "enableAutoUpdate": false,
+    "vimMode": true,
+    "sessionRetention": {
+      "enabled": true,
+      "maxAge": "30d",
+      "warningAcknowledged": true
+    }
+  },
+  "security": {
+    "auth": {
+      "selectedType": "oauth-personal"
+    }
+  },
+  "ui": {
+    "theme": "Dracula",
+    "hideTips": true,
+    "footer": {
+      "hideContextPercentage": false
+    }
+  },
+  "output": {
+    "format": "text"
+  }
+}

@@ -1,4 +1,4 @@
-#!/usr/bin/zsh
+#!/usr/bin/env zsh
 
 if [ -z "$MY_ZSH_PROFILE" ]; then
     source "$HOME/.config/zsh/.zprofile"
@@ -61,24 +61,12 @@ function select-history() {
 zle -N select-history
 
 bindkey -e
+bindkey '^r' select-history
 bindkey "^[[3~" delete-char
 bindkey "^[[H" beginning-of-line
 bindkey "^[[F" end-of-line
-bindkey '^r' select-history
 bindkey "^[[1~" beginning-of-line
 bindkey "^[[4~" end-of-line
 
 # Include shell template
-{{ includeTemplate "shell_rc.tmpl" (dict "shell" "zsh" ) }}
-
-{{ if and (lookPath "starship") (eq .zsh "starship") }}
-{{      output "starship" "init" "zsh" }}
-precmd_functions+=(set-window-title)
-{{ else if and (lookPath "oh-my-posh") (eq .zsh "oh-my-posh") }}
-{{      output "oh-my-posh" "init" "zsh" "--config" "~/.config/omp.toml" | replaceAllRegex "export POSH_SESSION_ID.+" "" }}
-{{ else }}
-# POWERLEVEL
-source "$XDG_CONFIG_HOME/zsh/plugins/powerlevel10k/powerlevel10k.zsh-theme"
-POWERLEVEL9K_DISABLE_CONFIGURATION_WIZARD=true
-{{      include "dot_config/zsh/dot_p10k.zsh" }}
-{{ end }}
+{{ includeTemplate "shell_rc.tmpl" (dict "shell" "zsh" "homeDir" .chezmoi.homeDir) }}

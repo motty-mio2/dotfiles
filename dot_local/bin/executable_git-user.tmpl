@@ -1,0 +1,40 @@
+#!/usr/bin/env bash
+
+if ! git rev-parse --is-inside-work-tree &>/dev/null; then
+  echo "このディレクトリはGit管理されていません。"
+  exit 1
+fi
+current_name="$(git config user.name)"
+current_email="$(git config user.email)"
+
+if [[ -n $current_name && -n $current_email ]]; then
+    echo "Current: $current_name <$current_email>"
+else
+    echo "Invalid or not set."
+fi
+
+PS3="Select Git user: "
+
+keys=("motty <motty.mio2@gmail.com>")
+names=("motty")
+values=("motty.mio2@gmail.com")
+
+{{ if lookPath "bw" -}}
+{{    range (bitwarden "item" "87a4afa9-31ce-4707-aab5-b3a3002b227e").fields -}}
+keys+=("{{ .name }} <{{ .value }}>")
+names+=("{{ .name }}")
+values+=("{{ .value }}")
+{{    end }}
+{{ end -}}
+
+select item in "${keys[@]}"; do
+  if [[ -n "$item" ]]; then
+    idx=$((REPLY-1))
+    git config user.name "${names[$idx]}"
+    git config user.email "${values[$idx]}"
+    echo "Set Git user to: ${keys[$idx]}"
+    exit 0
+  else
+    echo "Invalid selection."
+  fi
+done
