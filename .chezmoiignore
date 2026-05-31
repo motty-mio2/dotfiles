@@ -6,6 +6,13 @@ justfile
 nix
 tools
 
+{{ if env "CI" }}
+.config/mcpc
+.local/share/bash-completion/completions
+.config/zsh/completion
+.config/powershell/completion
+{{ end }}
+
 {{ if eq .chezmoi.os "windows" }}
     .bash_logout
     .bash_profile
