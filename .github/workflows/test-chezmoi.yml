@@ -16,9 +16,20 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v5
 
-      - name: Install dotfiles
+      - name: Install chezmoi
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
           sh -c "$(curl -fsLS get.chezmoi.io)" -- -b "$HOME/.local/bin"
+
+      - name: Initialize dotfiles
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
           "$HOME/.local/bin/chezmoi" init --apply --promptDefaults -S .
+
+      - name: Apply dotfiles
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          "$HOME/.local/bin/chezmoi" apply -k -S .
