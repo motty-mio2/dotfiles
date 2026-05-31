@@ -9,7 +9,7 @@ on:
       - main
 
 jobs:
-  test:
+  on_ubuntu:
     runs-on: ubuntu-latest
 
     steps:
@@ -33,3 +33,28 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
           "$HOME/.local/bin/chezmoi" apply -k -S .
+
+  on_windows:
+    runs-on: windows-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v5
+
+      - name: Install chezmoi
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          Invoke-WebRequest -Uri "https://github.com/twpayne/chezmoi/releases/latest/download/chezmoi-windows-amd64.exe" -OutFile $HOME/.local/bin/chezmoi.exe
+
+      - name: Initialize dotfiles
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          ."$HOME/.local/bin/chezmoi.exe" init --apply --promptDefaults -S .
+
+      - name: Apply dotfiles
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          ."$HOME/.local/bin/chezmoi.exe" apply -k -S .
