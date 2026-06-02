@@ -29,7 +29,6 @@ npm = [
   "dockerfile-language-server-nodejs",
   "markdownlint-cli2",
   "neovim",
-  "opencode-ai",
   "semver",
   "svelte-language-server",
   "typescript-language-server",
@@ -65,6 +64,7 @@ lazygit = { scoop = "lazygit", aur = "lazygit", nix = "lazygit", mise = "github:
 less = { scoop = "less", apt = "less" }
 nano = { scoop = "nano", apt = "nano", aur = "nano" }
 neovim = { scoop = "neovim", aur = "neovim", nix = "neovim", mise = "github:neovim/neovim" }
+opencode = { mise = "github:anomalyco/opencode"}
 ripgrep = { scoop = "ripgrep", apt = "ripgrep", nix = "ripgrep", mise = "github:BurntSushi/ripgrep" }
 starship = { scoop = "starship", aur = "starship", nix = "starship", mise = "github:starship/starship" }
 tombi = { scoop = "tombi", aur = "tombi", nix = "tombi", mise = "github:tombi-toml/tombi" }
