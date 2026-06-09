@@ -41,17 +41,17 @@ function Install-uv-Tools {
 }
 
 function Install-Scoop-Tools {
-    $pkgs = (chezmoi execute-template '{{ range $name, $managers := .dependencies.cli -}}{{- get $managers "scoop" | printf "%s " -}}{{- end }}') -split '\s+' | Where-Object { $_ }
+    $pkgs = (chezmoi execute-template '{{ range $name, $managers := .dependencies.cli -}}{{- if and (hasKey $managers "scoop") (not (hasKey $managers "mise")) -}}{{- get $managers "scoop" | printf "%s " -}}{{- end -}}{{- end }}') -split '\s+' | Where-Object { $_ }
     scoop install $pkgs
 }
 
 function Install-Scoop-Dev-Tools {
-    $pkgs = (chezmoi execute-template '{{ range $name, $managers := .dependencies.dev -}}{{- get $managers "scoop" | printf "%s " -}}{{- end }}') -split '\s+' | Where-Object { $_ }
+    $pkgs = (chezmoi execute-template '{{ range $name, $managers := .dependencies.dev -}}{{- if and (hasKey $managers "scoop") (not (hasKey $managers "mise")) -}}{{- get $managers "scoop" | printf "%s " -}}{{- end -}}{{- end }}') -split '\s+' | Where-Object { $_ }
     scoop install $pkgs
 }
 
 function Install-Scoop-GUI-Tools {
-    $pkgs = (chezmoi execute-template '{{ range $name, $managers := .dependencies.desktop -}}{{- get $managers "scoop" | printf "%s " -}}{{- end }}') -split '\s+' | Where-Object { $_ }
+    $pkgs = (chezmoi execute-template '{{ range $name, $managers := .dependencies.desktop -}}{{- if and (hasKey $managers "scoop") (not (hasKey $managers "mise")) -}}{{- get $managers "scoop" | printf "%s " -}}{{- end -}}{{- end }}') -split '\s+' | Where-Object { $_ }
     scoop install 7zip geekuninstaller gsudo sysinternals $pkgs
 }
 
