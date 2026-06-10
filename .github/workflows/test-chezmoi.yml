@@ -79,6 +79,7 @@ jobs:
       - name: Install Dependencies
         run: |
           (Resolve-Path ~/scoop/shims).Path >> $Env:GITHUB_PATH
+          $Env:PATH="$Env:PATH;$(Resolve-Path ~/scoop/shims).Path";
           scoop update
           Install-Scoop-Tools
           Install-Scoop-Dev-Tools
