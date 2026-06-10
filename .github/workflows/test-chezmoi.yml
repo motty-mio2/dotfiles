@@ -60,8 +60,10 @@ jobs:
         run: |
           New-Item -ItemType Directory -Force $HOME/.local/bin
           Invoke-WebRequest -Uri "https://github.com/twpayne/chezmoi/releases/latest/download/chezmoi-windows-amd64.exe" -OutFile $HOME/.local/bin/chezmoi.exe
-          New-Item -ItemType Directory -Force $HOME/.config/chezmoi
-          echo 'sourceDir = "${{ github.workspace }}"' >> $HOME/.config/chezmoi/chezmoi.toml
+          $configDir = Join-Path $HOME ".config" "chezmoi"
+          New-Item -ItemType Directory -Force $configDir
+          $sourceDir = "${{ github.workspace }}".Replace('\', '/')
+          "sourceDir = `"$sourceDir`"" | Out-File -FilePath (Join-Path $configDir "chezmoi.toml") -Encoding utf8
 
       - name: Initialize dotfiles
         env:
