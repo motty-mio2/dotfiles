@@ -72,6 +72,7 @@ jobs:
 
       - name: Install Dependencies
         run: |
+          $env:Path += ";$HOME/.scoop/shims/"
           Install-Scoop-Tools
           Install-Scoop-Dev-Tools
           Install-Scoop-GUI-Tools
