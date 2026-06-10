@@ -9,6 +9,7 @@ pip = [
   "isort",
   "mypy",
   "pyright",
+  "streamlink",
   "ruff",
 ]
 rustup = [
@@ -39,8 +40,8 @@ npm = [
 [dependencies.cli]
 act = { aur = "act", nix = "act", mise = "github:nektos/act" }
 bat = { scoop = "bat", apt = "bat", aur = "bat", nix = "bat", mise = "github:sharkdp/bat" }
-bw = { scoop = "bitwarden", aur = "bitwarden-cli", nix = "bitwarden-cli", mise = "npm:@bitwarden/cli" }
-bws = { mise = "bitwarden-secrets-manager"}
+bw = { scoop = "bitwarden", aur = "bitwarden-cli", nix = "bitwarden-cli", mise = "bitwarden" }
+bws = { scoop = "bitwarden-secrets-manager-cli", mise = "bitwarden-secrets-manager" }
 byobu = { apt = "byobu", aur = "byobu" }
 chezmoi = { scoop = "chezmoi", aur = "chezmoi", nix = "chezmoi", mise = "github:twpayne/chezmoi" }
 cloudflared = { scoop = "cloudflared", aur = "cloudflared", nix = "cloudflared", mise = "github:cloudflare/cloudflared" }
@@ -65,7 +66,7 @@ lazygit = { scoop = "lazygit", aur = "lazygit", nix = "lazygit", mise = "github:
 less = { scoop = "less", apt = "less" }
 nano = { scoop = "nano", apt = "nano", aur = "nano" }
 neovim = { scoop = "neovim", aur = "neovim", nix = "neovim", mise = "github:neovim/neovim" }
-opencode = { mise = "github:anomalyco/opencode"}
+opencode = { mise = "github:anomalyco/opencode" }
 ripgrep = { scoop = "ripgrep", apt = "ripgrep", nix = "ripgrep", mise = "github:BurntSushi/ripgrep" }
 starship = { scoop = "starship", aur = "starship", nix = "starship", mise = "github:starship/starship" }
 tombi = { scoop = "tombi", aur = "tombi", nix = "tombi", mise = "github:tombi-toml/tombi" }
@@ -76,7 +77,7 @@ vim = { scoop = "vim", apt = "vim", aur = "vim" }
 wget = { scoop = "wget", apt = "wget", aur = "wget" }
 which = { scoop = "which" }
 yazi = { scoop = "yazi", nix = "yazi", mise = "github:sxyazi/yazi" }
-yt-dlp = { scoop = "yt-dlp", aur = "yt-dlp", nix = "yt-dlp", mise = "pipx:yt-dlp" }
+yt-dlp = { scoop = "yt-dlp", aur = "yt-dlp", nix = "yt-dlp", mise = "yt-dlp" }
 zoxide = { aur = "zoxide", nix = "zoxide", scoop = "zoxide", mise = "github:ajeetdsouza/zoxide" }
 zsh = { apt = "zsh", aur = "zsh" }
 

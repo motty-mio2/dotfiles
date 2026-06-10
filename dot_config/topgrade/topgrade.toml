@@ -4,7 +4,6 @@
 [include]
 # paths = ["/etc/topgrade.toml"]
 
-
 [misc]
 # On Unix systems, Topgrade should not be run as root, it
 # will run commands with sudo or equivalent where needed.
@@ -29,7 +28,7 @@
 
 # Disable specific steps - same options as the command line flag
 # disable = ["system", "emacs"]
-disable = ["chezmoi", "nix"]
+disable = ["chezmoi", "docker", "mise", "nix"]
 
 # Run these steps before all others
 # first = ["chezmoi"]
@@ -125,22 +124,18 @@ disable = ["chezmoi", "nix"]
 #   autodetect, nh, vanilla
 # nix_handler = "autodetect"
 
-
 # Commands to run before anything
 [pre_commands]
 # "Emacs Snapshot" = "rm -rf ~/.emacs.d/elpa.bak && cp -rl ~/.emacs.d/elpa ~/.emacs.d/elpa.bak"
-
 
 # Commands to run after anything
 [post_commands]
 # "Emacs Snapshot" = "rm -rf ~/.emacs.d/elpa.bak && cp -rl ~/.emacs.d/elpa ~/.emacs.d/elpa.bak"
 
-
 # Custom commands
 [commands]
 # "Python Environment" = "~/dev/.env/bin/pip install -i https://pypi.python.org/simple -U --upgrade-strategy eager jupyter"
 # "Custom command using interactive shell (unix)" = "-i vim_upgrade"
-
 
 [python]
 # enable_pip_review = true                         ###disabled by default
@@ -155,7 +150,6 @@ disable = ["chezmoi", "nix"]
 # (default: false)
 # poetry_force_self_update = true
 
-
 [conda]
 # Additional named conda environments to update (`conda env update -n env_name`)
 # env_names = [
@@ -168,10 +162,8 @@ disable = ["chezmoi", "nix"]
 #     "~/experiments/.conda/"
 # ]
 
-
 [composer]
 # self_update = true
-
 
 [brew]
 # For the BrewCask step
@@ -198,7 +190,6 @@ disable = ["chezmoi", "nix"]
 # For the BrewFormula step
 # Upgrade formulae built from the HEAD branch; `brew upgrade --fetch-HEAD`
 # fetch_head = true
-
 
 [linux]
 # Arch Package Manager to use.
@@ -251,20 +242,17 @@ disable = ["chezmoi", "nix"]
 # Extra Home Manager arguments
 # home_manager_arguments = ["--flake", "file"]
 
-
 [mandb]
 # Enable the mandb step (to update manual entries).
 # Mandb is updated in the background by a service on most systems by default.
 # (default: false)
 # enable = true
 
-
 [pkgfile]
 # Enable the pkgfile step (to update the pkgfile database).
 # Pkgfile is sometimes installed by default, but often not used and heavy to update.
 # (default: false)
 # enable = true
-
 
 [git]
 # How many repos to pull or fetch at max in parallel
@@ -318,7 +306,6 @@ disable = ["chezmoi", "nix"]
 # (default: false)
 # winget_use_sudo = true
 
-
 [chezmoi]
 # Exclude encrypted files from update
 # (default: false)
@@ -341,31 +328,25 @@ disable = ["chezmoi", "nix"]
 # Exclude specified binaries from `gup update`
 # gup_exclude = ["kind", "pkgsite"]
 
-
 [npm]
 # Use sudo if the NPM directory isn't owned by the current user
 # use_sudo = true
-
 
 [yarn]
 # Run `yarn global upgrade` with `sudo`
 # use_sudo = true
 
-
 [deno]
 # Upgrade deno executable to the given version.
 # version = "stable"
-
 
 [vim]
 # For `vim-plug`, execute `PlugUpdate!` instead of `PlugUpdate`
 # force_plug_update = true
 
-
 [firmware]
 # Offer to update firmware; if false just check for and display available updates
 # upgrade = true
-
 
 [vagrant]
 # Vagrant directories
@@ -377,11 +358,9 @@ disable = ["chezmoi", "nix"]
 # Always suspend vagrant boxes instead of powering off
 # always_suspend = true
 
-
 [flatpak]
 # Use sudo for updating the system-wide installation
 # use_sudo = true
-
 
 [distrobox]
 # use_root = false
