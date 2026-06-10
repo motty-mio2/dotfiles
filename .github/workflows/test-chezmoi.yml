@@ -8,6 +8,9 @@ on:
     branches:
       - main
 
+env:
+  CHEZMOI_SOURCE_DIR: ${{ github.workspace }}
+
 jobs:
   on_posix:
     strategy:
@@ -23,19 +26,19 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
-          sh -c "$(curl -fsLS get.chezmoi.io)" -- -b "$HOME/.local/bin"
+          $binDir = "$HOME/.local/bin"
+          sh -c "$(curl -fsLS get.chezmoi.io)" -- -b "$binDir"
+          echo "$binDir" >> "$GITHUB_PATH"
 
       - name: Initialize dotfiles
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        run: |
-          "$HOME/.local/bin/chezmoi" init --apply --promptDefaults -S .
+        run: chezmoi init --apply --promptDefaults
 
       - name: Apply dotfiles
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        run: |
-          "$HOME/.local/bin/chezmoi" apply -k -S .
+        run: chezmoi apply -k
 
   on_windows:
     runs-on: windows-latest
@@ -63,18 +66,16 @@ jobs:
       - name: Initialize dotfiles
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        run: chezmoi init --apply --promptDefaults -S .
+        run: chezmoi init --apply --promptDefaults
 
       - name: Apply dotfiles
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
-          chezmoi apply -k -S .
+          chezmoi apply -k
           Add-Content $env:GITHUB_PATH (Join-Path $HOME "scoop" "shims")
 
       - name: Install Dependencies
-        env:
-          CHEZMOI_SOURCE_DIR: ${{ github.workspace }}
         run: |
           Install-Scoop-Tools
           Install-Scoop-Dev-Tools
