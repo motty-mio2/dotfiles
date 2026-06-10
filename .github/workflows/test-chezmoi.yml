@@ -26,19 +26,19 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
-          $binDir = "$HOME/.local/bin"
-          sh -c "$(curl -fsLS get.chezmoi.io)" -- -b "$binDir"
-          echo "$binDir" >> "$GITHUB_PATH"
+          sh -c "$(curl -fsLS get.chezmoi.io)" -- -b "$HOME/.local/bin"
 
       - name: Initialize dotfiles
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        run: chezmoi init --apply --promptDefaults
+        run: |
+          "$HOME/.local/bin/chezmoi" init --apply --promptDefaults
 
       - name: Apply dotfiles
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        run: chezmoi apply -k
+        run: |
+          "$HOME/.local/bin/chezmoi" apply -k
 
   on_windows:
     runs-on: windows-latest
@@ -77,6 +77,7 @@ jobs:
 
       - name: Install Dependencies
         run: |
+          (Resolve-Path ~/scoop/shims).Path >> $Env:GITHUB_PATH
           scoop update
           Install-Scoop-Tools
           Install-Scoop-Dev-Tools
