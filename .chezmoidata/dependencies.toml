@@ -58,7 +58,7 @@ grep = { scoop = "grep", apt = "grep" }
 htop = { apt = "htop", aur = "htop" }
 jnv = { scoop = "jnv", aur = "jnv", nix = "jnv", mise = "github:ynqa/jnv" }
 jq = { scoop = "jq", apt = "jq", aur = "jq", nix = "jq", mise = "github:jqlang/jq" }
-jujutsu = { scoop = "jjutsu", aur = "jujutsu", nix = "jujutsu", mise = "github:jj-vcs/jj" }
+jujutsu = { scoop = "jj", aur = "jujutsu", nix = "jujutsu", mise = "github:jj-vcs/jj" }
 just = { scoop = "just", nix = "just", mise = "github:casey/just" }
 kanata = { nix = "kanata", mise = "github:jtroo/kanata" }
 lazydocker = { scoop = "lazydocker", nix = "lazydocker", mise = "github:jesseduffield/lazydocker" }
