@@ -58,22 +58,20 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
-          $binDir = Join-Path $HOME ".local" "bin"
-          New-Item -ItemType Directory -Force $binDir
-          Invoke-WebRequest -Uri "https://github.com/twpayne/chezmoi/releases/latest/download/chezmoi-windows-amd64.exe" -OutFile (Join-Path $binDir "chezmoi.exe")
-          Add-Content $env:GITHUB_PATH $binDir
+          New-Item -ItemType Directory -Force $HOME/.local/bin
+          Invoke-WebRequest -Uri "https://github.com/twpayne/chezmoi/releases/latest/download/chezmoi-windows-amd64.exe" -OutFile $HOME/.local/bin/chezmoi.exe
 
       - name: Initialize dotfiles
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        run: chezmoi init --apply --promptDefaults
+        run: |-
+          ."$HOME/.local/bin/chezmoi.exe" init --apply --promptDefaults
 
       - name: Apply dotfiles
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
-          chezmoi apply -k
-          Add-Content $env:GITHUB_PATH (Join-Path $HOME "scoop" "shims")
+          ."$HOME/.local/bin/chezmoi.exe" apply -k
 
       - name: Install Dependencies
         run: |
