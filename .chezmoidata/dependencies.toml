@@ -40,6 +40,7 @@ npm = [
 act = { aur = "act", nix = "act", mise = "github:nektos/act" }
 bat = { scoop = "bat", apt = "bat", aur = "bat", nix = "bat", mise = "github:sharkdp/bat" }
 bw = { scoop = "bitwarden", aur = "bitwarden-cli", nix = "bitwarden-cli", mise = "npm:@bitwarden/cli" }
+bws = { mise = "bitwarden-secrets-manager"}
 byobu = { apt = "byobu", aur = "byobu" }
 chezmoi = { scoop = "chezmoi", aur = "chezmoi", nix = "chezmoi", mise = "github:twpayne/chezmoi" }
 cloudflared = { scoop = "cloudflared", aur = "cloudflared", nix = "cloudflared", mise = "github:cloudflare/cloudflared" }
