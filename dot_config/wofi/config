@@ -3,3 +3,5 @@ allow_images=true
 image_size=40
 no_actions=false
 matching=fuzzy
+pre_display_exec=true
+
