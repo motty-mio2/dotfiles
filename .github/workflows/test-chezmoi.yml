@@ -63,12 +63,6 @@ jobs:
         run: |
           ."$HOME/.local/bin/chezmoi.exe" apply -k -S .
 
-      - name: Set up Scoop
-        uses: ScoopInstaller/GithubActions@main
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          SKIP_UPDATED: "1"
-
       - name: Install Dependencies
         run: |
           scoop bucket add extras
