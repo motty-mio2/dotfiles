@@ -1,0 +1,45 @@
+name: 'Setup Dotfiles'
+description: 'Install chezmoi and initialize dotfiles'
+inputs:
+  github_token:
+    description: 'GitHub Token'
+    required: true
+
+runs:
+  using: "composite"
+  steps:
+    - name: Install chezmoi (POSIX)
+      shell: bash
+      run: |
+        if [[ "${{ runner.os }}" != "Windows" ]]; then
+          sh -c "$(curl -fsLS get.chezmoi.io)" -- -b "$HOME/.local/bin"
+        fi
+
+    - name: Install chezmoi (Windows)
+      shell: pwsh
+      run: |
+        if ("${{ runner.os }}" -eq "Windows") {
+          New-Item -ItemType Directory -Force "$HOME\.local\bin"
+          Invoke-WebRequest -Uri "https://github.com/twpayne/chezmoi/releases/latest/download/chezmoi-windows-amd64.exe" -OutFile "$HOME\.local\bin\chezmoi.exe"
+        }
+
+    - name: Initialize dotfiles (POSIX)
+      shell: bash
+      env:
+        GITHUB_TOKEN: ${{ inputs.github_token }}
+      run: |
+        if [[ "${{ runner.os }}" != "Windows" ]]; then
+          "$HOME/.local/bin/chezmoi" init --apply --promptDefaults -S .
+        fi
+
+    - name: Initialize dotfiles (Windows)
+      shell: pwsh
+      env:
+        GITHUB_TOKEN: ${{ inputs.github_token }}
+      run: |
+        if ("${{ runner.os }}" -eq "Windows") {
+          & "$HOME\.local\bin\chezmoi.exe" init --apply --promptDefaults -S .
+          $Env:PATH = "$HOME\scoop\shims;$Env:PATH"
+          . "$HOME\Documents\PowerShell\Microsoft.PowerShell_profile.ps1"
+          Install-Scoop
+        }

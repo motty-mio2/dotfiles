@@ -98,10 +98,10 @@ function Install-Scoop {
 
     scoop reset *
 
-    scoop bucket add extras
-    scoop bucket add java
-    scoop bucket add versions
-    scoop bucket add nerd-fonts
-    scoop bucket add motty https://github.com/motty-mio2/scoop-bucket.git
+    if (-not (scoop bucket list | Select-String "extras")) { scoop bucket add extras }
+    if (-not (scoop bucket list | Select-String "java")) { scoop bucket add java }
+    if (-not (scoop bucket list | Select-String "versions")) { scoop bucket add versions }
+    if (-not (scoop bucket list | Select-String "nerd-fonts")) { scoop bucket add nerd-fonts }
+    if (-not (scoop bucket list | Select-String "motty")) { scoop bucket add motty https://github.com/motty-mio2/scoop-bucket.git }
 }
 
