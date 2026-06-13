@@ -9,32 +9,37 @@ runs:
   using: "composite"
   steps:
     - name: Install chezmoi (POSIX)
-      if: ${{ runner.os != 'Windows' }}
       shell: bash
       run: |
-        sh -c "$(curl -fsLS get.chezmoi.io)" -- -b "$HOME/.local/bin"
+        if [[ "${{ runner.os }}" != "Windows" ]]; then
+          sh -c "$(curl -fsLS get.chezmoi.io)" -- -b "$HOME/.local/bin"
+        fi
 
     - name: Install chezmoi (Windows)
-      if: ${{ runner.os == 'Windows' }}
       shell: pwsh
       run: |
-        New-Item -ItemType Directory -Force "$HOME\.local\bin"
-        Invoke-WebRequest -Uri "https://github.com/twpayne/chezmoi/releases/latest/download/chezmoi-windows-amd64.exe" -OutFile "$HOME\.local\bin\chezmoi.exe"
+        if ("${{ runner.os }}" -eq "Windows") {
+          New-Item -ItemType Directory -Force "$HOME\.local\bin"
+          Invoke-WebRequest -Uri "https://github.com/twpayne/chezmoi/releases/latest/download/chezmoi-windows-amd64.exe" -OutFile "$HOME\.local\bin\chezmoi.exe"
+        }
 
     - name: Initialize dotfiles (POSIX)
-      if: ${{ runner.os != 'Windows' }}
       shell: bash
       env:
         GITHUB_TOKEN: ${{ inputs.github_token }}
-      run: "$HOME/.local/bin/chezmoi" init --apply --promptDefaults -S .
+      run: |
+        if [[ "${{ runner.os }}" != "Windows" ]]; then
+          "$HOME/.local/bin/chezmoi" init --apply --promptDefaults -S .
+        fi
 
     - name: Initialize dotfiles (Windows)
-      if: ${{ runner.os == 'Windows' }}
       shell: pwsh
       env:
         GITHUB_TOKEN: ${{ inputs.github_token }}
       run: |
-        & "$HOME\.local\bin\chezmoi.exe" init --apply --promptDefaults -S .
-        $Env:PATH="$HOME\scoop\shims;$Env:PATH"
-        . "$HOME\Documents\PowerShell\Microsoft.PowerShell_profile.ps1"
-        Install-Scoop
+        if ("${{ runner.os }}" -eq "Windows") {
+          & "$HOME\.local\bin\chezmoi.exe" init --apply --promptDefaults -S .
+          $Env:PATH = "$HOME\scoop\shims;$Env:PATH"
+          . "$HOME\Documents\PowerShell\Microsoft.PowerShell_profile.ps1"
+          Install-Scoop
+        }
