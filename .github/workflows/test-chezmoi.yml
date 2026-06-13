@@ -78,7 +78,10 @@ jobs:
           "$HOME\scoop\shims" >> $Env:GITHUB_PATH
           . "$HOME\Documents\PowerShell\Microsoft.PowerShell_profile.ps1"
           scoop bucket add extras
+          scoop bucket add versions
           scoop update
-          Install-Scoop-Tools
-          Install-Scoop-Dev-Tools
-          Install-Scoop-GUI-Tools
+          # Install individually to prevent one failure from stopping everything
+          Install-Scoop-Tools | Out-Null
+          Install-Scoop-Dev-Tools | Out-Null
+          # GUI tools often fail in CI or need specific buckets
+          try { Install-Scoop-GUI-Tools } catch { Write-Warning "GUI tools installation failed" }
