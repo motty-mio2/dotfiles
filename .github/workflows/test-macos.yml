@@ -41,7 +41,7 @@ jobs:
           check_brew() {
             local section=$1
             local pkgs
-            pkgs=$(~/ .local/bin/chezmoi execute-template "{{ range \$name, \$managers := .dependencies.$section -}}{{- if hasKey \$managers \"brew\" -}}{{- get \$managers \"brew\" | printf \"%s \" -}}{{- end -}}{{- end }}")
+            pkgs=$(~/.local/bin/chezmoi execute-template "{{ range \$name, \$managers := .dependencies.$section -}}{{- if hasKey \$managers \"brew\" -}}{{- get \$managers \"brew\" | printf \"%s \" -}}{{- end -}}{{- end }}")
             for pkg in $pkgs; do
               echo "Checking Homebrew package: $pkg"
               if ! brew info --json "$pkg" > /dev/null 2>&1; then

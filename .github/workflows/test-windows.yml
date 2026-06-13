@@ -73,11 +73,9 @@ jobs:
 
       - name: Validate mise Packages
         run: |
-          $Env:PATH="$HOME\.local\bin;$Env:PATH"
+          $Env:PATH="$HOME\scoop\shims;$Env:PATH"
           if (-not (Get-Command mise -ErrorAction SilentlyContinue)) {
-              # On Windows, mise is often installed to ~/.local/bin/mise.exe
-              irm https://mise.run | iex
-              $Env:PATH="$HOME\.local\bin;$Env:PATH"
+              scoop install mise
           }
           
           $mise_pkgs = (chezmoi execute-template '{{ range $section, $deps := .dependencies -}}{{- if or (eq $section "cli") (eq $section "dev") (eq $section "desktop") -}}{{- range $name, $managers := $deps -}}{{- if hasKey $managers "mise" -}}{{- get $managers "mise" | printf "%s " -}}{{- end -}}{{- end -}}{{- end -}}{{- end }}') -split '\s+' | Where-Object { $_ }
@@ -85,8 +83,7 @@ jobs:
           foreach ($pkg in $mise_pkgs) {
               if ($pkg) {
                   Write-Host "Checking mise package: $pkg"
-                  # mise ls-remote returns 0 if found, even if it's just a tool name
-                  & mise ls-remote $pkg | Select-Object -First 1 | Out-Null
+                  mise ls-remote $pkg | Select-Object -First 1 | Out-Null
                   if ($LASTEXITCODE -ne 0) {
                       Write-Error "mise package not found or invalid: $pkg"
                       exit 1
