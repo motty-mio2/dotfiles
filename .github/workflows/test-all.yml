@@ -64,6 +64,8 @@ jobs:
       - name: Validate Scoop
         if: matrix.manager == 'scoop'
         shell: pwsh
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
           $Env:PATH="$HOME\scoop\shims;$Env:PATH"
           . "$HOME\Documents\PowerShell\Microsoft.PowerShell_profile.ps1"
@@ -87,6 +89,8 @@ jobs:
 
       - name: Validate Homebrew
         if: matrix.manager == 'brew'
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
           brew update
           check_brew() {
@@ -108,6 +112,8 @@ jobs:
       - name: Validate mise
         if: matrix.manager == 'mise'
         shell: bash
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
           if [[ "${{ runner.os }}" == "Windows" ]]; then
             export PATH="$HOME/scoop/shims:$PATH"
@@ -128,6 +134,8 @@ jobs:
 
       - name: Validate Nix
         if: matrix.manager == 'nix'
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
           if ! command -v nix &> /dev/null; then
             curl -L https://nixos.org/nix/install | sh -s -- --daemon
@@ -144,6 +152,8 @@ jobs:
 
       - name: Validate npm
         if: matrix.manager == 'npm'
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
           # shellcheck disable=SC2016
           npm_pkgs=$(~/.local/bin/chezmoi execute-template '{{ .dependencies.npm | join " " }}')
@@ -156,6 +166,8 @@ jobs:
 
       - name: Validate pip
         if: matrix.manager == 'pip'
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
           # shellcheck disable=SC2016
           pip_pkgs=$(~/.local/bin/chezmoi execute-template '{{ .dependencies.pip | join " " }}')
