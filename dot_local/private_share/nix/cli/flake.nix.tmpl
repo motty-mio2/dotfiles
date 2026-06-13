@@ -18,7 +18,7 @@
           name = "cli";
           paths = with pkgs; [
             {{- range $name, $managers := .dependencies.cli -}}
-              {{- if and (hasKey $managers "nix") (not (hasKey $managers "mise")) -}}
+              {{- if and (hasKey $managers "nix") (or (not (lookPath "mise")) (not (hasKey $managers "mise"))) -}}
                 {{- get $managers "nix" | printf "%s " -}}
               {{- end -}}
             {{- end }}
