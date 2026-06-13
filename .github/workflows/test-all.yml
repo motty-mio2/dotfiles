@@ -85,10 +85,10 @@ jobs:
             local pkgs
             # shellcheck disable=SC2016
             pkgs=$(~/.local/bin/chezmoi execute-template "{{ range \$name, \$managers := .dependencies.$1 -}}{{- if hasKey \$managers \"brew\" -}}{{- get \$managers \"brew\" | printf \"%s \" -}}{{- end -}}{{- end }}")
-            for pkg in $pkgs; do
+            for pkg in "$pkgs"; do
               if [ -n "$pkg" ]; then
                 echo "Checking Brew: $pkg"
-                brew info ${2:-} --json "$pkg" > /dev/null || exit 1
+                brew info "${2:-}" --json "$pkg" > /dev/null || exit 1
               fi
             done
           }
