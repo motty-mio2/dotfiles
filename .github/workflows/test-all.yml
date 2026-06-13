@@ -15,7 +15,7 @@ jobs:
       fail-fast: false
       matrix:
         os: [ubuntu-latest, macos-latest, windows-latest]
-        manager: [scoop, brew, mise, nix]
+        manager: [scoop, brew, mise, nix, npm, pip]
         exclude:
           - os: ubuntu-latest
             manager: scoop
@@ -23,10 +23,18 @@ jobs:
             manager: brew
           - os: macos-latest
             manager: scoop
+          - os: macos-latest
+            manager: npm
+          - os: macos-latest
+            manager: pip
           - os: windows-latest
             manager: brew
           - os: windows-latest
             manager: nix
+          - os: windows-latest
+            manager: npm
+          - os: windows-latest
+            manager: pip
     
     runs-on: ${{ matrix.os }}
 
@@ -131,5 +139,29 @@ jobs:
             echo "Checking Nix: $pkg"
             if ! nix-env -qaP "$pkg" > /dev/null 2>&1; then
               echo "::warning::Nix package validation skipped/failed: $pkg"
+            fi
+          done
+
+      - name: Validate npm
+        if: matrix.manager == 'npm'
+        run: |
+          # shellcheck disable=SC2016
+          npm_pkgs=$(~/.local/bin/chezmoi execute-template '{{ .dependencies.npm | join " " }}')
+          for pkg in $npm_pkgs; do
+            if [ -n "$pkg" ]; then
+              echo "Checking npm: $pkg"
+              npm view "$pkg" > /dev/null || exit 1
+            fi
+          done
+
+      - name: Validate pip
+        if: matrix.manager == 'pip'
+        run: |
+          # shellcheck disable=SC2016
+          pip_pkgs=$(~/.local/bin/chezmoi execute-template '{{ .dependencies.pip | join " " }}')
+          for pkg in $pip_pkgs; do
+            if [ -n "$pkg" ]; then
+              echo "Checking pip: $pkg"
+              curl -sSf "https://pypi.org/pypi/$pkg/json" > /dev/null || exit 1
             fi
           done
