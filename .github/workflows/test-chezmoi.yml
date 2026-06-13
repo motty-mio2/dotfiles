@@ -70,12 +70,14 @@ jobs:
         run: |
           ."$HOME/.local/bin/chezmoi.exe" apply -k
 
-      # - name: Install Dependencies
-      #   run: |
-      #     (Resolve-Path ~/scoop/shims).Path >> $Env:GITHUB_PATH
-      #     $Env:PATH="$Env:PATH;$(Resolve-Path ~/scoop/shims).Path";
-      #     echo $Env:PATH
-      #     scoop update
-      #     Install-Scoop-Tools
-      #     Install-Scoop-Dev-Tools
-      #     Install-Scoop-GUI-Tools
+      - name: Install Dependencies
+        run: |
+          $Env:PATH="$HOME\.local\bin;$Env:PATH"
+          "$HOME\.local\bin" >> $Env:GITHUB_PATH
+          $Env:PATH="$HOME\scoop\shims;$Env:PATH"
+          "$HOME\scoop\shims" >> $Env:GITHUB_PATH
+          . "$HOME\Documents\PowerShell\Microsoft.PowerShell_profile.ps1"
+          scoop update
+          Install-Scoop-Tools
+          Install-Scoop-Dev-Tools
+          Install-Scoop-GUI-Tools
