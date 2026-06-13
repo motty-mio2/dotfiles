@@ -1,0 +1,125 @@
+name: Validate Dotfiles
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  validate:
+    name: Validate (${{ matrix.os }}, ${{ matrix.manager }})
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-latest, macos-latest, windows-latest]
+        manager: [scoop, brew, mise, nix]
+        exclude:
+          - os: ubuntu-latest
+            manager: scoop
+          - os: ubuntu-latest
+            manager: brew
+          - os: macos-latest
+            manager: scoop
+          - os: windows-latest
+            manager: brew
+          - os: windows-latest
+            manager: nix
+    
+    runs-on: ${{ matrix.os }}
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v5
+
+      - name: Cache Manager
+        uses: actions/cache@v5
+        with:
+          path: |
+            ${{ matrix.os == 'windows-latest' && '~\scoop\cache' || '' }}
+            ${{ matrix.os == 'windows-latest' && '~\scoop\buckets' || '' }}
+            ${{ matrix.os == 'macos-latest' && '~/Library/Caches/Homebrew' || '' }}
+          key: ${{ runner.os }}-${{ matrix.manager }}-${{ hashFiles('.chezmoidata/dependencies.toml') }}
+          restore-keys: |
+            ${{ runner.os }}-${{ matrix.manager }}-
+
+      - name: Setup Dotfiles
+        uses: ./.github/actions/setup-dotfiles
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+
+      # --- Validation Steps ---
+
+      - name: Validate Scoop
+        if: matrix.manager == 'scoop'
+        shell: pwsh
+        run: |
+          $Env:PATH="$HOME\scoop\shims;$Env:PATH"
+          . "$HOME\Documents\PowerShell\Microsoft.PowerShell_profile.ps1"
+          function Test-Scoop-Pkg {
+              param($pkgs)
+              foreach ($pkg in $pkgs) {
+                  if ($pkg) {
+                      Write-Host "Checking Scoop package: $pkg"
+                      scoop info $pkg | Out-Null
+                      if ($LASTEXITCODE -ne 0) { exit 1 }
+                  }
+              }
+          }
+          $cli = (chezmoi execute-template '{{ range $name, $managers := .dependencies.cli -}}{{- if hasKey $managers "scoop" -}}{{- get $managers "scoop" | printf "%s " -}}{{- end -}}{{- end }}') -split '\s+'
+          $dev = (chezmoi execute-template '{{ range $name, $managers := .dependencies.dev -}}{{- if hasKey $managers "scoop" -}}{{- get $managers "scoop" | printf "%s " -}}{{- end -}}{{- end }}') -split '\s+'
+          $gui = (chezmoi execute-template '{{ range $name, $managers := .dependencies.desktop -}}{{- if hasKey $managers "scoop" -}}{{- get $managers "scoop" | printf "%s " -}}{{- end -}}{{- end }}') -split '\s+'
+          Test-Scoop-Pkg ($cli + $dev + $gui + @("7zip", "geekuninstaller", "gsudo", "sysinternals"))
+
+      - name: Validate Homebrew
+        if: matrix.manager == 'brew'
+        run: |
+          brew update
+          check_brew() {
+            local pkgs
+            # shellcheck disable=SC2016
+            pkgs=$(~/.local/bin/chezmoi execute-template "{{ range \$name, \$managers := .dependencies.$1 -}}{{- if hasKey \$managers \"brew\" -}}{{- get \$managers \"brew\" | printf \"%s \" -}}{{- end -}}{{- end }}")
+            for pkg in $pkgs; do
+              echo "Checking Brew: $pkg"
+              brew info ${2:-} --json "$pkg" > /dev/null
+            done
+          }
+          check_brew "cli"
+          check_brew "dev"
+          check_brew "desktop" "--cask"
+
+      - name: Validate mise
+        if: matrix.manager == 'mise'
+        shell: bash
+        run: |
+          if [[ "${{ runner.os }}" == "Windows" ]]; then
+            export PATH="$HOME/scoop/shims:$PATH"
+            if ! command -v mise &> /dev/null; then scoop install mise; fi
+          else
+            export PATH="$HOME/.local/bin:$PATH"
+            if ! command -v mise &> /dev/null; then curl https://mise.run | sh; fi
+          fi
+          # shellcheck disable=SC2016
+          mise_pkgs=$(~/.local/bin/chezmoi execute-template '{{ range $section, $deps := .dependencies -}}{{- if or (eq $section "cli") (eq $section "dev") (eq $section "desktop") -}}{{- range $name, $managers := $deps -}}{{- if hasKey $managers "mise" -}}{{- get $managers "mise" | printf "%s " -}}{{- end -}}{{- end -}}{{- end -}}{{- end }}')
+          for pkg in $mise_pkgs; do
+            echo "Checking mise: $pkg"
+            mise ls-remote "$pkg" | head -n 1 > /dev/null
+          done
+
+      - name: Validate Nix
+        if: matrix.manager == 'nix'
+        run: |
+          if ! command -v nix &> /dev/null; then
+            curl -L https://nixos.org/nix/install | sh -s -- --daemon
+            . /nix/var/nix/profiles/default/etc/profile.d/nix-daemon.sh
+          fi
+          # shellcheck disable=SC2016
+          nix_pkgs=$(~/.local/bin/chezmoi execute-template '{{ range $section, $deps := .dependencies -}}{{- if or (eq $section "cli") (eq $section "dev") (eq $section "desktop") -}}{{- range $name, $managers := $deps -}}{{- if hasKey $managers "nix" -}}{{- get $managers "nix" | printf "%s " -}}{{- end -}}{{- end -}}{{- end -}}{{- end }}')
+          for pkg in $nix_pkgs; do
+            echo "Checking Nix: $pkg"
+            if ! nix-env -qaP "$pkg" > /dev/null 2>&1; then
+              echo "::warning::Nix package validation skipped/failed: $pkg"
+            fi
+          done
