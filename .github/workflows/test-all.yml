@@ -38,9 +38,10 @@ jobs:
         uses: actions/cache@v5
         with:
           path: |
-            ${{ matrix.os == 'windows-latest' && '~\scoop\cache' || '' }}
-            ${{ matrix.os == 'windows-latest' && '~\scoop\buckets' || '' }}
+            ${{ matrix.os == 'windows-latest' && '$HOME\scoop\cache' || '' }}
+            ${{ matrix.os == 'windows-latest' && '$HOME\scoop\buckets' || '' }}
             ${{ matrix.os == 'macos-latest' && '~/Library/Caches/Homebrew' || '' }}
+            ${{ matrix.os == 'ubuntu-latest' && '~/.cache/mise' || '' }}
           key: ${{ runner.os }}-${{ matrix.manager }}-${{ hashFiles('.chezmoidata/dependencies.toml') }}
           restore-keys: |
             ${{ runner.os }}-${{ matrix.manager }}-
@@ -64,13 +65,16 @@ jobs:
                   if ($pkg) {
                       Write-Host "Checking Scoop package: $pkg"
                       scoop info $pkg | Out-Null
-                      if ($LASTEXITCODE -ne 0) { exit 1 }
+                      if ($LASTEXITCODE -ne 0) {
+                          Write-Error "Scoop package not found: $pkg"
+                          exit 1
+                      }
                   }
               }
           }
-          $cli = (chezmoi execute-template '{{ range $name, $managers := .dependencies.cli -}}{{- if hasKey $managers "scoop" -}}{{- get $managers "scoop" | printf "%s " -}}{{- end -}}{{- end }}') -split '\s+'
-          $dev = (chezmoi execute-template '{{ range $name, $managers := .dependencies.dev -}}{{- if hasKey $managers "scoop" -}}{{- get $managers "scoop" | printf "%s " -}}{{- end -}}{{- end }}') -split '\s+'
-          $gui = (chezmoi execute-template '{{ range $name, $managers := .dependencies.desktop -}}{{- if hasKey $managers "scoop" -}}{{- get $managers "scoop" | printf "%s " -}}{{- end -}}{{- end }}') -split '\s+'
+          $cli = (chezmoi execute-template '{{ range $name, $managers := .dependencies.cli -}}{{- if hasKey $managers "scoop" -}}{{- get $managers "scoop" | printf "%s " -}}{{- end -}}{{- end }}') -split '\s+' | Where-Object { $_ }
+          $dev = (chezmoi execute-template '{{ range $name, $managers := .dependencies.dev -}}{{- if hasKey $managers "scoop" -}}{{- get $managers "scoop" | printf "%s " -}}{{- end -}}{{- end }}') -split '\s+' | Where-Object { $_ }
+          $gui = (chezmoi execute-template '{{ range $name, $managers := .dependencies.desktop -}}{{- if hasKey $managers "scoop" -}}{{- get $managers "scoop" | printf "%s " -}}{{- end -}}{{- end }}') -split '\s+' | Where-Object { $_ }
           Test-Scoop-Pkg ($cli + $dev + $gui + @("7zip", "geekuninstaller", "gsudo", "sysinternals"))
 
       - name: Validate Homebrew
@@ -82,8 +86,10 @@ jobs:
             # shellcheck disable=SC2016
             pkgs=$(~/.local/bin/chezmoi execute-template "{{ range \$name, \$managers := .dependencies.$1 -}}{{- if hasKey \$managers \"brew\" -}}{{- get \$managers \"brew\" | printf \"%s \" -}}{{- end -}}{{- end }}")
             for pkg in $pkgs; do
-              echo "Checking Brew: $pkg"
-              brew info ${2:-} --json "$pkg" > /dev/null
+              if [ -n "$pkg" ]; then
+                echo "Checking Brew: $pkg"
+                brew info ${2:-} --json "$pkg" > /dev/null || exit 1
+              fi
             done
           }
           check_brew "cli"
@@ -104,8 +110,11 @@ jobs:
           # shellcheck disable=SC2016
           mise_pkgs=$(~/.local/bin/chezmoi execute-template '{{ range $section, $deps := .dependencies -}}{{- if or (eq $section "cli") (eq $section "dev") (eq $section "desktop") -}}{{- range $name, $managers := $deps -}}{{- if hasKey $managers "mise" -}}{{- get $managers "mise" | printf "%s " -}}{{- end -}}{{- end -}}{{- end -}}{{- end }}')
           for pkg in $mise_pkgs; do
-            echo "Checking mise: $pkg"
-            mise ls-remote "$pkg" | head -n 1 > /dev/null
+            if [ -n "$pkg" ]; then
+              echo "Checking mise: $pkg"
+              # mise ls-remote returns 0 if found
+              mise ls-remote "$pkg" | head -n 1 > /dev/null || exit 1
+            fi
           done
 
       - name: Validate Nix
