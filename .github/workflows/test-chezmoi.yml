@@ -77,8 +77,7 @@ jobs:
           $Env:PATH="$HOME\scoop\shims;$Env:PATH"
           "$HOME\scoop\shims" >> $Env:GITHUB_PATH
           . "$HOME\Documents\PowerShell\Microsoft.PowerShell_profile.ps1"
-          scoop bucket add extras
-          scoop bucket add versions
+          Install-Scoop
           scoop update
           # Install individually to prevent one failure from stopping everything
           Install-Scoop-Tools
