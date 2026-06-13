@@ -63,23 +63,9 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |-
           ."$HOME/.local/bin/chezmoi.exe" init --apply --promptDefaults -S .
-
-      - name: Apply dotfiles
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        run: |
-          ."$HOME/.local/bin/chezmoi.exe" apply -k
-
-      - name: Install Dependencies
-        run: |
-          $Env:PATH="$HOME\.local\bin;$Env:PATH"
-          "$HOME\.local\bin" >> $Env:GITHUB_PATH
           $Env:PATH="$HOME\scoop\shims;$Env:PATH"
-          "$HOME\scoop\shims" >> $Env:GITHUB_PATH
           . "$HOME\Documents\PowerShell\Microsoft.PowerShell_profile.ps1"
           Install-Scoop
-          scoop update
-          # Install individually to prevent one failure from stopping everything
           Install-Scoop-Tools
           Install-Scoop-Dev-Tools
           try { Install-Scoop-GUI-Tools } catch { Write-Warning "GUI tools installation failed" }
