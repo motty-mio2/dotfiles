@@ -33,6 +33,7 @@ jobs:
             curl https://mise.run | sh
           fi
           
+          # shellcheck disable=SC2016
           mise_pkgs=$(~/.local/bin/chezmoi execute-template '{{ range $section, $deps := .dependencies -}}{{- if or (eq $section "cli") (eq $section "dev") (eq $section "desktop") -}}{{- range $name, $managers := $deps -}}{{- if hasKey $managers "mise" -}}{{- get $managers "mise" | printf "%s " -}}{{- end -}}{{- end -}}{{- end -}}{{- end }}')
           
           for pkg in $mise_pkgs; do
@@ -50,6 +51,7 @@ jobs:
             . /nix/var/nix/profiles/default/etc/profile.d/nix-daemon.sh
           fi
 
+          # shellcheck disable=SC2016
           nix_pkgs=$(~/.local/bin/chezmoi execute-template '{{ range $section, $deps := .dependencies -}}{{- if or (eq $section "cli") (eq $section "dev") (eq $section "desktop") -}}{{- range $name, $managers := $deps -}}{{- if hasKey $managers "nix" -}}{{- get $managers "nix" | printf "%s " -}}{{- end -}}{{- end -}}{{- end -}}{{- end }}')
           
           for pkg in $nix_pkgs; do
