@@ -45,11 +45,15 @@ jobs:
         uses: actions/checkout@v5
 
       - name: Cache Scoop
-        id: cache-primes
+        id: cache-scoop
         uses: actions/cache@v5
         with:
-          path: ~/scoop/cache
-          key: scoop-cache
+          path: |
+            ~\scoop\cache
+            ~\scoop\buckets
+          key: ${{ runner.os }}-scoop-${{ hashFiles('.chezmoidata/dependencies.toml') }}
+          restore-keys: |
+            ${{ runner.os }}-scoop-
 
       - name: Install chezmoi
         env:
