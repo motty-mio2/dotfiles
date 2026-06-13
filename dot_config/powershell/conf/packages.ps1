@@ -52,7 +52,12 @@ function Install-Scoop-Dev-Tools {
 
 function Install-Scoop-GUI-Tools {
     $pkgs = (chezmoi execute-template '{{ range $name, $managers := .dependencies.desktop -}}{{- if and (hasKey $managers "scoop") (not (hasKey $managers "mise")) -}}{{- get $managers "scoop" | printf "%s " -}}{{- end -}}{{- end }}') -split '\s+' | Where-Object { $_ }
-    scoop install 7zip geekuninstaller gsudo sysinternals $pkgs
+    $default_pkgs = @("7zip", "geekuninstaller", "gsudo", "sysinternals")
+    foreach ($pkg in ($default_pkgs + $pkgs)) {
+        if ($pkg) {
+            scoop install $pkg
+        }
+    }
 }
 
 function Install-Windows-Software {
