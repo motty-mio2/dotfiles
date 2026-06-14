@@ -51,6 +51,10 @@ jobs:
                 echo "::warning::Nix package not found in nixpkgs: $pkg"
               elif [ "$CHECK_RESULT" = "error" ]; then
                 echo "::warning::Error checking Nix package: $pkg"
+              else
+                if ! nix-env -qaP "$pkg" > /dev/null 2>&1; then
+                  echo "::warning::Nix package validation failed: $pkg"
+                fi
               fi
             fi
           done
