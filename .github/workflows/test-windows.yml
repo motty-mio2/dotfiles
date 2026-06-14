@@ -29,10 +29,10 @@ jobs:
           # Install chezmoi briefly to get config
           New-Item -ItemType Directory -Force "$HOME\.local\bin"
           Invoke-WebRequest -Uri "https://github.com/twpayne/chezmoi/releases/latest/download/chezmoi-windows-amd64.exe" -OutFile "$HOME\.local\bin\chezmoi.exe"
-          $defaults = (& "$HOME\.local\bin\chezmoi.exe" execute-template '{{ .scoop.default | join " " }}')
-          $externals = (& "$HOME\.local\bin\chezmoi.exe" execute-template '{{ range $n, $u := .dependencies.scoop.external }}{{ $n }} {{ $u }}|{{ end }}')
-          "defaults=$defaults" >> $env:GITHUB_OUTPUT
-          "externals=$externals" >> $env:GITHUB_OUTPUT
+          $defaults = (& "$HOME\.local\bin\chezmoi.exe" execute-template -S . '{{ .scoop.default | join " " }}')
+          $externals = (& "$HOME\.local\bin\chezmoi.exe" execute-template -S . '{{ range $n, $u := .dependencies.scoop.external }}{{ $n }} {{ $u }}|{{ end }}')
+          echo "defaults=$defaults" >> $env:GITHUB_OUTPUT
+          echo "externals=$externals" >> $env:GITHUB_OUTPUT
 
       - name: Setup Scoop
         uses: MinoruSekine/setup-scoop@v4
