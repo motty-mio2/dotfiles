@@ -101,7 +101,7 @@ function Install-Scoop {
     $source = if (Test-Path ".chezmoidata") { "-S ." } else { "" }
 
     # Default buckets
-    $defaults = (Invoke-Expression "chezmoi $source execute-template '{{ .scoop.default | join "" "" }}'") -split '\s+' | Where-Object { $_ }
+    $defaults = (& chezmoi $source execute-template '{{ .dependencies.scoop.default | join " " }}') -split '\s+' | Where-Object { $_ }
     foreach ($bucket in $defaults) {
         if (-not (scoop bucket list | Select-String $bucket)) {
             scoop bucket add $bucket
@@ -109,7 +109,7 @@ function Install-Scoop {
     }
 
     # External buckets
-    $externals = (Invoke-Expression "chezmoi $source execute-template '{{ range $name, $url := .dependencies.scoop.external }}{{ $name }} {{ $url }}|{{ end }}'") -split '\|' | Where-Object { $_ }
+    $externals = (& chezmoi $source execute-template '{{ range $name, $url := .dependencies.scoop.external }}{{ $name }} {{ $url }}|{{ end }}') -split '\|' | Where-Object { $_ }
     foreach ($line in $externals) {
         if ($line) {
             $parts = $line -split ' '
