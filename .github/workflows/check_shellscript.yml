@@ -11,7 +11,7 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - uses: mfinelli/setup-shfmt@v4
-      - uses: extractions/setup-just@v2
+      - uses: extractions/setup-just@v4
 
       - name: Do Check
         run: |
