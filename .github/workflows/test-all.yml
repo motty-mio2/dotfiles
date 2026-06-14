@@ -46,11 +46,20 @@ jobs:
             . /nix/var/nix/profiles/default/etc/profile.d/nix-daemon.sh
           fi
           # shellcheck disable=SC2016
-          nix_pkgs=$(~/.local/bin/chezmoi execute-template '{{ range $section, $deps := .dependencies -}}{{- if or (eq $section "cli") (eq $section "dev") (eq $section "desktop") -}}{{- range $name, $managers := $deps -}}{{- if hasKey $managers "nix" -}}{{- get $managers "nix" | printf "%s " -}}{{- end -}}{{- end -}}{{- end -}}{{- end }}')
+          nix_pkgs=$(~/.local/bin/chezmoi execute-template '{{ range $section, $deps := .dependencies -}}{{- if or (eq $section "cli") (eq $section "dev") (eq $section "desktop") -}}{{- range $name, $m := $deps -}}{{- if hasKey $m "nix" -}}{{- get $m "nix" | printf "%s " -}}{{- end -}}{{- end -}}{{- end -}}{{- end -}}{{- end }}')
           for pkg in $nix_pkgs; do
-            echo "Checking Nix: $pkg"
-            if ! nix-env -qaP "$pkg" > /dev/null 2>&1; then
-              echo "::warning::Nix package validation skipped/failed: $pkg"
+            if [ -n "$pkg" ]; then
+              echo "Checking Nix: $pkg"
+              # Check platform compatibility
+              # shellcheck disable=SC2016
+              SUPPORTED=$(nix-instantiate --eval -E "let pkgs = import <nixpkgs> {}; pkg = pkgs.$pkg; in builtins.elem pkgs.stdenv.hostPlatform.system (pkg.meta.platforms or [ pkgs.stdenv.hostPlatform.system ])" 2>/dev/null || echo "true")
+              if [ "$SUPPORTED" != "true" ]; then
+                echo "::warning::Package $pkg is not supported on this platform. Skipping."
+                continue
+              fi
+              if ! nix-env -qaP "$pkg" > /dev/null 2>&1; then
+                echo "::warning::Nix package validation failed: $pkg"
+              fi
             fi
           done
 
@@ -129,11 +138,20 @@ jobs:
             . /nix/var/nix/profiles/default/etc/profile.d/nix-daemon.sh
           fi
           # shellcheck disable=SC2016
-          nix_pkgs=$(~/.local/bin/chezmoi execute-template '{{ range $section, $deps := .dependencies -}}{{- if or (eq $section "cli") (eq $section "dev") (eq $section "desktop") -}}{{- range $name, $managers := $deps -}}{{- if hasKey $managers "nix" -}}{{- get $managers "nix" | printf "%s " -}}{{- end -}}{{- end -}}{{- end -}}{{- end }}')
+          nix_pkgs=$(~/.local/bin/chezmoi execute-template '{{ range $section, $deps := .dependencies -}}{{- if or (eq $section "cli") (eq $section "dev") (eq $section "desktop") -}}{{- range $name, $m := $deps -}}{{- if hasKey $m "nix" -}}{{- get $m "nix" | printf "%s " -}}{{- end -}}{{- end -}}{{- end -}}{{- end -}}{{- end }}')
           for pkg in $nix_pkgs; do
-            echo "Checking Nix: $pkg"
-            if ! nix-env -qaP "$pkg" > /dev/null 2>&1; then
-              echo "::warning::Nix package validation skipped/failed: $pkg"
+            if [ -n "$pkg" ]; then
+              echo "Checking Nix: $pkg"
+              # Check platform compatibility
+              # shellcheck disable=SC2016
+              SUPPORTED=$(nix-instantiate --eval -E "let pkgs = import <nixpkgs> {}; pkg = pkgs.$pkg; in builtins.elem pkgs.stdenv.hostPlatform.system (pkg.meta.platforms or [ pkgs.stdenv.hostPlatform.system ])" 2>/dev/null || echo "true")
+              if [ "$SUPPORTED" != "true" ]; then
+                echo "::warning::Package $pkg is not supported on this platform. Skipping."
+                continue
+              fi
+              if ! nix-env -qaP "$pkg" > /dev/null 2>&1; then
+                echo "::warning::Nix package validation failed: $pkg"
+              fi
             fi
           done
 
