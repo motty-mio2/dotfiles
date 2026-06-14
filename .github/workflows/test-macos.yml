@@ -49,17 +49,12 @@ jobs:
           check_brew "dev"
           check_brew "desktop" "--cask"
 
-      - name: Setup Nix
-        uses: nix-community/cache-nix-action@v6
-        with:
-          primary-key: ${{ runner.os }}-nix-${{ hashFiles('.chezmoidata/dependencies.toml') }}
-          restore-prefixes-first-match: ${{ runner.os }}-nix-
-
       - name: Validate Nix
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
-          if [ -e /nix/var/nix/profiles/default/etc/profile.d/nix-daemon.sh ]; then
+          if ! command -v nix &> /dev/null; then
+            curl -L https://nixos.org/nix/install | sh -s -- --daemon
             . /nix/var/nix/profiles/default/etc/profile.d/nix-daemon.sh
           fi
           # shellcheck disable=SC2016
