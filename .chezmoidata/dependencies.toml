@@ -38,11 +38,9 @@ npm = [
   "yaml-language-server",
 ]
 
-[dependencies.scoop]
-extras = "https://github.com/ScoopInstaller/Extras"
-java = "https://github.com/ScoopInstaller/java"
-versions = "https://github.com/ScoopInstaller/versions"
-nerd-fonts = "https://github.com/matthewjberger/scoop-nerd-fonts"
+scoop.default = ["extras", "java", "versions", "nerd-fonts"]
+
+[dependencies.scoop.external]
 motty = "https://github.com/motty-mio2/scoop-bucket"
 
 [dependencies.cli]

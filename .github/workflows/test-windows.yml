@@ -22,15 +22,31 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v5
 
+      - name: Get Scoop config
+        id: scoop-config
+        shell: pwsh
+        run: |
+          # Install chezmoi briefly to get config
+          New-Item -ItemType Directory -Force "$HOME\.local\bin"
+          Invoke-WebRequest -Uri "https://github.com/twpayne/chezmoi/releases/latest/download/chezmoi-windows-amd64.exe" -OutFile "$HOME\.local\bin\chezmoi.exe"
+          $defaults = (& "$HOME\.local\bin\chezmoi.exe" execute-template '{{ .scoop.default | join " " }}')
+          $externals = (& "$HOME\.local\bin\chezmoi.exe" execute-template '{{ range $n, $u := .dependencies.scoop.external }}{{ $n }} {{ $u }}|{{ end }}')
+          "defaults=$defaults" >> $env:GITHUB_OUTPUT
+          "externals=$externals" >> $env:GITHUB_OUTPUT
+
       - name: Setup Scoop
         uses: MinoruSekine/setup-scoop@v4
         with:
-          buckets: extras versions java nerd-fonts
+          buckets: ${{ steps.scoop-config.outputs.defaults }}
 
-      - name: Add custom Scoop bucket
+      - name: Add custom Scoop buckets
         shell: pwsh
         run: |
-          scoop bucket add motty https://github.com/motty-mio2/scoop-bucket.git
+          $externals = "${{ steps.scoop-config.outputs.externals }}".Split("|") | Where-Object { $_ }
+          foreach ($line in $externals) {
+            $parts = $line -split ' '
+            scoop bucket add $parts[0] $parts[1]
+          }
 
       - name: Setup Dotfiles
         uses: ./.github/actions/setup-dotfiles
