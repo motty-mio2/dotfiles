@@ -41,6 +41,9 @@ npm = [
 [dependencies.scoop]
 extras = "https://github.com/ScoopInstaller/Extras"
 java = "https://github.com/ScoopInstaller/java"
+versions = "https://github.com/ScoopInstaller/versions"
+nerd-fonts = "https://github.com/matthewjberger/scoop-nerd-fonts"
+motty = "https://github.com/motty-mio2/scoop-bucket"
 
 [dependencies.cli]
 act = { aur = "act", nix = "act", mise = "github:nektos/act" }
