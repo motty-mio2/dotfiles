@@ -4,9 +4,15 @@ on:
   push:
     branches:
       - main
+    paths:
+      - '.github/workflows/test-macos.yml'
+      - '.chezmoidata/dependencies.toml'
   pull_request:
     branches:
       - main
+    paths:
+      - '.github/workflows/test-macos.yml'
+      - '.chezmoidata/dependencies.toml'
 
 jobs:
   test:
