@@ -53,7 +53,7 @@ jobs:
               echo "Checking Nix: $pkg"
               # Check platform compatibility and existence
               # shellcheck disable=SC2016
-              CHECK_RESULT=$(nix-instantiate --eval -E "let pkgs = import <nixpkgs> {}; pkg = pkgs.$pkg; in if (pkgs.hasAttr \"$pkg\" pkgs) then (if builtins.elem pkgs.stdenv.hostPlatform.system (pkg.meta.platforms or [ pkgs.stdenv.hostPlatform.system ]) then \"ok\" else \"unsupported\") else \"missing\"" 2>/dev/null || echo "error")
+              CHECK_RESULT=$(nix-instantiate --eval -E "let pkgs = import <nixpkgs> {}; in if (pkgs ? \"$pkg\") then (let pkg = pkgs.\"$pkg\"; in if builtins.elem pkgs.stdenv.hostPlatform.system (pkg.meta.platforms or [ pkgs.stdenv.hostPlatform.system ]) then \"ok\" else \"unsupported\") else \"missing\"" 2>/dev/null | tr -d '"' || echo "error")
               
               if [ "$CHECK_RESULT" = "unsupported" ]; then
                 echo "::warning::Package $pkg is not supported on this platform. Skipping."
