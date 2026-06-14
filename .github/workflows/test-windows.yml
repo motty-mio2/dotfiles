@@ -25,7 +25,12 @@ jobs:
       - name: Setup Scoop
         uses: MinoruSekine/setup-scoop@v4
         with:
-          buckets: extras versions java nerd-fonts motty https://github.com/motty-mio2/scoop-bucket.git
+          buckets: extras versions java nerd-fonts
+
+      - name: Add custom Scoop bucket
+        shell: pwsh
+        run: |
+          scoop bucket add motty https://github.com/motty-mio2/scoop-bucket.git
 
       - name: Setup Dotfiles
         uses: ./.github/actions/setup-dotfiles
