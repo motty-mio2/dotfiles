@@ -77,9 +77,13 @@ jobs:
                 echo "::warning::Package $pkg is not supported on this platform. Skipping."
               elif [ "$CHECK_RESULT" = "missing" ]; then
                 echo "::warning::Nix package not found in nixpkgs: $pkg"
-              if ! nix-env -qaP "$pkg" > /dev/null 2>&1; then
-                echo "::warning::Nix package validation failed: $pkg"
+              elif [ "$CHECK_RESULT" = "error" ]; then
+                echo "::warning::Error checking Nix package: $pkg"
+              else
+                if ! nix-env -qaP "$pkg" > /dev/null 2>&1; then
+                  echo "::warning::Nix package validation failed: $pkg"
+                fi
               fi
-              fi
-              done
+            fi
+          done
 
