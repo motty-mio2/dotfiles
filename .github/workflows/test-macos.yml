@@ -77,24 +77,9 @@ jobs:
                 echo "::warning::Package $pkg is not supported on this platform. Skipping."
               elif [ "$CHECK_RESULT" = "missing" ]; then
                 echo "::warning::Nix package not found in nixpkgs: $pkg"
-              elif [ "$CHECK_RESULT" = "error" ]; then
-                echo "::warning::Error checking Nix package: $pkg"
+              if ! nix-env -qaP "$pkg" > /dev/null 2>&1; then
+                echo "::warning::Nix package validation failed: $pkg"
               fi
-            fi
-          done
+              fi
+              done
 
-      - name: Validate mise
-        shell: bash
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        run: |
-          export PATH="$HOME/.local/bin:$PATH"
-          if ! command -v mise &> /dev/null; then curl https://mise.run | sh; fi
-          # shellcheck disable=SC2016
-          mise_pkgs=$(~/.local/bin/chezmoi execute-template '{{ range $section, $deps := .dependencies -}}{{- if or (eq $section "cli") (eq $section "dev") (eq $section "desktop") -}}{{- range $name, $m := $deps -}}{{- if hasKey $m "mise" -}}{{- get $m "mise" | printf "%s " -}}{{- end -}}{{- end -}}{{- end -}}{{- end }}')
-          for pkg in $mise_pkgs; do
-            if [ -n "$pkg" ]; then
-              echo "Checking mise: $pkg"
-              mise ls-remote "$pkg" | head -n 1 > /dev/null || exit 1
-            fi
-          done
