@@ -1,0 +1,48 @@
+name: Test Universal setup
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  validate:
+    name: Validate (Registry)
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v5
+
+      - name: Setup Dotfiles
+        uses: ./.github/actions/setup-dotfiles
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Validate npm
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          # shellcheck disable=SC2016
+          npm_pkgs=$(~/.local/bin/chezmoi execute-template '{{ .dependencies.npm | join " " }}')
+          for pkg in $npm_pkgs; do
+            if [ -n "$pkg" ]; then
+              echo "Checking npm: $pkg"
+              npm view "$pkg" > /dev/null || exit 1
+            fi
+          done
+
+      - name: Validate pip
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          # shellcheck disable=SC2016
+          pip_pkgs=$(~/.local/bin/chezmoi execute-template '{{ .dependencies.pip | join " " }}')
+          for pkg in $pip_pkgs; do
+            if [ -n "$pkg" ]; then
+              echo "Checking pip: $pkg"
+              curl -sSf "https://pypi.org/pypi/$pkg/json" > /dev/null || exit 1
+            fi
+          done
