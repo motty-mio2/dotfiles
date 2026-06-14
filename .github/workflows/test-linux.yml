@@ -1,0 +1,90 @@
+name: Test Linux setup
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  test:
+    name: Validate (Linux)
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v5
+
+      - name: Setup Dotfiles
+        uses: ./.github/actions/setup-dotfiles
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Validate mise
+        shell: bash
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          export PATH="$HOME/.local/bin:$PATH"
+          if ! command -v mise &> /dev/null; then curl https://mise.run | sh; fi
+          # shellcheck disable=SC2016
+          mise_pkgs=$(~/.local/bin/chezmoi execute-template '{{ range $section, $deps := .dependencies -}}{{- if or (eq $section "cli") (eq $section "dev") (eq $section "desktop") -}}{{- range $name, $m := $deps -}}{{- if hasKey $m "mise" -}}{{- get $m "mise" | printf "%s " -}}{{- end -}}{{- end -}}{{- end -}}{{- end -}}{{- end }}')
+          for pkg in $mise_pkgs; do
+            if [ -n "$pkg" ]; then
+              echo "Checking mise: $pkg"
+              mise ls-remote "$pkg" | head -n 1 > /dev/null || exit 1
+            fi
+          done
+
+      - name: Validate Nix
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          if ! command -v nix &> /dev/null; then
+            curl -L https://nixos.org/nix/install | sh -s -- --daemon
+            . /nix/var/nix/profiles/default/etc/profile.d/nix-daemon.sh
+          fi
+          # shellcheck disable=SC2016
+          nix_pkgs=$(~/.local/bin/chezmoi execute-template '{{ range $section, $deps := .dependencies -}}{{- if or (eq $section "cli") (eq $section "dev") (eq $section "desktop") -}}{{- range $name, $m := $deps -}}{{- if hasKey $m "nix" -}}{{- get $m "nix" | printf "%s " -}}{{- end -}}{{- end -}}{{- end -}}{{- end -}}{{- end }}')
+          for pkg in $nix_pkgs; do
+            if [ -n "$pkg" ]; then
+              echo "Checking Nix: $pkg"
+              # Check platform compatibility
+              # shellcheck disable=SC2016
+              SUPPORTED=$(nix-instantiate --eval -E "let pkgs = import <nixpkgs> {}; pkg = pkgs.$pkg; in builtins.elem pkgs.stdenv.hostPlatform.system (pkg.meta.platforms or [ pkgs.stdenv.hostPlatform.system ])" 2>/dev/null || echo "true")
+              if [ "$SUPPORTED" != "true" ]; then
+                echo "::warning::Package $pkg is not supported on this platform. Skipping."
+                continue
+              fi
+              if ! nix-env -qaP "$pkg" > /dev/null 2>&1; then
+                echo "::warning::Nix package validation failed: $pkg"
+              fi
+            fi
+          done
+
+      - name: Validate npm
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          # shellcheck disable=SC2016
+          npm_pkgs=$(~/.local/bin/chezmoi execute-template '{{ .dependencies.npm | join " " }}')
+          for pkg in $npm_pkgs; do
+            if [ -n "$pkg" ]; then
+              echo "Checking npm: $pkg"
+              npm view "$pkg" > /dev/null || exit 1
+            fi
+          done
+
+      - name: Validate pip
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          # shellcheck disable=SC2016
+          pip_pkgs=$(~/.local/bin/chezmoi execute-template '{{ .dependencies.pip | join " " }}')
+          for pkg in $pip_pkgs; do
+            if [ -n "$pkg" ]; then
+              echo "Checking pip: $pkg"
+              curl -sSf "https://pypi.org/pypi/$pkg/json" > /dev/null || exit 1
+            fi
+          done

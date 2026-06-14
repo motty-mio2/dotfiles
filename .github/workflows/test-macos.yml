@@ -1,0 +1,92 @@
+name: Test macOS setup
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  test:
+    name: Validate (macOS)
+    runs-on: macos-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v5
+
+      - name: Cache Homebrew
+        uses: actions/cache@v5
+        with:
+          path: ~/Library/Caches/Homebrew
+          key: ${{ runner.os }}-brew-${{ hashFiles('.chezmoidata/dependencies.toml') }}
+          restore-keys: ${{ runner.os }}-brew-
+
+      - name: Setup Dotfiles
+        uses: ./.github/actions/setup-dotfiles
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Validate Homebrew
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          brew update
+          check_brew() {
+            local pkgs
+            # shellcheck disable=SC2016
+            pkgs=$(~/.local/bin/chezmoi execute-template "{{ range \$name, \$managers := .dependencies.$1 -}}{{- if hasKey \$managers \"brew\" -}}{{- get \$managers \"brew\" | printf \"%s \" -}}{{- end -}}{{- end }}")
+            # shellcheck disable=SC2086
+            for pkg in $pkgs; do
+              if [ -n "$pkg" ]; then
+                echo "Checking Brew: $pkg"
+                brew info "${2:-}" --json "$pkg" > /dev/null || exit 1
+              fi
+            done
+          }
+          check_brew "cli"
+          check_brew "dev"
+          check_brew "desktop" "--cask"
+
+      - name: Validate Nix
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          if ! command -v nix &> /dev/null; then
+            curl -L https://nixos.org/nix/install | sh -s -- --daemon
+            . /nix/var/nix/profiles/default/etc/profile.d/nix-daemon.sh
+          fi
+          # shellcheck disable=SC2016
+          nix_pkgs=$(~/.local/bin/chezmoi execute-template '{{ range $section, $deps := .dependencies -}}{{- if or (eq $section "cli") (eq $section "dev") (eq $section "desktop") -}}{{- range $name, $m := $deps -}}{{- if hasKey $m "nix" -}}{{- get $m "nix" | printf "%s " -}}{{- end -}}{{- end -}}{{- end -}}{{- end -}}{{- end }}')
+          for pkg in $nix_pkgs; do
+            if [ -n "$pkg" ]; then
+              echo "Checking Nix: $pkg"
+              # Check platform compatibility
+              # shellcheck disable=SC2016
+              SUPPORTED=$(nix-instantiate --eval -E "let pkgs = import <nixpkgs> {}; pkg = pkgs.$pkg; in builtins.elem pkgs.stdenv.hostPlatform.system (pkg.meta.platforms or [ pkgs.stdenv.hostPlatform.system ])" 2>/dev/null || echo "true")
+              if [ "$SUPPORTED" != "true" ]; then
+                echo "::warning::Package $pkg is not supported on this platform. Skipping."
+                continue
+              fi
+              if ! nix-env -qaP "$pkg" > /dev/null 2>&1; then
+                echo "::warning::Nix package validation failed: $pkg"
+              fi
+            fi
+          done
+
+      - name: Validate mise
+        shell: bash
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          export PATH="$HOME/.local/bin:$PATH"
+          if ! command -v mise &> /dev/null; then curl https://mise.run | sh; fi
+          # shellcheck disable=SC2016
+          mise_pkgs=$(~/.local/bin/chezmoi execute-template '{{ range $section, $deps := .dependencies -}}{{- if or (eq $section "cli") (eq $section "dev") (eq $section "desktop") -}}{{- range $name, $m := $deps -}}{{- if hasKey $m "mise" -}}{{- get $m "mise" | printf "%s " -}}{{- end -}}{{- end -}}{{- end -}}{{- end -}}{{- end }}')
+          for pkg in $mise_pkgs; do
+            if [ -n "$pkg" ]; then
+              echo "Checking mise: $pkg"
+              mise ls-remote "$pkg" | head -n 1 > /dev/null || exit 1
+            fi
+          done

@@ -1,0 +1,72 @@
+name: Test Windows setup
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  test:
+    name: Validate (Windows)
+    runs-on: windows-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v5
+
+      - name: Cache Scoop
+        uses: actions/cache@v5
+        with:
+          path: |
+            ~\scoop\cache
+            ~\scoop\buckets
+          key: ${{ runner.os }}-scoop-${{ hashFiles('.chezmoidata/dependencies.toml') }}
+          restore-keys: ${{ runner.os }}-scoop-
+
+      - name: Setup Dotfiles
+        uses: ./.github/actions/setup-dotfiles
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Validate Scoop
+        shell: pwsh
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          $Env:PATH="$HOME\scoop\shims;$Env:PATH"
+          . "$HOME\Documents\PowerShell\Microsoft.PowerShell_profile.ps1"
+          function Test-Scoop-Pkg {
+              param($pkgs)
+              foreach ($pkg in $pkgs) {
+                  if ($pkg) {
+                      Write-Host "Checking Scoop package: $pkg"
+                      scoop info $pkg | Out-Null
+                      if ($LASTEXITCODE -ne 0) {
+                          Write-Error "Scoop package not found: $pkg"
+                          exit 1
+                      }
+                  }
+              }
+          }
+          $cli = (chezmoi execute-template '{{ range $name, $managers := .dependencies.cli -}}{{- if hasKey $managers "scoop" -}}{{- get $managers "scoop" | printf "%s " -}}{{- end -}}{{- end }}') -split '\s+' | Where-Object { $_ }
+          $dev = (chezmoi execute-template '{{ range $name, $managers := .dependencies.dev -}}{{- if hasKey $managers "scoop" -}}{{- get $managers "scoop" | printf "%s " -}}{{- end -}}{{- end }}') -split '\s+' | Where-Object { $_ }
+          $gui = (chezmoi execute-template '{{ range $name, $managers := .dependencies.desktop -}}{{- if hasKey $managers "scoop" -}}{{- get $managers "scoop" | printf "%s " -}}{{- end -}}{{- end }}') -split '\s+' | Where-Object { $_ }
+          Test-Scoop-Pkg ($cli + $dev + $gui + @("7zip", "geekuninstaller", "gsudo", "sysinternals"))
+
+      - name: Validate mise
+        shell: bash
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          export PATH="$HOME/scoop/shims:$PATH"
+          if ! command -v mise &> /dev/null; then scoop install mise; fi
+          # shellcheck disable=SC2016
+          mise_pkgs=$(~/.local/bin/chezmoi execute-template '{{ range $section, $deps := .dependencies -}}{{- if or (eq $section "cli") (eq $section "dev") (eq $section "desktop") -}}{{- range $name, $m := $deps -}}{{- if hasKey $m "mise" -}}{{- get $m "mise" | printf "%s " -}}{{- end -}}{{- end -}}{{- end -}}{{- end -}}{{- end }}')
+          for pkg in $mise_pkgs; do
+            if [ -n "$pkg" ]; then
+              echo "Checking mise: $pkg"
+              mise ls-remote "$pkg" | head -n 1 > /dev/null || exit 1
+            fi
+          done
