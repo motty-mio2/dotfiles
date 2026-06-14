@@ -22,14 +22,15 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v5
 
-      - name: Cache Scoop
-        uses: actions/cache@v5
+      - name: Setup Scoop
+        uses: MinoruSekine/setup-scoop@v4
         with:
-          path: |
-            ~\scoop\cache
-            ~\scoop\buckets
-          key: ${{ runner.os }}-scoop-${{ hashFiles('.chezmoidata/dependencies.toml') }}
-          restore-keys: ${{ runner.os }}-scoop-
+          buckets: |
+            extras
+            versions
+            java
+            nerd-fonts
+            motty https://github.com/motty-mio2/scoop-bucket.git
 
       - name: Setup Dotfiles
         uses: ./.github/actions/setup-dotfiles
