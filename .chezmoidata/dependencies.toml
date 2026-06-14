@@ -20,6 +20,7 @@ rustup = [
   "rustfmt",
   "rust-analyzer",
 ]
+
 npm = [
   "@biomejs/biome",
   "@github/copilot",
@@ -36,6 +37,10 @@ npm = [
   "vim-language-server",
   "yaml-language-server",
 ]
+
+[dependencies.scoop]
+extras = "https://github.com/ScoopInstaller/Extras"
+java = "https://github.com/ScoopInstaller/java"
 
 [dependencies.cli]
 act = { aur = "act", nix = "act", mise = "github:nektos/act" }
