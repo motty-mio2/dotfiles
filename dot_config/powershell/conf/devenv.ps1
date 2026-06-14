@@ -98,10 +98,25 @@ function Install-Scoop {
 
     scoop reset *
 
-    scoop bucket add extras
-    scoop bucket add java
-    scoop bucket add versions
-    scoop bucket add nerd-fonts
-    scoop bucket add motty https://github.com/motty-mio2/scoop-bucket.git
+    $source = if (Test-Path ".chezmoidata") { "-S ." } else { "" }
+
+    # Default buckets
+    $defaults = (& chezmoi $source execute-template '{{ .dependencies.scoop.default | join " " }}') -split '\s+' | Where-Object { $_ }
+    foreach ($bucket in $defaults) {
+        if (-not (scoop bucket list | Select-String $bucket)) {
+            scoop bucket add $bucket
+        }
+    }
+
+    # External buckets
+    $externals = (& chezmoi $source execute-template '{{ range $name, $url := .dependencies.scoop.external }}{{ $name }} {{ $url }}|{{ end }}') -split '\|' | Where-Object { $_ }
+    foreach ($line in $externals) {
+        if ($line) {
+            $parts = $line -split ' '
+            if (-not (scoop bucket list | Select-String $parts[0])) {
+                scoop bucket add $parts[0] $parts[1]
+            }
+        }
+    }
 }
 

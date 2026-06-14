@@ -1,7 +1,6 @@
 [dependencies]
 nix = 25.11
-
-uv = [
+pip = [
   "basedpyright",
   "black",
   "cmake-language-server",
@@ -10,7 +9,8 @@ uv = [
   "isort",
   "mypy",
   "pyright",
-  "ruff"
+  "streamlink",
+  "ruff",
 ]
 rustup = [
   "clippy",
@@ -20,83 +20,90 @@ rustup = [
   "rustfmt",
   "rust-analyzer",
 ]
+
 npm = [
   "@biomejs/biome",
   "@github/copilot",
   "@github/copilot-language-server",
   "@google/gemini-cli",
+  "@tailwindcss/language-server",
   "bash-language-server",
   "dockerfile-language-server-nodejs",
   "markdownlint-cli2",
   "neovim",
-  "opencode-ai",
   "semver",
   "svelte-language-server",
   "typescript-language-server",
   "vim-language-server",
-  "yaml-language-server"
+  "yaml-language-server",
 ]
 
+scoop.default = ["extras", "java", "versions", "nerd-fonts"]
+
+[dependencies.scoop.external]
+motty = "https://github.com/motty-mio2/scoop-bucket"
+
 [dependencies.cli]
-act = { aur = "act", nix = "act" }
-bat = { scoop = "bat", apt = "bat", aur = "bat", nix = "bat" }
-bw = { scoop = "bitwarden", aur = "bitwarden-cli", nix = "bitwarden-cli" }
-bws = { mise = "bitwarden-secrets-manager"}
+act = { aur = "act", nix = "act", mise = "github:nektos/act" }
+bat = { scoop = "bat", apt = "bat", aur = "bat", nix = "bat", mise = "github:sharkdp/bat" }
+bw = { scoop = "bitwarden", aur = "bitwarden-cli", nix = "bitwarden-cli", mise = "bitwarden" }
+bws = { scoop = "bitwarden-secrets-manager-cli", mise = "bitwarden-secrets-manager" }
 byobu = { apt = "byobu", aur = "byobu" }
-chezmoi = { scoop = "chezmoi", aur = "chezmoi", nix = "chezmoi" }
-cloudflared = { scoop = "cloudflared", aur = "cloudflared", nix = "cloudflared" }
+chezmoi = { scoop = "chezmoi", aur = "chezmoi", nix = "chezmoi", mise = "github:twpayne/chezmoi" }
+cloudflared = { scoop = "cloudflared", aur = "cloudflared", nix = "cloudflared", mise = "github:cloudflare/cloudflared" }
 curl = { scoop = "curl", apt = "curl", aur = "curl", nix = "curl" }
-delta = { scoop = "delta", apt = "git-delta", aur = "git-delta", nix = "delta" }
-deno = { scoop = "deno", nix = "deno" }
-eza = { scoop = "eza", nix = "eza" }
-fd = { scoop = "fd", apt = "fd-find", aur = "fd", nix = "fd" }
-fzf = { scoop = "fzf", apt = "fzf", aur = "fzf", nix = "fzf" }
-gh = { scoop = "gh", aur = "github-cli", nix = "gh" }
+delta = { scoop = "delta", apt = "git-delta", aur = "git-delta", nix = "delta", mise = "github:dandavison/delta" }
+deno = { scoop = "deno", nix = "deno", mise = "deno" }
+eza = { scoop = "eza", nix = "eza", mise = "github:eza-community/eza" }
+fd = { scoop = "fd", apt = "fd-find", aur = "fd", nix = "fd", mise = "github:sharkdp/fd" }
+fzf = { scoop = "fzf", apt = "fzf", aur = "fzf", nix = "fzf", mise = "github:junegunn/fzf" }
+gh = { scoop = "gh", aur = "github-cli", nix = "gh", mise = "github:cli/cli" }
 git = { scoop = "git", apt = "git", aur = "git" }
-glab = { scoop = "glab", aur = "glab", nix = "glab" }
+glab = { scoop = "glab", aur = "glab", nix = "glab", mise = "gitlab:gitlab-org/cli" }
 grep = { scoop = "grep", apt = "grep" }
 htop = { apt = "htop", aur = "htop" }
-jnv = { scoop = "jnv", aur = "jnv", nix = "jnv" }
-jq = { scoop = "jq", apt = "jq", aur = "jq", nix = "jq" }
-jujutsu = { scoop = "jjutsu", aur = "jujutsu", nix = "jujutsu" }
-just = { scoop = "just", nix = "just" }
-kanata = { nix = "kanata" }
-lazydocker = { scoop = "lazydocker", nix = "lazydocker" }
-lazygit = { scoop = "lazygit", aur = "lazygit", nix = "lazygit" }
+jnv = { scoop = "jnv", aur = "jnv", nix = "jnv", mise = "github:ynqa/jnv" }
+jq = { scoop = "jq", apt = "jq", aur = "jq", nix = "jq", mise = "github:jqlang/jq" }
+jujutsu = { scoop = "jj", aur = "jujutsu", nix = "jujutsu", mise = "github:jj-vcs/jj" }
+just = { scoop = "just", nix = "just", mise = "github:casey/just" }
+kanata = { nix = "kanata", mise = "github:jtroo/kanata" }
+lazydocker = { scoop = "lazydocker", nix = "lazydocker", mise = "github:jesseduffield/lazydocker" }
+lazygit = { scoop = "lazygit", aur = "lazygit", nix = "lazygit", mise = "github:jesseduffield/lazygit" }
 less = { scoop = "less", apt = "less" }
 nano = { scoop = "nano", apt = "nano", aur = "nano" }
-neovim = { scoop = "neovim", aur = "neovim", nix = "neovim" }
-ripgrep = { scoop = "ripgrep", apt = "ripgrep", nix = "ripgrep" }
-starship = { scoop = "starship", aur = "starship", nix = "starship" }
-tombi = { scoop = "tombi", aur = "tombi", nix = "tombi" }
+neovim = { scoop = "neovim", aur = "neovim", nix = "neovim", mise = "github:neovim/neovim" }
+opencode = { mise = "github:anomalyco/opencode" }
+ripgrep = { scoop = "ripgrep", apt = "ripgrep", nix = "ripgrep", mise = "github:BurntSushi/ripgrep" }
+starship = { scoop = "starship", aur = "starship", nix = "starship", mise = "github:starship/starship" }
+tombi = { scoop = "tombi", aur = "tombi", nix = "tombi", mise = "github:tombi-toml/tombi" }
 unzip = { scoop = "unzip", apt = "unzip", aur = "unzip" }
-usage = { nix = "usage" }
-uv = { scoop = "uv", nix = "uv" }
+usage = { nix = "usage", mise = "usage" }
+uv = { scoop = "uv", nix = "uv", mise = "uv" }
 vim = { scoop = "vim", apt = "vim", aur = "vim" }
 wget = { scoop = "wget", apt = "wget", aur = "wget" }
 which = { scoop = "which" }
-yazi = { scoop = "yazi", nix = "yazi" }
-yt-dlp = { scoop = "yt-dlp", aur = "yt-dlp", nix = "yt-dlp" }
-zoxide = { aur = "zoxide", nix = "zoxide", scoop = "zoxide" }
+yazi = { scoop = "yazi", nix = "yazi", mise = "github:sxyazi/yazi" }
+yt-dlp = { scoop = "yt-dlp", aur = "yt-dlp", nix = "yt-dlp", mise = "yt-dlp" }
+zoxide = { aur = "zoxide", nix = "zoxide", scoop = "zoxide", mise = "github:ajeetdsouza/zoxide" }
 zsh = { apt = "zsh", aur = "zsh" }
 
 [dependencies.dev]
-actionlint = { scoop = "actionlint", aur = "actionlint", nix = "actionlint" }
-arduino-cli = { scoop = "arduino-cli" }
-arduino-language-server = { nix = "arduino-language-server" }
+actionlint = { scoop = "actionlint", aur = "actionlint", nix = "actionlint", mise = "github:rhysd/actionlint" }
+arduino-cli = { scoop = "arduino-cli", mise = "github:arduino/arduino-cli" }
+arduino-language-server = { nix = "arduino-language-server", mise = "github:arduino/arduino-language-server" }
 clang-format = { apt = "clang-format" }
 clang-tidy = { apt = "clang-tidy" }
 clangd = { scoop = "llvm", apt = "clangd" }
 hadolint = { scoop = "hadolint", nix = "hadolint" }
 lld = { apt = "lld" }
-lua-language-server = { scoop = "lua-language-server", nix = "lua-language-server" }
-marksman = { scoop = "marksman", nix = "marksman" }
-sccache = { scoop = "sccache", aur = "sccache-bin", nix = "sccache" }
-shellcheck = { scoop = "shellcheck", aur = "shellcheck-bin", nix = "shellcheck" }
-shfmt = { scoop = "shfmt", aur = "shfmt", nix = "shfmt" }
-stylua = { scoop = "stylua", aur = "stylua", nix = "stylua" }
-systemd-lsp = { aur = "systemd-lsp", nix = "systemd-lsp" }
-tree-sitter = { scoop = "tree-sitter", nix = "tree-sitter" }
+lua-language-server = { scoop = "lua-language-server", nix = "lua-language-server", mise = "github:LuaLS/lua-language-server" }
+marksman = { scoop = "marksman", nix = "marksman", mise = "github:artempyanykh/marksman" }
+sccache = { scoop = "sccache", aur = "sccache-bin", nix = "sccache", mise = "github:mozilla/sccache" }
+shellcheck = { scoop = "shellcheck", aur = "shellcheck-bin", nix = "shellcheck", mise = "github:koalaman/shellcheck" }
+shfmt = { scoop = "shfmt", aur = "shfmt", nix = "shfmt", mise = "github:mvdan/sh" }
+stylua = { scoop = "stylua", aur = "stylua", nix = "stylua", mise = "github:JohnnyMorganz/StyLua" }
+systemd-lsp = { aur = "systemd-lsp", nix = "systemd-lsp", mise = "github:jFryy/systemd-lsp" }
+tree-sitter = { scoop = "tree-sitter", nix = "tree-sitter", mise = "github:tree-sitter/tree-sitter" }
 # svlint = { scoop = "svlint", aur = "svlint-bin", nix = "svlint" }
 # svls = { scoop = "svls", aur = "svls", nix = "svls" }
 # verible = { scoop = "verible", nix = "verible" }
@@ -128,7 +135,6 @@ hyprpaper = { apt = "hyprpaper" }
 hyprpolkitagent = { apt = "hyprpolkitagent" }
 hyprutils1 = { apt = "hyprutils1" }
 xdg-desktop-portal-hyprland = { apt = "xdg-desktop-portal-hyprland" }
-
 # Tools
 brightnessctl = { nix = "brightnessctl", apt = "brightnessctl", aur = "brightnessctl" }
 cliphist = { nix = "cliphist", apt = "cliphist", aur = "cliphist" }

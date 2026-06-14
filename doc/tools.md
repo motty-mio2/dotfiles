@@ -1,41 +1,30 @@
-# Tools
+# Package Managers
 
-## Package Manager
+|                | Windows | Linux | macOS | system | desktop |
+| -------------- | :-----: | :---: | :---: | :----: | :-----: |
+| mise           |    o    |   o   |   o   |   x    |    x    |
+| Homebrew       |    x    |   x   |   △   |   o    |    o    |
+| apt / pacman   |    x    |   o   |   x   |   o    |    o    |
+| snap / flatpak |    x    |   o   |   x   |   o    |    o    |
+| AUR            |    x    |   o   |   x   |   o    |    o    |
+| nix            |    x    |   o   |   o   |   o    |    o    |
+| scoop          |    o    |   x   |   x   |   x    |    o    |
+| winget         |    o    |   x   |   x   |   o    |    o    |
 
-|        OS         | Name  | Privilege |
-| :---------------: | :---: | :-------: |
-|      Windows      | Scoop |    No     |
-|      Windows      | Wingt |    Yes    |
-| Arch Distribution |  AUR  |    Yes    |
-|       Linux       |  nix  |    No     |
-|       Linux       | brew  |    No     |
+## common
 
-## Development Tools
+Use mise as main package manager for all environments.
 
-|    Name    | Windows |    Linux     | Dependency |
-| :--------: | :-----: | :----------: | :--------: |
-|    Git     |  Scoop  |  OS default  |            |
-|   Neovim   |  Scoop  | AUR/nix/brew |            |
-|  starship  |  Scoop  | AUR/nix/brew |            |
+## Windows
 
-## Language Tools
+Use scoop and winget as main package manager.
 
-|   Language    |         Name         | Windows |    Linux     | Dependency |
-| :-----------: | :------------------: | :-----: | :----------: | :--------: |
-|     C/CPP     |        clangd        |  Scoop  |  OS default  |            |
-|     C/CPP     |     clang-format     |  Scoop  | AUR/nix/brew |   cargo    |
-|      Lua      |        Stylua        |  Scoop  |    native    |            |
-|   Markdown    |       Marksman       |  scoop  | AUR/nix/brew |            |
-|    Python     |          uv          | native  |    native    |            |
-|    Python     |        black         |   uv    |      uv      |    pip     |
-|    Python     |        flake8        |   uv    |      uv      |    pip     |
-|    Python     |        isort         |   uv    |      uv      |    pip     |
-|    Python     |         mypy         |   uv    |      uv      |    pip     |
-|    Python     |         ruff         |   uv    |      uv      |    pip     |
-|    Python     |       pyright        |  mise   |     mise     |   nodejs   |
-|     Shell     | bash-language-server |  mise   |     mise     |   nodejs   |
-|     Shell     |      shellcheck      |  scoop  | AUR/nix/brew |            |
-|     Shell     |        shfmt         |  scoop  | AUR/nix/brew |            |
-| SystemVerilog |         svls         |  scoop  | AUR/nix/brew |   cargo    |
-| SystemVerilog |        svlint        |  scoop  | AUR/nix/brew |   cargo    |
-| SystemVerilog |       verible        |  scoop  | AUR/nix/brew |            |
+## macOS
+
+Use nix as main package manager.
+Use homebrew and mas-cli for some applications from nix-darwin.
+
+## Linux
+
+Use nix as main package manager.
+If you can use root permission, you can use mise.

@@ -59,7 +59,7 @@ install-uv() {
 
 install-uv-tools() {
 	# shellcheck disable=SC1009,SC1072,SC1073,SC1083,SC2207
-	tools=($(chezmoi execute-template '{{- .dependencies.uv | quoteList | join " " -}}'))
+	tools=($(chezmoi execute-template '{{- .dependencies.pip | quoteList | join " " -}}'))
 
 	for tool in "${tools[@]}"; do
 		"$HOME/.local/bin/uv" tool install --upgrade "$tool"

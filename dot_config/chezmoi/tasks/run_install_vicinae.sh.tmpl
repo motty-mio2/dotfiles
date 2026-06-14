@@ -1,5 +1,10 @@
 {{- if and (eq .chezmoi.os "linux") (or (eq .machine_type "laptop") (eq .machine_type "desktop")) -}}
+{{- if or (not (lookPath "vicinae"))
+    (not (contains ((gitHubLatestRelease "vicinaehq/vicinae").TagName) (output "vicinae" "version")))
+}}
+
 #!/usr/bin/env bash
 
 curl -fsSL https://vicinae.com/install.sh | bash -s -- --prefix ~/.local
+{{- end -}}
 {{ end -}}

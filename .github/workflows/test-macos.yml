@@ -1,0 +1,100 @@
+name: Test macOS setup
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - '.github/workflows/test-macos.yml'
+      - '.chezmoidata/dependencies.toml'
+  pull_request:
+    branches:
+      - main
+    paths:
+      - '.github/workflows/test-macos.yml'
+      - '.chezmoidata/dependencies.toml'
+
+jobs:
+  validate-brew:
+    name: Validate (Homebrew)
+    runs-on: macos-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v5
+
+      - name: Cache Homebrew
+        uses: actions/cache@v5
+        with:
+          path: ~/Library/Caches/Homebrew
+          key: ${{ runner.os }}-brew-${{ hashFiles('.chezmoidata/dependencies.toml') }}
+          restore-keys: ${{ runner.os }}-brew-
+
+      - name: Setup Dotfiles
+        uses: ./.github/actions/setup-dotfiles
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Validate Homebrew
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          brew update
+          check_brew() {
+            local pkgs
+            # shellcheck disable=SC2016
+            pkgs=$(~/.local/bin/chezmoi execute-template -S . "{{ range \$name, \$m := .dependencies.$1 -}}{{- if hasKey \$m \"brew\" -}}{{- \$ok := true -}}{{- if hasKey \$m \"os\" -}}{{- \$ok = false -}}{{- range \$m.os -}}{{- if eq . \$.chezmoi.os -}}{{- \$ok = true -}}{{- end -}}{{- end -}}{{- end -}}{{- if \$ok -}}{{- get \$m \"brew\" | printf \"%s \" -}}{{- end -}}{{- end -}}{{- end }}")
+            # shellcheck disable=SC2086
+            for pkg in $pkgs; do
+              if [ -n "$pkg" ]; then
+                echo "Checking Brew: $pkg"
+                brew info "${2:-}" --json "$pkg" > /dev/null || exit 1
+              fi
+            done
+          }
+          check_brew "cli"
+          check_brew "dev"
+          check_brew "desktop" "--cask"
+
+  validate-nix:
+    name: Validate (Nix)
+    runs-on: macos-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v5
+
+      - name: Setup Dotfiles
+        uses: ./.github/actions/setup-dotfiles
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Setup Nix
+        uses: nixbuild/nix-quick-install-action@v30
+
+      - name: Validate Nix
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          nix-channel --add https://nixos.org/channels/nixpkgs-unstable nixpkgs
+          nix-channel --update
+          # shellcheck disable=SC2016
+          nix_pkgs=$(~/.local/bin/chezmoi execute-template -S . '{{ range $section, $deps := .dependencies -}}{{- if or (eq $section "cli") (eq $section "dev") (eq $section "desktop") -}}{{- range $name, $m := $deps -}}{{- if hasKey $m "nix" -}}{{- get $m "nix" | printf "%s " -}}{{- end -}}{{- end -}}{{- end -}}{{- end }}')
+          for pkg in $nix_pkgs; do
+            if [ -n "$pkg" ]; then
+              echo "Checking Nix: $pkg"
+              # Check platform compatibility and existence
+              # shellcheck disable=SC2016
+              CHECK_RESULT=$(nix-instantiate --eval -E "let pkgs = import <nixpkgs> {}; in if (pkgs ? \"$pkg\") then (let pkg = pkgs.\"$pkg\"; in if builtins.elem pkgs.stdenv.hostPlatform.system (pkg.meta.platforms or [ pkgs.stdenv.hostPlatform.system ]) then \"ok\" else \"unsupported\") else \"missing\"" 2>/dev/null | tr -d '"' || echo "error")
+              
+              if [ "$CHECK_RESULT" = "unsupported" ]; then
+                echo "::warning::Package $pkg is not supported on this platform. Skipping."
+              elif [ "$CHECK_RESULT" = "missing" ]; then
+                echo "::warning::Nix package not found in nixpkgs: $pkg"
+              elif [ "$CHECK_RESULT" = "error" ]; then
+                echo "::warning::Error checking Nix package: $pkg"
+              else
+                if ! nix-env -qaP "$pkg" > /dev/null 2>&1; then
+                  echo "::warning::Nix package validation failed: $pkg"
+                fi
+              fi
+            fi
+          done

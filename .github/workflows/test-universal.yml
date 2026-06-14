@@ -1,0 +1,94 @@
+name: Test Universal setup
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - '.github/workflows/test-universal.yml'
+      - '.chezmoidata/dependencies.toml'
+  pull_request:
+    branches:
+      - main
+    paths:
+      - '.github/workflows/test-universal.yml'
+      - '.chezmoidata/dependencies.toml'
+
+jobs:
+  validate-mise:
+    name: Validate (mise)
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v5
+
+      - name: Setup Dotfiles
+        uses: ./.github/actions/setup-dotfiles
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Validate mise
+        shell: bash
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          export PATH="$HOME/.local/bin:$PATH"
+          if ! command -v mise &> /dev/null; then curl https://mise.run | sh; fi
+          # shellcheck disable=SC2016
+          mise_pkgs=$(~/.local/bin/chezmoi execute-template -S . '{{ range $section, $deps := .dependencies -}}{{- if or (eq $section "cli") (eq $section "dev") (eq $section "desktop") -}}{{- range $name, $m := $deps -}}{{- if hasKey $m "mise" -}}{{- get $m "mise" | printf "%s " -}}{{- end -}}{{- end -}}{{- end -}}{{- end }}')
+          for pkg in $mise_pkgs; do
+            if [ -n "$pkg" ]; then
+              echo "Checking mise: $pkg"
+              mise ls-remote "$pkg" | head -n 1 > /dev/null || exit 1
+            fi
+          done
+
+  validate-npm:
+    name: Validate (npm)
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v5
+
+      - name: Setup Dotfiles
+        uses: ./.github/actions/setup-dotfiles
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Validate npm
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          # shellcheck disable=SC2016
+          npm_pkgs=$(~/.local/bin/chezmoi execute-template -S . '{{ .dependencies.npm | join " " }}')
+          for pkg in $npm_pkgs; do
+            if [ -n "$pkg" ]; then
+              echo "Checking npm: $pkg"
+              npm view "$pkg" > /dev/null || exit 1
+            fi
+          done
+
+  validate-pip:
+    name: Validate (pip)
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v5
+
+      - name: Setup Dotfiles
+        uses: ./.github/actions/setup-dotfiles
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Validate pip
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          # shellcheck disable=SC2016
+          pip_pkgs=$(~/.local/bin/chezmoi execute-template -S . '{{ .dependencies.pip | join " " }}')
+          for pkg in $pip_pkgs; do
+            if [ -n "$pkg" ]; then
+              echo "Checking pip: $pkg"
+              curl -sSf "https://pypi.org/pypi/$pkg/json" > /dev/null || exit 1
+            fi
+          done
