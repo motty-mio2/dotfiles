@@ -16,8 +16,16 @@ on:
 
 jobs:
   test:
-    name: Validate (Linux)
-    runs-on: ubuntu-latest
+    name: Validate (Linux, ${{ matrix.arch }})
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - arch: amd64
+            os: ubuntu-latest
+          - arch: arm64
+            os: ubuntu-24.04-arm
+    runs-on: ${{ matrix.os }}
     steps:
       - name: Checkout repository
         uses: actions/checkout@v5
