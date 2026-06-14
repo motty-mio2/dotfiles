@@ -15,8 +15,8 @@ on:
       - '.chezmoidata/dependencies.toml'
 
 jobs:
-  test:
-    name: Validate (macOS)
+  validate-brew:
+    name: Validate (Homebrew)
     runs-on: macos-latest
     steps:
       - name: Checkout repository
@@ -42,7 +42,7 @@ jobs:
           check_brew() {
             local pkgs
             # shellcheck disable=SC2016
-            pkgs=$(~/.local/bin/chezmoi execute-template "{{ range \$name, \$managers := .dependencies.$1 -}}{{- if hasKey \$managers \"brew\" -}}{{- get \$managers \"brew\" | printf \"%s \" -}}{{- end -}}{{- end }}")
+            pkgs=$(~/.local/bin/chezmoi execute-template -S . "{{ range \$name, \$m := .dependencies.$1 -}}{{- if hasKey \$m \"brew\" -}}{{- \$ok := true -}}{{- if hasKey \$m \"os\" -}}{{- \$ok = false -}}{{- range \$m.os -}}{{- if eq . \$.chezmoi.os -}}{{- \$ok = true -}}{{- end -}}{{- end -}}{{- end -}}{{- if \$ok -}}{{- get \$m \"brew\" | printf \"%s \" -}}{{- end -}}{{- end -}}{{- end }}")
             # shellcheck disable=SC2086
             for pkg in $pkgs; do
               if [ -n "$pkg" ]; then
@@ -55,6 +55,18 @@ jobs:
           check_brew "dev"
           check_brew "desktop" "--cask"
 
+  validate-nix:
+    name: Validate (Nix)
+    runs-on: macos-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v5
+
+      - name: Setup Dotfiles
+        uses: ./.github/actions/setup-dotfiles
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+
       - name: Setup Nix
         uses: nixbuild/nix-quick-install-action@v30
 
@@ -65,7 +77,7 @@ jobs:
           nix-channel --add https://nixos.org/channels/nixpkgs-unstable nixpkgs
           nix-channel --update
           # shellcheck disable=SC2016
-          nix_pkgs=$(~/.local/bin/chezmoi execute-template '{{ range $section, $deps := .dependencies -}}{{- if or (eq $section "cli") (eq $section "dev") (eq $section "desktop") -}}{{- range $name, $m := $deps -}}{{- if hasKey $m "nix" -}}{{- get $m "nix" | printf "%s " -}}{{- end -}}{{- end -}}{{- end -}}{{- end }}')
+          nix_pkgs=$(~/.local/bin/chezmoi execute-template -S . '{{ range $section, $deps := .dependencies -}}{{- if or (eq $section "cli") (eq $section "dev") (eq $section "desktop") -}}{{- range $name, $m := $deps -}}{{- if hasKey $m "nix" -}}{{- get $m "nix" | printf "%s " -}}{{- end -}}{{- end -}}{{- end -}}{{- end }}')
           for pkg in $nix_pkgs; do
             if [ -n "$pkg" ]; then
               echo "Checking Nix: $pkg"
@@ -86,4 +98,3 @@ jobs:
               fi
             fi
           done
-
