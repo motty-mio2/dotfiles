@@ -38,6 +38,7 @@ runs:
         GITHUB_TOKEN: ${{ inputs.github_token }}
       run: |
         if ("${{ runner.os }}" -eq "Windows") {
+          $Env:PATH = "$HOME\.local\bin;$Env:PATH"
           & "$HOME\.local\bin\chezmoi.exe" init --apply --promptDefaults -S .
           $Env:PATH = "$HOME\scoop\shims;$Env:PATH"
           . "$HOME\Documents\PowerShell\Microsoft.PowerShell_profile.ps1"
