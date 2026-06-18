@@ -3,9 +3,24 @@ if (Get-Command mise -ErrorAction SilentlyContinue) {
 }
 
 function mupdate {
-    mise self-update --quiet
-    mise upgrade --bump
-    mise cache prune
+    $tokenSet = $false
+    if (Get-Command gh -ErrorAction SilentlyContinue) {
+        $status = gh auth status --active --hostname github.com 2>&1
+        if ($LASTEXITCODE -eq 0 -and $status) {
+            $env:MISE_GITHUB_TOKEN = gh auth token
+            $tokenSet = $true
+        }
+    }
+
+    try {
+        mise self-update --quiet
+        mise upgrade --bump
+        mise cache prune
+    } finally {
+        if ($tokenSet) {
+            Remove-Item Env:\MISE_GITHUB_TOKEN
+        }
+    }
 }
 
 function supdate {
