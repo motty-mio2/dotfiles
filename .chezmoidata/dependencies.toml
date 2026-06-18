@@ -100,7 +100,7 @@ lua-language-server = { scoop = "lua-language-server", nix = "lua-language-serve
 marksman = { scoop = "marksman", nix = "marksman", mise = "github:artempyanykh/marksman" }
 sccache = { scoop = "sccache", aur = "sccache-bin", nix = "sccache", mise = "github:mozilla/sccache" }
 shellcheck = { scoop = "shellcheck", aur = "shellcheck-bin", nix = "shellcheck", mise = "github:koalaman/shellcheck" }
-shfmt = { scoop = "shfmt", aur = "shfmt", nix = "shfmt", mise = "github:mvdan/sh" }
+shfmt = { scoop = "shfmt", aur = "shfmt", nix = "shfmt", mise = "shfmt" }
 stylua = { scoop = "stylua", aur = "stylua", nix = "stylua", mise = "github:JohnnyMorganz/StyLua" }
 systemd-lsp = { aur = "systemd-lsp", nix = "systemd-lsp", mise = "github:jFryy/systemd-lsp" }
 tree-sitter = { scoop = "tree-sitter", nix = "tree-sitter", mise = "github:tree-sitter/tree-sitter" }
