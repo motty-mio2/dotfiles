@@ -17,9 +17,10 @@
         packages.dev = pkgs.buildEnv {
           name = "dev";
           paths = with pkgs; [
-            arduino-language-server
-            {{range $name, $managers := .dependencies.dev -}}
-            {{ get $managers "nix" | printf "%s " -}}
+            {{- range $name, $managers := .dependencies.dev -}}
+              {{- if and (hasKey $managers "nix") (or (not (lookPath "mise")) (not (hasKey $managers "mise"))) -}}
+                {{- get $managers "nix" | printf "%s " -}}
+              {{- end -}}
             {{- end }}
           ];
         };

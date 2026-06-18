@@ -2,12 +2,4 @@
 Set-ExecutionPolicy -ExecutionPolicy RemoteSigned -Scope CurrentUser
 Set-ExecutionPolicy RemoteSigned -Scope CurrentUser -Force
 
-# Install Scoop
-if ( -not (Get-Command "scoop")) {
-    Invoke-WebRequest -useb get.scoop.sh | Invoke-Expression
-}
-
-$Env:Path="$Env:USERPROFILE\\scoop\\shims;$ENV:Path"
-scoop install 7zip git chezmoi
-
 {{ end }}

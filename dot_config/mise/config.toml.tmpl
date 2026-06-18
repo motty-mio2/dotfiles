@@ -1,0 +1,36 @@
+[settings]
+experimental = true
+minimum_release_age = "3d"
+
+[tools]
+# Not in dependencies
+node = "lts"
+"github:708u/twig" = "latest"
+"github:bahdotsh/wrkflw" = "latest"
+"github:coder3101/protols" = "latest"
+"github:cordx56/rustowl" = "latest"
+"github:terror/just-lsp" = "latest"
+"github:trasta298/keifu" = "latest"
+
+# From dependencies
+{{- range $name, $managers := .dependencies.cli }}
+{{- if hasKey $managers "mise" }}
+"{{ get $managers "mise" }}" = "latest"
+{{- end }}
+{{- end }}
+{{- range $name, $managers := .dependencies.dev }}
+{{- if hasKey $managers "mise" }}
+"{{ get $managers "mise" }}" = "latest"
+{{- end }}
+{{- end }}
+
+
+# Node.js based tools
+{{- range .dependencies.npm }}
+"npm:{{ . }}" = "latest"
+{{- end }}
+
+# Python based tools
+{{- range .dependencies.pip }}
+"pipx:{{ . }}" = "latest"
+{{- end }}

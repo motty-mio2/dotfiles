@@ -1,3 +1,6 @@
+umask = 0o022
+sourceDir = "{{ .chezmoi.sourceDir }}"
+
 [data]
 
 {{- $machine_type_prompt_list := list "desktop" "laptop" "server" -}}
