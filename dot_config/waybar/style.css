@@ -1,25 +1,27 @@
 * {
-    border: none;
-    border-radius: 0;
-    font-family: "HackGen35 Console NF";
-    font-size: 14px;
-    font-weight: 600;
-    min-height: 0;
+	border: none;
+	border-radius: 0;
+	font-family: "HackGen Console NF";
+	font-size: 14px;
+	font-weight: 600;
+	min-height: 0;
 }
 
 window#waybar {
-    background-color: transparent;
+	background-color: transparent;
 }
 
 tooltip {
-    background: #1e1e2e;
-    border: 1px solid #89b4fa;
-    border-radius: 8px;
+	background: #1e1e2e;
+	border: 1px solid #89b4fa;
+	border-radius: 8px;
+	font-family: "HackGen Console NF";
+	font-size: 14px;
 }
 
 tooltip label {
-    color: #cdd6f4;
-    padding: 10px;
+	color: #cdd6f4;
+	padding: 10px;
 }
 
 /* ピル形状のモジュールベーススタイル */
@@ -41,170 +43,170 @@ tooltip label {
 #custom-notification,
 #power-profiles-daemon,
 #keyboard-state {
-    background-color: rgba(30, 30, 46, 0.85); /* 半透明なダーク背景 */
-    color: #cdd6f4;
-    border-radius: 18px; /* 角丸 */
-    padding: 0 14px;
-    margin: 4px 2px;
-    box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.4);
+	background-color: rgba(30, 30, 46, 0.85); /* 半透明なダーク背景 */
+	color: #cdd6f4;
+	border-radius: 18px; /* 角丸 */
+	padding: 0 14px;
+	margin: 4px 2px;
+	box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.4);
 }
 
 /* ワークスペース (Left) */
 #workspaces {
-    padding: 0 4px;
+	padding: 0 4px;
 }
 
 #workspaces button {
-    padding: 0 6px;
-    color: rgba(166, 173, 200, 0.45); /* 空のドットはある程度見えた方が安心 */
-    background-color: transparent;
-    transition: all 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+	padding: 0 6px;
+	color: rgba(166, 173, 200, 0.45); /* 空のドットはある程度見えた方が安心 */
+	background-color: transparent;
+	transition: all 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275);
 }
 
 #workspaces button.active {
-    color: #89b4fa;
-    text-shadow: 0 0 8px rgba(137, 180, 250, 0.6);
+	color: #89b4fa;
+	text-shadow: 0 0 8px rgba(137, 180, 250, 0.6);
 }
 
 #workspaces button:hover {
-    color: #cba6f7;
+	color: #cba6f7;
 }
 
 #workspaces button.urgent {
-    background-color: #f38ba8;
-    color: #1e1e2e;
+	background-color: #f38ba8;
+	color: #1e1e2e;
 }
 
 /* 個別モジュールのアクセントカラー (Catppuccin Mocha) */
 #clock {
-    color: #fab387; /* Peach */
+	color: #fab387; /* Peach */
 }
 
 #battery {
-    color: #a6e3a1; /* Green */
+	color: #a6e3a1; /* Green */
 }
 
 #battery.charging {
-    color: #1e1e2e;
-    background-color: #a6e3a1;
+	color: #1e1e2e;
+	background-color: #a6e3a1;
 }
 
 #battery.critical:not(.charging) {
-    background-color: #f38ba8;
-    color: #1e1e2e;
-    animation-name: blink;
-    animation-duration: 0.8s;
-    animation-timing-function: ease-in-out;
-    animation-iteration-count: infinite;
-    animation-direction: alternate;
+	background-color: #f38ba8;
+	color: #1e1e2e;
+	animation-name: blink;
+	animation-duration: 0.8s;
+	animation-timing-function: ease-in-out;
+	animation-iteration-count: infinite;
+	animation-direction: alternate;
 }
 
 @keyframes blink {
-    to {
-        background-color: rgba(243, 139, 168, 0.5);
-        color: #f38ba8;
-    }
+	to {
+		background-color: rgba(243, 139, 168, 0.5);
+		color: #f38ba8;
+	}
 }
 
 #custom-cpu {
-    color: #f9e2af; /* Yellow */
+	color: #f9e2af; /* Yellow */
 }
 
 #memory {
-    color: #94e2d5; /* Teal */
+	color: #94e2d5; /* Teal */
 }
 
 #temperature {
-    color: #f38ba8; /* Red */
+	color: #f38ba8; /* Red */
 }
 
 #temperature.critical {
-    background-color: #f38ba8;
-    color: #1e1e2e;
+	background-color: #f38ba8;
+	color: #1e1e2e;
 }
 
 #backlight {
-    color: #f5c2e7; /* Pink */
+	color: #f5c2e7; /* Pink */
 }
 
 #network {
-    color: #89b4fa; /* Blue */
+	color: #89b4fa; /* Blue */
 }
 
 #network.disconnected {
-    background-color: #f38ba8;
-    color: #1e1e2e;
+	background-color: #f38ba8;
+	color: #1e1e2e;
 }
 
 #pulseaudio {
-    color: #cba6f7; /* Mauve */
+	color: #cba6f7; /* Mauve */
 }
 
 #pulseaudio.muted {
-    background-color: #6c7086;
-    color: #1e1e2e;
+	background-color: #6c7086;
+	color: #1e1e2e;
 }
 
 #tray {
-    padding: 0 10px;
+	padding: 0 10px;
 }
 
 /* メニュー（ポップアップ）のスタイル */
 menu {
-    background: rgba(30, 30, 46, 0.95); /* バーと同じ暗い背景 */
-    border: 1px solid #89b4fa;
-    border-radius: 12px;
-    padding: 8px;
+	background: rgba(30, 30, 46, 0.95); /* バーと同じ暗い背景 */
+	border: 1px solid #89b4fa;
+	border-radius: 12px;
+	padding: 8px;
 }
 
 menuitem {
-    color: #cdd6f4;
-    padding: 4px 12px;
-    border-radius: 8px;
-    transition: all 0.2s ease;
+	color: #cdd6f4;
+	padding: 4px 12px;
+	border-radius: 8px;
+	transition: all 0.2s ease;
 }
 
 menuitem:hover {
-    background-color: #89b4fa;
-    color: #1e1e2e;
+	background-color: #89b4fa;
+	color: #1e1e2e;
 }
 
 separator {
-    background-color: #6c7086;
-    margin: 4px 0;
+	background-color: #6c7086;
+	margin: 4px 0;
 }
 
 #custom-power {
-    background-color: #f38ba8;
-    color: #1e1e2e;
+	background-color: #f38ba8;
+	color: #1e1e2e;
 }
 
 #custom-power:hover {
-    background-color: #eba0ac;
+	background-color: #eba0ac;
 }
 
 #custom-recorder {
-    color: #f38ba8;
-    background-color: rgba(243, 139, 168, 0.15);
+	color: #f38ba8;
+	background-color: rgba(243, 139, 168, 0.15);
 }
 
 #custom-notification {
-    color: #f9e2af;
+	color: #f9e2af;
 }
 
 #idle_inhibitor.activated {
-    background-color: #cdd6f4;
-    color: #1e1e2e;
+	background-color: #cdd6f4;
+	color: #1e1e2e;
 }
 
 #power-profiles-daemon.performance {
-    color: #f38ba8;
+	color: #f38ba8;
 }
 
 #power-profiles-daemon.balanced {
-    color: #89b4fa;
+	color: #89b4fa;
 }
 
 #power-profiles-daemon.power-saver {
-    color: #a6e3a1;
+	color: #a6e3a1;
 }
