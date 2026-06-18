@@ -4,17 +4,33 @@ alias aupdate='sudo apt update && sudo apt upgrade -y && sudo apt autoremove -y'
 alias bupdate='brew update && brew upgrade'
 alias dupdate='sudo dnf update -y'
 alias fupdate='sudo flatpak update && sudo flatpak remove --unused'
-alias mupdate='mise self-update --quiet; mise upgrade --bump; mise cache prune'
+# alias mupdate='mise self-update --quiet; mise upgrade --bump; mise cache prune'
 alias pupdate='sudo pacman -Syu'
 alias supdate='sudo snap refresh'
 alias yupdate='yay -Syu'
 alias zupdate='sudo zypper ref && sudo zypper update -y'
 alias rupdate='sudo darwin-rebuild switch --flake $HOME/.local/share/nix/darwin'
 
+mupdate() {
+	header=""
+
+	if [ "$(gh auth status --active --hostname github.com)" ]; then
+		header=" MISE_GITHUB_TOKEN=$(gh auth token)"
+	fi
+
+	eval "$header mise self-update --quiet"
+	eval "$header mise upgrade --bump"
+	eval "$header mise cache prune"
+}
+
 nupdate() {
+	header=""
+	if [ "$(gh auth status --active --hostname github.com)" ]; then
+		header=" NIX_CONFIG=\"access-tokens = github.com=$(gh auth token)\""
+	fi
 	for item in $(nix profile list --json | jq -r ".elements | keys | .[] "); do
-		nix flake update --flake "$XDG_DATA_HOME/nix/$item"
-		nix profile upgrade "$item"
+		eval "$header nix flake update --flake $XDG_DATA_HOME/nix/$item"
+		eval "$header nix profile upgrade $item"
 	done
 
 	if [ -e "$HOME/.nix-profile" ]; then
