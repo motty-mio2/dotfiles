@@ -123,8 +123,20 @@
 	"clock": {
 		// "format-alt": "{:%Y-%m-%d / %H\:%M\:%S}"
 		"interval": 30,
-		"tooltip-format": "<big>{:%Y %B}</big>\n<tt><small>{calendar}</small></tt>",
-		"format": "{:%Y-%m-%d %H:%M}"
+		"tooltip-format": "<span >{calendar}</span>",
+		"format": "{:%Y-%m-%d %H:%M}",
+		"calendar": {
+			"mode": "month",
+			"mode-mon-col": 3,
+			"on-scroll": 1,
+			"format": {
+				"months": "<span color='#ffead3'><b>{}</b></span>",
+				"days": "<span color='#ecc6d9'>_{}</span>",
+				// "weekdays": "<span color='#ffcc66'><b>{:2}</b></span>",
+				"weekdays": "<span color='#ffcc66'><b>日 月 火 水 木 金 土</b></span>",
+				"today": "<span color='#ff6699'><b><u>{}</u></b></span>"
+			}
+		}
 	},
 	"custom/cpu": {
 		"format": "{}",

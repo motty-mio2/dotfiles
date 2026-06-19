@@ -1,13 +1,11 @@
 [Unit]
-Description=Waybar Service
+Description=Dunst Service
 
 [Service]
-ExecStart=waybar
+ExecStart=dunst
 ExecStop=/bin/kill ${MAINPID}
 Restart=always
 RestartSec=3
 
 [Install]
 WantedBy=hyprland-session.target
-
-
