@@ -25,7 +25,6 @@ npm = [
   "@biomejs/biome",
   "@github/copilot",
   "@github/copilot-language-server",
-  "@google/gemini-cli",
   "@tailwindcss/language-server",
   "bash-language-server",
   "dockerfile-language-server-nodejs",
@@ -45,11 +44,13 @@ motty = "https://github.com/motty-mio2/scoop-bucket"
 
 [dependencies.cli]
 act = { aur = "act", nix = "act", mise = "github:nektos/act" }
+antigravity-cli = { mise = "antigravity-cli" }
 bat = { scoop = "bat", apt = "bat", aur = "bat", nix = "bat", mise = "github:sharkdp/bat" }
 bw = { scoop = "bitwarden", aur = "bitwarden-cli", nix = "bitwarden-cli", mise = "bitwarden" }
 bws = { scoop = "bitwarden-secrets-manager-cli", mise = "bitwarden-secrets-manager" }
 byobu = { apt = "byobu", aur = "byobu" }
 chezmoi = { scoop = "chezmoi", aur = "chezmoi", nix = "chezmoi", mise = "github:twpayne/chezmoi" }
+claude = { mise = "claude" }
 cloudflared = { scoop = "cloudflared", aur = "cloudflared", nix = "cloudflared", mise = "github:cloudflare/cloudflared" }
 curl = { scoop = "curl", apt = "curl", aur = "curl", nix = "curl" }
 delta = { scoop = "delta", apt = "git-delta", aur = "git-delta", nix = "delta", mise = "github:dandavison/delta" }
