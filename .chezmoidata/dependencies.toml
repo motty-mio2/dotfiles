@@ -69,6 +69,7 @@ just = { scoop = "just", nix = "just", mise = "github:casey/just" }
 kanata = { nix = "kanata", mise = "github:jtroo/kanata" }
 lazydocker = { scoop = "lazydocker", nix = "lazydocker", mise = "github:jesseduffield/lazydocker" }
 lazygit = { scoop = "lazygit", aur = "lazygit", nix = "lazygit", mise = "github:jesseduffield/lazygit" }
+leaf = { mise = "github:rivolink/leaf" }
 less = { scoop = "less", apt = "less" }
 nano = { scoop = "nano", apt = "nano", aur = "nano" }
 neovim = { scoop = "neovim", aur = "neovim", nix = "neovim", mise = "github:neovim/neovim" }
