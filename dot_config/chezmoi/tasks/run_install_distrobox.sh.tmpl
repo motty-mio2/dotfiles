@@ -1,5 +1,9 @@
 {{- if and (eq .chezmoi.os "linux") (or (eq .machine_type "laptop") (eq .machine_type "desktop")) -}}
+{{- if or (not (lookPath "distrobox"))
+    (not (contains ((gitHubLatestRelease "89luca89/distrobox").TagName) (output "distrobox" "version")))
+-}}
 #!/usr/bin/env bash
 
 curl -s https://raw.githubusercontent.com/89luca89/distrobox/main/install | sh -s -- --prefix ~/.local
-{{ end -}}
+{{- end -}}
+{{- end -}}

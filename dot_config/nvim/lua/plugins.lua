@@ -1,4 +1,5 @@
 return {
+
 	{
 		"nvimtools/none-ls.nvim",
 		dependencies = {
@@ -94,6 +95,9 @@ return {
 			"nvim-treesitter/nvim-treesitter",
 		},
 		event = "VeryLazy",
+		keys = {
+			{ "<Esc>", "<cmd>NoiceDismiss<cr>", mode = "n", desc = "Dismiss Noice Message" },
+		},
 		opts = {
 			views = {
 				cmdline_popup = {
@@ -117,6 +121,12 @@ return {
 					},
 				},
 			},
+		},
+	},
+	{
+		"rcarriga/nvim-notify",
+		opts = {
+			timeout = 3000,
 		},
 	},
 	{

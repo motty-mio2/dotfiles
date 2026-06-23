@@ -25,6 +25,7 @@ npm = [
   "@biomejs/biome",
   "@github/copilot",
   "@github/copilot-language-server",
+  "@google/jules",
   "@tailwindcss/language-server",
   "bash-language-server",
   "dockerfile-language-server-nodejs",
@@ -67,6 +68,7 @@ jnv = { scoop = "jnv", aur = "jnv", nix = "jnv", mise = "github:ynqa/jnv" }
 jq = { scoop = "jq", apt = "jq", aur = "jq", nix = "jq", mise = "github:jqlang/jq" }
 jujutsu = { scoop = "jj", aur = "jujutsu", nix = "jujutsu", mise = "github:jj-vcs/jj" }
 just = { scoop = "just", nix = "just", mise = "github:casey/just" }
+kakehashi = { mise = "github:atusy/kakehashi" }
 kanata = { nix = "kanata", mise = "github:jtroo/kanata" }
 lazydocker = { scoop = "lazydocker", nix = "lazydocker", mise = "github:jesseduffield/lazydocker" }
 lazygit = { scoop = "lazygit", aur = "lazygit", nix = "lazygit", mise = "github:jesseduffield/lazygit" }
