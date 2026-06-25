@@ -28,6 +28,7 @@ npm = [
   "@google/jules",
   "@tailwindcss/language-server",
   "bash-language-server",
+  "ccusage",
   "dockerfile-language-server-nodejs",
   "markdownlint-cli2",
   "neovim",
