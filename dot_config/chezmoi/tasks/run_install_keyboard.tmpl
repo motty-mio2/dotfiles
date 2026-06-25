@@ -1,9 +1,0 @@
-{{- if and (eq .chezmoi.os "linux") (or (eq .machine_type "laptop") (eq .machine_type "desktop")) -}}
-#!/usr/bin/env bash
-# Use a null-delimited find + read loop to safely handle filenames
-while IFS= read -r -d '' rule_file; do
-    sudo ln -s "$rule_file" "/etc/udev/rules.d/"
-done < <(find "$HOME/.config/udev" -name '*.rules' -print0)
-sudo udevadm control --reload-rules
-sudo udevadm trigger
-{{ end -}}

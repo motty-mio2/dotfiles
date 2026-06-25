@@ -1,0 +1,31 @@
+{{- if and (eq .chezmoi.os "linux") (or (eq .machine_type "laptop") (eq .machine_type "desktop")) -}}
+#!/usr/bin/env bash
+
+# udev rules hash:
+{{- range (glob (joinPath .chezmoi.sourceDir "dot_config/udev/*.rules")) }}
+# {{ . }}: {{ include . | sha256sum }}
+{{- end }}
+
+echo "Checking keyboard udev rules..."
+
+# Use a null-delimited find + read loop to safely handle filenames
+while IFS= read -r -d '' rule_file; do
+    rule_name=$(basename "$rule_file")
+    dest="/etc/udev/rules.d/$rule_name"
+
+    if [ -L "$dest" ] && [ "$(readlink "$dest")" = "$rule_file" ]; then
+        # Already correctly linked, skip
+        continue
+    fi
+
+    echo "Linking $rule_file to $dest"
+    sudo ln -sf "$rule_file" "$dest"
+    RELOAD_NEEDED=1
+done < <(find "$HOME/.config/udev" -name '*.rules' -print0)
+
+if [ -n "$RELOAD_NEEDED" ]; then
+    echo "Reloading udev rules..."
+    sudo udevadm control --reload-rules
+    sudo udevadm trigger
+fi
+{{- end -}}

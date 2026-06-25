@@ -25,9 +25,11 @@ npm = [
   "@biomejs/biome",
   "@github/copilot",
   "@github/copilot-language-server",
-  "@google/gemini-cli",
+  "@google/jules",
   "@tailwindcss/language-server",
   "bash-language-server",
+  "ccusage",
+  "diffit",
   "dockerfile-language-server-nodejs",
   "markdownlint-cli2",
   "neovim",
@@ -45,12 +47,14 @@ motty = "https://github.com/motty-mio2/scoop-bucket"
 
 [dependencies.cli]
 act = { aur = "act", nix = "act", mise = "github:nektos/act" }
-atuin = { aur = "atuin", nix = "atuin", mise = "github:atuinsh/atuin" }
+atuin = { aur = "atuin", nix = "atuin", mise = "github:atuinsh/atuin", scoop = "atuin" }
+antigravity-cli = { mise = "antigravity-cli" }
 bat = { scoop = "bat", apt = "bat", aur = "bat", nix = "bat", mise = "github:sharkdp/bat" }
 bw = { scoop = "bitwarden", aur = "bitwarden-cli", nix = "bitwarden-cli", mise = "bitwarden" }
 bws = { scoop = "bitwarden-secrets-manager-cli", mise = "bitwarden-secrets-manager" }
 byobu = { apt = "byobu", aur = "byobu" }
 chezmoi = { scoop = "chezmoi", aur = "chezmoi", nix = "chezmoi", mise = "github:twpayne/chezmoi" }
+claude = { mise = "claude" }
 cloudflared = { scoop = "cloudflared", aur = "cloudflared", nix = "cloudflared", mise = "github:cloudflare/cloudflared" }
 curl = { scoop = "curl", apt = "curl", aur = "curl", nix = "curl" }
 delta = { scoop = "delta", apt = "git-delta", aur = "git-delta", nix = "delta", mise = "github:dandavison/delta" }
@@ -67,9 +71,11 @@ jnv = { scoop = "jnv", aur = "jnv", nix = "jnv", mise = "github:ynqa/jnv" }
 jq = { scoop = "jq", apt = "jq", aur = "jq", nix = "jq", mise = "github:jqlang/jq" }
 jujutsu = { scoop = "jj", aur = "jujutsu", nix = "jujutsu", mise = "github:jj-vcs/jj" }
 just = { scoop = "just", nix = "just", mise = "github:casey/just" }
+kakehashi = { mise = "github:atusy/kakehashi" }
 kanata = { nix = "kanata", mise = "github:jtroo/kanata" }
 lazydocker = { scoop = "lazydocker", nix = "lazydocker", mise = "github:jesseduffield/lazydocker" }
 lazygit = { scoop = "lazygit", aur = "lazygit", nix = "lazygit", mise = "github:jesseduffield/lazygit" }
+leaf = { mise = "github:rivolink/leaf" }
 less = { scoop = "less", apt = "less" }
 nano = { scoop = "nano", apt = "nano", aur = "nano" }
 neovim = { scoop = "neovim", aur = "neovim", nix = "neovim", mise = "github:neovim/neovim" }
@@ -101,7 +107,7 @@ lua-language-server = { scoop = "lua-language-server", nix = "lua-language-serve
 marksman = { scoop = "marksman", nix = "marksman", mise = "github:artempyanykh/marksman" }
 sccache = { scoop = "sccache", aur = "sccache-bin", nix = "sccache", mise = "github:mozilla/sccache" }
 shellcheck = { scoop = "shellcheck", aur = "shellcheck-bin", nix = "shellcheck", mise = "github:koalaman/shellcheck" }
-shfmt = { scoop = "shfmt", aur = "shfmt", nix = "shfmt", mise = "github:mvdan/sh" }
+shfmt = { scoop = "shfmt", aur = "shfmt", nix = "shfmt", mise = "shfmt" }
 stylua = { scoop = "stylua", aur = "stylua", nix = "stylua", mise = "github:JohnnyMorganz/StyLua" }
 systemd-lsp = { aur = "systemd-lsp", nix = "systemd-lsp", mise = "github:jFryy/systemd-lsp" }
 tree-sitter = { scoop = "tree-sitter", nix = "tree-sitter", mise = "github:tree-sitter/tree-sitter" }

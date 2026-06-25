@@ -28,7 +28,7 @@
 
 # Disable specific steps - same options as the command line flag
 # disable = ["system", "emacs"]
-disable = ["chezmoi", "docker", "mise", "nix"]
+disable = ["chezmoi", "containers", "distrobox", "docker", "mise", "nix"]
 
 # Run these steps before all others
 # first = ["chezmoi"]

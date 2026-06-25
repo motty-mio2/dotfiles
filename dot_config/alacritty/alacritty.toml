@@ -15,3 +15,8 @@ style = { shape = "Beam", blinking = "Off" }
 
 [env]
 TERM = "xterm-256color"
+
+[[keyboard.bindings]]
+key = "Return"
+mods = "Shift"
+chars = "\u001B\r"
