@@ -30,3 +30,13 @@ tools
     Documents
     _vimrc
 {{ end }}
+
+{{ if not (env "BW_SESSION") }}
+    .config/mcpc/notion.json
+    .config/mozc/dict.txt
+    .local/bin/git-user
+    .ssh/config.d/3_hostC.conf
+    .ssh/config.d/3_hostLC.conf
+    .ssh/config.d/3_hostLN.conf
+{{ end }}
+
