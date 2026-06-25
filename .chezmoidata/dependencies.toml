@@ -29,6 +29,7 @@ npm = [
   "@tailwindcss/language-server",
   "bash-language-server",
   "ccusage",
+  "diffit",
   "dockerfile-language-server-nodejs",
   "markdownlint-cli2",
   "neovim",
