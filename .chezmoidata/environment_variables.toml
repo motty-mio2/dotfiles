@@ -34,9 +34,7 @@ PYTHONSTARTUP = "XDG_CONFIG_HOME/python/pythonrc"
 RUSTUP_HOME = "XDG_DATA_HOME/rustup"
 SVLINT_CONFIG = "XDG_CONFIG_HOME/svlint/.svlint.toml"
 ZDOTDIR = "XDG_CONFIG_HOME/zsh"
+
 [environment.application_config]
-COPILOT_OTEL_ENABLED=true
-COPILOT_OTEL_EXPORTER_TYPE="file"
-COPILOT_OTEL_FILE_EXPORTER_PATH="$HOME/.copilot/otel/copilot-otel-$(date +%Y%m%d-%H%M%S).jsonl"
 INSTALLER_NO_MODIFY_PATH = "1"
 PIPENV_VENV_IN_PROJECT = "1"
