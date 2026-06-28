@@ -5,6 +5,10 @@
 
 (defcfg
     process-unmapped-keys yes   ;; defsrc で定義しないキーも通す
+    linux-dev-names-exclude (
+        "Shokz Shokz Loop110 Consumer Control"
+        "Shokz Shokz Loop110"
+    )
 )
 
 ;; 1. 使用キーの定義
