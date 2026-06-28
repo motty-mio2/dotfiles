@@ -35,6 +35,12 @@ POWERLEVEL9K_DISABLE_CONFIGURATION_WIZARD=true
 {{      end }}
 {{ end }}
 
+{{ if lookPath "atuin" }}
+if command -v atuin > /dev/null 2>&1; then
+{{      output "atuin" "init" .shell "--disable-up-arrow" }}
+fi
+{{ end }}
+
 {{ if lookPath "zoxide" }}
 if command -v zoxide > /dev/null 2>&1; then
 {{      output "zoxide" "init" .shell }}
