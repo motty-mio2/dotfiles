@@ -8,6 +8,8 @@
     linux-dev-names-exclude (
         "Shokz Shokz Loop110 Consumer Control"
         "Shokz Shokz Loop110"
+        "Shokz Shokz Loop120 Consumer Control"
+        "Shokz Shokz Loop120"
     )
 )
 
@@ -42,3 +44,6 @@ left down up  rght
  ;; cap (tap-hold-press 200 200 caps lctl)
   vim (tap-hold-press 200 200 ncnv (layer-toggle arrows))
 )
+
+
+
