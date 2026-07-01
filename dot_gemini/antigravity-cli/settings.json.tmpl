@@ -1,0 +1,19 @@
+{{- $targetFile := joinPath .chezmoi.homeDir ".gemini/antigravity-cli/settings.json" -}}
+{{- $state := dict "trusted" list -}}
+{{- if stat $targetFile -}}
+  {{- $current := output "cat" $targetFile | fromJson -}}
+  {{- if hasKey $current "trustedWorkspaces" -}}
+    {{- $_ := set $state "trusted" $current.trustedWorkspaces -}}
+  {{- end -}}
+{{- end -}}
+{
+  "allowNonWorkspaceAccess": true,
+  "enableTelemetry": false,
+  "model": "Gemini 3.5 Flash (High)",
+  "statusLine": {
+    "type": "command",
+    "command": "{{ .chezmoi.homeDir }}/.local/bin/statusline.sh antigravity",
+    "enabled": true
+  },
+  "trustedWorkspaces": {{ $state.trusted | toJson }}
+}
