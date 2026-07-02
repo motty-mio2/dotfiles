@@ -1,3 +1,9 @@
+{{- $targetFile := joinPath .chezmoi.homeDir ".config/zed/settings.json" -}}
+{{- $state := dict "ssh_connections" list -}}
+{{- if stat $targetFile -}}
+  {{- $ssh_connections := output "node" "-e" `const fs = require("fs"); const content = fs.readFileSync(process.argv[1], "utf8"); const clean = content.replace(/\/\*[\s\S]*?\*\/|([^\\:]|^)\/\/.*$/gm, "$1").replace(/,(\s*[}\]])/g, "$1"); console.log(JSON.stringify(JSON.parse(clean).ssh_connections || []));` $targetFile | fromJson -}}
+  {{- $_ := set $state "ssh_connections" $ssh_connections -}}
+{{- end -}}
 // Zed settings
 //
 // For information on how to configure Zed, see the Zed
@@ -7,6 +13,7 @@
 // custom settings, run `zed: open default settings` from the
 // command palette
 {
+  "ssh_connections": {{ $state.ssh_connections | toJson }},
   "cli_default_open_behavior": "existing_window",
   "agent_servers": {
     "github-copilot-cli": {
