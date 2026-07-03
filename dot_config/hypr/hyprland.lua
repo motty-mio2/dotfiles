@@ -1,4 +1,4 @@
-require("land.monitors_base")
+require("land.monitors")
 
 -------------------
 --- MY PROGRAMS ---
@@ -12,11 +12,13 @@ local menu = "wofi --show drun --show-icons"
 -----------------
 --- AUTOSTART ---
 -----------------
-
-hl.exec({ cmd = "dbus-update-activation-environment --systemd WAYLAND_DISPLAY XDG_CURRENT_DESKTOP", once = true })
-hl.exec({ cmd = "systemctl --user start hyprland-session.target", once = true })
-hl.exec({ cmd = "/usr/libexec/polkit-agent-helper-1", once = true })
-
+hl.on("hyprland.start", function ()
+  hl.exec_cmd("dbus-update-activation-environment --systemd WAYLAND_DISPLAY XDG_CURRENT_DESKTOP")
+  hl.exec_cmd("systemctl --user start hyprland-session.target")
+  hl.exec_cmd("/usr/libexec/polkit-agent-helper-1")
+  hl.exec_cmd('gsettings set org.gnome.desktop.interface color-scheme "prefer-dark"')
+  hl.exec_cmd('gsettings set org.gnome.desktop.interface gtk-theme "adw-gtk3"')
+end)
 -----------------------------
 --- ENVIRONMENT VARIABLES ---
 -----------------------------
@@ -33,8 +35,6 @@ hl.config({
 	},
 })
 
-hl.exec({ cmd = 'gsettings set org.gnome.desktop.interface color-scheme "prefer-dark"' })
-hl.exec({ cmd = 'gsettings set org.gnome.desktop.interface gtk-theme "adw-gtk3"' })
 
 -------------------
 --- PERMISSIONS ---
@@ -58,8 +58,8 @@ hl.config({
 		gaps_out = 5,
 		border_size = 1,
 
-		["col.active_border"] = "rgba(33ccffee) rgba(00ff99ee) 45deg",
-		["col.inactive_border"] = "rgba(595959aa)",
+		-- ["col.active_border"] = "rgba(33ccffee) rgba(00ff99ee) 45deg",
+		-- ["col.inactive_border"] = "rgba(595959aa)",
 
 		resize_on_border = true,
 		allow_tearing = false,
