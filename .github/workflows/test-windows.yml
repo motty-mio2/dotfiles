@@ -35,7 +35,7 @@ jobs:
           echo "externals=$externals" >> $env:GITHUB_OUTPUT
 
       - name: Setup Scoop
-        uses: MinoruSekine/setup-scoop@v4
+        uses: MinoruSekine/setup-scoop@v5
         with:
           buckets: ${{ steps.scoop-config.outputs.defaults }}
 
