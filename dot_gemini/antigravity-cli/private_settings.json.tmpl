@@ -15,5 +15,5 @@
     "command": "{{ .chezmoi.homeDir }}/.local/bin/statusline.sh antigravity",
     "enabled": true
   },
-  "trustedWorkspaces": {{ $state.trusted | toJson }}
+  "trustedWorkspaces": {{ $state.trusted | toPrettyJson "  " | indent 2 | trim }}
 }
