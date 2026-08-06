@@ -1,5 +1,4 @@
 return {
-
 	{
 		"nvimtools/none-ls.nvim",
 		dependencies = {
@@ -164,10 +163,6 @@ return {
 			{ "<leader>xL", "<cmd>Trouble loclist toggle<cr>", desc = "Location List (Trouble)" },
 			{ "<leader>xQ", "<cmd>Trouble qflist toggle<cr>", desc = "Quickfix List (Trouble)" },
 		},
-	},
-	{
-		"nvim-telescope/telescope.nvim",
-		dependencies = { "nvim-lua/plenary.nvim" },
 	},
 	{
 		"rachartier/tiny-inline-diagnostic.nvim",
