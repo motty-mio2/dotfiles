@@ -65,7 +65,6 @@ gh = { scoop = "gh", aur = "github-cli", nix = "gh", mise = "github:cli/cli" }
 git = { scoop = "git", apt = "git", aur = "git" }
 glab = { scoop = "glab", aur = "glab", nix = "glab", mise = "gitlab:gitlab-org/cli" }
 grep = { scoop = "grep", apt = "grep" }
-herdr = { mise = "github:ogulcancelik/herdr" }
 htop = { apt = "htop", aur = "htop" }
 jnv = { scoop = "jnv", aur = "jnv", nix = "jnv", mise = "github:ynqa/jnv" }
 jq = { scoop = "jq", apt = "jq", aur = "jq", nix = "jq", mise = "github:jqlang/jq" }
