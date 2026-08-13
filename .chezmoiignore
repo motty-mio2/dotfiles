@@ -1,5 +1,6 @@
 .gitignore
 doc
+AGENTS.md
 LICENSE
 README.md
 justfile
