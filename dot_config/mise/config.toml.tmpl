@@ -33,6 +33,7 @@ node = "lts"
 {{- range .dependencies.npm }}
 "npm:{{ . }}" = "latest"
 {{- end }}
+"npm:svelte-language-server" = { version = "latest", trust_policy_excludes = ["svelte@4.2.20"] }
 
 # Python based tools
 {{- range .dependencies.pip }}

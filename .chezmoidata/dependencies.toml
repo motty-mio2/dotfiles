@@ -34,7 +34,6 @@ npm = [
   "markdownlint-cli2",
   "neovim",
   "semver",
-  "svelte-language-server",
   "typescript-language-server",
   "vim-language-server",
   "yaml-language-server",
