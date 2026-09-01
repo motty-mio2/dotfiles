@@ -50,6 +50,7 @@ bw = { scoop = "bitwarden", aur = "bitwarden-cli", nix = "bitwarden-cli", mise =
 bw_edit = { mise = "github:motty-mio2/bw_edit" }
 bws = { scoop = "bitwarden-secrets-manager-cli", mise = "bitwarden-secrets-manager" }
 byobu = { apt = "byobu", aur = "byobu" }
+carapace = { scoop = "carapace-bin" }
 chezmoi = { scoop = "chezmoi", aur = "chezmoi", nix = "chezmoi", mise = "github:twpayne/chezmoi" }
 claude = { mise = "claude" }
 cloudflared = { scoop = "cloudflared", aur = "cloudflared", nix = "cloudflared", mise = "github:cloudflare/cloudflared" }
