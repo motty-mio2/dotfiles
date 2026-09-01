@@ -35,6 +35,10 @@ if ! shopt -oq posix; then
             source "${file}"
         done
     fi
+
+    if command -v carapace >/dev/null 2>&1; then
+        source <(carapace _carapace)
+    fi
 fi
 
 # Include shell template

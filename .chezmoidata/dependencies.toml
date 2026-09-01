@@ -52,6 +52,7 @@ bat = { scoop = "bat", apt = "bat", aur = "bat", nix = "bat", mise = "github:sha
 bw = { scoop = "bitwarden", aur = "bitwarden-cli", nix = "bitwarden-cli", mise = "bitwarden" }
 bws = { scoop = "bitwarden-secrets-manager-cli", mise = "bitwarden-secrets-manager" }
 byobu = { apt = "byobu", aur = "byobu" }
+carapace = { scoop = "carapace", nix = "carapace", mise = "github:rsteube/carapace-bin" }
 chezmoi = { scoop = "chezmoi", aur = "chezmoi", nix = "chezmoi", mise = "github:twpayne/chezmoi" }
 claude = { mise = "claude" }
 cloudflared = { scoop = "cloudflared", aur = "cloudflared", nix = "cloudflared", mise = "github:cloudflare/cloudflared" }
