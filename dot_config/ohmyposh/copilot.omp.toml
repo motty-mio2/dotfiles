@@ -1,0 +1,49 @@
+version = 4
+
+[[blocks]]
+  type = 'prompt'
+  alignment = 'left'
+
+  [[blocks.segments]]
+    template = '📂 <cyan>{{ .Path }}</>'
+    type = 'path'
+    style = 'plain'
+
+    [blocks.segments.options]
+      style = 'full'
+
+  [[blocks.segments]]
+    template = ' <#868686>│</> 🌿 <green>{{ .HEAD }}</>{{ if .Working.Changed }} <yellow>{{ .Working.String }}</>{{ end }}{{ if .Staging.Changed }} <green>{{ .Staging.String }}</>{{ end }}'
+    type = 'git'
+    style = 'plain'
+
+    [blocks.segments.options]
+      branch_icon = ''
+
+[[blocks]]
+  type = 'prompt'
+  alignment = 'left'
+  newline = true
+
+  [[blocks.segments]]
+    template = '🧠 <{{ if ge (int .TokenUsagePercent) 90 }}red{{ else if ge (int .TokenUsagePercent) 70 }}yellow{{ else }}green{{ end }}>{{ .TokenGaugeUsed }}</> {{ .TokenUsagePercent }}% <#868686>│</> 🤖 <yellow>{{ .Model.DisplayName }}</>'
+    type = 'copilot_cli'
+    style = 'plain'
+
+    [blocks.segments.options]
+      gauge_marked_char = '█'
+      gauge_unmarked_char = '░'
+
+[[blocks]]
+  type = 'prompt'
+  alignment = 'left'
+  newline = true
+
+  [[blocks.segments]]
+    template = '{{ if .Cost }}{{ if gt .Cost.TotalPremiumRequests 0 }}⚡ <yellow>{{ .Cost.TotalPremiumRequests }} reqs</>{{ if .FormattedDuration }} <#868686>│</> {{ end }}{{ end }}{{ if .FormattedDuration }}⏱️ <cyan>{{ .FormattedDuration }}</>{{ end }}{{ end }}'
+    type = 'copilot_cli'
+    style = 'plain'
+
+    [blocks.segments.options]
+      gauge_marked_char = '█'
+      gauge_unmarked_char = '░'

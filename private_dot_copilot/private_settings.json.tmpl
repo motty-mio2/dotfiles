@@ -1,0 +1,35 @@
+{{- $targetFile := joinPath .chezmoi.homeDir ".copilot/settings.json" -}}
+{{- $model := "gpt-5-mini" -}}
+{{- if stat $targetFile -}}
+  {{- $current := include $targetFile | fromJson -}}
+  {{- if hasKey $current "model" -}}
+    {{- $model = $current.model -}}
+  {{- end -}}
+{{- end -}}
+{
+  "model": {{ $model | toJson }},
+  "footer": {
+    "showModelEffort": false,
+    "showDirectory": true,
+    "showBranch": true,
+    "showContextWindow": true,
+    "showQuota": true,
+    "showAiUsed": true,
+    "showAgent": true,
+    "showCodeChanges": true,
+    "showUsername": false,
+    "showSandbox": true,
+    "showYolo": false,
+    "showCiStatus": false,
+    "showCustom": false
+  },
+  "statusLine": {
+    "type": "command",
+    "command": "oh-my-posh copilot --config {{ .chezmoi.homeDir }}/.config/ohmyposh/copilot.omp.toml"
+  },
+  "feature_flags": {
+    "enabled": [
+      "STATUS_LINE"
+    ]
+  }
+}
