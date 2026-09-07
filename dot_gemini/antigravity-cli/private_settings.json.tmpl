@@ -15,7 +15,7 @@
   "model": {{ $state.model | toJson }},
   "statusLine": {
     "type": "command",
-    "command": "{{ .chezmoi.homeDir }}/.local/bin/statusline.sh antigravity",
+    "command": "oh-my-posh antigravity --config {{ .chezmoi.homeDir }}/.config/ohmyposh/antigravity.omp.json",
     "enabled": true
   },
   "trustedWorkspaces": {{ $state.trusted | toPrettyJson "  " | indent 2 | trim }}

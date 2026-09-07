@@ -1,0 +1,60 @@
+{
+  "$schema": "https://raw.githubusercontent.com/JanDeDobbeleer/oh-my-posh/main/themes/schema.json",
+  "version": 4,
+  "blocks": [
+    {
+      "type": "prompt",
+      "alignment": "left",
+      "segments": [
+        {
+          "type": "path",
+          "style": "plain",
+          "options": {
+            "style": "full"
+          },
+          "template": "📂 <cyan>{{ .Path }}</>"
+        },
+        {
+          "type": "git",
+          "style": "plain",
+          "options": {
+            "branch_icon": ""
+          },
+          "template": " <#868686>│</> 🌿 <green>{{ .HEAD }}</>{{ if .Working.Changed }} <yellow>{{ .Working.String }}</>{{ end }}{{ if .Staging.Changed }} <green>{{ .Staging.String }}</>{{ end }}"
+        }
+      ]
+    },
+    {
+      "type": "prompt",
+      "alignment": "left",
+      "newline": true,
+      "segments": [
+        {
+          "type": "antigravity",
+          "style": "plain",
+          "options": {
+            "gauge_marked_char": "█",
+            "gauge_unmarked_char": "░"
+          },
+          "template": "🧠 <{{ if ge (int .TokenUsagePercent) 90 }}red{{ else if ge (int .TokenUsagePercent) 70 }}yellow{{ else }}green{{ end }}>{{ .TokenGaugeUsed }}</> {{ .TokenUsagePercent }}% <#868686>│</> ✨ <yellow>{{ .Model.DisplayName }}</>"
+        }
+      ]
+    },
+    {
+      "type": "prompt",
+      "alignment": "left",
+      "newline": true,
+      "segments": [
+        {
+          "type": "antigravity",
+          "style": "plain",
+          "options": {
+            "gauge_marked_char": "█",
+            "gauge_unmarked_char": "░"
+          },
+          "template": "{{ if .Quota }}{{ $five := \"\" }}{{ $fiveUsed := 0 }}{{ $seven := \"\" }}{{ $sevenUsed := 0 }}{{ range $k, $v := .Quota }}{{ if and (contains \"5h\" $k) $v.RemainingFraction }}{{ $five = $k }}{{ $fiveUsed = int (round (mulf (subf 1.0 (float64 $v.RemainingFraction)) 100.0) 0) }}{{ end }}{{ if and (or (contains \"weekly\" $k) (contains \"7d\" $k) (contains \"seven\" $k)) $v.RemainingFraction }}{{ $seven = $k }}{{ $sevenUsed = int (round (mulf (subf 1.0 (float64 $v.RemainingFraction)) 100.0) 0) }}{{ end }}{{ end }}{{ if or $five $seven }}🕐 <{{ if ge $fiveUsed 90 }}red{{ else if ge $fiveUsed 70 }}yellow{{ else }}green{{ end }}>{{ $fFill := int (div $fiveUsed 20) }}{{ range until $fFill }}█{{ end }}{{ range until (int (sub 5 $fFill)) }}░{{ end }}</> {{ $fiveUsed }}% <#868686>│</> 📅 <{{ if ge $sevenUsed 90 }}red{{ else if ge $sevenUsed 70 }}yellow{{ else }}green{{ end }}>{{ $sFill := int (div $sevenUsed 20) }}{{ range until $sFill }}█{{ end }}{{ range until (int (sub 5 $sFill)) }}░{{ end }}</> {{ $sevenUsed }}%{{ end }}{{ end }}"
+        }
+      ]
+    }
+  ]
+}
