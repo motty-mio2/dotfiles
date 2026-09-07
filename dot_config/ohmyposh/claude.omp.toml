@@ -1,0 +1,49 @@
+version = 4
+
+[[blocks]]
+  type = 'prompt'
+  alignment = 'left'
+
+  [[blocks.segments]]
+    template = '📂 <cyan>{{ .Path }}</>'
+    type = 'path'
+    style = 'plain'
+
+    [blocks.segments.options]
+      style = 'full'
+
+  [[blocks.segments]]
+    template = ' <#868686>│</> 🌿 <green>{{ .HEAD }}</>{{ if .Working.Changed }} <yellow>{{ .Working.String }}</>{{ end }}{{ if .Staging.Changed }} <green>{{ .Staging.String }}</>{{ end }}'
+    type = 'git'
+    style = 'plain'
+
+    [blocks.segments.options]
+      branch_icon = ''
+
+[[blocks]]
+  type = 'prompt'
+  alignment = 'left'
+  newline = true
+
+  [[blocks.segments]]
+    template = '🧠 <{{ if ge (int .TokenUsagePercent) 90 }}red{{ else if ge (int .TokenUsagePercent) 70 }}yellow{{ else }}green{{ end }}>{{ .TokenGaugeUsed }}</> {{ .TokenUsagePercent }}% <#868686>│</> 💪 <yellow>{{ .Model.DisplayName }}{{ if .Effort }} ({{ .Effort.Level }}){{ end }}</>'
+    type = 'claude'
+    style = 'plain'
+
+    [blocks.segments.options]
+      gauge_marked_char = '█'
+      gauge_unmarked_char = '░'
+
+[[blocks]]
+  type = 'prompt'
+  alignment = 'left'
+  newline = true
+
+  [[blocks.segments]]
+    template = '{{ if .RateLimits }}{{ if or .RateLimits.FiveHour .RateLimits.SevenDay }}🕐 <{{ if ge (int .FiveHourUsage) 90 }}red{{ else if ge (int .FiveHourUsage) 70 }}yellow{{ else }}green{{ end }}>{{ .FiveHourGauge }}</> {{ .FiveHourUsage }}% <#868686>│</> 📅 <{{ if ge (int .SevenDayUsage) 90 }}red{{ else if ge (int .SevenDayUsage) 70 }}yellow{{ else }}green{{ end }}>{{ .SevenDayGauge }}</> {{ .SevenDayUsage }}%{{ end }}{{ end }}'
+    type = 'claude'
+    style = 'plain'
+
+    [blocks.segments.options]
+      gauge_marked_char = '█'
+      gauge_unmarked_char = '░'
