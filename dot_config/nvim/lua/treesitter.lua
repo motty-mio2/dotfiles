@@ -78,7 +78,10 @@ vim.api.nvim_create_autocmd("FileType", {
 			local available = ts.get_available()
 			if vim.list_contains(available, lang) and not installing_langs[lang] then
 				installing_langs[lang] = true
-				vim.notify(string.format("Treesitter: '%s' のパーサーを自動インストール中...", lang), vim.log.levels.INFO)
+				vim.notify(
+					string.format("Treesitter: '%s' のパーサーを自動インストール中...", lang),
+					vim.log.levels.INFO
+				)
 
 				ts.install({ lang }, nil, function(success)
 					installing_langs[lang] = nil
