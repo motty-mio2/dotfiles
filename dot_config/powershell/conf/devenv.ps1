@@ -92,7 +92,7 @@ function Set-SVLINT-PATH {
 }
 
 function Install-Scoop {
-    if ( -not (Get-Command "scoop")) {
+    if ( -not (Get-Command "scoop" -ErrorAction SilentlyContinue)) {
         Invoke-WebRequest -useb get.scoop.sh | Invoke-Expression
     }
 
