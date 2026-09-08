@@ -5,7 +5,6 @@ pip = [
   "black",
   "cmake-language-server",
   "flake8",
-  "ignr",
   "isort",
   "mypy",
   "pyright",
@@ -61,6 +60,7 @@ eza = { scoop = "eza", nix = "eza", mise = "github:eza-community/eza" }
 fd = { scoop = "fd", apt = "fd-find", aur = "fd", nix = "fd", mise = "github:sharkdp/fd" }
 fzf = { scoop = "fzf", apt = "fzf", aur = "fzf", nix = "fzf", mise = "github:junegunn/fzf" }
 gh = { scoop = "gh", aur = "github-cli", nix = "gh", mise = "github:cli/cli" }
+gibo = { scoop = "gibo", aur = "gibo", nix = "gibo", mise = "github:simonwhitaker/gibo" }
 git = { scoop = "git", apt = "git", aur = "git" }
 glab = { scoop = "glab", aur = "glab", nix = "glab", mise = "gitlab:gitlab-org/cli" }
 grep = { scoop = "grep", apt = "grep" }
