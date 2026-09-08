@@ -19,8 +19,8 @@ on:
       - 'dot_config/scoop/**'
 
 jobs:
-  test:
-    name: Validate (Windows)
+  validate-scoop:
+    name: Validate (Scoop)
     runs-on: windows-latest
     steps:
       - name: Checkout repository
@@ -58,18 +58,11 @@ jobs:
           buckets: ${{ steps.scoop-config.outputs.defaults }}
           custom_buckets: ${{ steps.scoop-config.outputs.externals }}
 
-      - name: Setup Dotfiles
-        uses: ./.github/actions/setup-dotfiles
-        with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-
       - name: Validate Scoop
         shell: pwsh
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
-          $Env:PATH="$HOME\scoop\shims;$Env:PATH"
-          . "$HOME\Documents\PowerShell\Microsoft.PowerShell_profile.ps1"
           function Test-Scoop-Pkg {
               param($pkgs)
               foreach ($pkg in $pkgs) {
@@ -87,6 +80,18 @@ jobs:
           $dev = (& "$HOME\.local\bin\chezmoi.exe" execute-template -S . '{{ range $name, $managers := .dependencies.dev -}}{{- if hasKey $managers "scoop" -}}{{- get $managers "scoop" | printf "%s " -}}{{- end -}}{{- end }}') -split '\s+' | Where-Object { $_ }
           $gui = (& "$HOME\.local\bin\chezmoi.exe" execute-template -S . '{{ range $name, $managers := .dependencies.desktop -}}{{- if hasKey $managers "scoop" -}}{{- get $managers "scoop" | printf "%s " -}}{{- end -}}{{- end }}') -split '\s+' | Where-Object { $_ }
           Test-Scoop-Pkg ($cli + $dev + $gui + @("7zip", "geekuninstaller", "gsudo", "sysinternals"))
+
+  validate-winget:
+    name: Validate (WinGet)
+    runs-on: windows-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v7
+
+      - name: Setup Dotfiles
+        uses: ./.github/actions/setup-dotfiles
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Validate WinGet
         shell: pwsh
