@@ -82,68 +82,9 @@ function Install-Scoop-GUI-Tools {
     }
 }
 
-function Prune-Scoop-Tools {
-    [CmdletBinding(SupportsShouldProcess)]
-    param (
-        [switch]$Uninstall,
-        [switch]$Force
-    )
-
-    if (-not (Get-Command scoop -ErrorAction SilentlyContinue)) {
-        Write-Warning "Scoop is not installed."
-        return
-    }
-
-    $exportJson = scoop export | ConvertFrom-Json
-    $installed = $exportJson.apps.Name
-    if (-not $installed) {
-        Write-Host "No Scoop packages are currently installed."
-        return
-    }
-
-    $defined = @()
-    foreach ($f in @("cli.json", "dev.json", "gui.json")) {
-        $p = Join-Path $Env:USERPROFILE ".config\scoop\$f"
-        if (Test-Path $p) {
-            $json = Get-Content $p -Raw | ConvertFrom-Json
-            if ($json.apps) {
-                $defined += $json.apps.Name
-            }
-        }
-    }
-    $defined = $defined | Select-Object -Unique
-
-    if ($defined.Count -eq 0) {
-        Write-Warning "No defined packages found in ~/.config/scoop/. Run 'chezmoi apply' first."
-        return
-    }
-
-    $unmanaged = $installed | Where-Object { $defined -notcontains $_ }
-
-    if (-not $unmanaged -or $unmanaged.Count -eq 0) {
-        Write-Host "No unmanaged Scoop packages found. All installed packages are tracked by dotfiles!" -ForegroundColor Green
-        return
-    }
-
-    Write-Host "Found $($unmanaged.Count) unmanaged Scoop package(s) (installed locally but not in dotfiles):" -ForegroundColor Yellow
-    foreach ($pkg in $unmanaged) {
-        Write-Host "  - $pkg"
-    }
-
-    if ($Uninstall) {
-        foreach ($pkg in $unmanaged) {
-            if ($Force -or $PSCmdlet.ShouldProcess($pkg, "Uninstall unmanaged Scoop package")) {
-                Write-Host "Uninstalling $pkg..." -ForegroundColor Cyan
-                scoop uninstall $pkg
-            }
-        }
-    } else {
-        Write-Host "`nTo uninstall these packages, run: Prune-Scoop-Tools -Uninstall" -ForegroundColor Cyan
-        Write-Host "Or use alias: sprune -Uninstall" -ForegroundColor DarkGray
-    }
+function sprune {
+    scoop prune @args
 }
-
-Set-Alias sprune Prune-Scoop-Tools
 
 function Apply-Windows-Registry {
     $file = Join-Path $Env:USERPROFILE ".config\winget\registry.dsc.yaml"

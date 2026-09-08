@@ -32,6 +32,7 @@ tools
     Appdata
     Documents
     _vimrc
+    scoop
 {{ end }}
 
 {{ if not (env "BW_SESSION") }}
