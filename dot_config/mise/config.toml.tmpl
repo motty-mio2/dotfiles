@@ -17,14 +17,26 @@ node = "lts"
 "github:ogulcancelik/herdr" = { version = "latest", os = ["linux", "macos"]}
 
 # From dependencies
+{{- $pref_cli := "mise" -}}
+{{- if hasKey . "preferred_installer" -}}
+  {{- $pref_cli = get .preferred_installer "cli" | default "mise" -}}
+{{- end -}}
 {{- range $name, $managers := .dependencies.cli }}
 {{- if hasKey $managers "mise" }}
+{{- if or (ne $pref_cli "scoop") (not (hasKey $managers "scoop")) }}
 "{{ get $managers "mise" }}" = "latest"
 {{- end }}
 {{- end }}
+{{- end }}
+{{- $pref_dev := "mise" -}}
+{{- if hasKey . "preferred_installer" -}}
+  {{- $pref_dev = get .preferred_installer "dev" | default "mise" -}}
+{{- end -}}
 {{- range $name, $managers := .dependencies.dev }}
 {{- if hasKey $managers "mise" }}
+{{- if or (ne $pref_dev "scoop") (not (hasKey $managers "scoop")) }}
 "{{ get $managers "mise" }}" = "latest"
+{{- end }}
 {{- end }}
 {{- end }}
 

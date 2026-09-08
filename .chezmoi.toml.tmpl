@@ -6,3 +6,12 @@ sourceDir = "{{ .chezmoi.sourceDir }}"
 {{- $machine_type_prompt_list := list "desktop" "laptop" "server" -}}
 {{- $machine_type_prompt := promptChoiceOnce . "machine_type_prompt" "Choice Machine Type (WSL is server)" $machine_type_prompt_list "server" }}
 machine_type = {{ $machine_type_prompt | quote }}
+
+[data.preferred_installer]
+{{- if eq .chezmoi.os "windows" }}
+cli = "scoop"
+dev = "scoop"
+{{- else }}
+cli = "mise"
+dev = "mise"
+{{- end }}
