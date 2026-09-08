@@ -30,6 +30,8 @@ tools
     Appdata
     Documents
     _vimrc
+    .local/share/bash
+    .local/share/zsh
 {{ end }}
 
 {{ if not (env "BW_SESSION") }}
