@@ -82,17 +82,6 @@ function Install-Scoop-GUI-Tools {
     }
 }
 
-function Install-Scoop-All {
-    $scoopfile = Join-Path $Env:USERPROFILE ".config\scoop\scoopfile.json"
-    if (Test-Path $scoopfile) {
-        scoop import $scoopfile
-    } else {
-        Install-Scoop-Tools
-        Install-Scoop-Dev-Tools
-        Install-Scoop-GUI-Tools
-    }
-}
-
 function Apply-Windows-Registry {
     $file = Join-Path $Env:USERPROFILE ".config\winget\registry.dsc.yaml"
     if (Test-Path $file) {
