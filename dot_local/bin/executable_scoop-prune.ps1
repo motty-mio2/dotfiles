@@ -1,4 +1,3 @@
-{{- if eq .chezmoi.os "windows" -}}
 # Usage: scoop prune [options]
 # Summary: Find and uninstall unmanaged Scoop packages
 # Help: Compares installed packages against dotfiles configurations (cli.json, dev.json, gui.json)
@@ -74,4 +73,3 @@ if ($Uninstall) {
 } else {
     Write-Host "`nTo uninstall these packages, run: scoop prune -u" -ForegroundColor Cyan
 }
-{{- end -}}
