@@ -93,22 +93,24 @@ function Set-SVLINT-PATH {
 
 function Install-Scoop {
     if ( -not (Get-Command "scoop" -ErrorAction SilentlyContinue)) {
-        $scoopDir = if ($env:SCOOP) { $env:SCOOP } else { "$HOME\scoop" }
-        $backupDir = "$HOME\scoop_backup_temp"
+        $targetScoopPath = if ($env:SCOOP) { $env:SCOOP } else { "$HOME\scoop" }
+        $backupScoopPath = "$HOME\scoop_backup_temp"
         $hasBackup = $false
-        if ((Test-Path $scoopDir) -and (Test-Path "$scoopDir\*")) {
-            Move-Item -Path $scoopDir -Destination $backupDir
+        if ((Test-Path $targetScoopPath) -and (Test-Path "$targetScoopPath\*")) {
+            Move-Item -Path $targetScoopPath -Destination $backupScoopPath
             $hasBackup = $true
         }
         try {
-            Invoke-WebRequest -useb get.scoop.sh | Invoke-Expression
+            & {
+                Invoke-WebRequest -useb get.scoop.sh | Invoke-Expression
+            }
         } finally {
-            if ($hasBackup -and (Test-Path $backupDir)) {
-                Copy-Item -Path "$backupDir\*" -Destination $scoopDir -Recurse -Force
-                Remove-Item -Path $backupDir -Recurse -Force
+            if ($hasBackup -and (Test-Path $backupScoopPath)) {
+                Copy-Item -Path "$backupScoopPath\*" -Destination $targetScoopPath -Recurse -Force
+                Remove-Item -Path $backupScoopPath -Recurse -Force
             }
         }
-        $Env:PATH = "$scoopDir\shims;$Env:PATH"
+        $Env:PATH = "$targetScoopPath\shims;$Env:PATH"
     }
 
     scoop reset *
