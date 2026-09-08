@@ -1,0 +1,24 @@
+{{- if eq .chezmoi.os "windows" -}}
+{{- $pref_desktop := "scoop" -}}
+{{- if hasKey . "package_managers" -}}
+  {{- $pref_desktop = get .package_managers "desktop" | default "scoop" -}}
+{{- else if hasKey . "preferred_installer" -}}
+  {{- $pref_desktop = get .preferred_installer "desktop" | default "scoop" -}}
+{{- end -}}
+
+{{- $app_names := list "7zip" "geekuninstaller" "gsudo" "sysinternals" -}}
+{{- range $name, $managers := .dependencies.desktop -}}
+  {{- if hasKey $managers "scoop" -}}
+    {{- if or (eq $pref_desktop "scoop") (not (hasKey $managers "mise")) -}}
+      {{- $app_names = append $app_names (get $managers "scoop") -}}
+    {{- end -}}
+  {{- end -}}
+{{- end -}}
+
+{{- $apps := list -}}
+{{- range ($app_names | uniq | sortAlpha) -}}
+  {{- $apps = append $apps (dict "Name" . "Source" .) -}}
+{{- end -}}
+
+{{ dict "apps" $apps | toPrettyJson "  " }}
+{{- end -}}

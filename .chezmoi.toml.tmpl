@@ -1,22 +1,13 @@
-umask = 0o022
-sourceDir = "{{ .chezmoi.sourceDir }}"
-
-[data]
-
 {{- $machine_type_prompt_list := list "desktop" "laptop" "server" -}}
-{{- $machine_type_prompt := promptChoiceOnce . "machine_type_prompt" "Choice Machine Type (WSL is server)" $machine_type_prompt_list "server" }}
-machine_type = {{ $machine_type_prompt | quote }}
-
+{{- $machine_type_prompt := promptChoiceOnce . "machine_type_prompt" "Choice Machine Type (WSL is server)" $machine_type_prompt_list "server" -}}
 {{- $os := .chezmoi.os -}}
 {{- $distro := "" -}}
 {{- if and (eq $os "linux") (hasKey .chezmoi "osRelease") (hasKey .chezmoi.osRelease "id") -}}
   {{- $distro = .chezmoi.osRelease.id -}}
 {{- end -}}
-
 {{- $choices := list "mise" -}}
 {{- $default_cli := "mise" -}}
 {{- $default_dev := "mise" -}}
-
 {{- if eq $os "windows" -}}
   {{- $choices = list "scoop" "mise" -}}
   {{- $default_cli = "scoop" -}}
@@ -38,10 +29,16 @@ machine_type = {{ $machine_type_prompt | quote }}
   {{- $default_cli = "nix" -}}
   {{- $default_dev = "mise" -}}
 {{- end -}}
-
 {{- $pref_cli := promptChoiceOnce . "package_manager_cli" "Preferred package manager for CLI tools" $choices $default_cli -}}
 {{- $pref_dev := promptChoiceOnce . "package_manager_dev" "Preferred package manager for Dev tools" $choices $default_dev -}}
+
+umask = 0o022
+sourceDir = {{ .chezmoi.sourceDir | quote }}
+
+[data]
+machine_type = {{ $machine_type_prompt | quote }}
 
 [data.package_managers]
 cli = {{ $pref_cli | quote }}
 dev = {{ $pref_dev | quote }}
+

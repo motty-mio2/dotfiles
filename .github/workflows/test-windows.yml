@@ -34,9 +34,12 @@ jobs:
           New-Item -ItemType Directory -Force "$HOME\.local\bin"
           Invoke-WebRequest -Uri "https://github.com/twpayne/chezmoi/releases/latest/download/chezmoi-windows-amd64.exe" -OutFile "$HOME\.local\bin\chezmoi.exe"
           $defaults = (& "$HOME\.local\bin\chezmoi.exe" execute-template -S . '{{ .dependencies.scoop.default | join " " }}')
-          $externals = (& "$HOME\.local\bin\chezmoi.exe" execute-template -S . '{{ range $n, $u := .dependencies.scoop.external }}{{ $n }} {{ $u }}|{{ end }}')
+          $externals = (& "$HOME\.local\bin\chezmoi.exe" execute-template -S . '{{ range $n, $u := .dependencies.scoop.external }}{{ $n }} {{ $u }}
+{{ end }}')
           echo "defaults=$defaults" >> $env:GITHUB_OUTPUT
-          echo "externals=$externals" >> $env:GITHUB_OUTPUT
+          echo "externals<<EOF" >> $env:GITHUB_OUTPUT
+          echo "$externals" >> $env:GITHUB_OUTPUT
+          echo "EOF" >> $env:GITHUB_OUTPUT
 
       - name: Cache Scoop
         id: scoop-cache
@@ -52,18 +55,9 @@ jobs:
         uses: MinoruSekine/setup-scoop@v5
         with:
           install_scoop: ${{ steps.scoop-cache.outputs.cache-hit != 'true' }}
-          scoop_update: ${{ steps.scoop-cache.outputs.cache-hit != 'true' }}
+          scoop_update: 'true'
           buckets: ${{ steps.scoop-config.outputs.defaults }}
-
-      - name: Add custom Scoop buckets
-        if: steps.scoop-cache.outputs.cache-hit != 'true'
-        shell: pwsh
-        run: |
-          $externals = "${{ steps.scoop-config.outputs.externals }}".Split("|") | Where-Object { $_ }
-          foreach ($line in $externals) {
-            $parts = $line -split ' '
-            scoop bucket add $parts[0] $parts[1]
-          }
+          custom_buckets: ${{ steps.scoop-config.outputs.externals }}
 
       - name: Setup Dotfiles
         uses: ./.github/actions/setup-dotfiles

@@ -56,20 +56,41 @@ function Install-uv-Tools {
 }
 
 function Install-Scoop-Tools {
-    $scoopfile = Join-Path $Env:USERPROFILE ".config\scoop\scoopfile.json"
-    if (Test-Path $scoopfile) {
-        scoop import $scoopfile
+    $file = Join-Path $Env:USERPROFILE ".config\scoop\cli.json"
+    if (Test-Path $file) {
+        scoop import $file
     } else {
-        Write-Warning "Scoopfile not found: $scoopfile. Run chezmoi apply first."
+        Write-Warning "Scoop CLI configuration not found: $file. Run chezmoi apply first."
     }
 }
 
 function Install-Scoop-Dev-Tools {
-    Install-Scoop-Tools
+    $file = Join-Path $Env:USERPROFILE ".config\scoop\dev.json"
+    if (Test-Path $file) {
+        scoop import $file
+    } else {
+        Write-Warning "Scoop dev configuration not found: $file. Run chezmoi apply first."
+    }
 }
 
 function Install-Scoop-GUI-Tools {
-    Install-Scoop-Tools
+    $file = Join-Path $Env:USERPROFILE ".config\scoop\gui.json"
+    if (Test-Path $file) {
+        scoop import $file
+    } else {
+        Write-Warning "Scoop GUI configuration not found: $file. Run chezmoi apply first."
+    }
+}
+
+function Install-Scoop-All {
+    $scoopfile = Join-Path $Env:USERPROFILE ".config\scoop\scoopfile.json"
+    if (Test-Path $scoopfile) {
+        scoop import $scoopfile
+    } else {
+        Install-Scoop-Tools
+        Install-Scoop-Dev-Tools
+        Install-Scoop-GUI-Tools
+    }
 }
 
 function Apply-Windows-Registry {
