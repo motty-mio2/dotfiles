@@ -122,13 +122,13 @@ Chrome = { flatpak = "com.google.Chrome", winget = "Google.Chrome.EXE" }
 Discord = { flatpak = "com.discordapp.Discord", winget = "XPDC2RH70K22MN" }
 Firefox = { flatpak = "org.mozilla.firefox" }
 IPscan = { flatpak = "org.angryip.ipscan" }
-KiCad = { scoop = "kicad", flatpak = "org.kicad.KiCad" }
+KiCad = { winget = "KiCad.KiCad", flatpak = "org.kicad.KiCad" }
 LibreOffice = { flatpak = "org.libreoffice.LibreOffice" }
 Notion = { winget = "Notion.Notion" }
 Slack = { flatpak = "com.slack.Slack", winget = "9WZDNCRDK3WP" }
 Vivaldi = { flatpak = "com.vivaldi.Vivaldi", winget = "XP99GVQDX7JPR4" }
 Vcxsrv = { winget = "marha.VcXsrv" }
-Wezterm = { scoop = "wezterm" }
+Wezterm = { winget = "wez.wezterm.nightly" }
 Zoom = { winget = "XP99J3KP4XZ4VV" }
 
 [dependencies.hyprland]
