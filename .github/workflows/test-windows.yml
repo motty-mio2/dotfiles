@@ -38,12 +38,25 @@ jobs:
           echo "defaults=$defaults" >> $env:GITHUB_OUTPUT
           echo "externals=$externals" >> $env:GITHUB_OUTPUT
 
+      - name: Cache Scoop
+        id: scoop-cache
+        uses: actions/cache@v4
+        with:
+          path: |
+            ~\scoop
+          key: scoop-${{ runner.os }}-${{ hashFiles('.chezmoidata/dependencies.toml') }}
+          restore-keys: |
+            scoop-${{ runner.os }}-
+
       - name: Setup Scoop
         uses: MinoruSekine/setup-scoop@v5
         with:
+          install_scoop: ${{ steps.scoop-cache.outputs.cache-hit != 'true' }}
+          scoop_update: ${{ steps.scoop-cache.outputs.cache-hit != 'true' }}
           buckets: ${{ steps.scoop-config.outputs.defaults }}
 
       - name: Add custom Scoop buckets
+        if: steps.scoop-cache.outputs.cache-hit != 'true'
         shell: pwsh
         run: |
           $externals = "${{ steps.scoop-config.outputs.externals }}".Split("|") | Where-Object { $_ }
