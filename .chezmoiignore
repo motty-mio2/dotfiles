@@ -23,7 +23,7 @@ tools
     .config/udev
     .config/zellij
     .config/zsh
-    .local/share/bash
+    .local/share/bash-completion
     .local/share/zsh
 {{ end }}
 
