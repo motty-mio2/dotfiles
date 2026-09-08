@@ -93,24 +93,15 @@ function Set-SVLINT-PATH {
 
 function Install-Scoop {
     if ( -not (Get-Command "scoop" -ErrorAction SilentlyContinue)) {
-        $targetScoopPath = if ($env:SCOOP) { $env:SCOOP } else { "$HOME\scoop" }
-        $backupScoopPath = "$HOME\scoop_backup_temp"
-        $hasBackup = $false
-        if ((Test-Path $targetScoopPath) -and (Test-Path "$targetScoopPath\*")) {
-            Move-Item -Path $targetScoopPath -Destination $backupScoopPath
-            $hasBackup = $true
+        Invoke-WebRequest -useb get.scoop.sh | Invoke-Expression
+    }
+
+    $pruneCommandPath = "$HOME\.local\bin\scoop-prune.ps1"
+    if (Test-Path $pruneCommandPath) {
+        $pruneAlias = scoop alias list | Where-Object { $_.Name -eq "prune" }
+        if (-not $pruneAlias) {
+            scoop alias add prune "& '$pruneCommandPath' @args" "Prune unmanaged Scoop packages"
         }
-        try {
-            & {
-                Invoke-WebRequest -useb get.scoop.sh | Invoke-Expression
-            }
-        } finally {
-            if ($hasBackup -and (Test-Path $backupScoopPath)) {
-                Copy-Item -Path "$backupScoopPath\*" -Destination $targetScoopPath -Recurse -Force
-                Remove-Item -Path $backupScoopPath -Recurse -Force
-            }
-        }
-        $Env:PATH = "$targetScoopPath\shims;$Env:PATH"
     }
 
     scoop reset *
@@ -136,4 +127,3 @@ function Install-Scoop {
         }
     }
 }
-
