@@ -7,12 +7,16 @@ on:
     paths:
       - '.github/workflows/test-windows.yml'
       - '.chezmoidata/dependencies.toml'
+      - 'dot_config/winget/**'
+      - 'dot_config/scoop/**'
   pull_request:
     branches:
       - main
     paths:
       - '.github/workflows/test-windows.yml'
       - '.chezmoidata/dependencies.toml'
+      - 'dot_config/winget/**'
+      - 'dot_config/scoop/**'
 
 jobs:
   test:
@@ -77,4 +81,13 @@ jobs:
           $dev = (& "$HOME\.local\bin\chezmoi.exe" execute-template -S . '{{ range $name, $managers := .dependencies.dev -}}{{- if hasKey $managers "scoop" -}}{{- get $managers "scoop" | printf "%s " -}}{{- end -}}{{- end }}') -split '\s+' | Where-Object { $_ }
           $gui = (& "$HOME\.local\bin\chezmoi.exe" execute-template -S . '{{ range $name, $managers := .dependencies.desktop -}}{{- if hasKey $managers "scoop" -}}{{- get $managers "scoop" | printf "%s " -}}{{- end -}}{{- end }}') -split '\s+' | Where-Object { $_ }
           Test-Scoop-Pkg ($cli + $dev + $gui + @("7zip", "geekuninstaller", "gsudo", "sysinternals"))
+
+      - name: Validate WinGet
+        shell: pwsh
+        run: |
+          New-Item -ItemType Directory -Force "$HOME\.config\winget"
+          & "$HOME\.local\bin\chezmoi.exe" apply "$HOME\.config\winget\packages.dsc.yaml"
+          & "$HOME\.local\bin\chezmoi.exe" apply "$HOME\.config\winget\registry.dsc.yaml"
+          winget configure validate -f "$HOME\.config\winget\packages.dsc.yaml"
+          winget configure validate -f "$HOME\.config\winget\registry.dsc.yaml"
 

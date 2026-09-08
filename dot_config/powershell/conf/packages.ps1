@@ -56,44 +56,41 @@ function Install-uv-Tools {
 }
 
 function Install-Scoop-Tools {
-    $source = if (Test-Path ".chezmoidata") { "-S ." } else { "" }
-    $pkgs = (& chezmoi $source execute-template '{{- $pref := "mise" -}}{{- if hasKey . "package_managers" -}}{{- $pref = get .package_managers "cli" | default "mise" -}}{{- else if hasKey . "preferred_installer" -}}{{- $pref = get .preferred_installer "cli" | default "mise" -}}{{- end -}}{{ range $name, $managers := .dependencies.cli -}}{{- if hasKey $managers ""scoop"" -}}{{- if or (eq $pref ""scoop"") (not (lookPath ""mise"")) (not (hasKey $managers ""mise"")) -}}{{- get $managers ""scoop"" | printf ""%s "" -}}{{- end -}}{{- end -}}{{- end }}') -split '\s+' | Where-Object { $_ }
-    scoop install $pkgs
+    $scoopfile = Join-Path $Env:USERPROFILE ".config\scoop\scoopfile.json"
+    if (Test-Path $scoopfile) {
+        scoop import $scoopfile
+    } else {
+        Write-Warning "Scoopfile not found: $scoopfile. Run chezmoi apply first."
+    }
 }
 
 function Install-Scoop-Dev-Tools {
-    $source = if (Test-Path ".chezmoidata") { "-S ." } else { "" }
-    $pkgs = (& chezmoi $source execute-template '{{- $pref := "mise" -}}{{- if hasKey . "package_managers" -}}{{- $pref = get .package_managers "dev" | default "mise" -}}{{- else if hasKey . "preferred_installer" -}}{{- $pref = get .preferred_installer "dev" | default "mise" -}}{{- end -}}{{ range $name, $managers := .dependencies.dev -}}{{- if hasKey $managers ""scoop"" -}}{{- if or (eq $pref ""scoop"") (not (lookPath ""mise"")) (not (hasKey $managers ""mise"")) -}}{{- get $managers ""scoop"" | printf ""%s "" -}}{{- end -}}{{- end -}}{{- end }}') -split '\s+' | Where-Object { $_ }
-    scoop install $pkgs
+    Install-Scoop-Tools
 }
 
 function Install-Scoop-GUI-Tools {
-    $source = if (Test-Path ".chezmoidata") { "-S ." } else { "" }
-    $pkgs = (& chezmoi $source execute-template '{{- $pref := "scoop" -}}{{- if hasKey . "package_managers" -}}{{- $pref = get .package_managers "desktop" | default "scoop" -}}{{- else if hasKey . "preferred_installer" -}}{{- $pref = get .preferred_installer "desktop" | default "scoop" -}}{{- end -}}{{ range $name, $managers := .dependencies.desktop -}}{{- if hasKey $managers ""scoop"" -}}{{- if or (eq $pref ""scoop"") (not (lookPath ""mise"")) (not (hasKey $managers ""mise"")) -}}{{- get $managers ""scoop"" | printf ""%s "" -}}{{- end -}}{{- end -}}{{- end }}') -split '\s+' | Where-Object { $_ }
-    $default_pkgs = @("7zip", "geekuninstaller", "gsudo", "sysinternals")
-    foreach ($pkg in ($default_pkgs + $pkgs)) {
-        if ($pkg) {
-            scoop install $pkg
-        }
+    Install-Scoop-Tools
+}
+
+function Apply-Windows-Registry {
+    $file = Join-Path $Env:USERPROFILE ".config\winget\registry.dsc.yaml"
+    if (Test-Path $file) {
+        winget configure -f $file --accept-configuration-agreements
+    } else {
+        Write-Warning "WinGet registry configuration file not found: $file. Run chezmoi apply first."
+    }
+}
+
+function Apply-Windows-Packages {
+    $file = Join-Path $Env:USERPROFILE ".config\winget\packages.dsc.yaml"
+    if (Test-Path $file) {
+        winget configure -f $file --accept-configuration-agreements
+    } else {
+        Write-Warning "WinGet packages configuration file not found: $file. Run chezmoi apply first."
     }
 }
 
 function Install-Windows-Software {
-    # OpenSSH
-    winget install --id Microsoft.OpenSSH.Beta --override ADDLOCAL=Client
-
-    # PowerShell
-    winget install --id  Microsoft.PowerShell
-
-    # PowerToys
-    winget install --id XP89DCGQ3K6VLD
-
-    # Visual Studio Code
-    winget install --id Microsoft.VisualStudioCode --override "/VERYSILENT /NORESTART /MERGETASKS=!runcode,addcontextmenufiles,addcontextmenufolders,associatewithfiles,addtopath"
-
-    # Install Apps
-    $wingetPkgs = (chezmoi execute-template '{{- range $name, $managers := .dependencies.desktop -}}{{- if get $managers "winget" -}}{{ get $managers "winget" | printf "%s " }}{{- end -}}{{- end -}}') -split '\s+' | Where-Object { $_ }
-    foreach ($pkg in $wingetPkgs) {
-        winget install --id $pkg
-    }
+    Apply-Windows-Packages
 }
+

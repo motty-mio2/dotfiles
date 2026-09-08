@@ -1,0 +1,217 @@
+{{- if eq .chezmoi.os "windows" -}}
+# yaml-language-server: $schema=https://aka.ms/configuration-dsc-schema/0.2
+properties:
+  configurationVersion: 0.2.0
+  resources:
+    # --- スタートメニュー ---
+    - resource: PSDscResources/Registry
+      directives:
+        description: スタートにおすすめを表示しない
+        allowPrerelease: true
+      settings:
+        Key: 'HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\ContentDeliveryManager'
+        ValueName: 'SystemPaneSuggestionsEnabled'
+        ValueData: ['0']
+        ValueType: 'Dword'
+        Ensure: 'Present'
+
+    - resource: PSDscResources/Registry
+      directives:
+        description: 最近開いた項目をスタート/タスクバーに表示しない (ShowRecent)
+        allowPrerelease: true
+      settings:
+        Key: 'HKEY_CURRENT_USER\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer'
+        ValueName: 'ShowRecent'
+        ValueData: ['0']
+        ValueType: 'Dword'
+        Ensure: 'Present'
+
+    - resource: PSDscResources/Registry
+      directives:
+        description: よく使うアプリを表示しない (ShowFrequent)
+        allowPrerelease: true
+      settings:
+        Key: 'HKEY_CURRENT_USER\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer'
+        ValueName: 'ShowFrequent'
+        ValueData: ['0']
+        ValueType: 'Dword'
+        Ensure: 'Present'
+
+    - resource: PSDscResources/Registry
+      directives:
+        description: おすすめのヒントやショートカットを表示しない (Start_IrisRecommendations)
+        allowPrerelease: true
+      settings:
+        Key: 'HKEY_CURRENT_USER\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\Advanced'
+        ValueName: 'Start_IrisRecommendations'
+        ValueData: ['0']
+        ValueType: 'Dword'
+        Ensure: 'Present'
+
+    - resource: PSDscResources/Registry
+      directives:
+        description: 最近追加したアプリの表示オフ (Start_TrackDocs)
+        allowPrerelease: true
+      settings:
+        Key: 'HKEY_CURRENT_USER\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\Advanced'
+        ValueName: 'Start_TrackDocs'
+        ValueData: ['0']
+        ValueType: 'Dword'
+        Ensure: 'Present'
+
+    - resource: PSDscResources/Registry
+      directives:
+        description: スタートのレイアウトでさらにピン留めを表示
+        allowPrerelease: true
+      settings:
+        Key: 'HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced'
+        ValueName: 'StartLayout'
+        ValueData: ['1']
+        ValueType: 'Dword'
+        Ensure: 'Present'
+
+    # --- タスクバー ---
+    - resource: PSDscResources/Registry
+      directives:
+        description: タスクバーのPeopleオフ
+        allowPrerelease: true
+      settings:
+        Key: 'HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced\People'
+        ValueName: 'PeopleBand'
+        ValueData: ['0']
+        ValueType: 'Dword'
+        Ensure: 'Present'
+
+    - resource: PSDscResources/Registry
+      directives:
+        description: タスクバーの検索アイコン非表示
+        allowPrerelease: true
+      settings:
+        Key: 'HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Search'
+        ValueName: 'SearchboxTaskbarMode'
+        ValueData: ['0']
+        ValueType: 'Dword'
+        Ensure: 'Present'
+
+    - resource: PSDscResources/Registry
+      directives:
+        description: タスクビューボタン非表示
+        allowPrerelease: true
+      settings:
+        Key: 'HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced'
+        ValueName: 'ShowTaskViewButton'
+        ValueData: ['0']
+        ValueType: 'Dword'
+        Ensure: 'Present'
+
+    - resource: PSDscResources/Registry
+      directives:
+        description: ウィジェットアイコン非表示
+        allowPrerelease: true
+      settings:
+        Key: 'HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced'
+        ValueName: 'TaskbarDa'
+        ValueData: ['0']
+        ValueType: 'Dword'
+        Ensure: 'Present'
+
+    - resource: PSDscResources/Registry
+      directives:
+        description: タスクバー右クリックメニューに「タスクの終了」を表示
+        allowPrerelease: true
+      settings:
+        Key: 'HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced\TaskbarDeveloperSettings'
+        ValueName: 'TaskbarEndTask'
+        ValueData: ['1']
+        ValueType: 'Dword'
+        Ensure: 'Present'
+
+    # --- エクスプローラー ---
+    - resource: PSDscResources/Registry
+      directives:
+        description: エクスプローラーを開いたときの初期表示をPCにする
+        allowPrerelease: true
+      settings:
+        Key: 'HKEY_CURRENT_USER\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\Advanced'
+        ValueName: 'LaunchTo'
+        ValueData: ['1']
+        ValueType: 'Dword'
+        Ensure: 'Present'
+
+    - resource: PSDscResources/Registry
+      directives:
+        description: 隠しファイル・フォルダーを表示する
+        allowPrerelease: true
+      settings:
+        Key: 'HKEY_CURRENT_USER\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\Advanced'
+        ValueName: 'Hidden'
+        ValueData: ['1']
+        ValueType: 'Dword'
+        Ensure: 'Present'
+
+    - resource: PSDscResources/Registry
+      directives:
+        description: フォルダーとデスクトップの項目の説明を非表示
+        allowPrerelease: true
+      settings:
+        Key: 'HKEY_CURRENT_USER\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\Advanced'
+        ValueName: 'ShowInfoTip'
+        ValueData: ['0']
+        ValueType: 'Dword'
+        Ensure: 'Present'
+
+    - resource: PSDscResources/Registry
+      directives:
+        description: フォルダーのヒントにファイルサイズ情報を表示しない
+        allowPrerelease: true
+      settings:
+        Key: 'HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced'
+        ValueName: 'FolderContentsInfoTip'
+        ValueData: ['0']
+        ValueType: 'Dword'
+        Ensure: 'Present'
+
+    - resource: PSDscResources/Registry
+      directives:
+        description: 空のドライブを表示しない
+        allowPrerelease: true
+      settings:
+        Key: 'HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced'
+        ValueName: 'HideDrivesWithNoMedia'
+        ValueData: ['1']
+        ValueType: 'Dword'
+        Ensure: 'Present'
+
+    - resource: PSDscResources/Registry
+      directives:
+        description: タイトルバーに完全なパスを表示する
+        allowPrerelease: true
+      settings:
+        Key: 'HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Explorer\CabinetState'
+        ValueName: 'FullPath'
+        ValueData: ['1']
+        ValueType: 'Dword'
+        Ensure: 'Present'
+
+    - resource: PSDscResources/Registry
+      directives:
+        description: 登録されている拡張子は表示しない設定 (元スクリプト準拠)
+        allowPrerelease: true
+      settings:
+        Key: 'HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced'
+        ValueName: 'HideFileExt'
+        ValueData: ['1']
+        ValueType: 'Dword'
+        Ensure: 'Present'
+
+    - resource: PSDscResources/Registry
+      directives:
+        description: クイックアクセスにOffice.comのファイルを表示しない
+        allowPrerelease: true
+      settings:
+        Key: 'HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Explorer'
+        ValueName: 'ShowCloudFilesInQuickAccess'
+        ValueData: ['0']
+        ValueType: 'Dword'
+        Ensure: 'Present'
+{{- end -}}
