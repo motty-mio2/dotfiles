@@ -32,7 +32,7 @@ tools
     Appdata
     Documents
     _vimrc
-    scoop
+    .local/bin/scoop-prune.ps1
 {{ end }}
 
 {{ if not (env "BW_SESSION") }}
@@ -43,4 +43,3 @@ tools
     .ssh/config.d/3_hostLC.conf
     .ssh/config.d/3_hostLN.conf
 {{ end }}
-
