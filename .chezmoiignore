@@ -23,6 +23,8 @@ tools
     .config/udev
     .config/zellij
     .config/zsh
+    .local/share/bash
+    .local/share/zsh
 {{ end }}
 
 {{ if ne .chezmoi.os "windows" }}
@@ -30,8 +32,6 @@ tools
     Appdata
     Documents
     _vimrc
-    .local/share/bash
-    .local/share/zsh
 {{ end }}
 
 {{ if not (env "BW_SESSION") }}
