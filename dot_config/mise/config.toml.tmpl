@@ -18,23 +18,27 @@ node = "lts"
 
 # From dependencies
 {{- $pref_cli := "mise" -}}
-{{- if hasKey . "preferred_installer" -}}
+{{- if hasKey . "package_managers" -}}
+  {{- $pref_cli = get .package_managers "cli" | default "mise" -}}
+{{- else if hasKey . "preferred_installer" -}}
   {{- $pref_cli = get .preferred_installer "cli" | default "mise" -}}
 {{- end -}}
 {{- range $name, $managers := .dependencies.cli }}
 {{- if hasKey $managers "mise" }}
-{{- if or (ne $pref_cli "scoop") (not (hasKey $managers "scoop")) }}
+{{- if or (eq $pref_cli "mise") (not (hasKey $managers $pref_cli)) }}
 "{{ get $managers "mise" }}" = "latest"
 {{- end }}
 {{- end }}
 {{- end }}
 {{- $pref_dev := "mise" -}}
-{{- if hasKey . "preferred_installer" -}}
+{{- if hasKey . "package_managers" -}}
+  {{- $pref_dev = get .package_managers "dev" | default "mise" -}}
+{{- else if hasKey . "preferred_installer" -}}
   {{- $pref_dev = get .preferred_installer "dev" | default "mise" -}}
 {{- end -}}
 {{- range $name, $managers := .dependencies.dev }}
 {{- if hasKey $managers "mise" }}
-{{- if or (ne $pref_dev "scoop") (not (hasKey $managers "scoop")) }}
+{{- if or (eq $pref_dev "mise") (not (hasKey $managers $pref_dev)) }}
 "{{ get $managers "mise" }}" = "latest"
 {{- end }}
 {{- end }}

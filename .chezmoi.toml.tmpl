@@ -7,11 +7,41 @@ sourceDir = "{{ .chezmoi.sourceDir }}"
 {{- $machine_type_prompt := promptChoiceOnce . "machine_type_prompt" "Choice Machine Type (WSL is server)" $machine_type_prompt_list "server" }}
 machine_type = {{ $machine_type_prompt | quote }}
 
-[data.preferred_installer]
-{{- if eq .chezmoi.os "windows" }}
-cli = "scoop"
-dev = "scoop"
-{{- else }}
-cli = "mise"
-dev = "mise"
-{{- end }}
+{{- $os := .chezmoi.os -}}
+{{- $distro := "" -}}
+{{- if and (eq $os "linux") (hasKey .chezmoi "osRelease") (hasKey .chezmoi.osRelease "id") -}}
+  {{- $distro = .chezmoi.osRelease.id -}}
+{{- end -}}
+
+{{- $choices := list "mise" -}}
+{{- $default_cli := "mise" -}}
+{{- $default_dev := "mise" -}}
+
+{{- if eq $os "windows" -}}
+  {{- $choices = list "scoop" "mise" -}}
+  {{- $default_cli = "scoop" -}}
+  {{- $default_dev = "scoop" -}}
+{{- else if eq $os "darwin" -}}
+  {{- $choices = list "nix" "mise" -}}
+  {{- $default_cli = "nix" -}}
+  {{- $default_dev = "mise" -}}
+{{- else if eq $distro "arch" -}}
+  {{- $choices = list "aur" "nix" "mise" -}}
+  {{- $default_cli = "aur" -}}
+  {{- $default_dev = "mise" -}}
+{{- else if or (eq $distro "ubuntu") (eq $distro "debian") -}}
+  {{- $choices = list "apt" "nix" "mise" -}}
+  {{- $default_cli = "apt" -}}
+  {{- $default_dev = "mise" -}}
+{{- else if eq $os "linux" -}}
+  {{- $choices = list "nix" "mise" -}}
+  {{- $default_cli = "nix" -}}
+  {{- $default_dev = "mise" -}}
+{{- end -}}
+
+{{- $pref_cli := promptChoiceOnce . "package_manager_cli" "Preferred package manager for CLI tools" $choices $default_cli -}}
+{{- $pref_dev := promptChoiceOnce . "package_manager_dev" "Preferred package manager for Dev tools" $choices $default_dev -}}
+
+[data.package_managers]
+cli = {{ $pref_cli | quote }}
+dev = {{ $pref_dev | quote }}

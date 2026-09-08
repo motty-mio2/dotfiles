@@ -57,19 +57,19 @@ function Install-uv-Tools {
 
 function Install-Scoop-Tools {
     $source = if (Test-Path ".chezmoidata") { "-S ." } else { "" }
-    $pkgs = (& chezmoi $source execute-template '{{- $pref := "mise" -}}{{- if hasKey . "preferred_installer" -}}{{- $pref = get .preferred_installer "cli" | default "mise" -}}{{- end -}}{{ range $name, $managers := .dependencies.cli -}}{{- if hasKey $managers ""scoop"" -}}{{- if or (eq $pref ""scoop"") (not (lookPath ""mise"")) (not (hasKey $managers ""mise"")) -}}{{- get $managers ""scoop"" | printf ""%s "" -}}{{- end -}}{{- end -}}{{- end }}') -split '\s+' | Where-Object { $_ }
+    $pkgs = (& chezmoi $source execute-template '{{- $pref := "mise" -}}{{- if hasKey . "package_managers" -}}{{- $pref = get .package_managers "cli" | default "mise" -}}{{- else if hasKey . "preferred_installer" -}}{{- $pref = get .preferred_installer "cli" | default "mise" -}}{{- end -}}{{ range $name, $managers := .dependencies.cli -}}{{- if hasKey $managers ""scoop"" -}}{{- if or (eq $pref ""scoop"") (not (lookPath ""mise"")) (not (hasKey $managers ""mise"")) -}}{{- get $managers ""scoop"" | printf ""%s "" -}}{{- end -}}{{- end -}}{{- end }}') -split '\s+' | Where-Object { $_ }
     scoop install $pkgs
 }
 
 function Install-Scoop-Dev-Tools {
     $source = if (Test-Path ".chezmoidata") { "-S ." } else { "" }
-    $pkgs = (& chezmoi $source execute-template '{{- $pref := "mise" -}}{{- if hasKey . "preferred_installer" -}}{{- $pref = get .preferred_installer "dev" | default "mise" -}}{{- end -}}{{ range $name, $managers := .dependencies.dev -}}{{- if hasKey $managers ""scoop"" -}}{{- if or (eq $pref ""scoop"") (not (lookPath ""mise"")) (not (hasKey $managers ""mise"")) -}}{{- get $managers ""scoop"" | printf ""%s "" -}}{{- end -}}{{- end -}}{{- end }}') -split '\s+' | Where-Object { $_ }
+    $pkgs = (& chezmoi $source execute-template '{{- $pref := "mise" -}}{{- if hasKey . "package_managers" -}}{{- $pref = get .package_managers "dev" | default "mise" -}}{{- else if hasKey . "preferred_installer" -}}{{- $pref = get .preferred_installer "dev" | default "mise" -}}{{- end -}}{{ range $name, $managers := .dependencies.dev -}}{{- if hasKey $managers ""scoop"" -}}{{- if or (eq $pref ""scoop"") (not (lookPath ""mise"")) (not (hasKey $managers ""mise"")) -}}{{- get $managers ""scoop"" | printf ""%s "" -}}{{- end -}}{{- end -}}{{- end }}') -split '\s+' | Where-Object { $_ }
     scoop install $pkgs
 }
 
 function Install-Scoop-GUI-Tools {
     $source = if (Test-Path ".chezmoidata") { "-S ." } else { "" }
-    $pkgs = (& chezmoi $source execute-template '{{- $pref := "scoop" -}}{{- if hasKey . "preferred_installer" -}}{{- $pref = get .preferred_installer "desktop" | default "scoop" -}}{{- end -}}{{ range $name, $managers := .dependencies.desktop -}}{{- if hasKey $managers ""scoop"" -}}{{- if or (eq $pref ""scoop"") (not (lookPath ""mise"")) (not (hasKey $managers ""mise"")) -}}{{- get $managers ""scoop"" | printf ""%s "" -}}{{- end -}}{{- end -}}{{- end }}') -split '\s+' | Where-Object { $_ }
+    $pkgs = (& chezmoi $source execute-template '{{- $pref := "scoop" -}}{{- if hasKey . "package_managers" -}}{{- $pref = get .package_managers "desktop" | default "scoop" -}}{{- else if hasKey . "preferred_installer" -}}{{- $pref = get .preferred_installer "desktop" | default "scoop" -}}{{- end -}}{{ range $name, $managers := .dependencies.desktop -}}{{- if hasKey $managers ""scoop"" -}}{{- if or (eq $pref ""scoop"") (not (lookPath ""mise"")) (not (hasKey $managers ""mise"")) -}}{{- get $managers ""scoop"" | printf ""%s "" -}}{{- end -}}{{- end -}}{{- end }}') -split '\s+' | Where-Object { $_ }
     $default_pkgs = @("7zip", "geekuninstaller", "gsudo", "sysinternals")
     foreach ($pkg in ($default_pkgs + $pkgs)) {
         if ($pkg) {
