@@ -34,7 +34,6 @@ npm = [
   "neovim",
   "semver",
   "typescript-language-server",
-  "vim-language-server",
   "yaml-language-server",
 ]
 
