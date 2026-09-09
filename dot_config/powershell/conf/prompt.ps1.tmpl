@@ -2,7 +2,26 @@ Import-Module PSReadLine -ErrorAction SilentlyContinue
 Import-Module posh-git -ErrorAction SilentlyContinue
 Import-Module PSFzf -ErrorAction SilentlyContinue
 
-Set-PSReadLineKeyHandler -Key Tab -Function MenuComplete
+Set-PSReadLineKeyHandler -Key Tab -ScriptBlock {
+    $line = $null
+    $cursor = $null
+    [Microsoft.PowerShell.PSConsoleReadLine]::GetBufferState([ref]$line, [ref]$cursor)
+
+    [Microsoft.PowerShell.PSConsoleReadLine]::MenuComplete()
+
+    $newLine = $null
+    $newCursor = $null
+    [Microsoft.PowerShell.PSConsoleReadLine]::GetBufferState([ref]$newLine, [ref]$newCursor)
+
+    if ($newCursor -gt $cursor) {
+        $lastChar = $newLine[$newCursor - 1]
+        if ($lastChar -notin @(' ', '/', '\', ':', '=', ';', '|', '&', ',')) {
+            if ($newCursor -eq $newLine.Length -or $newLine[$newCursor] -ne ' ') {
+                [Microsoft.PowerShell.PSConsoleReadLine]::Insert(' ')
+            }
+        }
+    }
+}
 Set-PSReadlineKeyHandler -Key ctrl+d -Function DeleteCharOrExit
 Set-PSReadLineOption -Colors @{ "Parameter" = [ConsoleColor]::Cyan }
 
