@@ -36,6 +36,7 @@
     amend = commit --amend --no-edit
     wip = "!git add -A && git commit -m 'wip'"
     sync = "!git fetch origin && git rebase origin/main"
+    publish = "!git push --set-upstream origin \"$(git branch --show-current)\""
     wad = "!git-worktree-add"
     wtr = "!git-worktree-root"
     wcl = "!git-workspace-clone"
