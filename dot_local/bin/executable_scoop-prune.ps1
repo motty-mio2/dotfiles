@@ -1,0 +1,75 @@
+# Usage: scoop prune [options]
+# Summary: Find and uninstall unmanaged Scoop packages
+# Help: Compares installed packages against dotfiles configurations (cli.json, dev.json, gui.json)
+# and helps prune untracked packages.
+#
+# Options:
+#   -u, --uninstall   Uninstall unmanaged packages
+#   -f, --force       Uninstall without confirmation
+#   -h, --help        Show this help
+
+[CmdletBinding(SupportsShouldProcess)]
+param (
+    [Alias('u')]
+    [switch]$Uninstall,
+    [Alias('f')]
+    [switch]$Force,
+    [Alias('h')]
+    [switch]$Help,
+    [Parameter(ValueFromRemainingArguments = $true)]
+    $RemainingArgs
+)
+
+if ($Help) {
+    Get-Content $PSCommandPath | Where-Object { $_ -match '^#' } | ForEach-Object { $_ -replace '^#\s?', '' }
+    exit 0
+}
+
+$exportJson = scoop export | ConvertFrom-Json
+$installed = $exportJson.apps.Name
+if (-not $installed) {
+    Write-Host "No Scoop packages are currently installed."
+    exit 0
+}
+
+$configDir = Join-Path $Env:USERPROFILE ".config\scoop"
+$defined = @()
+foreach ($f in @("cli.json", "dev.json", "gui.json")) {
+    $p = Join-Path $configDir $f
+    if (Test-Path $p) {
+        $json = Get-Content $p -Raw | ConvertFrom-Json
+        if ($json.apps) {
+            $defined += $json.apps.Name
+        }
+    }
+}
+$defined = $defined | Select-Object -Unique
+
+if ($defined.Count -eq 0) {
+    Write-Warning "No defined packages found in $configDir. Run 'chezmoi apply' first."
+    exit 1
+}
+
+$unmanaged = $installed | Where-Object { $defined -notcontains $_ }
+
+if (-not $unmanaged -or $unmanaged.Count -eq 0) {
+    Write-Host "No unmanaged Scoop packages found. All installed packages are tracked by dotfiles!" -ForegroundColor Green
+    exit 0
+}
+
+Write-Host "Found $($unmanaged.Count) unmanaged Scoop package(s) (installed locally but not in dotfiles):" -ForegroundColor Yellow
+foreach ($pkg in $unmanaged) {
+    Write-Host "  - $pkg"
+}
+
+if ($Uninstall) {
+    Write-Host ""
+    foreach ($pkg in $unmanaged) {
+        if ($Force -or $PSCmdlet.ShouldProcess($pkg, "Uninstall unmanaged Scoop package")) {
+            Write-Host "Uninstalling $pkg..." -ForegroundColor Cyan
+            scoop uninstall $pkg
+        }
+    }
+} else {
+    Write-Host "`nTo uninstall these packages, run: scoop prune -u" -ForegroundColor Cyan
+}

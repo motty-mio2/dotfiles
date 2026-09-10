@@ -1,0 +1,24 @@
+{{- if eq .chezmoi.os "windows" -}}
+{{- $pref_dev := "mise" -}}
+{{- if hasKey . "package_managers" -}}
+  {{- $pref_dev = get .package_managers "dev" | default "mise" -}}
+{{- else if hasKey . "preferred_installer" -}}
+  {{- $pref_dev = get .preferred_installer "dev" | default "mise" -}}
+{{- end -}}
+
+{{- $app_names := list -}}
+{{- range $name, $managers := .dependencies.dev -}}
+  {{- if hasKey $managers "scoop" -}}
+    {{- if or (eq $pref_dev "scoop") (not (hasKey $managers "mise")) -}}
+      {{- $app_names = append $app_names (get $managers "scoop") -}}
+    {{- end -}}
+  {{- end -}}
+{{- end -}}
+
+{{- $apps := list -}}
+{{- range ($app_names | uniq | sortAlpha) -}}
+  {{- $apps = append $apps (dict "Name" . "Source" .) -}}
+{{- end -}}
+
+{{ dict "apps" $apps | toPrettyJson "  " }}
+{{- end -}}

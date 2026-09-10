@@ -56,44 +56,55 @@ function Install-uv-Tools {
 }
 
 function Install-Scoop-Tools {
-    $source = if (Test-Path ".chezmoidata") { "-S ." } else { "" }
-    $pkgs = (& chezmoi $source execute-template '{{ range $name, $managers := .dependencies.cli -}}{{- if and (hasKey $managers ""scoop"") (or (not (lookPath ""mise"")) (not (hasKey $managers ""mise""))) -}}{{- get $managers ""scoop"" | printf ""%s "" -}}{{- end -}}{{- end }}') -split '\s+' | Where-Object { $_ }
-    scoop install $pkgs
+    $file = Join-Path $Env:USERPROFILE ".config\scoop\cli.json"
+    if (Test-Path $file) {
+        scoop import $file
+    } else {
+        Write-Warning "Scoop CLI configuration not found: $file. Run chezmoi apply first."
+    }
 }
 
 function Install-Scoop-Dev-Tools {
-    $source = if (Test-Path ".chezmoidata") { "-S ." } else { "" }
-    $pkgs = (& chezmoi $source execute-template '{{ range $name, $managers := .dependencies.dev -}}{{- if and (hasKey $managers ""scoop"") (or (not (lookPath ""mise"")) (not (hasKey $managers ""mise""))) -}}{{- get $managers ""scoop"" | printf ""%s "" -}}{{- end -}}{{- end }}') -split '\s+' | Where-Object { $_ }
-    scoop install $pkgs
+    $file = Join-Path $Env:USERPROFILE ".config\scoop\dev.json"
+    if (Test-Path $file) {
+        scoop import $file
+    } else {
+        Write-Warning "Scoop dev configuration not found: $file. Run chezmoi apply first."
+    }
 }
 
 function Install-Scoop-GUI-Tools {
-    $source = if (Test-Path ".chezmoidata") { "-S ." } else { "" }
-    $pkgs = (& chezmoi $source execute-template '{{ range $name, $managers := .dependencies.desktop -}}{{- if and (hasKey $managers ""scoop"") (or (not (lookPath ""mise"")) (not (hasKey $managers ""mise""))) -}}{{- get $managers ""scoop"" | printf ""%s "" -}}{{- end -}}{{- end }}') -split '\s+' | Where-Object { $_ }
-    $default_pkgs = @("7zip", "geekuninstaller", "gsudo", "sysinternals")
-    foreach ($pkg in ($default_pkgs + $pkgs)) {
-        if ($pkg) {
-            scoop install $pkg
-        }
+    $file = Join-Path $Env:USERPROFILE ".config\scoop\gui.json"
+    if (Test-Path $file) {
+        scoop import $file
+    } else {
+        Write-Warning "Scoop GUI configuration not found: $file. Run chezmoi apply first."
+    }
+}
+
+function sprune {
+    scoop prune @args
+}
+
+function Apply-Windows-Registry {
+    $file = Join-Path $Env:USERPROFILE ".config\winget\registry.dsc.yaml"
+    if (Test-Path $file) {
+        winget configure -f $file --accept-configuration-agreements
+    } else {
+        Write-Warning "WinGet registry configuration file not found: $file. Run chezmoi apply first."
+    }
+}
+
+function Apply-Windows-Packages {
+    $file = Join-Path $Env:USERPROFILE ".config\winget\packages.dsc.yaml"
+    if (Test-Path $file) {
+        winget configure -f $file --accept-configuration-agreements
+    } else {
+        Write-Warning "WinGet packages configuration file not found: $file. Run chezmoi apply first."
     }
 }
 
 function Install-Windows-Software {
-    # OpenSSH
-    winget install --id Microsoft.OpenSSH.Beta --override ADDLOCAL=Client
-
-    # PowerShell
-    winget install --id  Microsoft.PowerShell
-
-    # PowerToys
-    winget install --id XP89DCGQ3K6VLD
-
-    # Visual Studio Code
-    winget install --id Microsoft.VisualStudioCode --override "/VERYSILENT /NORESTART /MERGETASKS=!runcode,addcontextmenufiles,addcontextmenufolders,associatewithfiles,addtopath"
-
-    # Install Apps
-    $wingetPkgs = (chezmoi execute-template '{{- range $name, $managers := .dependencies.desktop -}}{{- if get $managers "winget" -}}{{ get $managers "winget" | printf "%s " }}{{- end -}}{{- end -}}') -split '\s+' | Where-Object { $_ }
-    foreach ($pkg in $wingetPkgs) {
-        winget install --id $pkg
-    }
+    Apply-Windows-Packages
 }
+

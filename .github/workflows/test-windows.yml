@@ -7,16 +7,20 @@ on:
     paths:
       - '.github/workflows/test-windows.yml'
       - '.chezmoidata/dependencies.toml'
+      - 'dot_config/winget/**'
+      - 'dot_config/scoop/**'
   pull_request:
     branches:
       - main
     paths:
       - '.github/workflows/test-windows.yml'
       - '.chezmoidata/dependencies.toml'
+      - 'dot_config/winget/**'
+      - 'dot_config/scoop/**'
 
 jobs:
-  test:
-    name: Validate (Windows)
+  validate-scoop:
+    name: Validate (Scoop)
     runs-on: windows-latest
     steps:
       - name: Checkout repository
@@ -30,36 +34,23 @@ jobs:
           New-Item -ItemType Directory -Force "$HOME\.local\bin"
           Invoke-WebRequest -Uri "https://github.com/twpayne/chezmoi/releases/latest/download/chezmoi-windows-amd64.exe" -OutFile "$HOME\.local\bin\chezmoi.exe"
           $defaults = (& "$HOME\.local\bin\chezmoi.exe" execute-template -S . '{{ .dependencies.scoop.default | join " " }}')
-          $externals = (& "$HOME\.local\bin\chezmoi.exe" execute-template -S . '{{ range $n, $u := .dependencies.scoop.external }}{{ $n }} {{ $u }}|{{ end }}')
+          $externals = (& "$HOME\.local\bin\chezmoi.exe" execute-template -S . '{{ range $n, $u := .dependencies.scoop.external }}{{ $n }} {{ $u }}{{ print "\n" }}{{ end }}')
           echo "defaults=$defaults" >> $env:GITHUB_OUTPUT
-          echo "externals=$externals" >> $env:GITHUB_OUTPUT
+          echo "externals<<EOF" >> $env:GITHUB_OUTPUT
+          echo "$externals" >> $env:GITHUB_OUTPUT
+          echo "EOF" >> $env:GITHUB_OUTPUT
 
       - name: Setup Scoop
         uses: MinoruSekine/setup-scoop@v5
         with:
           buckets: ${{ steps.scoop-config.outputs.defaults }}
-
-      - name: Add custom Scoop buckets
-        shell: pwsh
-        run: |
-          $externals = "${{ steps.scoop-config.outputs.externals }}".Split("|") | Where-Object { $_ }
-          foreach ($line in $externals) {
-            $parts = $line -split ' '
-            scoop bucket add $parts[0] $parts[1]
-          }
-
-      - name: Setup Dotfiles
-        uses: ./.github/actions/setup-dotfiles
-        with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
+          custom_buckets: ${{ steps.scoop-config.outputs.externals }}
 
       - name: Validate Scoop
         shell: pwsh
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
-          $Env:PATH="$HOME\scoop\shims;$Env:PATH"
-          . "$HOME\Documents\PowerShell\Microsoft.PowerShell_profile.ps1"
           function Test-Scoop-Pkg {
               param($pkgs)
               foreach ($pkg in $pkgs) {
@@ -77,4 +68,25 @@ jobs:
           $dev = (& "$HOME\.local\bin\chezmoi.exe" execute-template -S . '{{ range $name, $managers := .dependencies.dev -}}{{- if hasKey $managers "scoop" -}}{{- get $managers "scoop" | printf "%s " -}}{{- end -}}{{- end }}') -split '\s+' | Where-Object { $_ }
           $gui = (& "$HOME\.local\bin\chezmoi.exe" execute-template -S . '{{ range $name, $managers := .dependencies.desktop -}}{{- if hasKey $managers "scoop" -}}{{- get $managers "scoop" | printf "%s " -}}{{- end -}}{{- end }}') -split '\s+' | Where-Object { $_ }
           Test-Scoop-Pkg ($cli + $dev + $gui + @("7zip", "geekuninstaller", "gsudo", "sysinternals"))
+
+  validate-winget:
+    name: Validate (WinGet)
+    runs-on: windows-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v7
+
+      - name: Setup Dotfiles
+        uses: ./.github/actions/setup-dotfiles
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Validate WinGet
+        shell: pwsh
+        run: |
+          New-Item -ItemType Directory -Force "$HOME\.config\winget"
+          & "$HOME\.local\bin\chezmoi.exe" apply "$HOME\.config\winget\packages.dsc.yaml"
+          & "$HOME\.local\bin\chezmoi.exe" apply "$HOME\.config\winget\registry.dsc.yaml"
+          winget configure validate -f "$HOME\.config\winget\packages.dsc.yaml"
+          winget configure validate -f "$HOME\.config\winget\registry.dsc.yaml"
 
