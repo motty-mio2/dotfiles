@@ -6,3 +6,9 @@ sourceDir = "{{ .chezmoi.sourceDir }}"
 {{- $machine_type_prompt_list := list "desktop" "laptop" "server" -}}
 {{- $machine_type_prompt := promptChoiceOnce . "machine_type_prompt" "Choice Machine Type (WSL is server)" $machine_type_prompt_list "server" }}
 machine_type = {{ $machine_type_prompt | quote }}
+{{- $package_manager := "mise" -}}
+{{- if ne .chezmoi.os "windows" -}}
+{{-   $package_manager_prompt_list := list "nix" "mise" -}}
+{{-   $package_manager = promptChoiceOnce . "package_manager_prompt" "Choice First Package Manager" $package_manager_prompt_list "nix" -}}
+{{- end }}
+package_manager = {{ $package_manager | quote }}

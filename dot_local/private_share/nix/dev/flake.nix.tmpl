@@ -17,9 +17,12 @@
         packages.dev = pkgs.buildEnv {
           name = "dev";
           paths = with pkgs; [
+            {{- $is_nix_first := eq .package_manager "nix" -}}
             {{- range $name, $managers := .dependencies.dev -}}
-              {{- if and (hasKey $managers "nix") (or (not (lookPath "mise")) (not (hasKey $managers "mise"))) -}}
-                {{- get $managers "nix" | printf "%s " -}}
+              {{- if hasKey $managers "nix" -}}
+                {{- if or $is_nix_first (not (lookPath "mise")) (not (hasKey $managers "mise")) -}}
+                  {{- get $managers "nix" | printf "%s " -}}
+                {{- end -}}
               {{- end -}}
             {{- end }}
           ];

@@ -17,15 +17,20 @@ node = "lts"
 "github:ogulcancelik/herdr" = { version = "latest", os = ["linux", "macos"]}
 
 # From dependencies
+{{- $is_nix_first := eq .package_manager "nix" -}}
 {{- range $name, $managers := .dependencies.cli }}
-{{- if hasKey $managers "mise" }}
+{{-   if hasKey $managers "mise" }}
+{{-     if or (not $is_nix_first) (not (hasKey $managers "nix")) }}
 "{{ get $managers "mise" }}" = "latest"
-{{- end }}
+{{-     end }}
+{{-   end }}
 {{- end }}
 {{- range $name, $managers := .dependencies.dev }}
-{{- if hasKey $managers "mise" }}
+{{-   if hasKey $managers "mise" }}
+{{-     if or (not $is_nix_first) (not (hasKey $managers "nix")) }}
 "{{ get $managers "mise" }}" = "latest"
-{{- end }}
+{{-     end }}
+{{-   end }}
 {{- end }}
 
 
