@@ -55,6 +55,13 @@ function Install-uv-Tools {
     & "$UV_ENV\$executableName" tool install --upgrade --from git+https://github.com/motty-mio2/dixp dixp
 }
 
+function Install-gh-extension {
+    $extensions = (chezmoi execute-template '{{- if hasKey .dependencies "gh_extension" }}{{ .dependencies.gh_extension | join " " }}{{ end -}}') -split '\s+' | Where-Object { $_ }
+    foreach ($ext in $extensions) {
+        gh extension install $ext --force
+    }
+}
+
 function Install-Scoop-Tools {
     $source = if (Test-Path ".chezmoidata") { "-S ." } else { "" }
     $pkgs = (& chezmoi $source execute-template '{{ range $name, $managers := .dependencies.cli -}}{{- if and (hasKey $managers ""scoop"") (or (not (lookPath ""mise"")) (not (hasKey $managers ""mise""))) -}}{{- get $managers ""scoop"" | printf ""%s "" -}}{{- end -}}{{- end }}') -split '\s+' | Where-Object { $_ }

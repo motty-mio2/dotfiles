@@ -19,7 +19,6 @@ rustup = [
   "rustfmt",
   "rust-analyzer",
 ]
-
 npm = [
   "@biomejs/biome",
   "@github/copilot",
@@ -36,7 +35,11 @@ npm = [
   "typescript-language-server",
   "yaml-language-server",
 ]
-
+gh_extension = [
+  "github/gh-stack",
+  "orangain/gh-pr-graph",
+  "vanilla-bar/gh-issue-graph",
+]
 scoop.default = ["extras", "java", "versions", "nerd-fonts"]
 
 [dependencies.scoop.external]
