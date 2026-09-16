@@ -36,6 +36,7 @@ npm = [
   "yaml-language-server",
 ]
 gh_extension = [
+  "dlvhdr/gh-dash",
   "github/gh-stack",
   "orangain/gh-pr-graph",
   "vanilla-bar/gh-issue-graph",
