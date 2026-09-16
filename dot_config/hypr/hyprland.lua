@@ -58,6 +58,7 @@ hl.config({
 	misc = {
 		force_default_wallpaper = -1,
 		disable_hyprland_logo = false,
+		initial_workspace_tracking = 2,
 	},
 })
 
@@ -151,13 +152,12 @@ hl.window_rule({
 hl.window_rule({
 	name = "suppress-maximize",
 	match = { class = ".*" },
-	suppress_event = "maximize",
+	suppress_event = "maximize x11configurerequest",
 })
 
 hl.window_rule({
 	name = "fix-xwayland",
 	match = {
-		focus = false,
 		class = "^$",
 		title = "^$",
 		xwayland = true,
@@ -166,6 +166,13 @@ hl.window_rule({
 		pin = false,
 	},
 	no_focus = true,
+})
+
+hl.window_rule({
+	name = "modal-dialogs",
+	match = { modal = true },
+	float = true,
+	center = true,
 })
 
 hl.window_rule({
