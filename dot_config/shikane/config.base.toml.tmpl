@@ -1,0 +1,8 @@
+{{- if lookPath "shikanectl" -}}
+{{- $exported := output "sh" "-c" "shikanectl export default 2>/dev/null || true" | trim -}}
+{{- if $exported -}}
+{{ replace "name = \"default\"" "name = \"default\"\nexec = [\"systemctl --user restart waybar.service\"]" $exported }}
+{{ else }}
+# shikane daemon is not running or no displays connected
+{{- end -}}
+{{- end }}

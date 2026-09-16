@@ -35,6 +35,10 @@ tools
     _vimrc
 {{ end }}
 
+{{ if ne .chezmoi.os "linux" }}
+    .config/shikane
+{{ end }}
+
 {{ if not (env "BW_SESSION") }}
     .config/mcpc/notion.json
     .config/mozc/dict.txt
