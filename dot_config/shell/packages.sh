@@ -84,6 +84,15 @@ install-uv-tools() {
 	"$HOME/.local/bin/uv" tool install --upgrade --from git+https://github.com/motty-mio2/dixp.git dixp
 }
 
+install-gh-extension() {
+	# shellcheck disable=SC1083,SC2207
+	extensions=($(chezmoi execute-template '{{- if hasKey .dependencies "gh_extension" }}{{ .dependencies.gh_extension | join " " }}{{ end -}}'))
+
+	for ext in "${extensions[@]}"; do
+		gh extension install "$ext" --force
+	done
+}
+
 install-aur() {
 	sudo pacman -Sy --noconfirm --needed base-devel git
 	local aur_helper="${1:-yay}"

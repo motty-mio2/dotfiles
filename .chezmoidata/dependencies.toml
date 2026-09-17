@@ -35,6 +35,12 @@ npm = [
   "typescript-language-server",
   "yaml-language-server",
 ]
+gh_extension = [
+  "dlvhdr/gh-dash",
+  "github/gh-stack",
+  "orangain/gh-pr-graph",
+  "vanilla-bar/gh-issue-graph",
+]
 scoop.default = ["extras", "java", "versions", "nerd-fonts"]
 
 [dependencies.scoop.external]
