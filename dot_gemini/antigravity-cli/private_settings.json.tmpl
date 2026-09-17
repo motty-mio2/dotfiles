@@ -11,8 +11,9 @@
 {{- end -}}
 {
   "allowNonWorkspaceAccess": true,
-  "enableTelemetry": false,
   "model": {{ $state.model | toJson }},
+  "showFeedbackSurvey": false,
+  "showTips": false,
   "statusLine": {
     "type": "command",
     "command": "oh-my-posh antigravity --config {{ .chezmoi.homeDir }}/.config/ohmyposh/antigravity.omp.toml",
