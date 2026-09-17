@@ -82,7 +82,7 @@ less = { scoop = "less", apt = "less" }
 nano = { scoop = "nano", apt = "nano", aur = "nano" }
 neovim = { scoop = "neovim", aur = "neovim", nix = "neovim", mise = "github:neovim/neovim" }
 oh-my-posh = { scoop = "oh-my-posh", aur = "oh-my-posh-bin", nix = "oh-my-posh", mise = "oh-my-posh" }
-opencode = { mise = "github:anomalyco/opencode" }
+opencode = { scoop = "opencode", nix = "opencode", mise = "github:anomalyco/opencode" }
 ripgrep = { scoop = "ripgrep", apt = "ripgrep", nix = "ripgrep", mise = "github:BurntSushi/ripgrep" }
 starship = { scoop = "starship", aur = "starship", nix = "starship", mise = "github:starship/starship" }
 tombi = { scoop = "tombi", aur = "tombi", nix = "tombi", mise = "github:tombi-toml/tombi" }
@@ -99,6 +99,7 @@ zsh = { apt = "zsh", aur = "zsh" }
 
 [dependencies.dev]
 actionlint = { scoop = "actionlint", aur = "actionlint", nix = "actionlint", mise = "github:rhysd/actionlint" }
+# Bubblewrapでエラーが起こるため、arduino-cliはNixでは使用しない
 arduino-cli = { scoop = "arduino-cli", mise = "github:arduino/arduino-cli" }
 arduino-language-server = { nix = "arduino-language-server", mise = "github:arduino/arduino-language-server" }
 clang-format = { apt = "clang-format" }
