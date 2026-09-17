@@ -17,6 +17,8 @@
     dark = true      # or light = true, or omit for auto-detection
     side-by-side = true
     line-numbers = true
+[diff]
+    algorithm = histogram
 [fetch]
     prune = true
 [filter "lfs"]
@@ -29,9 +31,14 @@
 [pull]
     ff = only
 [alias]
+    lg = log --oneline --graph --decorate --all -20
+    uncommit = reset --soft HEAD~1
+    amend = commit --amend --no-edit
+    wip = "!git add -A && git commit -m 'wip'"
+    sync = "!git fetch origin && git rebase origin/main"
+    publish = "!git push --set-upstream origin \"$(git branch --show-current)\""
     wad = "!git-worktree-add"
     wtr = "!git-worktree-root"
     wcl = "!git-workspace-clone"
 [rebase]
     reapply-cherry-picks = true
-

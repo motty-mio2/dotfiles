@@ -1,9 +1,11 @@
 {{- if eq .chezmoi.os "windows" -}}
-{{- $pref_cli := "mise" -}}
-{{- if hasKey . "package_managers" -}}
-  {{- $pref_cli = get .package_managers "cli" | default "mise" -}}
+{{- $pref_cli := "scoop" -}}
+{{- if hasKey . "package_manager" -}}
+  {{- $pref_cli = .package_manager -}}
+{{- else if hasKey . "package_managers" -}}
+  {{- $pref_cli = get .package_managers "cli" | default "scoop" -}}
 {{- else if hasKey . "preferred_installer" -}}
-  {{- $pref_cli = get .preferred_installer "cli" | default "mise" -}}
+  {{- $pref_cli = get .preferred_installer "cli" | default "scoop" -}}
 {{- end -}}
 
 {{- $app_names := list -}}

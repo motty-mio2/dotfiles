@@ -1,6 +1,8 @@
 {{- if eq .chezmoi.os "windows" -}}
 {{- $pref_desktop := "scoop" -}}
-{{- if hasKey . "package_managers" -}}
+{{- if hasKey . "package_manager" -}}
+  {{- $pref_desktop = .package_manager -}}
+{{- else if hasKey . "package_managers" -}}
   {{- $pref_desktop = get .package_managers "desktop" | default "scoop" -}}
 {{- else if hasKey . "preferred_installer" -}}
   {{- $pref_desktop = get .preferred_installer "desktop" | default "scoop" -}}

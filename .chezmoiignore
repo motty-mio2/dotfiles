@@ -16,7 +16,8 @@ tools
     .zshenv
     .config/bash
     .config/chezmoi/setup/run_once_01_setup.sh
-    .conifg/fcitx5
+    .config/distrobox
+    .config/fcitx5
     .config/keyd
     .config/nix
     .config/shell

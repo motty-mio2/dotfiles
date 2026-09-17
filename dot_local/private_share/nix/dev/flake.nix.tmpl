@@ -18,14 +18,17 @@
           name = "dev";
           paths = with pkgs; [
             {{- $pref := "nix" -}}
-            {{- if hasKey . "package_managers" -}}
+            {{- if hasKey . "package_manager" -}}
+              {{- $pref = .package_manager -}}
+            {{- else if hasKey . "package_managers" -}}
               {{- $pref = get .package_managers "dev" | default "nix" -}}
             {{- else if hasKey . "preferred_installer" -}}
               {{- $pref = get .preferred_installer "dev" | default "nix" -}}
             {{- end -}}
+            {{- $is_nix_first := eq $pref "nix" -}}
             {{- range $name, $managers := .dependencies.dev -}}
               {{- if hasKey $managers "nix" -}}
-                {{- if or (eq $pref "nix") (not (lookPath "mise")) (not (hasKey $managers "mise")) -}}
+                {{- if or $is_nix_first (not (lookPath "mise")) (not (hasKey $managers "mise")) -}}
                   {{- get $managers "nix" | printf "%s " -}}
                 {{- end -}}
               {{- end -}}

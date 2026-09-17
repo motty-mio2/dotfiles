@@ -5,7 +5,6 @@ pip = [
   "black",
   "cmake-language-server",
   "flake8",
-  "ignr",
   "isort",
   "mypy",
   "pyright",
@@ -20,7 +19,6 @@ rustup = [
   "rustfmt",
   "rust-analyzer",
 ]
-
 npm = [
   "@biomejs/biome",
   "@github/copilot",
@@ -35,10 +33,8 @@ npm = [
   "neovim",
   "semver",
   "typescript-language-server",
-  "vim-language-server",
   "yaml-language-server",
 ]
-
 scoop.default = ["extras", "java", "versions", "nerd-fonts"]
 
 [dependencies.scoop.external]
@@ -54,6 +50,7 @@ byobu = { apt = "byobu", aur = "byobu" }
 chezmoi = { scoop = "chezmoi", aur = "chezmoi", nix = "chezmoi", mise = "github:twpayne/chezmoi" }
 claude = { mise = "claude" }
 cloudflared = { scoop = "cloudflared", aur = "cloudflared", nix = "cloudflared", mise = "github:cloudflare/cloudflared" }
+codex = { scoop = "codex", aur = "openai-codex-bin", mise = "codex" }
 curl = { scoop = "curl", apt = "curl", aur = "curl", nix = "curl" }
 delta = { scoop = "delta", apt = "git-delta", aur = "git-delta", nix = "delta", mise = "github:dandavison/delta" }
 deno = { scoop = "deno", nix = "deno", mise = "deno" }
@@ -61,6 +58,7 @@ eza = { scoop = "eza", nix = "eza", mise = "github:eza-community/eza" }
 fd = { scoop = "fd", apt = "fd-find", aur = "fd", nix = "fd", mise = "github:sharkdp/fd" }
 fzf = { scoop = "fzf", apt = "fzf", aur = "fzf", nix = "fzf", mise = "github:junegunn/fzf" }
 gh = { scoop = "gh", aur = "github-cli", nix = "gh", mise = "github:cli/cli" }
+gibo = { scoop = "gibo", aur = "gibo", nix = "gibo", mise = "github:simonwhitaker/gibo" }
 git = { scoop = "git", apt = "git", aur = "git" }
 glab = { scoop = "glab", aur = "glab", nix = "glab", mise = "gitlab:gitlab-org/cli" }
 grep = { scoop = "grep", apt = "grep" }
@@ -77,8 +75,8 @@ leaf = { mise = "github:rivolink/leaf" }
 less = { scoop = "less", apt = "less" }
 nano = { scoop = "nano", apt = "nano", aur = "nano" }
 neovim = { scoop = "neovim", aur = "neovim", nix = "neovim", mise = "github:neovim/neovim" }
-oh-my-posh = { scoop = "oh-my-posh", aur = "oh-my-posh-bin", nix = "oh-my-posh", mise = "github:jandedobbeleer/oh-my-posh" }
-opencode = { mise = "github:anomalyco/opencode" }
+oh-my-posh = { scoop = "oh-my-posh", aur = "oh-my-posh-bin", nix = "oh-my-posh", mise = "oh-my-posh" }
+opencode = { scoop = "opencode", nix = "opencode", mise = "github:anomalyco/opencode" }
 ripgrep = { scoop = "ripgrep", apt = "ripgrep", nix = "ripgrep", mise = "github:BurntSushi/ripgrep" }
 starship = { scoop = "starship", aur = "starship", nix = "starship", mise = "github:starship/starship" }
 tombi = { scoop = "tombi", aur = "tombi", nix = "tombi", mise = "github:tombi-toml/tombi" }
@@ -95,6 +93,7 @@ zsh = { apt = "zsh", aur = "zsh" }
 
 [dependencies.dev]
 actionlint = { scoop = "actionlint", aur = "actionlint", nix = "actionlint", mise = "github:rhysd/actionlint" }
+# Bubblewrapでエラーが起こるため、arduino-cliはNixでは使用しない
 arduino-cli = { scoop = "arduino-cli", mise = "github:arduino/arduino-cli" }
 arduino-language-server = { nix = "arduino-language-server", mise = "github:arduino/arduino-language-server" }
 clang-format = { apt = "clang-format" }

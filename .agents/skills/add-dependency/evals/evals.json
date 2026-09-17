@@ -1,0 +1,29 @@
+{
+  "skill_name": "add-dependency",
+  "evals": [
+    {
+      "id": 1,
+      "prompt": "zellij を dependencies.toml に追加して",
+      "expected_output": "dependencies.cli に zellij がアルファベット順で追記され、scoop, nix, apt, aur, mise などのパッケージ定義が含まれること",
+      "files": [
+        ".chezmoidata/dependencies.toml"
+      ]
+    },
+    {
+      "id": 2,
+      "prompt": "taplo を追加して",
+      "expected_output": "TOML用LSP/フォーマッタとして dependencies.dev に taplo が追記されること",
+      "files": [
+        ".chezmoidata/dependencies.toml"
+      ]
+    },
+    {
+      "id": 3,
+      "prompt": "Obsidian を追加して",
+      "expected_output": "GUIアプリとして dependencies.desktop に Obsidian が winget や flatpak 等の設定とともに追記されること",
+      "files": [
+        ".chezmoidata/dependencies.toml"
+      ]
+    }
+  ]
+}

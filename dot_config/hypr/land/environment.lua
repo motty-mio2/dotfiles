@@ -22,6 +22,8 @@ hl.config({
 		"QT_QPA_PLATFORM,wayland",
 		"QT_STYLE_OVERRIDE,kvantum",
 		"QT_QPA_PLATFORMTHEME,qt5ct",
+		"ELECTRON_OZONE_PLATFORM_HINT,auto",
+		"NIXOS_OZONE_WL,1",
 	},
 })
 
