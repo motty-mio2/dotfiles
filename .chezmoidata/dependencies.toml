@@ -1,5 +1,5 @@
 [dependencies]
-nix = 25.11
+nix = "unstable"
 pip = [
   "basedpyright",
   "black",
