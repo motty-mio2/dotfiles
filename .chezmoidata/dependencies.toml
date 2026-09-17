@@ -150,6 +150,7 @@ xdg-desktop-portal-hyprland = { apt = "xdg-desktop-portal-hyprland" }
 brightnessctl = { nix = "brightnessctl", apt = "brightnessctl", aur = "brightnessctl" }
 cliphist = { nix = "cliphist", apt = "cliphist", aur = "cliphist" }
 grim = { nix = "grim", apt = "grim", aur = "grim" }
+shikane = { nix = "shikane" }
 slurp = { nix = "slurp", apt = "slurp", aur = "slurp" }
 waybar = { apt = "waybar", aur = "waybar" }
 wf-recorder = { nix = "wf-recorder", apt = "wf-recorder", aur = "wf-recorder" }
