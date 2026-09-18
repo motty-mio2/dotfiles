@@ -49,6 +49,7 @@ motty = "https://github.com/motty-mio2/scoop-bucket"
 [dependencies.cli]
 act = { aur = "act", nix = "act", mise = "github:nektos/act" }
 antigravity-cli = { mise = "antigravity-cli" }
+apm = { aur = "apm-bin", mise = "github:microsoft/apm" }
 bat = { scoop = "bat", apt = "bat", aur = "bat", nix = "bat", mise = "github:sharkdp/bat" }
 bw = { scoop = "bitwarden", aur = "bitwarden-cli", nix = "bitwarden-cli", mise = "bitwarden" }
 bws = { scoop = "bitwarden-secrets-manager-cli", mise = "bitwarden-secrets-manager" }

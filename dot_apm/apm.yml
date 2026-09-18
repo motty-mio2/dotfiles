@@ -1,0 +1,18 @@
+name: user
+version: 1.0.0
+description: APM project for user
+author: Developer
+# Which agent platforms to deploy to (uncomment to pin):
+targets:
+  - copilot
+  - claude
+  - codex
+  - opencode
+
+dependencies:
+  apm:
+    - mattpocock/skills/skills/engineering/grill-with-docs
+    - mattpocock/skills/skills/productivity/grilling
+  mcp: []
+includes: auto
+scripts: {}
