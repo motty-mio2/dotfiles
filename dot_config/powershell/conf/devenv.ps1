@@ -92,8 +92,16 @@ function Set-SVLINT-PATH {
 }
 
 function Install-Scoop {
-    if ( -not (Get-Command "scoop")) {
+    if ( -not (Get-Command "scoop" -ErrorAction SilentlyContinue)) {
         Invoke-WebRequest -useb get.scoop.sh | Invoke-Expression
+    }
+
+    $pruneCommandPath = "$HOME\.local\bin\scoop-prune.ps1"
+    if (Test-Path $pruneCommandPath) {
+        $pruneAlias = scoop alias list | Where-Object { $_.Name -eq "prune" }
+        if (-not $pruneAlias) {
+            scoop alias add prune "& '$pruneCommandPath' @args" "Prune unmanaged Scoop packages"
+        }
     }
 
     scoop reset *
@@ -119,4 +127,3 @@ function Install-Scoop {
         }
     }
 }
-

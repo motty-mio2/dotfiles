@@ -33,6 +33,7 @@ tools
     Appdata
     Documents
     _vimrc
+    .local/bin/scoop-prune.ps1
 {{ end }}
 
 {{ if ne .chezmoi.os "linux" }}
@@ -47,4 +48,3 @@ tools
     .ssh/config.d/3_hostLC.conf
     .ssh/config.d/3_hostLN.conf
 {{ end }}
-
