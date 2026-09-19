@@ -4,7 +4,8 @@ dependencies:
 - repo_url: mattpocock/skills
   name: grill-with-docs
   host: github.com
-  resolved_commit: 74ca5fe077456a0b3b2f5310cf9430999fd0b5fd
+  resolved_commit: c55ee46073ed923f86ce59a5eb3b6d895095d1b7
+  resolved_ref: c55ee46073ed923f86ce59a5eb3b6d895095d1b7
   version: unknown
   virtual_path: skills/engineering/grill-with-docs
   is_virtual: true
@@ -25,7 +26,8 @@ dependencies:
 - repo_url: mattpocock/skills
   name: grilling
   host: github.com
-  resolved_commit: 74ca5fe077456a0b3b2f5310cf9430999fd0b5fd
+  resolved_commit: c55ee46073ed923f86ce59a5eb3b6d895095d1b7
+  resolved_ref: c55ee46073ed923f86ce59a5eb3b6d895095d1b7
   version: unknown
   virtual_path: skills/productivity/grilling
   is_virtual: true
