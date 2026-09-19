@@ -1,6 +1,15 @@
 [Unit]
 Description=Hyprland Session Target
-Wants=waybar.service dunst.service hyprpolkitagent.service nm-applet.service fcitx5.service cliphist-text.service cliphist-images.service hypridle.service kwalletd5.service
+Wants=waybar.service
+Wants=dunst.service
+Wants=hyprpolkitagent.service
+Wants=nm-applet.service
+Wants=fcitx5.service
+Wants=cliphist-text.service
+Wants=cliphist-images.service
+Wants=hypridle.service
+Wants=kwalletd5.service
+Wants=shikane.service
 After=graphical-session-pre.target
 
 [Install]

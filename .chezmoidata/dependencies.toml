@@ -1,5 +1,5 @@
 [dependencies]
-nix = 25.11
+nix = "unstable"
 pip = [
   "basedpyright",
   "black",
@@ -35,6 +35,12 @@ npm = [
   "typescript-language-server",
   "yaml-language-server",
 ]
+gh_extension = [
+  "dlvhdr/gh-dash",
+  "github/gh-stack",
+  "orangain/gh-pr-graph",
+  "vanilla-bar/gh-issue-graph",
+]
 scoop.default = ["extras", "java", "versions", "nerd-fonts"]
 
 [dependencies.scoop.external]
@@ -43,6 +49,7 @@ motty = "https://github.com/motty-mio2/scoop-bucket"
 [dependencies.cli]
 act = { aur = "act", nix = "act", mise = "github:nektos/act" }
 antigravity-cli = { mise = "antigravity-cli" }
+apm = { aur = "apm-bin", mise = "github:microsoft/apm" }
 bat = { scoop = "bat", apt = "bat", aur = "bat", nix = "bat", mise = "github:sharkdp/bat" }
 bw = { scoop = "bitwarden", aur = "bitwarden-cli", nix = "bitwarden-cli", mise = "bitwarden" }
 bws = { scoop = "bitwarden-secrets-manager-cli", mise = "bitwarden-secrets-manager" }
@@ -144,6 +151,7 @@ xdg-desktop-portal-hyprland = { apt = "xdg-desktop-portal-hyprland" }
 brightnessctl = { nix = "brightnessctl", apt = "brightnessctl", aur = "brightnessctl" }
 cliphist = { nix = "cliphist", apt = "cliphist", aur = "cliphist" }
 grim = { nix = "grim", apt = "grim", aur = "grim" }
+shikane = { nix = "shikane" }
 slurp = { nix = "slurp", apt = "slurp", aur = "slurp" }
 waybar = { apt = "waybar", aur = "waybar" }
 wf-recorder = { nix = "wf-recorder", apt = "wf-recorder", aur = "wf-recorder" }

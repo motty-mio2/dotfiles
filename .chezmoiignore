@@ -36,6 +36,10 @@ tools
     .local/bin/scoop-prune.ps1
 {{ end }}
 
+{{ if ne .chezmoi.os "linux" }}
+    .config/shikane
+{{ end }}
+
 {{ if not (env "BW_SESSION") }}
     .config/mcpc/notion.json
     .config/mozc/dict.txt
