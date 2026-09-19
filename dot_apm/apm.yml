@@ -11,8 +11,8 @@ targets:
 
 dependencies:
   apm:
-    - mattpocock/skills/skills/engineering/grill-with-docs
-    - mattpocock/skills/skills/productivity/grilling
+    - mattpocock/skills/skills/engineering/grill-with-docs#c55ee46073ed923f86ce59a5eb3b6d895095d1b7
+    - mattpocock/skills/skills/productivity/grilling#c55ee46073ed923f86ce59a5eb3b6d895095d1b7
   mcp: []
 includes: auto
 scripts: {}
