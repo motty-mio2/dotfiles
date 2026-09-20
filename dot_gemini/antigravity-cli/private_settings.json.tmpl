@@ -1,23 +1,26 @@
 {{- $targetFile := joinPath .chezmoi.homeDir ".gemini/antigravity-cli/settings.json" -}}
-{{- $state := dict "trusted" list "model" "Gemini 3.8 Flash (High)" -}}
+{{- $config := dict -}}
 {{- if stat $targetFile -}}
-  {{- $current := include $targetFile | fromJson -}}
-  {{- if hasKey $current "trustedWorkspaces" -}}
-    {{- $_ := set $state "trusted" $current.trustedWorkspaces -}}
-  {{- end -}}
-  {{- if hasKey $current "model" -}}
-    {{- $_ := set $state "model" $current.model -}}
-  {{- end -}}
+  {{- $config = include $targetFile | fromJson -}}
 {{- end -}}
+{{- /* 初期値は、既存のキーがない場合だけ設定する。 */ -}}
+{{- if not (hasKey $config "model") -}}
+  {{- $_ := set $config "model" "Gemini 3.8 Flash (High)" -}}
+{{- end -}}
+{{- if not (hasKey $config "trustedWorkspaces") -}}
+  {{- $_ := set $config "trustedWorkspaces" list -}}
+{{- end -}}
+{{- /* 管理する設定は、この JSON に追記する。その他の既存設定は保持する。 */ -}}
+{{- $managed := printf `
 {
   "allowNonWorkspaceAccess": true,
-  "model": {{ $state.model | toJson }},
   "showFeedbackSurvey": false,
   "showTips": false,
   "statusLine": {
     "type": "command",
-    "command": "oh-my-posh antigravity --config {{ .chezmoi.homeDir }}/.config/ohmyposh/antigravity.omp.toml",
+    "command": %s,
     "enabled": true
-  },
-  "trustedWorkspaces": {{ $state.trusted | toPrettyJson "  " | indent 2 | trim }}
+  }
 }
+` (printf "oh-my-posh antigravity --config %s/.config/ohmyposh/antigravity.omp.toml" .chezmoi.homeDir | toJson) | fromJson -}}
+{{ mergeOverwrite $config $managed | toPrettyJson }}

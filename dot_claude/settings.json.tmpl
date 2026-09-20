@@ -1,3 +1,10 @@
+{{- $targetFile := joinPath .chezmoi.homeDir ".claude/settings.json" -}}
+{{- $config := dict -}}
+{{- if stat $targetFile -}}
+  {{- $config = include $targetFile | fromJson -}}
+{{- end -}}
+{{- /* 管理する設定は、この JSON に追記する。その他の既存設定は保持する。 */ -}}
+{{- $managed := printf `
 {
   "permissions": {
     "allow": []
@@ -11,6 +18,8 @@
   "theme": "dark",
   "statusLine": {
     "type": "command",
-    "command": "oh-my-posh claude --config {{ .chezmoi.homeDir }}/.config/ohmyposh/claude.omp.toml"
+    "command": %s
   }
 }
+` (printf "oh-my-posh claude --config %s/.config/ohmyposh/claude.omp.toml" .chezmoi.homeDir | toJson) | fromJson -}}
+{{ mergeOverwrite $config $managed | toPrettyJson }}
