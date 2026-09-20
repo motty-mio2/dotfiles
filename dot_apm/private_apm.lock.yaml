@@ -1,6 +1,33 @@
 lockfile_version: '1'
 apm_version: 0.30.0
 dependencies:
+- repo_url: github/gh-stack
+  name: gh-stack
+  host: github.com
+  resolved_commit: 2bd699a544a09cb5c45a013d03416e0894b0454e
+  version: unknown
+  package_type: skill_bundle
+  deployed_files:
+  - .agents/skills/gh-stack
+  - .agents/skills/gh-stack/SKILL.md
+  - .agents/skills/gh-stack/references/commands.md
+  - .agents/skills/gh-stack/references/stack-design.md
+  - .agents/skills/gh-stack/references/troubleshooting.md
+  - .config/opencode/skills/gh-stack
+  - .config/opencode/skills/gh-stack/SKILL.md
+  - .config/opencode/skills/gh-stack/references/commands.md
+  - .config/opencode/skills/gh-stack/references/stack-design.md
+  - .config/opencode/skills/gh-stack/references/troubleshooting.md
+  deployed_file_hashes:
+    .agents/skills/gh-stack/SKILL.md: sha256:5d966fc1ff92014db49d6689f41f70ddf1af40879f9dc8a12bb75b82d7850c25
+    .agents/skills/gh-stack/references/commands.md: sha256:31049425b8db652e80fa6994d5289f20169f57d7af0a0651fa72c3f25e8fe7c7
+    .agents/skills/gh-stack/references/stack-design.md: sha256:4a61e3065ce61a5d129a30f5dcbebe73bfde250e34c382277facdc31d2c4e5ce
+    .agents/skills/gh-stack/references/troubleshooting.md: sha256:fe1958036e663c7471a0d3efdf1fefe47ee65e06713b13a96e3db95becccdc47
+    .config/opencode/skills/gh-stack/SKILL.md: sha256:5d966fc1ff92014db49d6689f41f70ddf1af40879f9dc8a12bb75b82d7850c25
+    .config/opencode/skills/gh-stack/references/commands.md: sha256:31049425b8db652e80fa6994d5289f20169f57d7af0a0651fa72c3f25e8fe7c7
+    .config/opencode/skills/gh-stack/references/stack-design.md: sha256:4a61e3065ce61a5d129a30f5dcbebe73bfde250e34c382277facdc31d2c4e5ce
+    .config/opencode/skills/gh-stack/references/troubleshooting.md: sha256:fe1958036e663c7471a0d3efdf1fefe47ee65e06713b13a96e3db95becccdc47
+  content_hash: sha256:214bb5c979fccf15151c4dd60d1f666c59460b7a011c86de8f58afdd194763ae
 - repo_url: mattpocock/skills
   name: grill-with-docs
   host: github.com
@@ -47,7 +74,52 @@ dependencies:
   content_hash: sha256:e98f109bca3d8889f673d9f32bf84086f85a70ff9e241f8a34a4560a07ab5a39
 deployments:
 - kind: project-relative
-  target: copilot
+  target: legacy
+  value: .agents/skills/gh-stack
+  runtime: null
+  scope: project
+  owners:
+  - github/gh-stack
+  active_owner: github/gh-stack
+  content_hash: null
+- kind: project-relative
+  target: legacy
+  value: .agents/skills/gh-stack/SKILL.md
+  runtime: null
+  scope: project
+  owners:
+  - github/gh-stack
+  active_owner: github/gh-stack
+  content_hash: sha256:5d966fc1ff92014db49d6689f41f70ddf1af40879f9dc8a12bb75b82d7850c25
+- kind: project-relative
+  target: legacy
+  value: .agents/skills/gh-stack/references/commands.md
+  runtime: null
+  scope: project
+  owners:
+  - github/gh-stack
+  active_owner: github/gh-stack
+  content_hash: sha256:31049425b8db652e80fa6994d5289f20169f57d7af0a0651fa72c3f25e8fe7c7
+- kind: project-relative
+  target: legacy
+  value: .agents/skills/gh-stack/references/stack-design.md
+  runtime: null
+  scope: project
+  owners:
+  - github/gh-stack
+  active_owner: github/gh-stack
+  content_hash: sha256:4a61e3065ce61a5d129a30f5dcbebe73bfde250e34c382277facdc31d2c4e5ce
+- kind: project-relative
+  target: legacy
+  value: .agents/skills/gh-stack/references/troubleshooting.md
+  runtime: null
+  scope: project
+  owners:
+  - github/gh-stack
+  active_owner: github/gh-stack
+  content_hash: sha256:fe1958036e663c7471a0d3efdf1fefe47ee65e06713b13a96e3db95becccdc47
+- kind: project-relative
+  target: legacy
   value: .agents/skills/grill-with-docs
   runtime: null
   scope: project
@@ -56,7 +128,7 @@ deployments:
   active_owner: mattpocock/skills/skills/engineering/grill-with-docs
   content_hash: null
 - kind: project-relative
-  target: copilot
+  target: legacy
   value: .agents/skills/grill-with-docs/SKILL.md
   runtime: null
   scope: project
@@ -65,7 +137,7 @@ deployments:
   active_owner: mattpocock/skills/skills/engineering/grill-with-docs
   content_hash: sha256:7de372c13488f1ee96cc11cd8907b56b6809cc93eef776eeddd37de6b6cbe3fe
 - kind: project-relative
-  target: copilot
+  target: legacy
   value: .agents/skills/grill-with-docs/agents/openai.yaml
   runtime: null
   scope: project
@@ -74,7 +146,7 @@ deployments:
   active_owner: mattpocock/skills/skills/engineering/grill-with-docs
   content_hash: sha256:94cd0ab161fb468a836349f5ed482ba58ce8e709a05c57ce533d739dbd35cca9
 - kind: project-relative
-  target: copilot
+  target: legacy
   value: .agents/skills/grilling
   runtime: null
   scope: project
@@ -83,7 +155,7 @@ deployments:
   active_owner: mattpocock/skills/skills/productivity/grilling
   content_hash: null
 - kind: project-relative
-  target: copilot
+  target: legacy
   value: .agents/skills/grilling/SKILL.md
   runtime: null
   scope: project
@@ -92,7 +164,7 @@ deployments:
   active_owner: mattpocock/skills/skills/productivity/grilling
   content_hash: sha256:10ff989e7498b23b5acb49d5048f11dcd906757d2f79c5cdf8a00001381296f2
 - kind: project-relative
-  target: copilot
+  target: legacy
   value: .agents/skills/grilling/agents/openai.yaml
   runtime: null
   scope: project
@@ -101,7 +173,52 @@ deployments:
   active_owner: mattpocock/skills/skills/productivity/grilling
   content_hash: sha256:1411d7df7d99b7e621a1ff8283c8133cc2464be63d064e52d8ce169c6800ee9b
 - kind: project-relative
-  target: opencode
+  target: legacy
+  value: .config/opencode/skills/gh-stack
+  runtime: null
+  scope: project
+  owners:
+  - github/gh-stack
+  active_owner: github/gh-stack
+  content_hash: null
+- kind: project-relative
+  target: legacy
+  value: .config/opencode/skills/gh-stack/SKILL.md
+  runtime: null
+  scope: project
+  owners:
+  - github/gh-stack
+  active_owner: github/gh-stack
+  content_hash: sha256:5d966fc1ff92014db49d6689f41f70ddf1af40879f9dc8a12bb75b82d7850c25
+- kind: project-relative
+  target: legacy
+  value: .config/opencode/skills/gh-stack/references/commands.md
+  runtime: null
+  scope: project
+  owners:
+  - github/gh-stack
+  active_owner: github/gh-stack
+  content_hash: sha256:31049425b8db652e80fa6994d5289f20169f57d7af0a0651fa72c3f25e8fe7c7
+- kind: project-relative
+  target: legacy
+  value: .config/opencode/skills/gh-stack/references/stack-design.md
+  runtime: null
+  scope: project
+  owners:
+  - github/gh-stack
+  active_owner: github/gh-stack
+  content_hash: sha256:4a61e3065ce61a5d129a30f5dcbebe73bfde250e34c382277facdc31d2c4e5ce
+- kind: project-relative
+  target: legacy
+  value: .config/opencode/skills/gh-stack/references/troubleshooting.md
+  runtime: null
+  scope: project
+  owners:
+  - github/gh-stack
+  active_owner: github/gh-stack
+  content_hash: sha256:fe1958036e663c7471a0d3efdf1fefe47ee65e06713b13a96e3db95becccdc47
+- kind: project-relative
+  target: legacy
   value: .config/opencode/skills/grill-with-docs
   runtime: null
   scope: project
@@ -110,7 +227,7 @@ deployments:
   active_owner: mattpocock/skills/skills/engineering/grill-with-docs
   content_hash: null
 - kind: project-relative
-  target: opencode
+  target: legacy
   value: .config/opencode/skills/grill-with-docs/SKILL.md
   runtime: null
   scope: project
@@ -119,7 +236,7 @@ deployments:
   active_owner: mattpocock/skills/skills/engineering/grill-with-docs
   content_hash: sha256:7de372c13488f1ee96cc11cd8907b56b6809cc93eef776eeddd37de6b6cbe3fe
 - kind: project-relative
-  target: opencode
+  target: legacy
   value: .config/opencode/skills/grill-with-docs/agents/openai.yaml
   runtime: null
   scope: project
@@ -128,7 +245,7 @@ deployments:
   active_owner: mattpocock/skills/skills/engineering/grill-with-docs
   content_hash: sha256:94cd0ab161fb468a836349f5ed482ba58ce8e709a05c57ce533d739dbd35cca9
 - kind: project-relative
-  target: opencode
+  target: legacy
   value: .config/opencode/skills/grilling
   runtime: null
   scope: project
@@ -137,7 +254,7 @@ deployments:
   active_owner: mattpocock/skills/skills/productivity/grilling
   content_hash: null
 - kind: project-relative
-  target: opencode
+  target: legacy
   value: .config/opencode/skills/grilling/SKILL.md
   runtime: null
   scope: project
@@ -146,7 +263,7 @@ deployments:
   active_owner: mattpocock/skills/skills/productivity/grilling
   content_hash: sha256:10ff989e7498b23b5acb49d5048f11dcd906757d2f79c5cdf8a00001381296f2
 - kind: project-relative
-  target: opencode
+  target: legacy
   value: .config/opencode/skills/grilling/agents/openai.yaml
   runtime: null
   scope: project
