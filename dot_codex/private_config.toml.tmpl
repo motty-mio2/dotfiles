@@ -1,0 +1,12 @@
+{{- $targetFile := joinPath .chezmoi.homeDir ".codex/config.toml" -}}
+{{- $config := dict -}}
+{{- if stat $targetFile -}}
+  {{- $config = include $targetFile | fromToml -}}
+{{- end -}}
+{{- /* 管理する設定は、この TOML に追記する。その他の既存設定は保持する。 */ -}}
+{{- $managed := fromToml `
+[tui]
+status_line = ["model-with-reasoning", "current-dir", "git-branch", "pull-request-number", "five-hour-limit", "weekly-limit"]
+status_line_use_colors = true
+` -}}
+{{ mergeOverwrite $config $managed | toToml -}}
