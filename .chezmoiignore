@@ -41,7 +41,6 @@ tools
 {{ end }}
 
 {{ if not (env "BW_SESSION") }}
-    .config/mcpc/notion.json
     .config/mozc/dict.txt
     .local/bin/git-user
     .ssh/config.d/3_hostC.conf
