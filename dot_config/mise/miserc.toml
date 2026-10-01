@@ -1,0 +1,5 @@
+# Paths to ignore when discovering mise configurations
+ignored_config_paths = [
+  "~/.local/share/nvim/**",
+  "~/AppData/Local/nvim-data/**",
+]
