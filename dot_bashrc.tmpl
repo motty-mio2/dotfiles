@@ -24,16 +24,13 @@ shopt -s globstar
 
 
 if ! shopt -oq posix; then
+    if [ -d "$XDG_STATE_HOME/nix/profiles/profile/share" ]; then
+        export XDG_DATA_DIRS="$XDG_STATE_HOME/nix/profiles/profile/share:${XDG_DATA_DIRS:-/usr/local/share:/usr/share}"
+    fi
+
     if [ -f /usr/share/bash-completion/bash_completion ]; then
         #shellcheck source=/dev/null
         source /usr/share/bash-completion/bash_completion
-    fi
-
-    if [ -d "$XDG_STATE_HOME/nix/profiles/profile/share/bash-completion/completions" ]; then
-        for file in "$XDG_STATE_HOME/nix/profiles/profile/share/bash-completion/completions/"* ; do
-            #shellcheck source=/dev/null
-            source "${file}"
-        done
     fi
 fi
 

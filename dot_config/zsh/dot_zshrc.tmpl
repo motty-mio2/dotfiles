@@ -13,13 +13,14 @@ source "$XDG_CONFIG_HOME/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highligh
 fpath=("$XDG_DATA_HOME/zsh/site-functions" $fpath)
 fpath=("$XDG_STATE_HOME/nix/profiles/profile/share/zsh/site-functions" $fpath)
 
+setopt EXTENDED_GLOB
 autoload -Uz compinit
 
-if [[ -n ${ZDOTDIR}/.zcompdump ]]; then
-    compinit;
+if [[ -n ${ZDOTDIR}/.zcompdump(#qN.mh+24) || ! -f ${ZDOTDIR}/.zcompdump ]]; then
+    compinit
 else
-    compinit -C;
-fi;
+    compinit -C
+fi
 
 autoload -Uz bashcompinit && bashcompinit
 
@@ -44,7 +45,6 @@ colors
 
 setopt auto_menu
 setopt auto_param_slash
-setopt EXTENDED_GLOB
 setopt globdots
 setopt hist_ignore_all_dups
 setopt hist_ignore_dups

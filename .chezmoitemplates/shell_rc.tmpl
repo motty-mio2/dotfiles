@@ -13,7 +13,26 @@ done
 {{ if (lookPath "mise") }}
 if command -v mise > /dev/null 2>&1; then
 eval "$(mise activate {{ .shell }} --cd {{ .homeDir }})"
+if [ -n "$(typeset -f mise 2>/dev/null)" ]; then
+    eval "_orig_$(typeset -f mise)"
+    mise() {
+        if [ -z "$MISE_GITHUB_TOKEN" ]; then
+            local token
+            if token=$(gh auth token 2>/dev/null); then
+                export MISE_GITHUB_TOKEN="$token"
+            fi
+        fi
+        _orig_mise "$@"
+    }
 fi
+fi
+{{ end }}
+
+{{ if lookPath "copilot" }}
+copilot() {
+    export COPILOT_OTEL_FILE_EXPORTER_PATH="$HOME/.copilot/otel/copilot-otel-$(date +%Y%m%d-%H%M%S).jsonl"
+    command copilot "$@"
+}
 {{ end }}
 
 # Shell Framework
