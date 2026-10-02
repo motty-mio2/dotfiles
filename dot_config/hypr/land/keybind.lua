@@ -2,7 +2,7 @@
 --- MY PROGRAMS ---
 -------------------
 
-local terminal = "alacritty"
+local terminal = "ghostty"
 local fileManager = "nemo"
 local menu = "wofi --show drun --show-icons"
 -- local menu = "ulauncher"

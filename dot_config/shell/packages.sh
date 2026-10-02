@@ -229,6 +229,9 @@ install-ubuntu-dev-tools() {
 		$(. /etc/os-release && echo "${UBUNTU_CODENAME:-$VERSION_CODENAME}") stable" |
 		sudo tee /etc/apt/sources.list.d/docker.list >/dev/null
 
+	echo "Ghostty"
+	sudo add-apt-repository -y ppa:mkasberg/ghostty-ubuntu
+
 	echo "Alacritty"
 	sudo add-apt-repository ppa:aslatter/ppa
 
@@ -241,6 +244,7 @@ install-ubuntu-dev-tools() {
 	sudo apt-get update
 	sudo apt-get install code
 	sudo apt-get install flatpak
+	sudo apt-get install ghostty
 	sudo apt-get install alacritty
 	sudo apt-get install wezterm
 }
