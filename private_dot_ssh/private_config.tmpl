@@ -1,3 +1,6 @@
+Host lima-*
+    ForwardAgent yes
+    IdentitiesOnly no
 
 Include {{ joinPath .chezmoi.homeDir "/.config/colima/ssh_config" }}
 Include {{ joinPath .chezmoi.homeDir "/.local/share/lima/*/ssh.config" }}

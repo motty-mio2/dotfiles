@@ -24,7 +24,7 @@
             "shouldCacheVaultItems": true,
             "syncOnLaunch": true,
             "windowActionOnCopy": "close",
-            "cliPath": "/home/user/.local/share/mise/shims/bw"
+            "cliPath": "/home/user/.local/state/nix/profiles/profile/bin/bw"
          }
       },
       "@marcjulian/store.raycast.obsidian": {
