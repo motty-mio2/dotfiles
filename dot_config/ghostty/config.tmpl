@@ -18,6 +18,8 @@ command = {{ joinPath .chezmoi.homeDir ".local/bin/xsh" }} --login
 # --- コピー＆ペースト (テキスト選択で自動コピー) ---
 # テキスト選択時にセレクションバッファおよびシステムクリップボードへ自動コピー
 copy-on-select = clipboard
+# コピー時のトースト通知（ポップアップ）を無効化
+app-notifications = no-clipboard-copy
 
 # --- Zellij とのバッティングを完全回避 ---
 # 1. Ghostty のデフォルトキーバインドを全解除 (タブやペインの横取りを防止)
