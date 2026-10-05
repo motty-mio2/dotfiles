@@ -13,7 +13,7 @@ confirm-close-surface = false
 gtk-single-instance = false
 
 # --- シェル設定 ---
-command = /home/user/.local/bin/xsh --login
+command = {{ joinPath .chezmoi.homeDir ".local/bin/xsh" }} --login
 
 # --- コピー＆ペースト (テキスト選択で自動コピー) ---
 # テキスト選択時にセレクションバッファおよびシステムクリップボードへ自動コピー
