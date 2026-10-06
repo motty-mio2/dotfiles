@@ -6,20 +6,22 @@
 {{- /* 管理する設定は、この JSON に追記する。その他の既存設定は保持する。 */ -}}
 {{- $managed := printf `
 {
-  "permissions": {
-    "allow": []
-  },
+  "awaySummaryEnabled": false,
+  "askUserQuestionTimeout": "never",
   "enabledPlugins": {
     "clangd-lsp@claude-plugins-official": true,
     "liquid-lsp@claude-plugins-official": true,
     "pyright-lsp@claude-plugins-official": true,
     "typescript-lsp@claude-plugins-official": true
   },
-  "theme": "dark",
+  "permissions": {
+    "allow": []
+  },
   "statusLine": {
     "type": "command",
     "command": %s
-  }
+  },
+  "theme": "dark"
 }
 ` (printf "oh-my-posh claude --config %s/.config/ohmyposh/claude.omp.toml" .chezmoi.homeDir | toJson) | fromJson -}}
 {{ mergeOverwrite $config $managed | toPrettyJson }}
