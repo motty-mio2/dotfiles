@@ -4,6 +4,9 @@ if [ -z "$MY_ZSH_PROFILE" ]; then
     source "$HOME/.config/zsh/.zprofile"
 fi
 
+# Common shell setup & AI early return
+{{ includeTemplate "shell_common.tmpl" (dict "shell" "zsh" "homeDir" .chezmoi.homeDir) }}
+
 setopt nonomatch
 
 source "$XDG_CONFIG_HOME/zsh/plugins/zsh-completions/zsh-completions.plugin.zsh"
@@ -68,5 +71,5 @@ bindkey "^[[F" end-of-line
 bindkey "^[[1~" beginning-of-line
 bindkey "^[[4~" end-of-line
 
-# Include shell template
-{{ includeTemplate "shell_rc.tmpl" (dict "shell" "zsh" "homeDir" .chezmoi.homeDir) }}
+# Include human shell template
+{{ includeTemplate "shell_human.tmpl" (dict "shell" "zsh" "homeDir" .chezmoi.homeDir) }}

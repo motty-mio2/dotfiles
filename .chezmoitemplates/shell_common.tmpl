@@ -1,0 +1,44 @@
+# is_human: 人間（対話的端末）か AI / 非対話シェルかを判定
+is_human() {
+    [ -t 0 ] && [ -t 1 ] || return 1
+    [ -z "${CLAUDECODE:-}${CODEX_SANDBOX:-}${CURSOR_AGENT:-}${AI_AGENT:-}${OPENCODE:-}${AGY:-}${ORCA:-}${ORCA_AGENT_LAUNCH:-}${ORCA_AGENT_PANE:-}" ]
+}
+
+# 共通環境スクリプト (WSL, SSH agent 等)
+if [ -f "${HOME}/.config/shell/env.sh" ]; then
+    # shellcheck source=/dev/null
+    source "${HOME}/.config/shell/env.sh"
+fi
+
+# mise (AI にも PATH を通すために必須)
+{{ if (lookPath "mise") }}
+if command -v mise > /dev/null 2>&1; then
+eval "$(mise activate {{ .shell }} --cd {{ .homeDir }})"
+if [ -n "$(typeset -f mise 2>/dev/null)" ]; then
+    eval "_orig_$(typeset -f mise)"
+    mise() {
+        if [ -z "$MISE_GITHUB_TOKEN" ]; then
+            local token
+            if token=$(gh auth token 2>/dev/null); then
+                export MISE_GITHUB_TOKEN="$token"
+            fi
+        fi
+        _orig_mise "$@"
+    }
+fi
+fi
+{{ end }}
+
+# AI / 非対話シェルの場合はフェイルセーフ設定を適用して早期リターン
+if ! is_human; then
+    export EDITOR=true
+    export VISUAL=true
+    export GIT_EDITOR=true
+    export GIT_SEQUENCE_EDITOR=true
+    export PAGER=cat
+    export GIT_PAGER=cat
+    export MANPAGER=cat
+    export GIT_TERMINAL_PROMPT=0
+
+    return 0
+fi

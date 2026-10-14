@@ -1,32 +1,15 @@
-# Environement
+# Environment (Human)
 {{- if lookPath "nvim" }}
 export EDITOR=nvim
 {{- else if lookPath "vim" }}
 export EDITOR=vim
 {{- end }}
 
-for file in $(find "${HOME}/.config/shell" -name "*.sh"); do
-    #shellcheck source=/dev/null
+# Human shell scripts (aliases, package helpers, etc.)
+for file in $(find "${HOME}/.config/shell" -name "*.sh" ! -name "env.sh"); do
+    # shellcheck source=/dev/null
     source "${file}"
 done
-
-{{ if (lookPath "mise") }}
-if command -v mise > /dev/null 2>&1; then
-eval "$(mise activate {{ .shell }} --cd {{ .homeDir }})"
-if [ -n "$(typeset -f mise 2>/dev/null)" ]; then
-    eval "_orig_$(typeset -f mise)"
-    mise() {
-        if [ -z "$MISE_GITHUB_TOKEN" ]; then
-            local token
-            if token=$(gh auth token 2>/dev/null); then
-                export MISE_GITHUB_TOKEN="$token"
-            fi
-        fi
-        _orig_mise "$@"
-    }
-fi
-fi
-{{ end }}
 
 {{ if lookPath "copilot" }}
 copilot() {
