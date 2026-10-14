@@ -4,13 +4,18 @@ on:
     paths:
       - "**.lua"
 
+permissions:
+  contents: read
+
 jobs:
   lua:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v7
+      - uses: actions/checkout@v7.0.1
+        with:
+          persist-credentials: false
 
-      - uses: JohnnyMorganz/stylua-action@v5
+      - uses: JohnnyMorganz/stylua-action@v5.0.0
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
           version: latest

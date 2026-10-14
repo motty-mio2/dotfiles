@@ -13,6 +13,8 @@ on:
     paths:
       - '.github/workflows/test-linux.yml'
       - '.chezmoidata/dependencies.toml'
+permissions:
+  contents: read
 
 jobs:
   test:
@@ -29,6 +31,8 @@ jobs:
     steps:
       - name: Checkout repository
         uses: actions/checkout@v7
+        with:
+          persist-credentials: false
 
       - name: Setup Dotfiles
         uses: ./.github/actions/setup-dotfiles
