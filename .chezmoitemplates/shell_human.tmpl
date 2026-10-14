@@ -6,7 +6,7 @@ export EDITOR=vim
 {{- end }}
 
 # Human shell scripts (aliases, package helpers, etc.)
-for file in $(find "${HOME}/.config/shell" -maxdepth 1 -name "*.sh" ! -name "env.sh"); do
+for file in $(find "${HOME}/.config/shell" -name "*.sh" ! -name "env.sh"); do
     # shellcheck source=/dev/null
     source "${file}"
 done
