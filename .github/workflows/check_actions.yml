@@ -7,16 +7,22 @@ on:
 jobs:
   actions:
     runs-on: ubuntu-latest
+    permissions:
+      contents: read
     steps:
-      - uses: actions/checkout@v7
-      - uses: extractions/setup-just@v4
-      - name: Download actionlint
-        id: get_actionlint
+      - uses: actions/checkout@v7.0.1
+        with:
+          persist-credentials: false
+      - uses: extractions/setup-just@v4.0.0
+      - name: Install sisakulint
+        shell: bash
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
-          bash <(curl https://raw.githubusercontent.com/rhysd/actionlint/main/scripts/download-actionlint.bash)
-          sudo mv actionlint /usr/local/bin/
+          gh release download --repo sisaku-security/sisakulint --pattern "*linux_amd64.tar.gz" --output - | sudo tar -xz -C /usr/local/bin sisakulint
+      - name: Run sisakulint
         shell: bash
-      - name: Run actionlint
-        shell: bash
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
           just actions

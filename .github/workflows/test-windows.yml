@@ -17,6 +17,8 @@ on:
       - '.chezmoidata/dependencies.toml'
       - 'dot_config/winget/**'
       - 'dot_config/scoop/**'
+permissions:
+  contents: read
 
 jobs:
   validate-scoop:
@@ -24,7 +26,9 @@ jobs:
     runs-on: windows-latest
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v7
+        uses: actions/checkout@v7.0.1
+        with:
+          persist-credentials: false
 
       - name: Get Scoop config
         id: scoop-config
@@ -41,7 +45,7 @@ jobs:
           echo "EOF" >> $env:GITHUB_OUTPUT
 
       - name: Setup Scoop
-        uses: MinoruSekine/setup-scoop@v5
+        uses: MinoruSekine/setup-scoop@v5.0.1
         with:
           buckets: ${{ steps.scoop-config.outputs.defaults }}
           custom_buckets: ${{ steps.scoop-config.outputs.externals }}
@@ -74,10 +78,12 @@ jobs:
     runs-on: windows-latest
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v7
+        uses: actions/checkout@v7.0.1
+        with:
+          persist-credentials: false
 
       - name: Setup Dotfiles
-        uses: ./.github/actions/setup-dotfiles
+        uses: $/.github/actions/setup-dotfiles
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
 

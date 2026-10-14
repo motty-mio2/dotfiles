@@ -13,6 +13,8 @@ on:
     paths:
       - '.github/workflows/test-macos.yml'
       - '.chezmoidata/dependencies.toml'
+permissions:
+  contents: read
 
 jobs:
   validate-brew:
@@ -20,17 +22,19 @@ jobs:
     runs-on: macos-latest
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v7
+        uses: actions/checkout@v7.0.1
+        with:
+          persist-credentials: false
 
       - name: Cache Homebrew
-        uses: actions/cache@v6
+        uses: actions/cache@v6.1.0
         with:
           path: ~/Library/Caches/Homebrew
-          key: ${{ runner.os }}-brew-${{ hashFiles('.chezmoidata/dependencies.toml') }}
-          restore-keys: ${{ runner.os }}-brew-
+          key: ${{ runner.os }}-brew-${{ hashFiles('.chezmoidata/dependencies.toml') }}-${{ github.sha }}
+          restore-keys: ${{ runner.os }}-brew-${{ hashFiles('.chezmoidata/dependencies.toml') }}-
 
       - name: Setup Dotfiles
-        uses: ./.github/actions/setup-dotfiles
+        uses: $/.github/actions/setup-dotfiles
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
 
@@ -60,10 +64,12 @@ jobs:
     runs-on: macos-latest
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v7
+        uses: actions/checkout@v7.0.1
+        with:
+          persist-credentials: false
 
       - name: Setup Dotfiles
-        uses: ./.github/actions/setup-dotfiles
+        uses: $/.github/actions/setup-dotfiles
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
 

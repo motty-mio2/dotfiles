@@ -1,0 +1,44 @@
+# Configuration file for sisakulint
+# Use this file to customize the behavior of sisakulint
+
+# self-hosted-runner section is for configuring self-hosted runners.
+self-hosted-runner:
+  # Labels of the self-hosted runners used in your project, as an array of strings.
+  # 🧠 Example: labels: ["linux-large", "windows-2xlarge"]
+  labels: []
+
+# config-variables section is for specifying configuration variables defined in your repository or organization.
+# Setting it to null disables the check for configuration variables.
+# An empty array means no configuration variable is allowed.
+# 🧠 Example: config-variables: ["CI_ENVIRONMENT", "DEPLOY_TARGET"]
+# Note: List all the configuration variables that are used in your GitHub Actions workflows.
+config-variables: null
+
+# action-list section is an allowlist of the actions that may appear in "uses:".
+# When it is empty or omitted, the action-list rule reports nothing.
+# When it has one or more patterns, every "uses:" value that matches none of them is reported.
+# The whole "uses:" value is matched, including the part after "@", and "*" stands for any
+# string. So "actions/checkout" does NOT match "actions/checkout@v4"; write "actions/checkout@*".
+# 🧠 Example:
+# action-list:
+#   - actions/checkout@*
+#   - actions/setup-node@*
+action-list: []
+
+# secret-exfiltration section configures the secret-exfiltration rule.
+# allowed-hosts suppresses findings whose destination hostname matches any
+# entry. Supported syntax:
+#   - "api.example.com"  -> exact host match (case-insensitive)
+#   - "*.example.com"    -> matches any subdomain (sub.example.com,
+#                          api.sub.example.com) but NOT the apex
+#                          (example.com) (case-insensitive). To allow the
+#                          apex too, list "example.com" as a separate entry.
+# Only a leading "*." wildcard is supported. Other regex / glob syntax,
+# schemes, paths, and ports are rejected.
+# 🧠 Example:
+# secret-exfiltration:
+#   allowed-hosts:
+#     - api.example.com
+#     - "*.example.com"
+secret-exfiltration:
+  allowed-hosts: []
