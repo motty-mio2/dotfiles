@@ -41,8 +41,7 @@ tooltip label {
 #custom-media,
 #custom-recorder,
 #custom-notification,
-#power-profiles-daemon,
-#keyboard-state {
+#power-profiles-daemon {
 	background-color: rgba(30, 30, 46, 0.85); /* 半透明なダーク背景 */
 	color: #cdd6f4;
 	border-radius: 18px; /* 角丸 */
