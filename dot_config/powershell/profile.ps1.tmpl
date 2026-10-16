@@ -19,6 +19,5 @@ $Env:{{ $key }} = {{ $value }}
 $Env:PATH = "$Env:{{ .environment.path | join ";$Env:"}};$Env:PATH"
 
 # devenv
-$Env:EDITOR = "nvim"
 $Env:DISPLAY = "localhost:0.0"
 

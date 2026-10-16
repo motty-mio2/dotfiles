@@ -1,0 +1,108 @@
+# 1. is_ai: AI エージェント環境か判定
+function Test-IsAi {
+    return [bool]($env:CLAUDECODE -or $env:CODEX_SANDBOX -or $env:CURSOR_AGENT -or $env:AI_AGENT -or $env:OPENCODE -or $env:AGY -or $env:ORCA -or $env:ORCA_AGENT_LAUNCH -or $env:ORCA_AGENT_PANE)
+}
+
+# 2. mise (AI にも PATH を通すために必須)
+$env:MISE_PWSH_CHPWD_WARNING = "0"
+{{ if (lookPath "mise") }}
+if (Get-Command mise -ErrorAction SilentlyContinue) {
+    mise activate pwsh --cd $Env:USERPROFILE | Out-String | Invoke-Expression
+
+    if (Get-Command gh -ErrorAction SilentlyContinue) {
+        if (Get-Command mise -CommandType Function -ErrorAction SilentlyContinue) {
+            Copy-Item Function:\mise Function:\_orig_mise
+            function global:mise {
+                if (-not $env:MISE_GITHUB_TOKEN) {
+                    $token = gh auth token 2>$null
+                    if ($LASTEXITCODE -eq 0 -and $token) {
+                        $env:MISE_GITHUB_TOKEN = $token
+                    }
+                }
+                _orig_mise @args
+            }
+        } else {
+            function global:mise {
+                if (-not $env:MISE_GITHUB_TOKEN) {
+                    $token = gh auth token 2>$null
+                    if ($LASTEXITCODE -eq 0 -and $token) {
+                        $env:MISE_GITHUB_TOKEN = $token
+                    }
+                }
+                & (Get-Command -CommandType Application mise) @args
+            }
+        }
+    }
+}
+{{ end }}
+
+# 3. AI モード (AI エージェント実行時) の場合はハング防止用フェイルセーフを設定して早期リターン
+if (Test-IsAi) {
+    $env:EDITOR = "true"
+    $env:VISUAL = "true"
+    $env:GIT_EDITOR = "true"
+    $env:GIT_SEQUENCE_EDITOR = "true"
+    $env:PAGER = "cat"
+    $env:GIT_PAGER = "cat"
+    $env:MANPAGER = "cat"
+    $env:GIT_TERMINAL_PROMPT = "0"
+    return
+}
+
+# 4. 通常の非対話シェル（スクリプト実行・パイプなど）の場合は早期リターン
+try {
+    if (-not [Environment]::UserInteractive -or [Console]::IsInputRedirected -or [Console]::IsOutputRedirected) {
+        return
+    }
+} catch {
+}
+
+# --- 人間向け設定 (Human) ---
+
+# Environment (Human)
+{{- if lookPath "nvim" }}
+$env:EDITOR = "nvim"
+{{- else if lookPath "vim" }}
+$env:EDITOR = "vim"
+{{- end }}
+$env:VISUAL = $env:EDITOR
+
+# zoxide
+{{ if lookPath "zoxide" }}
+if (Get-Command zoxide -ErrorAction SilentlyContinue) {
+{{      output "zoxide" "init" "powershell" }}
+    Remove-Item Alias:cd -Force -ErrorAction SilentlyContinue
+    function global:cd { __zoxide_z @args }
+    function global:c { __zoxide_z @args }
+    function global:cz { __zoxide_zi @args }
+    function global:zode {
+        $target = zoxide query -i
+        if ($target) {
+            code $target
+        }
+    }
+# copilot
+{{ if lookPath "copilot" }}
+if (Get-Command copilot -ErrorAction SilentlyContinue) {
+    function global:copilot {
+        $timestamp = Get-Date -Format "yyyyMMdd-HHmmss"
+        $dir = "$HOME\.copilot\otel"
+        if (-not (Test-Path $dir)) {
+            New-Item -ItemType Directory -Path $dir -Force | Out-Null
+        }
+        $env:COPILOT_OTEL_FILE_EXPORTER_PATH = "$dir\copilot-otel-$timestamp.jsonl"
+        & (Get-Command -CommandType Application copilot) @args
+    }
+}
+{{ end }}
+
+$configure_folder = "$Env:USERPROFILE\.config\powershell"
+
+foreach ($subdir in "conf", "completion") {
+    $path = Join-Path $configure_folder $subdir
+    if (Test-Path $path) {
+        [System.IO.Directory]::GetFiles($path, "*.ps1", "AllDirectories") | ForEach-Object {
+            . $_
+        }
+    }
+}

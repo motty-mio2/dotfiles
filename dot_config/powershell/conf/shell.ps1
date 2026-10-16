@@ -283,3 +283,53 @@ function Reset-Broken-Windows {
     sudo DISM /Online /Cleanup-Image /ScanHealth
     sudo DISM /Online /Cleanup-Image /RestoreHealth
 }
+
+function rmemp ($target = ".") {
+    Get-ChildItem -Path $target -Directory -Recurse |
+        Where-Object { (Get-ChildItem -Path $_.FullName -Force).Count -eq 0 } |
+        Remove-Item -Force
+}
+
+function lsn ($path = ".") {
+    (Get-ChildItem -Path $path -Force).Count
+}
+
+function cats ($path) {
+    if (Test-Path $path) {
+        Get-Content $path | Where-Object { $_ -notmatch '^\s*#' -and $_ -notmatch '^\s*$' }
+    }
+}
+
+function webp2png ($dir = ".") {
+    Get-ChildItem -Path $dir -Filter "*.webp" | ForEach-Object {
+        $out = [System.IO.Path]::ChangeExtension($_.FullName, ".png")
+        Write-Host $_.FullName
+        dwebp -mt $_.FullName -o $out
+    }
+}
+
+function png2webp ($dir = ".") {
+    Get-ChildItem -Path $dir -Filter "*.png" | ForEach-Object {
+        $out = [System.IO.Path]::ChangeExtension($_.FullName, ".webp")
+        Write-Host $_.FullName
+        cwebp -lossless -mt -quiet $_.FullName -o $out
+    }
+}
+
+function watch {
+    param(
+        [Parameter(Mandatory = $true, ValueFromRemainingArguments = $true)]
+        [string[]]$Command,
+        [int]$Interval = 2
+    )
+    $cmdStr = $Command -join ' '
+    try {
+        while ($true) {
+            Clear-Host
+            Write-Host "Every ${Interval}s: $cmdStr`n" -ForegroundColor DarkGray
+            Invoke-Expression $cmdStr
+            Start-Sleep -Seconds $Interval
+        }
+    } catch {
+    }
+}
