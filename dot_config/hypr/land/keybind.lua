@@ -25,12 +25,7 @@ local mainMod = "SUPER"
 -- 	)
 -- )
 
--- hl.bind(mainMod .. " + T", hl.dsp.exec_cmd("bash -c '" .. terminal .. "'"))
-hl.bind(mainMod .. " + T", hl.dsp.exec_cmd("bash -li -c '" .. terminal .. "'"))
--- hl.bind(mainMod .. " + T", hl.dsp.exec_cmd("env -u XDG_DATA_DIRS -u XDG_CONFIG_DIRS -u FONTCONFIG_FILE " .. terminal))
-
--- hl.bind(mainMod .. " + T", hl.dsp.exec_cmd("env -u XDG_DATA_DIRS " .. terminal))
--- hl.bind(mainMod .. " + T", hl.dsp.exec_cmd(terminal))
+hl.bind(mainMod .. " + T", hl.dsp.exec_cmd(terminal))
 hl.bind(mainMod .. " + Q", hl.dsp.window.close())
 hl.bind(mainMod .. " + E", hl.dsp.exec_cmd(fileManager))
 hl.bind(mainMod .. " + F", hl.dsp.window.float({ action = "toggle" }))
