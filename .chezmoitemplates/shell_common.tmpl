@@ -1,7 +1,6 @@
-# is_human: 人間（対話的端末）か AI / 非対話シェルかを判定
-is_human() {
-    [ -t 0 ] && [ -t 1 ] || return 1
-    [ -z "${CLAUDECODE:-}${CODEX_SANDBOX:-}${CURSOR_AGENT:-}${AI_AGENT:-}${OPENCODE:-}${AGY:-}${ORCA:-}${ORCA_AGENT_LAUNCH:-}${ORCA_AGENT_PANE:-}" ]
+# is_ai: AI エージェント環境か判定
+is_ai() {
+    [ -n "${CLAUDECODE:-}${CODEX_SANDBOX:-}${CURSOR_AGENT:-}${AI_AGENT:-}${OPENCODE:-}${AGY:-}${ORCA:-}${ORCA_AGENT_LAUNCH:-}${ORCA_AGENT_PANE:-}" ]
 }
 
 # 共通環境スクリプト (WSL, SSH agent 等)
@@ -29,8 +28,8 @@ fi
 fi
 {{ end }}
 
-# AI / 非対話シェルの場合はフェイルセーフ設定を適用して早期リターン
-if ! is_human; then
+# 1. AI モード (AI エージェント実行時) の場合はハング防止用フェイルセーフを設定して早期リターン
+if is_ai; then
     export EDITOR=true
     export VISUAL=true
     export GIT_EDITOR=true
@@ -40,5 +39,10 @@ if ! is_human; then
     export MANPAGER=cat
     export GIT_TERMINAL_PROMPT=0
 
+    return 0
+fi
+
+# 2. 通常の非対話シェル（スクリプト実行・GUI起動ラッパーなど）の場合はフェイルセーフを汚染させず早期リターン
+if [ ! -t 0 ] || [ ! -t 1 ]; then
     return 0
 fi

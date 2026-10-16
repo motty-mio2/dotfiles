@@ -4,6 +4,7 @@ export EDITOR=nvim
 {{- else if lookPath "vim" }}
 export EDITOR=vim
 {{- end }}
+export VISUAL="$EDITOR"
 
 # Human shell scripts (aliases, package helpers, etc.)
 for file in $(find "${HOME}/.config/shell" -name "*.sh" ! -name "env.sh"); do
