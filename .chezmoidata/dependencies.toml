@@ -71,6 +71,7 @@ gibo = { scoop = "gibo", aur = "gibo", nix = "gibo", mise = "github:simonwhitake
 git = { scoop = "git", apt = "git", aur = "git" }
 glab = { scoop = "glab", aur = "glab", nix = "glab", mise = "gitlab:gitlab-org/cli" }
 grep = { scoop = "grep", apt = "grep" }
+herdr = { scoop = "herdr", aur = "herdr-bin", nix = "herdr", mise = "github:ogulcancelik/herdr" }
 htop = { apt = "htop", aur = "htop" }
 jnv = { scoop = "jnv", aur = "jnv", nix = "jnv", mise = "github:ynqa/jnv" }
 jq = { scoop = "jq", apt = "jq", aur = "jq", nix = "jq", mise = "github:jqlang/jq" }
