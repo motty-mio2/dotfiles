@@ -1,5 +1,6 @@
 return {
 	{ "neovim/nvim-lspconfig" },
+	{ "b0o/schemastore.nvim" },
 	{
 		"nvim-treesitter/nvim-treesitter",
 		branch = "main",

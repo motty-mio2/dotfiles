@@ -28,11 +28,11 @@ npm = [
   "bash-language-server",
   "ccusage",
   "difit",
-  "dockerfile-language-server-nodejs",
   "markdownlint-cli2",
   "neovim",
   "semver",
   "typescript-language-server",
+  "vscode-langservers-extracted",
   "yaml-language-server",
 ]
 gh_extension = [
@@ -109,6 +109,7 @@ arduino-language-server = { nix = "arduino-language-server", mise = "github:ardu
 clang-format = { apt = "clang-format" }
 clang-tidy = { apt = "clang-tidy" }
 clangd = { scoop = "llvm", apt = "clangd" }
+docker-language-server = { aur = "docker-language-server", nix = "docker-language-server", mise = "github:docker/docker-language-server" }
 hadolint = { scoop = "hadolint", nix = "hadolint" }
 lld = { apt = "lld" }
 lua-language-server = { scoop = "lua-language-server", nix = "lua-language-server", mise = "github:LuaLS/lua-language-server" }
@@ -120,6 +121,7 @@ sisakulint = { mise = "github:sisaku-security/sisakulint" }
 stylua = { scoop = "stylua", aur = "stylua", nix = "stylua", mise = "github:JohnnyMorganz/StyLua" }
 systemd-lsp = { aur = "systemd-lsp", nix = "systemd-lsp", mise = "github:jFryy/systemd-lsp" }
 tree-sitter = { scoop = "tree-sitter", nix = "tree-sitter", mise = "github:tree-sitter/tree-sitter" }
+typos-lsp = { aur = "typos-lsp-bin", nix = "typos-lsp", mise = "github:tekumara/typos-lsp" }
 # svlint = { scoop = "svlint", aur = "svlint-bin", nix = "svlint" }
 # svls = { scoop = "svls", aur = "svls", nix = "svls" }
 # verible = { scoop = "verible", nix = "verible" }
