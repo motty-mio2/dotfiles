@@ -81,6 +81,18 @@ if (Get-Command zoxide -ErrorAction SilentlyContinue) {
             code $target
         }
     }
+# copilot
+{{ if lookPath "copilot" }}
+if (Get-Command copilot -ErrorAction SilentlyContinue) {
+    function global:copilot {
+        $timestamp = Get-Date -Format "yyyyMMdd-HHmmss"
+        $dir = "$HOME\.copilot\otel"
+        if (-not (Test-Path $dir)) {
+            New-Item -ItemType Directory -Path $dir -Force | Out-Null
+        }
+        $env:COPILOT_OTEL_FILE_EXPORTER_PATH = "$dir\copilot-otel-$timestamp.jsonl"
+        & (Get-Command -CommandType Application copilot) @args
+    }
 }
 {{ end }}
 
