@@ -47,19 +47,30 @@
 
 ---
 
-## 2. Neovim (nvim) での設定方針
+## 2. 解決策: GitHub Releases (native binary) への移行
 
-`copilot.lua` や `copilot.vim` などのサードパーティプラグインに依存せず、Neovim 0.12+ の組み込み機能と `nvim-lspconfig` を利用する。
+npm パッケージのサニタイズ問題および Node.js ランタイムへの依存を回避するため、mise の `github:` バックエンドを利用して GitHub Releases から配布されているネイティブバイナリ（内部的には Node ランタイムを同梱した単一実行バイナリ）をインストールする構成に切り替えました。
+
+* `.chezmoidata/dependencies.toml`:
+  ```toml
+  # npm リストから @github/copilot-language-server を削除し、dev に追加
+  [dependencies.dev]
+  copilot-language-server = { mise = "github:github/copilot-language-server-release" }
+  ```
+* これにより、OS（Windows / Linux / macOS）および CPU アーキテクチャに応じた zip（例: `copilot-language-server-win32-x64-*.zip`）が mise により自動取得され、`copilot-language-server(.exe)` が確実に PATH 上に配置されます。
+
+---
+
+## 3. Neovim (nvim) での設定
+
+`copilot.lua` や `copilot.vim` などのサードパーティプラグインに依存せず、Neovim 0.12+ の組み込み機能と `nvim-lspconfig` を利用します。
 
 ### 構成
-1. **LSP サーバー起動 (`vim.lsp.config`)**:
-   * `copilot-language-server` が PATH 上にあればそれを直接使用する。
-   * PATH 上に見つからない場合（mise 管理下など）、`~/.local/share/mise/i/copilot-language-server-*/node_modules/@github/copilot-language-server/dist/language-server.js` を探索し、`node <path> --stdio` でフォールバック起動する。
-2. **サーバーの有効化**:
-   * `vim.lsp.enable("copilot")`
-3. **インライン補完（Ghost Text）の有効化**:
+1. **LSP サーバー起動 (`vim.lsp.enable("copilot")`)**:
+   * PATH 上の `copilot-language-server` がそのまま利用されます（デフォルト設定の `cmd = { 'copilot-language-server', '--stdio' }`）。
+2. **インライン補完（Ghost Text）の有効化**:
    * `vim.lsp.inline_completion.enable(true)`
-4. **補完確定キーマップ**:
-   * `vim.lsp.inline_completion.get()` を呼び出して候補を採用する（例: `<C-f>`）。
-5. **認証**:
+3. **補完確定キーマップ**:
+   * `vim.lsp.inline_completion.get()` を呼び出して候補を採用（`<C-f>`）。
+4. **初回認証**:
    * 起動後に `:LspCopilotSignIn` を実行して GitHub 認証を完了する。

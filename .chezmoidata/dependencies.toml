@@ -22,7 +22,6 @@ rustup = [
 npm = [
   "@biomejs/biome",
   "@github/copilot",
-  "@github/copilot-language-server",
   "@google/jules",
   "@tailwindcss/language-server",
   "bash-language-server",
@@ -106,6 +105,7 @@ actionlint = { scoop = "actionlint", aur = "actionlint", nix = "actionlint", mis
 # Bubblewrapでエラーが起こるため、arduino-cliはNixでは使用しない
 arduino-cli = { scoop = "arduino-cli", mise = "github:arduino/arduino-cli" }
 arduino-language-server = { nix = "arduino-language-server", mise = "github:arduino/arduino-language-server" }
+copilot-language-server = { mise = "github:github/copilot-language-server-release" }
 clang-format = { apt = "clang-format" }
 clang-tidy = { apt = "clang-tidy" }
 clangd = { scoop = "llvm", apt = "clangd" }
