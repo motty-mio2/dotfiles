@@ -1,7 +1,3 @@
-if (Get-Command mise -ErrorAction SilentlyContinue) {
-    mise activate pwsh --cd $Env:USERPROFILE | Out-String | Invoke-Expression
-}
-
 function mupdate {
     $tokenSet = $false
     if (Get-Command gh -ErrorAction SilentlyContinue) {
