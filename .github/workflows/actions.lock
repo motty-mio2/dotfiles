@@ -16,7 +16,7 @@ workflows:
     '.github/workflows/check_toml.yml':
         - 'actions/checkout@v7.0.1'
         - 'extractions/setup-just@v4.0.0'
-        - 'tombi-toml/setup-tombi@v1.7.0'
+        - 'tombi-toml/setup-tombi@v1.8.4'
     '.github/workflows/test-linux.yml':
         - 'actions/checkout@v7.0.1'
         - 'nixbuild/nix-quick-install-action@v35'
@@ -72,8 +72,8 @@ dependencies:
         commit: 'sha1-9f63be77f412a248c9d9a65a4c82cf066cdf8f0c'
         owner_id: 60610456
         repo_id: 296639338
-    'tombi-toml/setup-tombi@v1.7.0':
-        ref: 'v1.7.0'
-        commit: 'sha1-2a4ab856017ecce1511302ed241f571d1230a1d8'
+    'tombi-toml/setup-tombi@v1.8.4':
+        ref: 'v1.8.4'
+        commit: 'sha1-ebc771afde2bfb9192c91338a71b2c5d6152e2c3'
         owner_id: 192336641
         repo_id: 980084562
