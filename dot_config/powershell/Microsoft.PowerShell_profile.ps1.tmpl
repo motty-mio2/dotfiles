@@ -81,6 +81,9 @@ if (Get-Command zoxide -ErrorAction SilentlyContinue) {
             code $target
         }
     }
+}
+{{ end }}
+
 # copilot
 {{ if lookPath "copilot" }}
 if (Get-Command copilot -ErrorAction SilentlyContinue) {
