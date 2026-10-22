@@ -1,3 +1,8 @@
 {{ includeTemplate "dot_profile.tmpl" (dict "environment" .environment) }}
 
+# Interactive shell (e.g. SSH or Orca wrapper) should source ~/.bashrc
+if [ "$MY_BASH_PROFILE" != "sourcing" ] && [ -f "$HOME/.bashrc" ]; then
+    export MY_BASH_PROFILE=1
+    source "$HOME/.bashrc"
+fi
 export MY_BASH_PROFILE=1

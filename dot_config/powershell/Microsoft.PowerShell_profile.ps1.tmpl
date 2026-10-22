@@ -1,6 +1,6 @@
 # 1. is_ai: AI エージェント環境か判定
 function Test-IsAi {
-    return [bool]($env:CLAUDECODE -or $env:CODEX_SANDBOX -or $env:CURSOR_AGENT -or $env:AI_AGENT -or $env:OPENCODE -or $env:AGY -or $env:ORCA -or $env:ORCA_AGENT_LAUNCH -or $env:ORCA_AGENT_PANE)
+    return [bool]($env:CLAUDECODE -or $env:CODEX_SANDBOX -or $env:CURSOR_AGENT -or $env:AI_AGENT -or $env:OPENCODE -or $env:AGY -or $env:ANTIGRAVITY_AGENT)
 }
 
 # 2. mise (AI にも PATH を通すために必須)
