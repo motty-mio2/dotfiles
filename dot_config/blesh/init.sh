@@ -35,3 +35,12 @@ ble-bind -m vi_imap -f 'M-RET' newline
 # ble-bind -m vi_nmap -f 'RET' 'accept-line'
 # ble-bind -m vi_nmap -f 'C-m' 'accept-line'
 # ------------------------------------------------------------------------------
+
+# ------------------------------------------------------------------------------
+# fzf 連携 (Ctrl+R: 履歴検索, Ctrl+T: ファイル検索, Alt+C: ディレクトリ移動)
+# ------------------------------------------------------------------------------
+if command -v fzf >/dev/null 2>&1; then
+    ble-import integration/fzf-key-bindings
+    ble-import integration/fzf-completion
+fi
+
