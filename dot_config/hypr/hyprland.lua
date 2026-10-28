@@ -100,6 +100,7 @@ hl.config({
 
 		follow_mouse = 1,
 		sensitivity = 0,
+		emulate_discrete_scroll = 2,
 
 		touchpad = {
 			natural_scroll = true,
@@ -117,6 +118,11 @@ hl.gesture({
 hl.device({
 	name = "epic-mouse-v1",
 	sensitivity = -0.5,
+})
+
+hl.device({
+	name = "logitech-m720-triathlon-1",
+	scroll_factor = 1.0,
 })
 
 ------------------------------
