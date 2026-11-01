@@ -1,15 +1,3 @@
-# Python
-Set-Alias python3 python
-Set-Alias pip3 pip
-
-function iv {
-    iverilog $args
-}
-
-function ivx {
-    iverilog -g2012 $args
-}
-
 function wget  {
     wget --hsts-file="$Env:XDG_DATA_HOME/wget-hsts" $args
 }

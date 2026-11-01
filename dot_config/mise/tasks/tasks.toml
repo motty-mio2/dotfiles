@@ -6,6 +6,18 @@ quiet = true
 dir = "{{ cwd }}"
 run = "docker compose"
 
+[iv]
+description = "iverilog (Verilog コンパイル)"
+quiet = true
+dir = "{{ cwd }}"
+run = "iverilog"
+
+[ivx]
+description = "iverilog -g2012 (SystemVerilog)"
+quiet = true
+dir = "{{ cwd }}"
+run = "iverilog -g2012"
+
 [ghf]
 description = "fzf で選択した GitHub リポジトリを clone"
 quiet = true
