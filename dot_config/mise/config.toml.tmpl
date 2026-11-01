@@ -4,6 +4,12 @@ experimental = true
 minimum_release_age = "3d"
 exec_auto_install = false
 not_found_auto_install = false
+{{- if eq .chezmoi.os "windows" }}
+windows_default_inline_shell_args = "powershell -NoProfile -Command"
+{{- end }}
+
+[task_config]
+dir = "{{ "{{ cwd }}" }}"
 
 [tools]
 # Not in dependencies

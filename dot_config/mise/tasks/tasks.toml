@@ -1,0 +1,78 @@
+#:schema https://mise.jdx.dev/schema/mise-task.json
+
+[doc]
+description = "docker compose"
+quiet = true
+run = "docker compose"
+
+[watch]
+description = "コマンドを定期実行"
+quiet = true
+interactive = true
+run = "watch"
+run_windows = '''& { $Interval = 2; $Command = @($args); if ($Command.Count -ge 2 -and $Command[0] -eq "-n") { $Interval = [int]$Command[1]; if ($Command.Count -gt 2) { $Command = $Command[2..($Command.Count - 1)] } else { $Command = @() } }; if ($Command.Count -eq 0) { Write-Error "usage: watch [-n seconds] <command>"; exit 1 }; $cmdStr = $Command -join " "; try { while ($true) { Clear-Host; Write-Host "Every ${Interval}s: $cmdStr`n" -ForegroundColor DarkGray; Invoke-Expression $cmdStr; Start-Sleep -Seconds $Interval } } catch {} }'''
+
+[iv]
+description = "iverilog (Verilog コンパイル)"
+quiet = true
+run = "iverilog"
+
+[ivx]
+description = "iverilog -g2012 (SystemVerilog)"
+quiet = true
+run = "iverilog -g2012"
+
+[ghf]
+description = "fzf で選択した GitHub リポジトリを clone"
+quiet = true
+interactive = true
+run = '''gh repo clone "$(gh repo list -L 10000 --json nameWithOwner --jq '.[].nameWithOwner' | fzf)"'''
+run_windows = '''gh repo clone (gh repo list -L 10000 --json nameWithOwner --jq '.[].nameWithOwner' | fzf)'''
+
+[rmrf]
+description = "ファイル・ディレクトリを再帰的に削除"
+quiet = true
+run = "rm -rf --"
+run_windows = "Remove-Item -Recurse -Force -Path"
+
+[cats]
+description = "コメント行と空行を除いてファイルを表示"
+quiet = true
+run = "grep -vE '^\\s*(#|$)'"
+run_windows = '''& { $content = if ($args.Count -gt 0) { Get-Content $args[0] } else { Get-Content }; $content | Where-Object { $_ -notmatch '^\s*(#|$)' } }'''
+
+[lsn]
+description = "ディレクトリ直下のエントリ数を表示"
+quiet = true
+run = '''sh -c 'find "${1:-.}" -maxdepth 1 | wc -l' _'''
+run_windows = '''& { (Get-ChildItem -Force @args).Count }'''
+
+[rmemp]
+description = "空のディレクトリを再帰的に削除"
+quiet = true
+run = '''sh -c 'find "${1:-.}" -type d -empty -delete' _'''
+run_windows = '''& { $target = if ($args.Count -gt 0) { $args[0] } else { "." }; Get-ChildItem -Path $target -Directory -Recurse | Where-Object { (Get-ChildItem -Path $_.FullName -Force).Count -eq 0 } | Remove-Item -Force }'''
+
+[webp2png]
+description = "ディレクトリ内の webp を png に変換"
+quiet = true
+run = '''sh -c 'dir="${1:-.}"; for f in "$dir"/*.webp; do [ -e "$f" ] || continue; echo "$f"; dwebp -mt "$f" -o "${f%.webp}.png"; done' _'''
+run_windows = '''& { $dir = if ($args.Count -gt 0) { $args[0] } else { "." }; Get-ChildItem -Path $dir -Filter *.webp | ForEach-Object { $out = [System.IO.Path]::ChangeExtension($_.FullName, ".png"); Write-Host $_.FullName; dwebp -mt $_.FullName -o $out } }'''
+
+[png2webp]
+description = "ディレクトリ内の png を webp に変換"
+quiet = true
+run = '''sh -c 'dir="${1:-.}"; for f in "$dir"/*.png; do [ -e "$f" ] || continue; echo "$f"; cwebp -lossless -mt -quiet "$f" -o "${f%.png}.webp"; done' _'''
+run_windows = '''& { $dir = if ($args.Count -gt 0) { $args[0] } else { "." }; Get-ChildItem -Path $dir -Filter *.png | ForEach-Object { $out = [System.IO.Path]::ChangeExtension($_.FullName, ".webp"); Write-Host $_.FullName; cwebp -lossless -mt -quiet $_.FullName -o $out } }'''
+
+[zipf]
+description = "ファイルを zip に圧縮"
+quiet = true
+run = '''sh -c 'file="${1:?usage: zipf <file>}"; base=$(cd "$(dirname "$file")" && pwd); name=$(basename "$file"); stem="${name%.*}"; archive="$base/$stem.zip"; if [ -e "$archive" ]; then archive="$base/$stem-$(date +%s).zip"; fi; (cd "$base" && zip -qj "$archive" "$name")' _'''
+run_windows = '''& { if ($args.Count -eq 0) { Write-Error "usage: zipf <file>"; exit 1 }; $file = (Resolve-Path $args[0]).Path; $base = Split-Path -Parent $file; $name = Split-Path -Leaf $file; $stem = [System.IO.Path]::GetFileNameWithoutExtension($file); $archive = Join-Path $base "$stem.zip"; while (Test-Path $archive) { $archive = Join-Path $base ($stem + "-" + [Guid]::NewGuid().ToString().Substring(0, 4) + ".zip") }; Push-Location $base; try { 7z a $archive $name } finally { Pop-Location } }'''
+
+[zipd]
+description = "ディレクトリの内容を zip に圧縮"
+quiet = true
+run = '''sh -c 'dir="${1:-.}"; [ "$dir" = "." ] && dir="$(pwd)"; dir="${dir%/}"; base=$(cd "$(dirname "$dir")" && pwd); name=$(basename "$dir"); archive="$base/$name.zip"; if [ -e "$archive" ]; then archive="$base/$name-$(date +%s).zip"; fi; (cd "$dir" && zip -qr "$archive" .)' _'''
+run_windows = '''& { $dir = if ($args.Count -gt 0) { $args[0] } else { "." }; $resolved = (Resolve-Path $dir).Path; $base = Split-Path -Parent $resolved; $name = Split-Path -Leaf $resolved; $archive = Join-Path $base "$name.zip"; while (Test-Path $archive) { $archive = Join-Path $base ($name + [Guid]::NewGuid().ToString().Substring(0, 4) + ".zip") }; Push-Location $resolved; try { 7z a $archive * } finally { Pop-Location } }'''

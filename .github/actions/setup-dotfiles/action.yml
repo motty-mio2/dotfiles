@@ -40,7 +40,10 @@ runs:
         if ("${{ runner.os }}" -eq "Windows") {
           $Env:PATH = "$HOME\.local\bin;$Env:PATH"
           & "$HOME\.local\bin\chezmoi.exe" init --apply --promptDefaults -S .
+          if ($LASTEXITCODE -ne 0) { throw "chezmoi init --apply failed" }
           $Env:PATH = "$HOME\scoop\shims;$Env:PATH"
-          . "$HOME\Documents\PowerShell\Microsoft.PowerShell_profile.ps1"
+          # The full profile returns early for non-interactive shells, so load
+          # the setup helpers needed by CI directly.
+          . "$HOME\.config\powershell\conf\devenv.ps1"
           Install-Scoop
         }

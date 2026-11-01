@@ -4,16 +4,6 @@ if ! git rev-parse --is-inside-work-tree &>/dev/null; then
   echo "このディレクトリはGit管理されていません。"
   exit 1
 fi
-current_name="$(git config user.name)"
-current_email="$(git config user.email)"
-
-if [[ -n $current_name && -n $current_email ]]; then
-    echo "Current: $current_name <$current_email>"
-else
-    echo "Invalid or not set."
-fi
-
-PS3="Select Git user: "
 
 keys=("motty <motty.mio2@gmail.com>")
 names=("motty")
@@ -27,14 +17,83 @@ values+=("{{ .value }}")
 {{    end }}
 {{ end -}}
 
-select item in "${keys[@]}"; do
-  if [[ -n "$item" ]]; then
-    idx=$((REPLY-1))
-    git config user.name "${names[$idx]}"
-    git config user.email "${values[$idx]}"
-    echo "Set Git user to: ${keys[$idx]}"
-    exit 0
+show_current() {
+  local current_name current_email
+
+  current_name="$(git config user.name)"
+  current_email="$(git config user.email)"
+
+  if [[ -n $current_name && -n $current_email ]]; then
+    echo "Current: $current_name <$current_email>"
   else
-    echo "Invalid selection."
+    echo "Invalid or not set."
   fi
-done
+}
+
+list_users() {
+  local i
+
+  for i in "${!keys[@]}"; do
+    printf '  [%d] %s\n' "$i" "${keys[$i]}"
+  done
+}
+
+set_user() {
+  local idx="$1"
+
+  if [[ ! $idx =~ ^[0-9]+$ ]] || ((idx >= ${#keys[@]})); then
+    echo "Invalid index: $idx" >&2
+    echo "Available:" >&2
+    list_users >&2
+    return 1
+  fi
+
+  git config user.name "${names[$idx]}"
+  git config user.email "${values[$idx]}"
+  echo "Set Git user to: ${keys[$idx]}"
+}
+
+select_user() {
+  local reply
+
+  show_current
+  list_users
+
+  while true; do
+    read -r -p "Select Git user [0-$((${#keys[@]} - 1))]: " reply || exit 1
+
+    case "$reply" in
+    '')
+      echo "Cancelled."
+      return 0
+      ;;
+    *[!0-9]*)
+      echo "Enter a number."
+      ;;
+    *)
+      set_user "$reply" && return 0
+      ;;
+    esac
+  done
+}
+
+case "${1:-select}" in
+select)
+  select_user
+  ;;
+list | -l)
+  list_users
+  ;;
+-h | --help | help)
+  cat <<EOF
+Usage: git user [select|list|<index>]
+
+  select      対話的に Git user を選択 (default)
+  list        選択肢を表示
+  <index>     0 始まりの index で直接選択
+EOF
+  ;;
+*)
+  set_user "$1" || exit 1
+  ;;
+esac

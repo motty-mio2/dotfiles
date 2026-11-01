@@ -109,3 +109,8 @@ foreach ($subdir in "conf", "completion") {
         }
     }
 }
+
+# mise tasks (entrypoints generated from dot_config/mise/tasks/tasks.toml)
+{{ if lookPath "mise" }}
+{{ includeTemplate "mise_tasks_pwsh.tmpl" . }}
+{{ end }}

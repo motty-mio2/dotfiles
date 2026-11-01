@@ -7,6 +7,10 @@ on:
     paths:
       - '.github/workflows/test-windows.yml'
       - '.chezmoidata/dependencies.toml'
+      - '.chezmoitemplates/**'
+      - 'dot_config/mise/**'
+      - 'dot_config/powershell/**'
+      - 'dot_config/shell/**'
       - 'dot_config/winget/**'
       - 'dot_config/scoop/**'
   pull_request:
@@ -15,6 +19,10 @@ on:
     paths:
       - '.github/workflows/test-windows.yml'
       - '.chezmoidata/dependencies.toml'
+      - '.chezmoitemplates/**'
+      - 'dot_config/mise/**'
+      - 'dot_config/powershell/**'
+      - 'dot_config/shell/**'
       - 'dot_config/winget/**'
       - 'dot_config/scoop/**'
 permissions:
@@ -96,3 +104,118 @@ jobs:
           winget configure validate -f "$HOME\.config\winget\packages.dsc.yaml"
           winget configure validate -f "$HOME\.config\winget\registry.dsc.yaml"
 
+  validate-mise-tasks:
+    name: Validate (mise tasks)
+    runs-on: windows-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v7.0.1
+        with:
+          persist-credentials: false
+
+      - name: Setup Dotfiles
+        uses: $/.github/actions/setup-dotfiles
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Install mise, 7zip and unzip
+        shell: pwsh
+        run: |
+          $Env:PATH = "$HOME\scoop\shims;$Env:PATH"
+          if (-not (Get-Command 7z -ErrorAction SilentlyContinue)) {
+              scoop install 7zip
+          }
+          if (-not (Get-Command unzip -ErrorAction SilentlyContinue)) {
+              scoop install unzip
+          }
+          scoop install mise
+          mise --version
+
+      - name: Validate mise tasks
+        shell: pwsh
+        run: |
+          $Env:PATH = "$HOME\scoop\shims;$Env:PATH"
+          mise tasks validate
+          $tasks = @(mise tasks --json | ConvertFrom-Json)
+          Write-Host "Found $($tasks.Count) mise tasks"
+          $tasks | ForEach-Object { Write-Host " - $($_.name)" }
+
+      - name: Validate generated wrappers
+        shell: pwsh
+        run: |
+          $Env:PATH = "$HOME\scoop\shims;$Env:PATH"
+          $chezmoi = "$HOME\.local\bin\chezmoi.exe"
+          $wrappers = & $chezmoi execute-template -S . '{{ includeTemplate "mise_tasks_pwsh.tmpl" . }}'
+          $wrappers | Set-Content -Path wrappers.ps1 -Encoding utf8
+          Get-Content wrappers.ps1
+
+          $expected = @(mise tasks --json | ConvertFrom-Json)
+          $generated = @($wrappers | Where-Object { $_ -match '^function global:' })
+          if ($generated.Count -ne $expected.Count) {
+              throw "wrapper count mismatch: expected $($expected.Count), got $($generated.Count)"
+          }
+
+          $tokens = $null
+          $errors = $null
+          [System.Management.Automation.Language.Parser]::ParseFile(
+              (Resolve-Path wrappers.ps1).Path,
+              [ref]$tokens,
+              [ref]$errors
+          ) | Out-Null
+          if ($errors.Count -gt 0) {
+              $errors | ForEach-Object { Write-Error $_ }
+              exit 1
+          }
+
+      - name: Run mise task wrappers
+        shell: pwsh
+        run: |
+          $Env:PATH = "$HOME\scoop\shims;$Env:PATH"
+          . .\wrappers.ps1
+
+          $work = Join-Path $Env:RUNNER_TEMP "mise-task-test"
+          New-Item -ItemType Directory -Force $work | Out-Null
+          Push-Location $work
+          try {
+              # rmrf
+              New-Item -ItemType Directory -Force ".\delete-me\nested" | Out-Null
+              rmrf .\delete-me
+              if (Test-Path .\delete-me) { throw "rmrf did not delete the directory" }
+
+              # cats
+              Set-Content -Path .\comments.txt -Value @("hello", "# comment", "", "world")
+              $catsOutput = @(cats .\comments.txt) -join "`n"
+              if ($catsOutput -ne "hello`nworld") { throw "cats returned unexpected output: $catsOutput" }
+
+              # lsn
+              $countDir = Join-Path $work "count-me"
+              New-Item -ItemType Directory -Force $countDir | Out-Null
+              New-Item -ItemType File -Path (Join-Path $countDir "a") | Out-Null
+              New-Item -ItemType File -Path (Join-Path $countDir "b") | Out-Null
+              $count = [int](lsn $countDir)
+              if ($count -ne 2) { throw "lsn returned $count, expected 2" }
+
+              # zipd / zipf
+              $zipSrc = Join-Path $work "zip-src"
+              New-Item -ItemType Directory -Force $zipSrc | Out-Null
+              Set-Content -Path (Join-Path $zipSrc "file.txt") -Value "zipped"
+              zipd $zipSrc
+              $zip = Get-ChildItem -Path $work -Filter "zip-src*.zip" | Select-Object -First 1
+              if (-not $zip) { throw "zipd did not create an archive" }
+              Remove-Item -Recurse -Force $zipSrc
+              unzip -q $zip.FullName -d $zipSrc
+              if (-not (Test-Path (Join-Path $zipSrc "file.txt"))) { throw "zipd archive did not contain the file" }
+
+              # zipf
+              $single = Join-Path $work "single.txt"
+              Set-Content -Path $single -Value "single"
+              zipf $single
+              $singleZip = Get-ChildItem -Path $work -Filter "single*.zip" | Select-Object -First 1
+              if (-not $singleZip) { throw "zipf did not create an archive" }
+              Remove-Item -Force $single
+              unzip -q $singleZip.FullName -d $work
+              if (-not (Test-Path $single)) { throw "zipf archive did not contain the file" }
+          } finally {
+              Pop-Location
+              Remove-Item -Recurse -Force $work -ErrorAction SilentlyContinue
+          }
