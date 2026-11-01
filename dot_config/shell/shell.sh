@@ -23,24 +23,16 @@ mkcd() {
 }
 
 bwx() {
-	local key cmd
+	output=$(bw unlock)
 
-	key=$(bw unlock --raw) || return
-
-	if [ -z "$key" ]; then
-		echo "bw unlock failed." >&2
-		return 1
-	fi
-
-	if [ -n "${ZSH_VERSION:-}" ]; then
-		print -z "export BW_SESSION='$key'"
-	elif [ -n "${BASH_VERSION:-}" ]; then
-		cmd="export BW_SESSION='$key'"
-		history -s "$cmd"
-		printf 'Added to history. Press Up then Enter: %s\n' "$cmd"
-	else
-		printf "export BW_SESSION='%s'\n" "$key"
-	fi
+	echo "$output" | while IFS= read -r line; do
+		case "$line" in
+		\$\ *)
+			eval "${line#\$ }"
+			break
+			;;
+		esac
+	done
 }
 
 set-window-title() {

@@ -115,18 +115,11 @@ function paste {
 
 function bwx {
     try {
-        $key = (bw unlock --raw).Trim()
-        if ([string]::IsNullOrEmpty($key)) {
-            return
-        }
-
-        $cmd = '$env:BW_SESSION = "' + $key + '"'
-
-        if (Get-Module -Name PSReadLine) {
-            [Microsoft.PowerShell.PSConsoleReadLine]::Insert($cmd)
-        } else {
-            Set-Clipboard -Value $cmd
-            Write-Host "Copied to clipboard. Paste and press Enter."
+        $output = $(bw unlock)
+        foreach ($item in $output) {
+            if ($item -match "> (?<exec>.*)" ) {
+                Invoke-Expression $Matches.exec
+            }
         }
     } catch {
         #
