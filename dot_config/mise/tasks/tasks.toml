@@ -89,10 +89,3 @@ quiet = true
 dir = "{{ cwd }}"
 run = '''sh -c 'dir="${1:-.}"; [ "$dir" = "." ] && dir="$(pwd)"; dir="${dir%/}"; base=$(cd "$(dirname "$dir")" && pwd); name=$(basename "$dir"); archive="$base/$name.zip"; if [ -e "$archive" ]; then archive="$base/$name-$(date +%s).zip"; fi; (cd "$dir" && zip -qr "$archive" .)' _'''
 run_windows = '''& { $dir = if ($args.Count -gt 0) { $args[0] } else { "." }; $resolved = (Resolve-Path $dir).Path; $base = Split-Path -Parent $resolved; $name = Split-Path -Leaf $resolved; $archive = Join-Path $base "$name.zip"; while (Test-Path $archive) { $archive = Join-Path $base ($name + [Guid]::NewGuid().ToString().Substring(0, 4) + ".zip") }; Push-Location $resolved; try { 7z a $archive * } finally { Pop-Location } }'''
-
-[uzip]
-description = "zip を展開"
-quiet = true
-dir = "{{ cwd }}"
-run = '''sh -c 'archive="${1:?usage: uzip <archive>}"; base=$(dirname "$archive"); name=$(basename "$archive"); name="${name%.*}"; out="$base/$name"; if [ -e "$out" ]; then out="$base/$name-$(date +%s)"; fi; unzip -q "$archive" -d "$out"' _'''
-run_windows = '''& { if ($args.Count -eq 0) { Write-Error "usage: uzip <archive>"; exit 1 }; $archive = (Resolve-Path $args[0]).Path; $base = Split-Path -Parent $archive; $name = [System.IO.Path]::GetFileNameWithoutExtension($archive); $out = Join-Path $base $name; while (Test-Path $out) { $out = Join-Path $base ($name + "-" + [Guid]::NewGuid().ToString().Substring(0, 4)) }; unzip -q $archive -d $out }'''

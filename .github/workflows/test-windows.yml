@@ -195,7 +195,7 @@ jobs:
               $count = [int](lsn $countDir)
               if ($count -ne 2) { throw "lsn returned $count, expected 2" }
 
-              # zipd / uzip
+              # zipd / zipf
               $zipSrc = Join-Path $work "zip-src"
               New-Item -ItemType Directory -Force $zipSrc | Out-Null
               Set-Content -Path (Join-Path $zipSrc "file.txt") -Value "zipped"
@@ -203,8 +203,8 @@ jobs:
               $zip = Get-ChildItem -Path $work -Filter "zip-src*.zip" | Select-Object -First 1
               if (-not $zip) { throw "zipd did not create an archive" }
               Remove-Item -Recurse -Force $zipSrc
-              uzip $zip.FullName
-              if (-not (Test-Path (Join-Path $zipSrc "file.txt"))) { throw "uzip did not extract the archive" }
+              unzip -q $zip.FullName -d $zipSrc
+              if (-not (Test-Path (Join-Path $zipSrc "file.txt"))) { throw "zipd archive did not contain the file" }
 
               # zipf
               $single = Join-Path $work "single.txt"
@@ -213,8 +213,8 @@ jobs:
               $singleZip = Get-ChildItem -Path $work -Filter "single*.zip" | Select-Object -First 1
               if (-not $singleZip) { throw "zipf did not create an archive" }
               Remove-Item -Force $single
-              uzip $singleZip.FullName
-              if (-not (Test-Path (Join-Path $work "single\single.txt"))) { throw "zipf archive did not contain the file" }
+              unzip -q $singleZip.FullName -d $work
+              if (-not (Test-Path $single)) { throw "zipf archive did not contain the file" }
           } finally {
               Pop-Location
               Remove-Item -Recurse -Force $work -ErrorAction SilentlyContinue
