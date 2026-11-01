@@ -44,10 +44,6 @@ function wslp ($Target_Path) {
     wsl wslpath -u $out
 }
 
-function rmrf ($Target) {
-    Remove-Item -Recurse -Force $Target
-}
-
 function Directory_Break_Single {
     $Child_Path = Convert-Path $args
     $Parent_Path = Split-Path $Child_Path -parent
@@ -67,24 +63,6 @@ function Directory_Break {
         foreach ($item in $Child_Path) {
             Directory_Break_Single $item
         }
-    }
-}
-
-function zipd {
-    Param($Directory,
-        $Name = (Split-Path -Leaf $Directory)
-    )
-    if ($Directory) {
-        $Base_Path = Split-Path -Parent $Directory
-        $Archive_Name = Join-Path $Base_Path "$Name.zip"
-
-        while ((Test-Path $Archive_Name)) {
-            $Archive_Name = Join-Path $Base_Path ($Name + [Guid]::NewGuid().ToString().Substring(0, 4) + ".zip")
-        }
-
-        7z a $Archive_Name (Get-ChildItem $Directory) # > $null
-    } else {
-        Write-Output ("This is 7zip based archive function.`n`tParam is directory.")
     }
 }
 
@@ -111,23 +89,6 @@ function zip {
     Param($Archive, $Files)
     Write-Output $Files
     # 7z.exe a $Archive $Files
-}
-
-function uzip {
-    Param($Archive
-    )
-    if ($Archive) {
-        $Archive_Path = Convert-Path $Archive
-        $Archive_Name = [System.IO.Path]::GetFileNameWithoutExtension($args)
-        $Base_Dir = Split-Path $Archive_Path -Parent
-        $Output_Dir = Join-Path $Base_Dir $Archive_Name
-
-        while ((Test-Path $Output_Dir)) {
-            $Output_Dir = Join-Path $Base_Dir ($Archive_Name + [Guid]::NewGuid().ToString().Substring(0, 4))
-        }
-
-        7z x -r "-o$Output_Dir" $Archive_Path # > $null
-    }
 }
 
 function mkcd {
@@ -165,10 +126,6 @@ Set-Alias ll Get-ChildItem
 
 function lx {
     Get-ChildItem $Args | Where-Object { $_.Name -match '^\.' }
-}
-
-function doc {
-    docker compose $Args
 }
 
 function paste {
@@ -282,38 +239,6 @@ function Reset-Broken-Windows {
     sudo DISM /Online /Cleanup-Image /CheckHealth
     sudo DISM /Online /Cleanup-Image /ScanHealth
     sudo DISM /Online /Cleanup-Image /RestoreHealth
-}
-
-function rmemp ($target = ".") {
-    Get-ChildItem -Path $target -Directory -Recurse |
-        Where-Object { (Get-ChildItem -Path $_.FullName -Force).Count -eq 0 } |
-        Remove-Item -Force
-}
-
-function lsn ($path = ".") {
-    (Get-ChildItem -Path $path -Force).Count
-}
-
-function cats ($path) {
-    if (Test-Path $path) {
-        Get-Content $path | Where-Object { $_ -notmatch '^\s*#' -and $_ -notmatch '^\s*$' }
-    }
-}
-
-function webp2png ($dir = ".") {
-    Get-ChildItem -Path $dir -Filter "*.webp" | ForEach-Object {
-        $out = [System.IO.Path]::ChangeExtension($_.FullName, ".png")
-        Write-Host $_.FullName
-        dwebp -mt $_.FullName -o $out
-    }
-}
-
-function png2webp ($dir = ".") {
-    Get-ChildItem -Path $dir -Filter "*.png" | ForEach-Object {
-        $out = [System.IO.Path]::ChangeExtension($_.FullName, ".webp")
-        Write-Host $_.FullName
-        cwebp -lossless -mt -quiet $_.FullName -o $out
-    }
 }
 
 function watch {

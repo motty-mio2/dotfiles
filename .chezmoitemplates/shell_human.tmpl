@@ -47,3 +47,8 @@ alias cz="zi"
 alias zode='code "$(zoxide query -i)"'
 fi
 {{ end }}
+
+# mise tasks (entrypoints generated from dot_config/mise/tasks/tasks.toml)
+{{ if lookPath "mise" }}
+{{ includeTemplate "mise_tasks.tmpl" . }}
+{{ end }}

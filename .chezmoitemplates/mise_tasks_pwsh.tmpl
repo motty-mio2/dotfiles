@@ -1,0 +1,4 @@
+{{- $tasks := include "dot_config/mise/tasks/tasks.toml" | fromToml -}}
+{{- range $name, $task := $tasks }}
+function global:{{ $name }} { mise run {{ $name }} -- @args }
+{{- end }}
