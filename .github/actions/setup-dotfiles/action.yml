@@ -19,8 +19,14 @@ runs:
       shell: pwsh
       run: |
         if ("${{ runner.os }}" -eq "Windows") {
-          New-Item -ItemType Directory -Force "$HOME\.local\bin"
-          Invoke-WebRequest -Uri "https://github.com/twpayne/chezmoi/releases/latest/download/chezmoi-windows-amd64.exe" -OutFile "$HOME\.local\bin\chezmoi.exe"
+          $Env:PATH = "$HOME\.local\bin;$Env:PATH"
+          & "$HOME\.local\bin\chezmoi.exe" init --apply --promptDefaults -S .
+          if ($LASTEXITCODE -ne 0) { throw "chezmoi init --apply failed" }
+          $Env:PATH = "$HOME\scoop\shims;$Env:PATH"
+          # The full profile returns early for non-interactive shells, so load
+          # the setup helpers needed by CI directly.
+          . "$HOME\.config\powershell\conf\devenv.ps1"
+          Install-Scoop
         }
 
     - name: Initialize dotfiles (POSIX)
@@ -40,19 +46,10 @@ runs:
         if ("${{ runner.os }}" -eq "Windows") {
           $Env:PATH = "$HOME\.local\bin;$Env:PATH"
           & "$HOME\.local\bin\chezmoi.exe" init --apply --promptDefaults -S .
-          Write-Host "chezmoi exit code: $LASTEXITCODE"
           if ($LASTEXITCODE -ne 0) { throw "chezmoi init --apply failed" }
-          Write-Host "profile exists: $(Test-Path "$HOME\Documents\PowerShell\Microsoft.PowerShell_profile.ps1")"
-          Write-Host "conf files:"
-          Get-ChildItem "$HOME\.config\powershell\conf" -ErrorAction SilentlyContinue |
-            ForEach-Object { Write-Host "  $($_.FullName)" }
           $Env:PATH = "$HOME\scoop\shims;$Env:PATH"
-          . "$HOME\Documents\PowerShell\Microsoft.PowerShell_profile.ps1"
-          Write-Host "Install-Scoop available: $([bool](Get-Command Install-Scoop -ErrorAction SilentlyContinue))"
-          if (-not (Get-Command Install-Scoop -ErrorAction SilentlyContinue)) {
-            Write-Host "UserInteractive=$([Environment]::UserInteractive) InRedirect=$([Console]::IsInputRedirected) OutRedirect=$([Console]::IsOutputRedirected)"
-            Get-Content "$HOME\Documents\PowerShell\Microsoft.PowerShell_profile.ps1" -TotalCount 30
-            throw "Install-Scoop was not loaded from the PowerShell profile"
-          }
+          # The full profile returns early for non-interactive shells, so load
+          # the setup helpers needed by CI directly.
+          . "$HOME\.config\powershell\conf\devenv.ps1"
           Install-Scoop
         }
