@@ -1,0 +1,27 @@
+{{- if eq .chezmoi.os "linux" -}}
+#!/usr/bin/env bash
+set -eu
+
+if ! command -v systemctl >/dev/null 2>&1 || ! systemctl --user show-environment >/dev/null 2>&1; then
+	exit 0
+fi
+
+# ログインセッションごとにエージェントを1つだけにする。gcr-ssh-agent や
+# openssh-client の ssh-agent.socket は独自のエージェントを提供し、使われないまま
+# 常駐したり SSH_AUTH_SOCK の取り合いに勝ったりするため無効化する。
+for unit in gcr-ssh-agent.socket gcr-ssh-agent.service ssh-agent.socket ssh-agent.service wsl2-ssh-agent.socket wsl2-ssh-agent.service; do
+	if systemctl --user cat "$unit" >/dev/null 2>&1; then
+		systemctl --user mask --now "$unit" || true
+	fi
+done
+
+{{ if contains "microsoft" (.chezmoi.kernel.osrelease | lower) -}}
+if [ -x "$HOME/.local/bin/wsl2-ssh-agent" ]; then
+	systemctl --user enable --now chezmoi-wsl2-ssh-agent.service
+fi
+{{ else -}}
+if [ -x /usr/bin/ssh-agent ]; then
+	systemctl --user enable --now chezmoi-ssh-agent.service
+fi
+{{ end -}}
+{{- end -}}

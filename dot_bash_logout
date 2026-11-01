@@ -1,6 +1,5 @@
 #!/usr/bin/env bash
 
-if [[ -n $SSH_AGENT_PID ]]; then
-    agent="$(ssh-agent -k)"
-    eval "$agent"
-fi
+# SSH エージェントはシェルごとではなくログインセッション単位で管理する (chezmoi-ssh-agent.service)。
+# ここでエージェントを終了させないこと。子のログインシェルは親から SSH_AGENT_PID を
+# 引き継ぐため、終了させると親シェルが使っているエージェントまで止まってしまう。

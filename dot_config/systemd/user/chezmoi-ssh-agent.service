@@ -1,0 +1,13 @@
+[Unit]
+Description=SSH Agent (fixed socket)
+Documentation=man:ssh-agent(1)
+
+[Service]
+ExecStartPre=-/bin/rm -f %t/ssh-agent.socket
+ExecStart=/usr/bin/ssh-agent -D -a %t/ssh-agent.socket
+ExecStartPost=/usr/bin/systemctl --user set-environment SSH_AUTH_SOCK=%t/ssh-agent.socket
+ExecStopPost=-/usr/bin/systemctl --user unset-environment SSH_AUTH_SOCK
+Restart=on-failure
+
+[Install]
+WantedBy=default.target
