@@ -10,17 +10,8 @@ function ivx {
     iverilog -g2012 $args
 }
 
-function pchezmoi {
-    chezmoi -S $Env:HOME/Projects/dotfiles
-}
-
 function wget  {
     wget --hsts-file="$Env:XDG_DATA_HOME/wget-hsts" $args
-}
-
-function mygitconfig {
-    git config --local user.name "motty"
-    git config --local user.email "motty.mio2@gmail.com"
 }
 
 function Set-Environemt-Value {

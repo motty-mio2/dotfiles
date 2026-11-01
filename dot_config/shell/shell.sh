@@ -16,9 +16,6 @@ alias rsmv='\rsync -avhPR --remove-source-files'
 alias watch="watch "
 alias wget='\wget --hsts-file=$XDG_DATA_HOME/wget-hsts'
 
-# Others
-alias pchezmoi='chezmoi -S $HOME/Projects/dotfiles'
-
 # Verilog
 alias iv="iverilog"
 alias ivx="iverilog -g2012"
