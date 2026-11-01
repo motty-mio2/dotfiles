@@ -8,6 +8,9 @@ not_found_auto_install = false
 windows_default_inline_shell_args = "powershell -NoProfile -Command"
 {{- end }}
 
+[task_config]
+dir = "{{ "{{ cwd }}" }}"
+
 [tools]
 # Not in dependencies
 node = "lts"
