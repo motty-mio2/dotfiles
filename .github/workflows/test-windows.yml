@@ -118,12 +118,15 @@ jobs:
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
 
-      - name: Install mise and 7zip
+      - name: Install mise, 7zip and unzip
         shell: pwsh
         run: |
           $Env:PATH = "$HOME\scoop\shims;$Env:PATH"
           if (-not (Get-Command 7z -ErrorAction SilentlyContinue)) {
               scoop install 7zip
+          }
+          if (-not (Get-Command unzip -ErrorAction SilentlyContinue)) {
+              scoop install unzip
           }
           scoop install mise
           mise --version
@@ -202,6 +205,16 @@ jobs:
               Remove-Item -Recurse -Force $zipSrc
               uzip $zip.FullName
               if (-not (Test-Path (Join-Path $zipSrc "file.txt"))) { throw "uzip did not extract the archive" }
+
+              # zipf
+              $single = Join-Path $work "single.txt"
+              Set-Content -Path $single -Value "single"
+              zipf $single
+              $singleZip = Get-ChildItem -Path $work -Filter "single*.zip" | Select-Object -First 1
+              if (-not $singleZip) { throw "zipf did not create an archive" }
+              Remove-Item -Force $single
+              uzip $singleZip.FullName
+              if (-not (Test-Path (Join-Path $work "single\single.txt"))) { throw "zipf archive did not contain the file" }
           } finally {
               Pop-Location
               Remove-Item -Recurse -Force $work -ErrorAction SilentlyContinue

@@ -13,7 +13,6 @@ alias fgrep='fgrep --color=auto'
 alias egrep='egrep --color=auto'
 
 alias rsmv='\rsync -avhPR --remove-source-files'
-alias watch="watch "
 alias wget='\wget --hsts-file=$XDG_DATA_HOME/wget-hsts'
 
 # Vim

@@ -66,25 +66,6 @@ function Directory_Break {
     }
 }
 
-function zipf {
-    Param($file,
-        $Name = (Split-Path -Leaf $file)
-    )
-
-    if ($Directory) {
-        $Base_Path = Split-Path -Parent $Directory
-        $Archive_Name = Join-Path $Base_Path "$Name.zip"
-
-        while ((Test-Path $Archive_Name)) {
-            $Archive_Name = Join-Path $Base_Path ($Name + [Guid]::NewGuid().ToString().Substring(0, 4) + ".zip")
-        }
-
-        7z a $Archive_Name (Get-ChildItem $Directory) # > $null
-    } else {
-        Write-Output ("This is 7zip based archive function.`n`tParam is directory.")
-    }
-}
-
 function zip {
     Param($Archive, $Files)
     Write-Output $Files
@@ -239,22 +220,4 @@ function Reset-Broken-Windows {
     sudo DISM /Online /Cleanup-Image /CheckHealth
     sudo DISM /Online /Cleanup-Image /ScanHealth
     sudo DISM /Online /Cleanup-Image /RestoreHealth
-}
-
-function watch {
-    param(
-        [Parameter(Mandatory = $true, ValueFromRemainingArguments = $true)]
-        [string[]]$Command,
-        [int]$Interval = 2
-    )
-    $cmdStr = $Command -join ' '
-    try {
-        while ($true) {
-            Clear-Host
-            Write-Host "Every ${Interval}s: $cmdStr`n" -ForegroundColor DarkGray
-            Invoke-Expression $cmdStr
-            Start-Sleep -Seconds $Interval
-        }
-    } catch {
-    }
 }
