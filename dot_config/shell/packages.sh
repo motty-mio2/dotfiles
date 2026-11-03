@@ -25,13 +25,30 @@ mupdate() {
 
 nupdate() {
 	header=""
-	if [ "$(gh auth status --active --hostname github.com)" ]; then
+	if [ "$(gh auth status --active --hostname github.com 2>/dev/null)" ]; then
 		header=" NIX_CONFIG=\"access-tokens = github.com=$(gh auth token)\""
 	fi
-	for item in $(nix profile list --json | jq -r ".elements | keys | .[] "); do
-		eval "$header nix flake update --flake $XDG_DATA_HOME/nix/$item"
-		eval "$header nix profile upgrade $item"
-	done
+
+	while IFS=$'\t' read -r item original_url; do
+		[ -z "$item" ] && continue
+
+		flake_dir=""
+		case "$original_url" in
+		path:*)
+			flake_dir="${original_url#path:}"
+			;;
+		*)
+			if [ -d "${XDG_DATA_HOME:-$HOME/.local/share}/nix/$item" ]; then
+				flake_dir="${XDG_DATA_HOME:-$HOME/.local/share}/nix/$item"
+			fi
+			;;
+		esac
+
+		if [ -n "$flake_dir" ] && [ -f "$flake_dir/flake.nix" ]; then
+			eval "$header nix flake update --flake \"$flake_dir\""
+		fi
+		eval "$header nix profile upgrade \"$item\""
+	done < <(nix profile list --json | jq -r '(.elements // {}) | to_entries[] | "\(.key)\t\(.value.originalUrl // "")"')
 
 	if [ -e "$HOME/.nix-profile" ]; then
 		unlink "$HOME/.nix-profile"
