@@ -1,6 +1,7 @@
 [dependencies]
 nix = "unstable"
 pip = [
+  "basedpyright",
   "cmake-language-server",
   "mypy",
   "pyrefly",
