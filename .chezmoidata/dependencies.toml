@@ -111,6 +111,7 @@ clang-tidy = { apt = "clang-tidy" }
 clangd = { scoop = "llvm", apt = "clangd" }
 docker-language-server = { aur = "docker-language-server", nix = "docker-language-server", mise = "github:docker/docker-language-server" }
 hadolint = { scoop = "hadolint", nix = "hadolint" }
+jactionlint = { nix = "jactionlint", mise = "jactionlint" }
 lld = { apt = "lld" }
 lua-language-server = { scoop = "lua-language-server", nix = "lua-language-server", mise = "github:LuaLS/lua-language-server" }
 marksman = { scoop = "marksman", nix = "marksman", mise = "github:artempyanykh/marksman" }
