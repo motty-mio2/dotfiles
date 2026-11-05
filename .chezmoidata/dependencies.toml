@@ -26,7 +26,6 @@ npm = [
   "bash-language-server",
   "ccusage",
   "difit",
-  "markdownlint-cli2",
   "neovim",
   "semver",
   "typescript-language-server",
@@ -114,6 +113,7 @@ jactionlint = { nix = "jactionlint", mise = "jactionlint" }
 lld = { apt = "lld" }
 lua-language-server = { scoop = "lua-language-server", nix = "lua-language-server", mise = "github:LuaLS/lua-language-server" }
 marksman = { scoop = "marksman", nix = "marksman", mise = "github:artempyanykh/marksman" }
+rumdl = { scoop = "rumdl", aur = "rumdl", nix = "rumdl", mise = "rumdl" }
 sccache = { scoop = "sccache", aur = "sccache-bin", nix = "sccache", mise = "github:mozilla/sccache" }
 shellcheck = { scoop = "shellcheck", aur = "shellcheck-bin", nix = "shellcheck", mise = "github:koalaman/shellcheck" }
 shfmt = { scoop = "shfmt", aur = "shfmt", nix = "shfmt", mise = "shfmt" }
