@@ -2,10 +2,7 @@
 nix = "unstable"
 pip = [
   "basedpyright",
-  "black",
   "cmake-language-server",
-  "flake8",
-  "isort",
   "mypy",
   "pyright",
   "streamlink",
