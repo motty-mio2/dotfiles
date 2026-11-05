@@ -101,7 +101,6 @@ zoxide = { aur = "zoxide", nix = "zoxide", scoop = "zoxide", mise = "github:ajee
 zsh = { apt = "zsh", aur = "zsh" }
 
 [dependencies.dev]
-actionlint = { scoop = "actionlint", aur = "actionlint", nix = "actionlint", mise = "github:rhysd/actionlint" }
 # Bubblewrapでエラーが起こるため、arduino-cliはNixでは使用しない
 arduino-cli = { scoop = "arduino-cli", mise = "github:arduino/arduino-cli" }
 arduino-language-server = { nix = "arduino-language-server", mise = "github:arduino/arduino-language-server" }
