@@ -20,7 +20,6 @@ rustup = [
   "rust-analyzer",
 ]
 npm = [
-  "@biomejs/biome",
   "@github/copilot",
   "@google/jules",
   "@tailwindcss/language-server",
@@ -104,10 +103,11 @@ zsh = { apt = "zsh", aur = "zsh" }
 # Bubblewrapでエラーが起こるため、arduino-cliはNixでは使用しない
 arduino-cli = { scoop = "arduino-cli", mise = "github:arduino/arduino-cli" }
 arduino-language-server = { nix = "arduino-language-server", mise = "github:arduino/arduino-language-server" }
-copilot-language-server = { mise = "github:github/copilot-language-server-release" }
+biome = { scoop = "biome", aur = "biome", nix = "biome", mise = "biome" }
 clang-format = { apt = "clang-format" }
 clang-tidy = { apt = "clang-tidy" }
 clangd = { scoop = "llvm", apt = "clangd" }
+copilot-language-server = { mise = "github:github/copilot-language-server-release" }
 docker-language-server = { aur = "docker-language-server", nix = "docker-language-server", mise = "github:docker/docker-language-server" }
 hadolint = { scoop = "hadolint", nix = "hadolint" }
 jactionlint = { nix = "jactionlint", mise = "jactionlint" }
