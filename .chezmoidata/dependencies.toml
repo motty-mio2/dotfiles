@@ -1,9 +1,9 @@
 [dependencies]
 nix = "unstable"
 pip = [
-  "basedpyright",
   "cmake-language-server",
   "mypy",
+  "pyrefly",
   "pyright",
   "streamlink",
   "ruff",
