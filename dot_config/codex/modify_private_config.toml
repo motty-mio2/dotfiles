@@ -1,9 +1,9 @@
-{{- $targetFile := joinPath .chezmoi.homeDir ".codex/config.toml" -}}
+{{- /* chezmoi:modify-template */ -}}
+{{- /* 現在の $CODEX_HOME/config.toml が .chezmoi.stdin に渡される。管理する設定だけ上書きし、その他の既存設定は保持する。 */ -}}
 {{- $config := dict -}}
-{{- if stat $targetFile -}}
-  {{- $config = include $targetFile | fromToml -}}
+{{- if .chezmoi.stdin -}}
+{{-   $config = fromToml .chezmoi.stdin -}}
 {{- end -}}
-{{- /* 管理する設定は、この TOML に追記する。その他の既存設定は保持する。 */ -}}
 {{- $managed := fromToml `
 [tui]
 status_line = ["model-with-reasoning", "current-dir", "git-branch", "pull-request-number", "five-hour-limit", "weekly-limit"]

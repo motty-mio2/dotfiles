@@ -1,9 +1,9 @@
-{{- $targetFile := joinPath .chezmoi.homeDir ".claude/settings.json" -}}
+{{- /* chezmoi:modify-template */ -}}
+{{- /* 現在の ~/.claude/settings.json が .chezmoi.stdin に渡される。管理する設定だけ上書きし、その他の既存設定は保持する。 */ -}}
 {{- $config := dict -}}
-{{- if stat $targetFile -}}
-  {{- $config = include $targetFile | fromJson -}}
+{{- if .chezmoi.stdin -}}
+{{-   $config = fromJson .chezmoi.stdin -}}
 {{- end -}}
-{{- /* 管理する設定は、この JSON に追記する。その他の既存設定は保持する。 */ -}}
 {{- $managed := printf `
 {
   "awaySummaryEnabled": false,

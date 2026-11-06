@@ -1,0 +1,8 @@
+# chezmoi apply 時に、存在すれば削除するパス（ホームからの相対パス）
+# 不要になった旧設定の掃除用。全マシンへの反映が済んだ行は消してよい。
+
+# ~/.agents/skills を直接読めるようになったため不要
+.gemini/config/skills
+
+# CODEX_HOME を $XDG_CONFIG_HOME/codex に移したため不要
+.codex
