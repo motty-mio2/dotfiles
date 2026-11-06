@@ -11,3 +11,21 @@
 .viminfo
 .vim
 .vimrc
+
+# 環境変数・alias で XDG 配下へ移したため不要（残骸の掃除）
+# RUSTUP_HOME
+.rustup
+# alias wget --hsts-file
+.wget-hsts
+# ERRFILE
+.xsession-errors
+# NODE_REPL_HISTORY
+.node_repl_history
+# npmrc の cache（Zed などが環境変数なしで起動した npx が再作成することがある）
+.npm
+# GTK2_RC_FILES（KDE がテーマ変更時に再作成することがある）
+.gtkrc-2.0
+# home で mypy を実行したときのキャッシュ
+.mypy_cache
+# 旧 xdg-utils / Chrome の PWA が作る。GNOME 2.10 以降は不要
+.gnome
