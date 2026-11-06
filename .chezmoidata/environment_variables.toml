@@ -13,6 +13,8 @@ XDG_CACHE_HOME = "HOME/.local/cache"
 XDG_STATE_HOME = "HOME/.local/state"
 
 [environment.application_path]
+ANDROID_USER_HOME = "XDG_DATA_HOME/android"
+ANSIBLE_HOME = "XDG_DATA_HOME/ansible"
 AWS_CONFIG_FILE = "XDG_CONFIG_HOME/aws/config"
 AWS_SHARED_CREDENTIALS_FILE = "XDG_CONFIG_HOME/aws/credentials"
 CARGO_HOME = "XDG_DATA_HOME/cargo"

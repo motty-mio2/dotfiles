@@ -31,3 +31,8 @@
 .nix-profile
 .nix-channels
 .nix-defexpr
+
+# ANDROID_USER_HOME / alias adb（鍵は $XDG_DATA_HOME/android/.android へ移す）
+.android
+# ANSIBLE_HOME
+.ansible

@@ -14,6 +14,8 @@ alias egrep='egrep --color=auto'
 
 alias rsmv='\rsync -avhPR --remove-source-files'
 alias wget='\wget --hsts-file=$XDG_DATA_HOME/wget-hsts'
+# adb は ANDROID_USER_HOME を見ず $HOME/.android を使うため HOME を差し替える
+alias adb='HOME="$XDG_DATA_HOME/android" adb'
 
 # Vim
 alias vim='VIMINIT=":source $XDG_CONFIG_HOME/vim/vimrc" vim'
