@@ -27,10 +27,8 @@
 # 旧 xdg-utils / Chrome の PWA が作る。GNOME 2.10 以降は不要
 .gnome
 
-# nix.conf の use-xdg-base-directories で $XDG_STATE_HOME/nix 配下に移したため不要
+# nix profile のリンク。PATH は $XDG_STATE_HOME/nix/profiles/profile/bin を直接参照するため不要
 .nix-profile
-.nix-channels
-.nix-defexpr
 
 # ANDROID_USER_HOME / alias adb（鍵は $XDG_DATA_HOME/android/.android へ移す）
 .android
