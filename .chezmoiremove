@@ -29,3 +29,8 @@
 .mypy_cache
 # 旧 xdg-utils / Chrome の PWA が作る。GNOME 2.10 以降は不要
 .gnome
+
+# nix.conf の use-xdg-base-directories で $XDG_STATE_HOME/nix 配下に移したため不要
+.nix-profile
+.nix-channels
+.nix-defexpr

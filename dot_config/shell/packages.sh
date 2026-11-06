@@ -49,10 +49,6 @@ nupdate() {
 		fi
 		eval "$header nix profile upgrade \"$item\""
 	done < <(nix profile list --json | jq -r '(.elements // {}) | to_entries[] | "\(.key)\t\(.value.originalUrl // "")"')
-
-	if [ -e "$HOME/.nix-profile" ]; then
-		unlink "$HOME/.nix-profile"
-	fi
 }
 
 is-arch() {
@@ -274,12 +270,6 @@ install-nix() {
 		source "/nix/var/nix/profiles/default/etc/profile.d/nix-daemon.sh"
 	else
 		echo "Nix is already installed."
-	fi
-
-	if nix config show | grep 'use-xdg-base-directories = true' &>/dev/null; then
-		echo "Nix is already configured to use XDG base directories."
-	else
-		echo "use-xdg-base-directories = true" | sudo tee -a /etc/nix/nix.conf
 	fi
 }
 
