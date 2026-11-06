@@ -4,9 +4,6 @@
 # ~/.agents/skills を直接読めるようになったため不要
 .gemini/config/skills
 
-# CODEX_HOME を $XDG_CONFIG_HOME/codex に移したため不要
-.codex
-
 # vim は alias の VIMINIT で $XDG_CONFIG_HOME/vim/vimrc を読むため不要
 .viminfo
 .vim

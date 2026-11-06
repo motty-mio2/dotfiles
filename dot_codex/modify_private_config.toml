@@ -1,5 +1,5 @@
 {{- /* chezmoi:modify-template */ -}}
-{{- /* 現在の $CODEX_HOME/config.toml が .chezmoi.stdin に渡される。管理する設定だけ上書きし、その他の既存設定は保持する。 */ -}}
+{{- /* 現在の ~/.codex/config.toml が .chezmoi.stdin に渡される。管理する設定だけ上書きし、その他の既存設定は保持する。 */ -}}
 {{- $config := dict -}}
 {{- if .chezmoi.stdin -}}
 {{-   $config = fromToml .chezmoi.stdin -}}
