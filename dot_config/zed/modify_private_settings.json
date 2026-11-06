@@ -1,19 +1,12 @@
-{{- $targetFile := joinPath .chezmoi.homeDir ".config/zed/settings.json" -}}
-{{- $state := dict "ssh_connections" list -}}
-{{- if stat $targetFile -}}
-  {{- $ssh_connections := output "node" "-e" `const fs = require("fs"); const content = fs.readFileSync(process.argv[1], "utf8"); const clean = content.replace(/\/\*[\s\S]*?\*\/|([^\\:]|^)\/\/.*$/gm, "$1").replace(/,(\s*[}\]])/g, "$1"); console.log(JSON.stringify(JSON.parse(clean).ssh_connections || []));` $targetFile | fromJson -}}
-  {{- $_ := set $state "ssh_connections" $ssh_connections -}}
+{{- /* chezmoi:modify-template */ -}}
+{{- /* 現在の ~/.config/zed/settings.json (JSONC) が .chezmoi.stdin に渡される。管理する設定だけ上書きし、その他の既存設定 (ssh_connections など) は保持する。 */ -}}
+{{- $config := dict -}}
+{{- if .chezmoi.stdin -}}
+{{-   $config = fromJsonc .chezmoi.stdin -}}
 {{- end -}}
-// Zed settings
-//
-// For information on how to configure Zed, see the Zed
-// documentation: https://zed.dev/docs/configuring-zed
-//
-// To see all of Zed's default settings without changing your
-// custom settings, run `zed: open default settings` from the
-// command palette
+{{- /* Zed が MCP サーバーを起動するときは NPM_CONFIG_USERCONFIG が渡らず ~/.npm が作られるため、明示的に渡す。 */ -}}
+{{- $managed := printf `
 {
-  "ssh_connections": {{ $state.ssh_connections | toJson }},
   "cli_default_open_behavior": "existing_window",
   "agent_servers": {
     "opencode": {
@@ -94,6 +87,11 @@
       "enabled": true,
       "command": "npx",
       "args": ["chrome-devtools-mcp@latest"],
+      "env": {
+        "NPM_CONFIG_USERCONFIG": %s
+      },
     },
   },
 }
+` (printf "%s/.config/npm/npmrc" .chezmoi.homeDir | toJson) | fromJsonc -}}
+{{ mergeOverwrite $config $managed | toPrettyJson }}
