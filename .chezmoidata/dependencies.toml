@@ -106,11 +106,11 @@ clangd = { scoop = "llvm", apt = "clangd" }
 copilot-language-server = { mise = "github:github/copilot-language-server-release" }
 docker-language-server = { aur = "docker-language-server", nix = "docker-language-server", mise = "github:docker/docker-language-server" }
 hadolint = { scoop = "hadolint", nix = "hadolint" }
-jactionlint = { nix = "jactionlint", mise = "jactionlint" }
+jactionlint = { mise = "jactionlint" }
 lld = { apt = "lld" }
 lua-language-server = { scoop = "lua-language-server", nix = "lua-language-server", mise = "github:LuaLS/lua-language-server" }
 marksman = { scoop = "marksman", nix = "marksman", mise = "github:artempyanykh/marksman" }
-neocmakelsp = { aur = "neocmakelsp", nix = "neocmakelsp", mise = "github:neocmakelsp/neocmakelsp" }
+neocmakelsp = { mise = "github:neocmakelsp/neocmakelsp" }
 rumdl = { scoop = "rumdl", aur = "rumdl", nix = "rumdl", mise = "rumdl" }
 sccache = { scoop = "sccache", aur = "sccache-bin", nix = "sccache", mise = "github:mozilla/sccache" }
 shellcheck = { scoop = "shellcheck", aur = "shellcheck-bin", nix = "shellcheck", mise = "github:koalaman/shellcheck" }
