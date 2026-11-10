@@ -1,4 +1,5 @@
 {{- $tasks := include "dot_config/mise/tasks/tasks.toml" | fromToml -}}
 {{- range $name, $task := $tasks }}
+unalias {{ $name }} 2>/dev/null
 {{ $name }}() { mise run {{ $name }} -- "$@"; }
 {{- end }}
