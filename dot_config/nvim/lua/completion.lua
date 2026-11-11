@@ -31,8 +31,15 @@ cmp.setup({
 			end
 		end, { "i", "s" }),
 		["<Tab>"] = cmp.mapping(function(fallback)
+			-- 1. Copilotの提案（インライン補完）があれば採用
+			if vim.lsp.inline_completion and vim.lsp.inline_completion.get() then
+				return
+			end
+
+			-- 2. nvim-cmp の補完メニューが開いていれば次の候補を選択
 			if cmp.visible() then
 				cmp.select_next_item()
+			-- 3. それ以外は通常の Tab（インデント等）
 			else
 				fallback()
 			end

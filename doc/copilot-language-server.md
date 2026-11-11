@@ -71,6 +71,7 @@ npm パッケージのサニタイズ問題および Node.js ランタイムへ�
 2. **インライン補完（Ghost Text）の有効化**:
    * `vim.lsp.inline_completion.enable(true)`
 3. **補完確定キーマップ**:
-   * `vim.lsp.inline_completion.get()` を呼び出して候補を採用（`<C-f>`）。
+   * `<Tab>`: Copilotの提案があれば優先採用し、なければ `nvim-cmp` のメニュー選択、それ以外はインデント（`lua/completion.lua` にて統合）。
+   * `<C-f>`: `vim.lsp.inline_completion.get()` を直接呼び出す代替キーマップ（`lua/lsp/copilot.lua`）。
 4. **初回認証**:
    * 起動後に `:LspCopilotSignIn` を実行して GitHub 認証を完了する。

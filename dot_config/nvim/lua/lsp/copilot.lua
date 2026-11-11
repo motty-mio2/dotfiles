@@ -8,7 +8,7 @@ vim.lsp.enable("copilot")
 if vim.lsp.inline_completion then
 	vim.lsp.inline_completion.enable(true)
 
-	-- インライン補完の候補確定キーマップ (<C-f> で採用)
+	-- インライン補完の候補確定キーマップ (<C-f> で採用、<Tab> は lua/completion.lua で cmp と統合管理)
 	vim.keymap.set("i", "<C-f>", function()
 		vim.lsp.inline_completion.get()
 	end, { silent = true, desc = "LSP: Accept inline completion (Copilot)" })
