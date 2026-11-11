@@ -1,0 +1,21 @@
+# Generated from .chezmoidata/environment_variables.toml by chezmoi.
+# Read by systemd-environment-d-generator(8) for the systemd user instance.
+#
+# The "99-zz" prefix makes this file sort after the
+# /usr/lib/environment.d/99-environment.conf symlink to /etc/environment, so
+# that our PATH takes precedence over the distro-provided one.
+
+{{- range $key, $value := .environment.xdg }}
+{{ $key }}=${{ $value }}
+{{- end }}
+
+{{- range $key, $value := .environment.application_path }}
+{{ $key }}=${{ $value }}
+{{- end }}
+
+{{- range $key, $value := .environment.application_config }}
+{{ $key }}={{ $value }}
+{{- end }}
+
+{{- /* PATH must come last so the variables above can be expanded. */}}
+PATH={{ range $i, $p := .environment.path }}{{ if $i }}:{{ end }}${{ $p }}{{ end }}:$PATH

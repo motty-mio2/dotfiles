@@ -37,6 +37,7 @@ tools
 {{ end }}
 
 {{ if ne .chezmoi.os "linux" }}
+    .config/environment.d
     .config/shikane
 {{ end }}
 
