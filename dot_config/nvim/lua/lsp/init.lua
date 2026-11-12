@@ -56,4 +56,10 @@ end
 vim.lsp.enable("yamlls")
 
 -- Custom
+vim.lsp.config.ryl = {
+	cmd = { "ryl", "server" },
+	filetypes = { "yaml" },
+	root_markers = { ".ryl.toml", ".git" },
+}
+vim.lsp.enable("ryl")
 vim.lsp.enable("systemd_lsp")
