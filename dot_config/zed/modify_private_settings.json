@@ -4,8 +4,12 @@
 {{- if .chezmoi.stdin -}}
 {{-   $config = fromJsonc .chezmoi.stdin -}}
 {{- end -}}
-{{- /* Zed が MCP サーバーを起動するときは NPM_CONFIG_USERCONFIG が渡らず ~/.npm が作られるため、明示的に渡す。 */ -}}
-{{- $managed := printf `
+{{- if hasKey $config "context_servers" -}}
+{{-   if hasKey $config.context_servers "chrome-devtools" -}}
+{{-     $_ := unset $config.context_servers "chrome-devtools" -}}
+{{-   end -}}
+{{- end -}}
+{{- $managed := `
 {
   "cli_default_open_behavior": "existing_window",
   "agent_servers": {
@@ -87,11 +91,8 @@
       "enabled": true,
       "command": "npx",
       "args": ["chrome-devtools-mcp@latest"],
-      "env": {
-        "NPM_CONFIG_USERCONFIG": %s
-      },
     },
   },
 }
-` (printf "%s/.config/npm/npmrc" .chezmoi.homeDir | toJson) | fromJsonc -}}
+` | fromJsonc -}}
 {{ mergeOverwrite $config $managed | toPrettyJson }}
