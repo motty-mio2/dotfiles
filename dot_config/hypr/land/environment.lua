@@ -2,7 +2,7 @@
 --- AUTOSTART ---
 -----------------
 hl.on("hyprland.start", function()
-	hl.exec_cmd("dbus-update-activation-environment --systemd WAYLAND_DISPLAY XDG_CURRENT_DESKTOP")
+	hl.exec_cmd("dbus-update-activation-environment --systemd WAYLAND_DISPLAY XDG_CURRENT_DESKTOP XDG_SESSION_TYPE")
 	hl.exec_cmd("systemctl --user start hyprland-session.target")
 	hl.exec_cmd("/usr/libexec/polkit-agent-helper-1")
 	hl.exec_cmd('gsettings set org.gnome.desktop.interface color-scheme "prefer-dark"')
@@ -32,5 +32,5 @@ hl.config({
 -------------------
 
 hl.permission({ binary = "/usr/(bin|local/bin)/grim", type = "screencopy", mode = "allow" })
-hl.permission({ binary = "/usr/lib/xdg-desktop-portal-hyprland", type = "screencopy", mode = "allow" })
+hl.permission({ binary = "/usr/(lib|libexec)/xdg-desktop-portal-hyprland", type = "screencopy", mode = "allow" })
 hl.permission({ binary = "/usr/bin/hyprpm", type = "plugin", mode = "allow" })

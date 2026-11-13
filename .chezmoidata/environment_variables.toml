@@ -41,3 +41,5 @@ ZDOTDIR = "XDG_CONFIG_HOME/zsh"
 [environment.application_config]
 INSTALLER_NO_MODIFY_PATH = "1"
 PIPENV_VENV_IN_PROJECT = "1"
+XDG_SESSION_TYPE = "wayland"
+ELECTRON_OZONE_PLATFORM_HINT = "auto"
