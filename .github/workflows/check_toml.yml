@@ -16,7 +16,7 @@ jobs:
           persist-credentials: false
       - uses: extractions/setup-just@v4.0.0
 
-      - uses: tombi-toml/setup-tombi@v1.9.9
+      - uses: tombi-toml/setup-tombi@v1.11.2
 
       - name: Do Check
         run: |
