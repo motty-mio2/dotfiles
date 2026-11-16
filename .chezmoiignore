@@ -38,7 +38,9 @@ tools
 
 {{ if ne .chezmoi.os "linux" }}
     .config/environment.d
+    .config/fontconfig
     .config/shikane
+    .local/share/flatpak
 {{ end }}
 
 {{ if not (env "BW_SESSION") }}
