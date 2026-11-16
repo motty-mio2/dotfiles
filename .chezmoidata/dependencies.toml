@@ -119,6 +119,7 @@ shfmt = { scoop = "shfmt", aur = "shfmt", nix = "shfmt", mise = "shfmt" }
 stylua = { scoop = "stylua", aur = "stylua", nix = "stylua", mise = "github:JohnnyMorganz/StyLua" }
 systemd-lsp = { aur = "systemd-lsp", nix = "systemd-lsp", mise = "github:jFryy/systemd-lsp" }
 tree-sitter = { scoop = "tree-sitter", nix = "tree-sitter", mise = "github:tree-sitter/tree-sitter" }
+trivy = { scoop = "trivy", nix = "trivy" }
 typos-lsp = { aur = "typos-lsp-bin", nix = "typos-lsp", mise = "github:tekumara/typos-lsp" }
 # svlint = { scoop = "svlint", aur = "svlint-bin", nix = "svlint" }
 # svls = { scoop = "svls", aur = "svls", nix = "svls" }
