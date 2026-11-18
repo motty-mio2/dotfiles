@@ -97,9 +97,9 @@ local sr_dir = "~/Videos/"
 hl.bind("PRINT", hl.dsp.exec_cmd("hyprshot -m window -o " .. ss_dir .. " -f " .. ss_name .. "." .. ss_ext))
 hl.bind(
 	"SHIFT + PRINT",
-	hl.dsp.exec_cmd('grim -g "$(slurp)" - | tee ' .. ss_dir .. "/" .. ss_name .. "." .. ss_ext .. " | wl-copy")
+	hl.dsp.exec_cmd('g=$(slurp) && grim -g "$g" - | tee ' .. ss_dir .. "/" .. ss_name .. "." .. ss_ext .. " | wl-copy")
 )
 hl.bind(
 	"CTRL + PRINT",
-	hl.dsp.exec_cmd('pkill -INT wf-recorder || wf-recorder -g "$(slurp)" -f ' .. sr_dir .. "/" .. ss_name .. ".mp4")
+	hl.dsp.exec_cmd('pkill -INT wf-recorder || { g=$(slurp) && wf-recorder -g "$g" -f ' .. sr_dir .. "/" .. ss_name .. ".mp4; }")
 )
