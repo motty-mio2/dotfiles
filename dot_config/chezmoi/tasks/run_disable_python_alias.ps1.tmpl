@@ -1,10 +1,11 @@
-{{- if eq .chezmoi.os "windows" -}}
+﻿{{- if eq .chezmoi.os "windows" -}}
 # 1. レジストリで無効化
 $basePath = "HKCU:\Software\Microsoft\Windows\CurrentVersion\AppModel\SystemAppData\Microsoft.DesktopAppInstaller_8wekyb3d8bbwe\Aliases"
-New-Item -Path "$basePath\python.exe" -Force | Out-Null
-Set-ItemProperty -Path "$basePath\python.exe" -Name "State" -Value 0 -Type DWord
-New-Item -Path "$basePath\python3.exe" -Force | Out-Null
-Set-ItemProperty -Path "$basePath\python3.exe" -Name "State" -Value 0 -Type DWord
+New-Item -Path $basePath -Force | Out-Null
+foreach ($name in @("python.exe", "python3.exe")) {
+    New-Item -Path "$basePath\$name" -Force | Out-Null
+    New-ItemProperty -Path "$basePath\$name" -Name "State" -Value 0 -PropertyType DWord -Force | Out-Null
+}
 
 # 2. 残っているエイリアス実体を削除
 $appsPath = "$env:LOCALAPPDATA\Microsoft\WindowsApps"
