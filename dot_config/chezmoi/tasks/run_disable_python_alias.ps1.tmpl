@@ -1,4 +1,4 @@
-﻿{{- if eq .chezmoi.os "windows" -}}
+{{- if eq .chezmoi.os "windows" -}}
 # 1. レジストリで無効化
 $basePath = "HKCU:\Software\Microsoft\Windows\CurrentVersion\AppModel\SystemAppData\Microsoft.DesktopAppInstaller_8wekyb3d8bbwe\Aliases"
 New-Item -Path $basePath -Force | Out-Null
@@ -11,4 +11,4 @@ foreach ($name in @("python.exe", "python3.exe")) {
 $appsPath = "$env:LOCALAPPDATA\Microsoft\WindowsApps"
 Remove-Item -Path "$appsPath\python.exe" -Force -ErrorAction SilentlyContinue
 Remove-Item -Path "$appsPath\python3.exe" -Force -ErrorAction SilentlyContinue
-{{ end }}
+{{- end -}}
