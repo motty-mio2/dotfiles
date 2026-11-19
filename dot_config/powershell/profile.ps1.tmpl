@@ -12,7 +12,7 @@ $Env:{{ $key }} = "$Env:{{ $value }}"
 
 # APPLICATIONS CONFIG
 {{- range $key, $value := .environment.application_config }}
-$Env:{{ $key }} = {{ $value }}
+$Env:{{ $key }} = "{{ $value }}"
 {{- end }}
 
 # PATH

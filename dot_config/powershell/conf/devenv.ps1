@@ -1,4 +1,4 @@
-function wget  {
+﻿function wget  {
     wget --hsts-file="$Env:XDG_DATA_HOME/wget-hsts" $args
 }
 

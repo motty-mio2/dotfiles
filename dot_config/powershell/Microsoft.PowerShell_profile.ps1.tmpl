@@ -1,4 +1,4 @@
-# 1. is_ai: AI エージェント環境か判定
+﻿# 1. is_ai: AI エージェント環境か判定
 function Test-IsAi {
     return [bool]($env:CLAUDECODE -or $env:CODEX_SANDBOX -or $env:CURSOR_AGENT -or $env:AI_AGENT -or $env:OPENCODE -or $env:AGY -or $env:ANTIGRAVITY_AGENT)
 }
