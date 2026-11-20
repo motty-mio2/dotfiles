@@ -1,6 +1,7 @@
 return {
 	{ "neovim/nvim-lspconfig" },
 	{ "b0o/schemastore.nvim" },
+	{ "atusy/kakehashi.nvim" },
 	{
 		"nvim-treesitter/nvim-treesitter",
 		branch = "main",
@@ -77,6 +78,12 @@ return {
 		},
 	},
 	{
+		"antosha417/nvim-lsp-file-operations",
+		dependencies = {
+			"nvim-neo-tree/neo-tree.nvim",
+		},
+	},
+	{
 		"folke/lazy.nvim",
 	},
 	{
@@ -91,6 +98,13 @@ return {
 			{ "<Esc>", "<cmd>NoiceDismiss<cr>", mode = "n", desc = "Dismiss Noice Message" },
 		},
 		opts = {
+			lsp = {
+				override = {
+					["vim.lsp.util.convert_input_to_markdown_lines"] = true,
+					["vim.lsp.util.stylize_markdown"] = true,
+					["cmp.entry.get_documentation"] = true,
+				},
+			},
 			views = {
 				cmdline_popup = {
 					border = {
@@ -193,12 +207,7 @@ return {
 		},
 	},
 	{
-		"vim-denops/denops.vim",
-		lazy = false,
-	},
-	{
 		"nekowasabi/hellshake-yano.vim",
-		dependencies = { "vim-denops/denops.vim" },
 	},
 	{
 		"cordx56/rustowl",

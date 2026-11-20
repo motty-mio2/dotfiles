@@ -65,3 +65,8 @@ require("neo-tree").setup({
 		},
 	},
 })
+
+local has_lsp_file_operations, lsp_file_operations = pcall(require, "lsp-file-operations")
+if has_lsp_file_operations then
+	lsp_file_operations.setup()
+end
