@@ -23,11 +23,11 @@ quiet = true
 run = "iverilog -g2012"
 
 [ghf]
-description = "fzf で選択した GitHub リポジトリを clone"
+description = "fzf で選択した GitHub リポジトリ (自分 + motty-lab) を clone"
 quiet = true
 interactive = true
-run = '''gh repo clone "$(gh repo list -L 10000 --json nameWithOwner --jq '.[].nameWithOwner' | fzf)"'''
-run_windows = '''gh repo clone (gh repo list -L 10000 --json nameWithOwner --jq '.[].nameWithOwner' | fzf)'''
+run = '''gh repo clone "$( { gh repo list -L 10000 --json nameWithOwner --jq '.[].nameWithOwner'; gh repo list motty-lab -L 10000 --json nameWithOwner --jq '.[].nameWithOwner'; } | sort -u | fzf)"'''
+run_windows = '''gh repo clone (@(gh repo list -L 10000 --json nameWithOwner --jq '.[].nameWithOwner'; gh repo list motty-lab -L 10000 --json nameWithOwner --jq '.[].nameWithOwner') | Sort-Object -Unique | fzf)'''
 
 [rmrf]
 description = "ファイル・ディレクトリを再帰的に削除"
