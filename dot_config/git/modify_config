@@ -1,0 +1,19 @@
+#!/bin/sh
+set -eu
+
+tmp=$(mktemp)
+trap 'rm -f "$tmp"' EXIT
+cat > "$tmp"
+
+include="~/.config/git/common"
+if command -v git >/dev/null 2>&1 &&
+    ! git config --file "$tmp" --get-all include.path 2>/dev/null | grep -Fxq "$include"; then
+    merged=$(mktemp)
+    {
+        printf '[include]\n\tpath = %s\n\n' "$include"
+        cat "$tmp"
+    } > "$merged"
+    mv "$merged" "$tmp"
+fi
+
+cat "$tmp"
