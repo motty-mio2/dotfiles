@@ -46,6 +46,9 @@ tools
 {{ if not (env "BW_SESSION") }}
     .config/mozc/dict.txt
     .local/bin/git-user
+{{ end }}
+
+{{ if or (not (lookPath "bws")) (and (not (env "BWS_ACCESS_TOKEN")) (not (env "BW_SESSION"))) }}
     .ssh/config.d/3_hostC.conf
     .ssh/config.d/3_hostLC.conf
     .ssh/config.d/3_hostLN.conf

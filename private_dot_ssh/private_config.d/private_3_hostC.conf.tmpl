@@ -1,4 +1,4 @@
-{{ if lookPath "bw" -}}
-# bw_id: 7540fa95-a318-49a3-b140-b17500e9b87e
-{{ (bitwarden "item" "7540fa95-a318-49a3-b140-b17500e9b87e").notes }}
-{{ end }}
+{{- $token := includeTemplate "bws-token.tmpl" . -}}
+{{- if and (lookPath "bws") $token -}}
+{{ (bitwardenSecrets "72fe0cb6-c6d6-49bc-98a4-b50d00cec3e1" $token).value }}
+{{- end }}

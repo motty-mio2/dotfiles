@@ -114,16 +114,28 @@ function paste {
 }
 
 function bwx {
-    try {
-        $output = $(bw unlock)
-        foreach ($item in $output) {
-            if ($item -match "> (?<exec>.*)" ) {
-                Invoke-Expression $Matches.exec
-            }
-        }
-    } catch {
-        #
+    if (-not (Get-Command bw -ErrorAction SilentlyContinue)) {
+        Write-Error "bw not found"
+        return
     }
+
+    if ($env:BW_SESSION) {
+        try {
+            $status = bw status --session $env:BW_SESSION 2>$null | ConvertFrom-Json
+            if ($LASTEXITCODE -eq 0 -and $status.status -eq "unlocked") {
+                return
+            }
+        } catch {
+            #
+        }
+    }
+
+    $session = bw unlock --raw
+    if ($LASTEXITCODE -ne 0 -or -not $session) {
+        Write-Error "bw unlock failed"
+        return
+    }
+    $env:BW_SESSION = "$session".Trim()
 }
 
 function gime {

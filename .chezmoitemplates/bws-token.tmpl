@@ -1,0 +1,6 @@
+{{- $token := env "BWS_ACCESS_TOKEN" -}}
+{{- if not $token -}}
+{{-   $fields := bitwardenFields "item" "0b597429-1004-46ba-aae4-b50d00cd01ce" -}}
+{{-   $token = (index $fields "bws_host_reader").value -}}
+{{- end -}}
+{{- $token -}}

@@ -25,16 +25,14 @@ mkcd() {
 }
 
 bwx() {
-	output=$(bw unlock)
+	local session
 
-	echo "$output" | while IFS= read -r line; do
-		case "$line" in
-		\$\ *)
-			eval "${line#\$ }"
-			break
-			;;
-		esac
-	done
+	if [ -n "${BW_SESSION:-}" ] && bw status --session "$BW_SESSION" 2>/dev/null | grep -Eq '"status"[[:space:]]*:[[:space:]]*"unlocked"'; then
+		return 0
+	fi
+
+	session=$(bw unlock --raw) || return
+	export BW_SESSION="$session"
 }
 
 set-window-title() {
