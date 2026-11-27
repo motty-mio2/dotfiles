@@ -74,6 +74,7 @@ jujutsu = { scoop = "jj", aur = "jujutsu", nix = "jujutsu", mise = "github:jj-vc
 just = { scoop = "just", nix = "just", mise = "github:casey/just" }
 kakehashi = { mise = "github:atusy/kakehashi" }
 kanata = { nix = "kanata", mise = "github:jtroo/kanata" }
+keifu = { aur = "keifu-bin", nix = "keifu", mise = "github:trasta298/keifu" }
 lazydocker = { scoop = "lazydocker", nix = "lazydocker", mise = "github:jesseduffield/lazydocker" }
 lazygit = { scoop = "lazygit", aur = "lazygit", nix = "lazygit", mise = "github:jesseduffield/lazygit" }
 leaf = { mise = "github:rivolink/leaf" }
@@ -85,12 +86,14 @@ opencode = { scoop = "opencode", nix = "opencode", mise = "github:anomalyco/open
 ripgrep = { scoop = "ripgrep", apt = "ripgrep", nix = "ripgrep", mise = "github:BurntSushi/ripgrep" }
 starship = { scoop = "starship", aur = "starship", nix = "starship", mise = "github:starship/starship" }
 tombi = { scoop = "tombi", aur = "tombi", nix = "tombi", mise = "github:tombi-toml/tombi" }
+twig = { mise = "github:708u/twig" }
 unzip = { scoop = "unzip", apt = "unzip", aur = "unzip" }
 usage = { nix = "usage", mise = "usage" }
 uv = { scoop = "uv", nix = "uv", mise = "uv" }
 vim = { scoop = "vim", apt = "vim", aur = "vim" }
 wget = { scoop = "wget", apt = "wget", aur = "wget" }
 which = { scoop = "which" }
+wrkflw = { aur = "wrkflw", nix = "wrkflw", mise = "github:bahdotsh/wrkflw" }
 yazi = { scoop = "yazi", nix = "yazi", mise = "github:sxyazi/yazi" }
 yt-dlp = { scoop = "yt-dlp", aur = "yt-dlp", nix = "yt-dlp", mise = "yt-dlp" }
 zoxide = { aur = "zoxide", nix = "zoxide", scoop = "zoxide", mise = "github:ajeetdsouza/zoxide" }
@@ -108,12 +111,15 @@ copilot-language-server = { mise = "github:github/copilot-language-server-releas
 docker-language-server = { aur = "docker-language-server", nix = "docker-language-server", mise = "github:docker/docker-language-server" }
 hadolint = { scoop = "hadolint", nix = "hadolint" }
 jactionlint = { mise = "jactionlint" }
+just-lsp = { nix = "just-lsp", mise = "github:terror/just-lsp" }
 lld = { apt = "lld" }
 lua-language-server = { scoop = "lua-language-server", nix = "lua-language-server", mise = "github:LuaLS/lua-language-server" }
 marksman = { scoop = "marksman", nix = "marksman", mise = "github:artempyanykh/marksman" }
 neocmakelsp = { mise = "github:neocmakelsp/neocmakelsp" }
+protols = { aur = "protols", nix = "protols", mise = "github:coder3101/protols" }
 rumdl = { scoop = "rumdl", aur = "rumdl", nix = "rumdl", mise = "rumdl" }
 ryl = { mise = "github:owenlamont/ryl" }
+rustowl = { aur = "rustowl-bin", mise = "github:cordx56/rustowl" }
 sccache = { scoop = "sccache", aur = "sccache-bin", nix = "sccache", mise = "github:mozilla/sccache" }
 shellcheck = { scoop = "shellcheck", aur = "shellcheck-bin", nix = "shellcheck", mise = "github:koalaman/shellcheck" }
 shfmt = { scoop = "shfmt", aur = "shfmt", nix = "shfmt", mise = "shfmt" }
