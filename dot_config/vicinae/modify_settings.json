@@ -1,0 +1,8 @@
+{{- /* chezmoi:modify-template */ -}}
+{{- /* 現在の ~/.config/vicinae/settings.json (JSONC) が .chezmoi.stdin に渡される。setValueAtPath で特定キーのみ直接更新する。 */ -}}
+{{- (.chezmoi.stdin | default "{}" | fromJsonc)
+  | setValueAtPath "font.normal.family" "HackGen35"
+  | setValueAtPath (list "providers" "@jomifepe/store.raycast.bitwarden" "preferences" "cliPath") (lookPath "bw")
+  | setValueAtPath (list "providers" "@marcjulian/store.raycast.obsidian" "preferences" "vaultPath") (printf "%s/Documents/Obsidian" .chezmoi.homeDir)
+  | toPrettyJson
+}}
