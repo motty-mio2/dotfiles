@@ -58,6 +58,7 @@ codex = { scoop = "codex", aur = "openai-codex-bin", mise = "codex" }
 curl = { scoop = "curl", apt = "curl", aur = "curl", nix = "curl" }
 delta = { scoop = "delta", apt = "git-delta", aur = "git-delta", nix = "delta", mise = "github:dandavison/delta" }
 deno = { scoop = "deno", nix = "deno", mise = "deno" }
+distrobox = { aur = "distrobox", nix = "distrobox" }
 eza = { scoop = "eza", nix = "eza", mise = "github:eza-community/eza" }
 fd = { scoop = "fd", apt = "fd-find", aur = "fd", nix = "fd", mise = "github:sharkdp/fd" }
 fzf = { scoop = "fzf", apt = "fzf", aur = "fzf", nix = "fzf", mise = "github:junegunn/fzf" }
