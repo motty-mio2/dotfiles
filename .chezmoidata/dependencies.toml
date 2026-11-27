@@ -75,7 +75,8 @@ jujutsu = { scoop = "jj", aur = "jujutsu", nix = "jujutsu", mise = "github:jj-vc
 just = { scoop = "just", nix = "just", mise = "github:casey/just" }
 kakehashi = { mise = "github:atusy/kakehashi" }
 kanata = { nix = "kanata", mise = "github:jtroo/kanata" }
-keifu = { aur = "keifu-bin", nix = "keifu", mise = "github:trasta298/keifu" }
+# Nix ではバイナリキャッシュがなくビルドが走るため、mise のみを使用
+keifu = { mise = "github:trasta298/keifu" }
 lazydocker = { scoop = "lazydocker", nix = "lazydocker", mise = "github:jesseduffield/lazydocker" }
 lazygit = { scoop = "lazygit", aur = "lazygit", nix = "lazygit", mise = "github:jesseduffield/lazygit" }
 leaf = { mise = "github:rivolink/leaf" }
@@ -120,7 +121,7 @@ neocmakelsp = { mise = "github:neocmakelsp/neocmakelsp" }
 protols = { aur = "protols", nix = "protols", mise = "github:coder3101/protols" }
 rumdl = { scoop = "rumdl", aur = "rumdl", nix = "rumdl", mise = "rumdl" }
 ryl = { mise = "github:owenlamont/ryl" }
-rustowl = { aur = "rustowl-bin", mise = "github:cordx56/rustowl" }
+rustowl = { mise = "github:cordx56/rustowl" }
 sccache = { scoop = "sccache", aur = "sccache-bin", nix = "sccache", mise = "github:mozilla/sccache" }
 shellcheck = { scoop = "shellcheck", aur = "shellcheck-bin", nix = "shellcheck", mise = "github:koalaman/shellcheck" }
 shfmt = { scoop = "shfmt", aur = "shfmt", nix = "shfmt", mise = "shfmt" }
