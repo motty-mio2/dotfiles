@@ -1,0 +1,9 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/jdx/jactionlint/main/schema/jactionlint-config.json
+profile: default
+
+rules:
+  missing-timeout: warn
+  concurrency-limits: warn
+  unpinned-tools: warn
+  unverified-download: warn
+  dependabot-cooldown: warn

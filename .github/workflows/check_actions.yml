@@ -14,15 +14,13 @@ jobs:
         with:
           persist-credentials: false
       - uses: extractions/setup-just@v4.0.0
-      - name: Install sisakulint
+      - name: Install jactionlint
         shell: bash
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
-          gh release download --repo sisaku-security/sisakulint --pattern "*linux_amd64.tar.gz" --output - | sudo tar -xz -C /usr/local/bin sisakulint
-      - name: Run sisakulint
+          gh release download --repo jdx/jactionlint --pattern "*linux_amd64.tar.gz" --output - | sudo tar -xz -C /usr/local/bin jactionlint
+      - name: Run jactionlint
         shell: bash
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
           just actions

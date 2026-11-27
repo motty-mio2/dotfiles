@@ -4,7 +4,7 @@ default:
     @echo "{{GREETING}}"
 
 actions:
-    sisakulint -ignore commit-sha
+    jactionlint
 
 shell-de-template:
     find . -name "*.sh.tmpl" -exec sed -i '/{{"{{"}}/s/^/# /' {} \;
