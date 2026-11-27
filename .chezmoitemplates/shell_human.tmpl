@@ -48,6 +48,12 @@ alias zode='code "$(zoxide query -i)"'
 fi
 {{ end }}
 
+{{ if lookPath "wt" }}
+if command -v wt > /dev/null 2>&1; then
+{{      output "wt" "config" "shell" "init" .shell }}
+fi
+{{ end }}
+
 # mise tasks (entrypoints generated from dot_config/mise/tasks/tasks.toml)
 {{ if lookPath "mise" }}
 {{ includeTemplate "mise_tasks.tmpl" . }}

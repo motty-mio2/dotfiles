@@ -1,0 +1,4 @@
+# User configuration for Worktrunk (wt)
+# https://worktrunk.dev/config/
+
+worktree-path = "{{ repo_path }}/../{{ repo }}-worktree/{{ branch }}"

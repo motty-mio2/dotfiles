@@ -84,6 +84,13 @@ if (Get-Command zoxide -ErrorAction SilentlyContinue) {
 }
 {{ end }}
 
+# wt (Worktrunk)
+{{ if lookPath "wt" }}
+if (Get-Command wt -ErrorAction SilentlyContinue) {
+{{      output "wt" "config" "shell" "init" "powershell" }}
+}
+{{ end }}
+
 # copilot
 {{ if lookPath "copilot" }}
 if (Get-Command copilot -ErrorAction SilentlyContinue) {

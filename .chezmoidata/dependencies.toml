@@ -96,6 +96,7 @@ vim = { scoop = "vim", apt = "vim", aur = "vim" }
 wget = { scoop = "wget", apt = "wget", aur = "wget" }
 which = { scoop = "which" }
 wrkflw = { aur = "wrkflw", nix = "wrkflw", mise = "github:bahdotsh/wrkflw" }
+wt = { aur = "worktrunk", nix = "worktrunk", mise = "github:max-sixty/worktrunk" }
 yazi = { scoop = "yazi", nix = "yazi", mise = "github:sxyazi/yazi" }
 yt-dlp = { scoop = "yt-dlp", aur = "yt-dlp", nix = "yt-dlp", mise = "yt-dlp" }
 zoxide = { aur = "zoxide", nix = "zoxide", scoop = "zoxide", mise = "github:ajeetdsouza/zoxide" }
